@@ -23,6 +23,12 @@ Auth::routes();
 
 Route::get('/user/{user}', 'UserController@index')->name('user.show');
 
+Route::get('/logout' , function() {
+    Auth::logout();
+    return redirect('/home');
+});
+
+
 Route::resource('items','ItemsController');
 
 
