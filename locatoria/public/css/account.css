@@ -1,0 +1,127 @@
+div.container1{
+    float: left;
+    text-align: center;
+    width: 500px;
+    height: 500px;
+    padding: 20px;
+    margin-top: 150px;
+    margin-left: 2%;
+    border: black solid 2px;
+    border-radius: 10%;
+    margin-left: 10%;
+}
+
+div.container2{
+    height: 300px;
+    padding: 50px;
+}
+
+
+div.signup{
+    margin-top: 100px;
+    width: 600px;
+    height: 600px;
+    text-align: center;
+    border: black solid 2px;
+    padding: 60px;
+    border-radius: 10%;
+    margin-left: 20%;
+}
+
+div.submit{
+    width: 150px;
+    margin-left: 35%;
+}
+
+div.container3{
+    float: left;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+div.research{
+    margin-left: 25%;
+    width: 700px;
+    
+}
+
+
+div.block{
+    float: left;
+    width: 40%;
+    height: 500px;
+    border: black solid 2px;
+    margin-left: 100px;
+    
+}
+
+div.mini-block{
+    width: 90%;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 30px;
+    border: black solid 2px;
+}
+
+div.hidden{
+    border: none;
+}
+
+table.mini-block{
+    margin-left: 160px;
+
+}
+
+
+
+table.mini-block tr div td{
+    border: black solid 2px;
+    width: 300px;
+    height: 70px;
+    text-align: center;
+    font-size: 1.5em;
+   
+}
+
+div.image-block{
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 200px;
+    height: 150px;
+    border: black solid 2px;
+}
+
+div.title-block{
+    padding: 40px;
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 300px;
+    height: 150px;
+    font-size: 1.5em;
+    font-family: "Lucida Console", Courier, monospace;
+    text-align: center;
+}
+
+div.flt{
+    float: left;
+}
+
+button.butt{
+    width: 250px;
+    height: 70px;
+}
+
+div.info{
+    width: 650px;
+    padding: 70px;
+}
+
+div.header{
+    text-align: center;
+    
+}
+
+div.edit-block{
+    margin-left: 30%;
+    margin-top: 30px;
+}

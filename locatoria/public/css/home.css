@@ -1,0 +1,58 @@
+table.img-container{
+    margin-top: 90px;
+    margin-left: 10%;
+    width: 70%;
+}
+
+
+td.image{
+    text-align: center;
+    width: 1500px;
+    margin-top: 70px;
+    font-size: 2em;
+}
+
+div.search{
+    margin-top: 50px;
+    margin-left: 25%;
+}
+
+div.categorie{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 30px;
+}
+
+div.conteneur{
+    width: 70%;
+    margin-left: 15%;
+    height: 200px;
+}
+
+.jumbotron div.annonce{
+    float: left;
+    width: 150px;
+    height: 120px;
+    margin-left: 40px;
+    background-color: rgb(142, 142, 145);
+    padding: 40px;
+}
+
+div.title{
+    font-size: 2em;
+    margin-left: 15%;
+}
+
+.jumbotron div.annonce1{
+    background-color: transparent;
+    width: 350px;
+    font-size: 2em;
+    
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+
