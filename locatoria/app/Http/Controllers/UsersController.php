@@ -37,18 +37,18 @@ class UsersController extends Controller
         
     }
 
-    public function show(User $Users)
+    public function show(User $user)
     {
-        return view('user.account', compact('Users'));
+        return view('user.account', compact('user'));
     }
 
-    public function edit(User $Users)
+    public function edit(User $user)
     {
         
-        return view('user.edit', compact('Users'));
+        return view('user.edit', compact('user'));
     }
 
-    public function update(User $Users)
+    public function update(User $user)
     {
         $data = request()->validate([
             'name' => '',
@@ -62,9 +62,9 @@ class UsersController extends Controller
 
 
      
-    $Users->update($data);
+    $user->update($data);
 
-    return redirect("/user/{$Users->id}");
+    return redirect("/user/{$user->id}");
 
     }
 

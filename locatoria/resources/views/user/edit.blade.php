@@ -4,7 +4,7 @@
 
 <br><br><br><br>
     
-    <form action="{{ url('Users/'.$user->id) }}" enctype="multipart/form-data" method="POST">
+    <form action="{{ url('user/'.$user->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         @method('PUT')
 

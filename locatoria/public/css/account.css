@@ -58,7 +58,7 @@ div.block{
 div.mini-block{
     width: 90%;
     height: 200px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 30px;
     border: black solid 2px;
 }
@@ -88,7 +88,7 @@ div.image-block{
     margin-left: 30px;
     width: 200px;
     height: 150px;
-    border: black solid 2px;
+    
 }
 
 div.title-block{
@@ -97,7 +97,7 @@ div.title-block{
     margin-left: 30px;
     width: 300px;
     height: 150px;
-    font-size: 1.5em;
+    font-size: 2em;
     font-family: "Lucida Console", Courier, monospace;
     text-align: center;
 }

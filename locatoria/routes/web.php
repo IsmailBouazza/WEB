@@ -20,7 +20,7 @@ Auth::routes();
 
 
 
-Route::resource('Users', 'UsersController');
+Route::resource('user', 'UsersController');
 
 
 

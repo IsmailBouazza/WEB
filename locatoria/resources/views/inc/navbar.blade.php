@@ -25,7 +25,7 @@
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="http://localhost/WEB/locatoria/public/Users/{{ Auth::user()->id }}">My account <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="http://localhost/WEB/locatoria/public/user/{{ Auth::user()->id }}">My account <span class="sr-only">(current)</span></a>
                 </li>
             @endif
           </ul>
