@@ -7,7 +7,7 @@
     <div class="block hidden">
         <div class="mini-block hidden">
             <div class="image-block flt">
-                <img src="http://localhost/WEB/locatoria/public/uploads/{{$user->picture}}" style="width:250px; height:200px; border-radius:50%;">
+                <img src="http://localhost/WEB/locatoria/storage/app/public/{{$user->picture}}" style="width:250px; height:250px; border-radius:50%;">
             </div>
             <div class="title-block flt">
                 Welcome to your account

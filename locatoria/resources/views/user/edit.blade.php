@@ -8,7 +8,7 @@
         @csrf
         @method('PUT')
 
-        <div class="block">
+        <div class="block edit-block">
             <div class="info row">
                     <div class="col-md-6 mb-3">
                         <label for="name">Your Name</label>
@@ -67,6 +67,16 @@
                     </div>
                     <br><br>
                 
+                    <div class="col-md-6 mb-3">
+                        <label for="city">Image</label>
+                        <input type="file" class="form-control-file" id="picture" name="picture">
+                        @if($errors->has('picture'))
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('picture')}}</strong>
+                            </span>
+                        @endif
+                    </div>
+
                     <div class="col-md-6 mb-3">
                         <label for="zip_code"><br><br></label>
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Edit</button>

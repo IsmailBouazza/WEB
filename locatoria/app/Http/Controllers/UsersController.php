@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller
 {
@@ -24,7 +25,8 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    
+     public function index()
     {
         
     }
@@ -58,17 +60,28 @@ class UsersController extends Controller
             'adresse' => '',
             'zip_code' => '',
             'city' => '',
+            'picture' => '',
         ]);
 
 
-     
-    $user->update($data);
+        if(request('picture')){
 
-    return redirect("/user/{$user->id}");
+            $picturePath = request('picture')->store('user','public');
+            $picture = Image::make(public_path("storage/{$picturePath}"))->fit(250,200);
+            $picture->save();
+
+        }
+
+        
+        $user->update(array_merge(
+            $data,
+            ['picture' => $picturePath]
+        ));
+
+        return redirect("/user/{$user->id}");
 
     }
 
-    
     public function destroy($id)
     {
         //

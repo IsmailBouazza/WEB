@@ -22,8 +22,6 @@ Auth::routes();
 
 Route::resource('user', 'UsersController');
 
-
-
 Route::get('/logout' , function() {
     Auth::logout();
     return redirect('/home');

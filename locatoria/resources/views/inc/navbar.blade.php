@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
       <a class="navbar-brand" href="{{ url('http://localhost/WEB/locatoria/public/home') }}">
-          {{ config('app.name', 'Locatoria') }}
+        <img src="http://localhost/WEB/locatoria/public/images/logo.png" style="width:32px; height:32px; position:absolute; top:10px; left:200px; border-radius:50%;">
+        {{ config('app.name', 'Locatoria') }}
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
           <span class="navbar-toggler-icon"></span>
@@ -44,8 +45,9 @@
                   @endif
               @else
                   <li class="nav-item dropdown">
-                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                          {{ Auth::user()->name }} <span class="caret"></span>
+                      <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="position: relative; padding-left:50px;">
+                        <img src="http://localhost/WEB/locatoria/storage/app/public/{{ Auth::user()->picture }}" style="width:32px; height:32px; position:absolute; top:5px; left:10px; border-radius:50%;">
+                        {{ Auth::user()->name }} <span class="caret"></span>
                       </a>
 
                       <div class="dropdown-menu dropdown-menu-right" >

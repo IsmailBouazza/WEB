@@ -57,10 +57,10 @@ div.block{
 
 div.mini-block{
     width: 90%;
-    height: 200px;
+    height: 300px;
     margin-top: 10px;
     margin-left: 30px;
-    border: black solid 2px;
+  
 }
 
 div.hidden{
