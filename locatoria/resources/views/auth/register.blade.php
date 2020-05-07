@@ -60,13 +60,13 @@
                             <label for="picture" class="col-md-4 col-form-label text-md-right">Picture</label>
 
                             <div class="col-md-6">
-                                <input id="picture" type="picture" class="form-control @error('picture') is-invalid @enderror" name="picture" autocomplete="new-picture">
+                                <input type="file" class="form-control-file" id="picture" name="picture">
 
-                                @error('picture')
+                                @if($errors->has('picture'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('picture')}}</strong>
                                     </span>
-                                @enderror
+                                @endif
                             </div>
                         </div>
 

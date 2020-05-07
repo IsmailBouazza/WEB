@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', 'HomeController@home');
 
 
-
-
-
 Auth::routes();
 
-Route::get('/user/{user}', 'UserController@index')->name('user.show');
+
+
+Route::resource('Users', 'UsersController');
+
+
 
 Route::get('/logout' , function() {
     Auth::logout();
