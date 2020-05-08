@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -25,18 +25,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    
-     public function index()
+  
+
+    public function index()
     {
-        
-    }
 
-    public function create(){
-        
-    }
+        $users = User::all();
 
-    public function store(){
-        
+        return view('admin.users', [
+            "users"=>$users
+        ]);
     }
 
     public function show(User $user)
@@ -84,8 +82,16 @@ class UserController extends Controller
 
     }
 
-    public function destroy($id)
+    
+
+
+    public function delete(User $user)
     {
-        //
+        AdminController::loginverification();
+
+        $user->delete();
+
+        return redirect('/users');
     }
+
 }

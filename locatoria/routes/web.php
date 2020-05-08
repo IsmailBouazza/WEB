@@ -13,21 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/', 'HomeController@home');
 Route::get('/home', 'HomeController@home');
 
 
 Auth::routes();
 
 
+Route::get('/users', 'UserController@index');
+Route::get('/user/delete/{user}', 'UserController@delete');
+
 
 Route::resource('user', 'UserController');
 
-Route::get('/logout' , function() {
-    Auth::logout();
-    return redirect('/home');
-});
+
+Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
+Route::post('/login/admin', 'Auth\LoginController@adminLogin');
+Route::get('/admin', 'AdminController@show');
 
 
-Route::resource('items','ItemsController');
+
+
 
 
