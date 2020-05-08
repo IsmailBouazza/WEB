@@ -11,8 +11,9 @@ use Auth;
 
 class AdminController extends Controller
 {
-    //
 
+
+    // a function to prevent users other than the admin to access this controller
     public function loginverification(){
 
         if ( ! Auth::guard('admin')->check()) {
@@ -21,13 +22,14 @@ class AdminController extends Controller
         }
     }
 
-
+    // dashboard of the admin
     public function show()
     {
         $this->loginverification();
         //return view('admin');
         return View::make('admin.admin');
     }
+
 
     public function delete(User $user)
     {

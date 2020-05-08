@@ -24,10 +24,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(User $user)
+    public function show(User $user)
     {
-        
+
         return view('user.account', compact('user'));
+    }
+
+    public function index()
+    {
+
+        $users = User::all();
+
+        return view('admin.users', [
+            "users"=>$users
+        ]);
     }
 
 }

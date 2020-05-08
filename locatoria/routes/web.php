@@ -20,7 +20,9 @@ Route::get('/home', 'HomeController@home');
 
 Auth::routes();
 
-Route::get('/user/{user}', 'UserController@index')->name('user.show');
+Route::get('/user/{user}', 'UserController@show')->name('user.show');
+
+Route::get('/users', 'UserController@index')->name('users.show');
 
 Route::resource('items','ItemsController');
 
