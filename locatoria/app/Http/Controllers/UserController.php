@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -33,11 +33,22 @@ class UserController extends Controller
     public function index()
     {
 
+
         $users = User::all();
 
         return view('admin.users', [
             "users"=>$users
         ]);
+    }
+
+
+    public function delete(User $user)
+    {
+        AdminController::loginverification();
+
+        $user->delete();
+
+        return redirect('/users');
     }
 
 }

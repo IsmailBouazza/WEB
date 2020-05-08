@@ -21,8 +21,8 @@ Route::get('/home', 'HomeController@home');
 Auth::routes();
 
 Route::get('/user/{user}', 'UserController@show')->name('user.show');
-
-Route::get('/users', 'UserController@index')->name('users.show');
+Route::get('/users', 'UserController@index');
+Route::get('/user/delete/{user}', 'UserController@delete');
 
 Route::resource('items','ItemsController');
 
