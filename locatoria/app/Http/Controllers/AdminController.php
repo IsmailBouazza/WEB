@@ -13,12 +13,18 @@ class AdminController extends Controller
 {
     //
 
-    public function show()
-    {
+    public function loginverification(){
+
         if ( ! Auth::guard('admin')->check()) {
 
             dd("you can not access");
         }
+    }
+
+
+    public function show()
+    {
+        $this->loginverification();
         //return view('admin');
         return View::make('admin.admin');
     }
