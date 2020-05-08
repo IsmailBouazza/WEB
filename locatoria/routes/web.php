@@ -23,12 +23,21 @@ Auth::routes();
 
 Route::get('/user/{user}', 'UserController@index')->name('user.show');
 
-Route::get('/logout' , function() {
-    Auth::logout();
-    return redirect('/home');
-});
+//Route::get('/logout' , function() {
+//    Auth::logout();
+//    return redirect('/home');
+//});
 
 
-Route::resource('items','ItemsController');
+//Route::resource('items','ItemsController');
+
+
+Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
+Route::post('/login/admin', 'Auth\LoginController@adminLogin');
+Route::get('/admin', 'AdminController@show');
+
+Route::view('test' , 'test');
+
+
 
 
