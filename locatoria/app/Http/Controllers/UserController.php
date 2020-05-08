@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -77,6 +77,8 @@ class UsersController extends Controller
             $data,
             ['picture' => $picturePath]
         ));
+        
+        
 
         return redirect("/user/{$user->id}");
 

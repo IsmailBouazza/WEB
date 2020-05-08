@@ -20,7 +20,7 @@ Auth::routes();
 
 
 
-Route::resource('user', 'UsersController');
+Route::resource('user', 'UserController');
 
 Route::get('/logout' , function() {
     Auth::logout();
