@@ -75,15 +75,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        if(request('picture')){
+        $user = User::create([
 
-            $picturePath = request('picture')->store('user','public');
-            $picture = Image::make(public_path("storage/{$picturePath}"))->fit(250,200);
-            $picture->save();
-
-        }
-
-        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -92,17 +85,22 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'zip_code' => $data['zip_code'],
             'bio' => $data['bio'],
-            'picture' => $picturePath,
+            
 
-        ]);
+        ]);        
 
-       
-       
-       
-       
-       
+        if($data['picture']){
+
+            $extension = $data['picture']->getClientOriginalExtension();
+            $imageName = $user->id.'_picture'.'.'.$extension;
+            $picturePath = $data['picture']->storeAs($user->id, $imageName,'public');
+            $picture = Image::make(public_path("storage/{$picturePath}"))->fit(250,200);
         
+            $user->picture = $picturePath;
+            $user->save();
+        }
 
-
+        return $user;
+       
     }
 }
