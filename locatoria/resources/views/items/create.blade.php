@@ -1,10 +1,12 @@
-@extends('layouts.auth')
+@extends('layouts.app')
 <!-- link css -->
 <link href="{{ asset('css/lightpick.css') }}" rel="stylesheet">
 <link href="{{ asset('css/image-uploader.min.css') }}" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!--  -->
 @section('content')
+<br><br><br><br><br><br>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">

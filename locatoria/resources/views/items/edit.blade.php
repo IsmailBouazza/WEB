@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.app')
 @section('content')
 <link href="{{ asset('css/image-uploader.min.css') }}" rel="stylesheet">
 <div class="container">
