@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@home');
 
 Auth::routes();
 
+Route::resource('Item','ItemController');
+Route::resource('ItemPhoto','ItemPhotoController');
 
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');

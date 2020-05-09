@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-
+@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
@@ -787,7 +786,6 @@ pre code {
   flex: 0 0 auto;
   width: auto;
   max-width: 100%;
-  float: left;
 }
 
 .col-1 {
@@ -7180,7 +7178,6 @@ button.bg-dark:focus {
 
 .d-none {
   display: none !important;
-  float: left;
 }
 
 .d-inline {

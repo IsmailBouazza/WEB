@@ -1,113 +1,225 @@
 @extends('layouts.auth')
-
+<!-- link css -->
+<link href="{{ asset('css/lightpick.css') }}" rel="stylesheet">
+<link href="{{ asset('css/image-uploader.min.css') }}" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!--  -->
 @section('content')
-
-<br><br><br>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Create Item</div>
-    
+                    <div class="card-header">list an Item</div>
+
                     <div class="card-body">
-                        <form  action="{{ action('ItemsController@store') }}" enctype="multipart/form-data" method="post">
+
+                        @if(Session::has('success'))
+
+                            <div class="alert alert-success">
+                                {{ Session::get('success') }}
+                                @php
+                                    Session::forget('success');
+                                @endphp
+                            </div>
+
+                    @endif
+                    <!-- from starts here -->
+                        <form enctype="multipart/form-data" action="{{ url('Item') }}" method="POST">
                             @csrf
-    
                             <div class="form-group row">
-                                <label for="title_item" class="col-md-4 col-form-label text-md-right">Title</label>
-    
-                                <div class="col-md-6">
-                                    <input id="title_item"  class="form-control @error('title_item') is-invalid @enderror" name="title_item" value="{{ old('title_item') }}" autocomplete="title_item">
-    
-                                    @error('title_item')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <label for="title" class="col-4 col-form-label">Title</label>
+                                <div class="col-8">
+                                    <input id="title" name="title" placeholder="item title " type="text" class="form-control" required >
+                                    @if ($errors->has('title'))
+                                        <div class="card bg-danger text-white">
+                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('title') }}</div>
+                                        </div>
+                                    @endif
                                 </div>
-                            </div>
-    
-    
-                            <div class="form-group row">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
-    
-                                <div class="col-md-6">
-                                    <input id="description"  class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" autocomplete="description">
-    
-                                    @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-    
-                            <div class="form-group row">
-                                <label for="status" class="col-md-4 col-form-label text-md-right">Status</label>
-    
-                                <div class="col-md-6">
-                                    <input id="status"  class="form-control @error('status') is-invalid @enderror" name="status" autocomplete="new-status">
-    
-                                    @error('status')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-    
-                            <div class="form-group row">
-                                <label for="category_id" class="col-md-4 col-form-label text-md-right">Category</label>
-    
-                                <div class="col-md-6">
-                                      <select class="custom-select" id="category_id" name="category_id" autocomplete="new-category_id">
-                                            <option selected>Choose...</option>
-                                            @foreach($categories as $category)
-                                                <option value="{{$category->category_id}}">{{$category->category_name}}</option>
-                                            @endforeach
-                                      </select>
-                                </div>
+
                             </div>
                             <div class="form-group row">
-                                <label for="offre" class="col-md-4 col-form-label text-md-right">Offre</label>
-    
-                                <div class="col-md-6">
-                                    <input id="offre"  class="form-control @error('offre') is-invalid @enderror" name="offre" autocomplete="new-offre">
-    
-                                    @error('offre')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <label for="description" class="col-4 col-form-label">description</label>
+                                <div class="col-8">
+                                    <textarea id="description" name="description" cols="40" rows="5" class="form-control" required></textarea>
+                                    @if ($errors->has('description'))
+                                        <div class="card bg-danger text-white">
+                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('description') }}</div>
+                                        </div>
+                                    @endif
                                 </div>
+
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="category" class="col-4 col-form-label">Category</label>
+                                <div class="col-8">
+                                    <select id="select" name="category" class="custom-select" required >
+                                        <option value="" selected disabled hidden>Choose here</option>
+                                        <option value="1">INFORMATIQUE ET MULTIMEDIA</option>
+                                        <option value="2">VEHICULES</option>
+                                        <option value="3">IMMOBILIER</option>
+                                        <option value="4">POUR LA MAISON ET JARDIN</option>
+                                        <option value="5">HABILLEMENT ET BIEN ETRE</option>
+                                        <option value="6">LOISIRS ET DIVERTISSEMENT</option>
+                                        <option value="7">EMPLOI ET SERVICES</option>
+                                        <option value="8">ENTREPRISES</option>
+                                        <option value="9">AUTRES</option>
+                                    </select>
+                                </div>
+                                @if ($errors->has('category'))
+                                    <div class="card bg-danger text-white">
+                                        <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('category') }}</div>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="form-group row">
-                                <label for="thumbnail_path" class="col-md-4 col-form-label text-md-right">Image</label>
-                                
-                                <div class="col-md-6">
-                                    <input type="file" class="form-control-file" id="thumbnail_path" name="thumbnail_path">
+                                <label for="price" class="col-4 col-form-label">Rent Price</label>
+                                <div class="col-8">
+                                    <input id="price" name="price" placeholder="$$$$ " type="text" class="form-control" required >
+                                    @if ($errors->has('price'))
+                                        <div class="card bg-danger text-white">
+                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('price') }}</div>
+                                        </div>
+                                    @endif
+                                </div>
 
-                                    @if($errors->has('thumbnail_path'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('thumbnail_path')}}</strong>
-                                        </span>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="dispo_starts" class="col-4 col-form-label">Availability</label>
+                                <div class="col-8">
+                                    <input type="text" id="dispo_starts" name="dispo_starts" placeholder="from" class="form-control" class="form-control" required/>
+                                    <input type="text" id="dispo_ends" name="dispo_ends" placeholder="to" class="form-control" required/>
+                                    @if ($errors->has('dispo_starts') or $errors->has('dispo_ends'))
+                                        <div class="card bg-danger text-white">
+                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('dispo_starts') }} {{ $errors->first('dispo_ends') }}</div>
+                                        </div>
+                                    @endif
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="thumbnail" class="col-4 col-form-label">Thumbnail</label>
+                                <div class="col-8">
+
+                                    <div class="input-group">
+
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="thumbnail"
+                                                   name="thumbnail" accept="image/*">
+                                            <label class="custom-file-label" for="thumbnail">Choose file</label>
+                                        </div>
+                                    </div>
+                                    @if ($errors->has('thumbnail'))
+                                        <div class="card bg-danger text-white">
+                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('thumbnail') }}</div>
+                                        </div>
+                                    @endif
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row input-field">
+                                <label for="images" class="col-4 col-form-label">images</label>
+                                <div class="col-8">
+                                    <div id="images" class="input-images-1"  style="padding-top: .5rem;"> </div>
+                                    @if ($errors->has('images'))
+                                        <div class="card bg-danger text-white">
+                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('images') }}</div>
+                                        </div>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Create
-                                    </button>
+                            <div class="form-group row">
+                                <div class="offset-6 col-8">
+                                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
+
                         </form>
+
                     </div>
                 </div>
-            </div>                     
+            </div>
         </div>
     </div>
+    <!-- from ends here -->
 
+    <!-- include for js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"   type="application/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="{{ asset('js/lightpick.js') }}" ></script>
+    <script src="{{ asset('js/image-uploader.js') }}" ></script>
+    <!--  -->
+    <script type="application/javascript" >
+
+        $('#thumbnail').change(function(e){
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
+        });
+
+
+        var date = new Date();
+        var today = date.getFullYear()+'-'+(date.getMonth()+1)+'/'+date.getDate();
+        // console.log(today);
+        const myPicker = new Lightpick({
+            field: document.getElementById('dispo_starts'),
+            secondField: document.getElementById('dispo_ends'),
+
+            // date format
+            format: 'YYYY-MM-DD',
+
+            // separator character
+            separator: ' -',
+
+            // number of months to display
+            numberOfMonths: 1,
+
+            // number of columns to display
+            numberOfColumns: 1,
+
+            // single date mode
+            singleDate: false,
+
+            // auto close after selection
+            autoclose: true,
+
+            // Repick start/end instead of new range.
+            repick: false,
+
+            // start/end dates
+            startDate: null,
+            endDate: null,
+
+            // min/max dates
+            minDate: today,
+            maxDate: null,
+
+            // min/max days
+            minDays: null,
+            maxDays: null,
+
+            // shows tooltip
+            hoveringTooltip: true,
+
+            // disabled dates in the range
+            disabledDatesInRange: true,
+
+
+            // disable Saturday and Sunday.
+            disableWeekends: false,
+
+            // inline mode (still still)
+            inline: false,
+        });
+
+        $('.input-images-1').imageUploader();
+    </script>
 @endsection
