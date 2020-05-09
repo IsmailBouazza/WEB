@@ -4,22 +4,15 @@
 
 <br><br><br><br>
     
-    <div class="block hidden">
-        <div class="mini-block hidden">
-            <div class="image-block flt">
-                <img src="http://localhost/WEB/locatoria/storage/app/public/{{$user->picture}}" style="width:250px; height:250px; border-radius:50%;">
+    <div class="nav">
+        <div class="mini-block">
+            <img src="http://localhost/WEB/locatoria/storage/app/public/{{$user->picture}}" style="width:150px; height:150px; border-radius:50%; margin-left:250px;">
+            <div class="s-nav">
+                <i class="fas fa-home"></i><a href="#"><button type="button" class="butt btn btn-secondary">My messages</button></a>
+                <a href="#"><button type="button"  class="butt btn btn-secondary">My items</button></a>
+                <a href="#"><button type="button"  class="butt btn btn-secondary">My favorites</button></a>
+                <a href="http://localhost/WEB/locatoria/public/user/{{$user->id}}/edit"><button type="button" class="butt btn btn-secondary">Update Profile</button></a>
             </div>
-            <div class="title-block flt">
-                Welcome to your account
-            </div>
-        </div>
-        <br><br>
-        <div class="mini-block hidden">
-            <table class="mini-block">
-            <tr><td><a href="http://localhost/WEB/locatoria/public/user/{{$user->id}}"><button type="button"  class="butt btn btn-secondary">My profile</button></a></td></tr>
-                <tr><td><a href="http://localhost/WEB/locatoria/public/items"><button type="button" class="butt btn btn-secondary">My items</button></a></td></tr>
-                <tr><td><button type="button" class="butt btn btn-secondary">My messages</button></td></tr>
-            </table>
         </div>
     </div>
 
@@ -81,12 +74,17 @@
                         Valid city is required.
                     </div>
                 </div>
-                <br><br>
-               
+
                 <div class="col-md-6 mb-3">
-                    <label for="zip_code"><br><br></label>
-                    <a href="http://localhost/WEB/locatoria/public/user/{{$user->id}}/edit"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Edit</button></a>
+                    <label for="password">Password</label>
+                    <input type="text" class="form-control" id="password" value="{{$user->password}}" readonly>
+                    <div class="invalid-feedback">
+                        Valid password is required.
+                    </div>
                 </div>
+                
+               
+               
             
 
         </div>   

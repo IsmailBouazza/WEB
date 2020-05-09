@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -28,8 +28,7 @@ class UserController extends Controller
   
 
     public function index()
-    {
-
+    {        
         $users = User::all();
 
         return view('admin.users', [
@@ -39,7 +38,12 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('user.account', compact('user'));
+        if(Auth::user()->id == $user->id){
+            return view('user.account', compact('user'));
+        }
+        else{
+            return view('erreur.erreur');
+        }
     }
 
     public function edit(User $user)
@@ -58,6 +62,7 @@ class UserController extends Controller
             'adresse' => '',
             'zip_code' => '',
             'city' => '',
+            'password' => '',
             'picture' => '',
         ]);
 
@@ -68,13 +73,17 @@ class UserController extends Controller
             $picture = Image::make(public_path("storage/{$picturePath}"))->fit(250,200);
             $picture->save();
 
+            $user->update(array_merge(
+                $data,
+                ['picture' => $picturePath]
+            ));
         }
 
+        else{
+            $user->update($data);
+        }
         
-        $user->update(array_merge(
-            $data,
-            ['picture' => $picturePath]
-        ));
+        
         
         
 

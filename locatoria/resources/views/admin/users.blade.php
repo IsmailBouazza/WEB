@@ -13,8 +13,8 @@
 
                             <div class="card-body">
 
-                                <a href="/user/{{$user->id}}" >
-                                    <img src="/images/logo.png"> {{-- $user->image --}}
+                                <a href="user/{{$user->id}}" >
+                                    <img src="http://localhost/WEB/locatoria/storage/app/public/{{$user->picture}}" style="width:50px; height:50px; border-radius:50%;">
                                 </a>
                                 <span>name : {{$user->name}}</span>
                                 <span>city : {{$user->city}}</span>
