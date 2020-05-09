@@ -1,21 +1,25 @@
-@extends('layouts.auth')
+@extends('layouts.app')
 
 @section('content')
     
-    <form action="{{ url('user/'.$user->id) }}" enctype="multipart/form-data" method="POST">
+<br><br>
+
+<div class="nav">
+    <div class="mini-block">
+        <div class="s-nav">
+            <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
+            <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-shopping-cart" style="margin-right: 7px;"></i>My items</button></a>
+            <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
+            </i><a href="http://localhost/WEB/locatoria/public/user/{{$user->id}}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
+        </div>
+    </div>
+</div>
+
+
+
+<form action="{{ url('user/'.$user->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         @method('PUT')
-
-        <div class="nav">
-            <div class="mini-block">
-                <div class="s-nav">
-                    <i class="fas fa-home"></i><a href="#"><button type="button" class="butt btn btn-secondary">My messages</button></a>
-                    <a href="#"><button type="button"  class="butt btn btn-secondary">My items</button></a>
-                    <a href="#"><button type="button"  class="butt btn btn-secondary">My favorites</button></a>
-                    <a href="http://localhost/WEB/locatoria/public/user/{{$user->id}}"><button type="button" class="butt btn btn-secondary">My Profile</button></a>
-                </div>
-            </div>
-        </div>
 
         <div class="edit-block">
             <div class="float">
