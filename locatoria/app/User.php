@@ -41,6 +41,29 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
-    
+    public function items(){
+        return $this->hasMany(Item::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    public function myitemscomments(){
+        return $this->hasMany(Comment::class , "user_id")->where('commentable_type', Item::class);
+    }
+
+    public function myuserscomments(){
+        return $this->hasMany(Comment::class , "user_id")->where('commentable_type', self::class);
+    }
+
+    public function reservation(){
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function favorites(){
+        return $this->hasMany(Favorite::class);
+    }
 
 }

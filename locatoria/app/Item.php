@@ -13,5 +13,30 @@ class Item extends Model
         'status' => '1'
     ];
 
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
+    public function photos(){
+        return $this->hasMany(ItemPhoto::class);
+    }
+
+    public function premium(){
+        return $this->hasOne(ItemPremium::class);
+    }
+
+    public function reservation(){
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function favorites(){
+        return $this->hasMany(Favorite::class);
+    }
+
 }
 

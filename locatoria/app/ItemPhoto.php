@@ -8,4 +8,8 @@ class ItemPhoto extends Model
 {
     //
     protected $table = 'itemphotos';
+
+    public function item(){
+        return $this->belongsTo(Item::class);
+    }
 }
