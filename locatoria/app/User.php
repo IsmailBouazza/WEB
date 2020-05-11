@@ -55,15 +55,15 @@ class User extends Authenticatable
     }
 
     public function myuserscomments(){
-        return $this->hasMany(Comment::class , "user_id")->where('commentable_type', self::class);
+        return $this->hasMany(Comment::class , "user_id")->where('commentable_type', self::class );
     }
 
-    public function reservation(){
+    public function reservations(){
         return $this->hasMany(Reservation::class);
     }
 
     public function favorites(){
-        return $this->hasMany(Favorite::class);
+        return $this->belongsToMany(Item::class ,'Favorites' ,'user_id','item_id')->withPivot('created_at','id','updated_at');
     }
 
 }

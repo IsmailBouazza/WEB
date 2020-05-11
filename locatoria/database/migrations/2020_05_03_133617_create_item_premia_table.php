@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItempremiaTable extends Migration
+class CreateItemPremiaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateItempremiaTable extends Migration
      */
     public function up()
     {
-        Schema::create('itempremia', function (Blueprint $table) {
+        Schema::create('item_premia', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('item_id');
             $table->integer('status');
@@ -28,6 +28,6 @@ class CreateItempremiaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('itempremia');
+        Schema::dropIfExists('item_premia');
     }
 }

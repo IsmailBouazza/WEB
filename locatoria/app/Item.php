@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $guarded = ['price'];
+    protected $guarded = [];
     // default values just to test change it when saving
     protected $attributes = [
         'user_id' => '1',
@@ -30,12 +30,16 @@ class Item extends Model
         return $this->hasOne(ItemPremium::class);
     }
 
-    public function reservation(){
+    public function reservations(){
         return $this->hasMany(Reservation::class);
     }
 
-    public function favorites(){
-        return $this->hasMany(Favorite::class);
+    public function fans(){
+        return $this->belongsToMany(User::class , 'Favorites' , 'item_id', 'user_id')->withPivot('created_at','id','updated_at');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }

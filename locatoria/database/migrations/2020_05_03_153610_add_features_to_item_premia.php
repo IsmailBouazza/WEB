@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFeaturesToItempremia extends Migration
+class AddFeaturesToItemPremia extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddFeaturesToItempremia extends Migration
      */
     public function up()
     {
-        Schema::table('itempremia', function (Blueprint $table) {
+        Schema::table('item_premia', function (Blueprint $table) {
             //
 
             $table->foreign('item_id')
@@ -30,7 +30,7 @@ class AddFeaturesToItempremia extends Migration
      */
     public function down()
     {
-        Schema::table('itempremia', function (Blueprint $table) {
+        Schema::table('item_premia', function (Blueprint $table) {
             //
             $table->dropForeign('item_id');
         });
