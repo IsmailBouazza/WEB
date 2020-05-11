@@ -30,9 +30,17 @@ Route::get('/user/delete/{user}', 'UserController@delete');
 Route::resource('user', 'UserController');
 
 
+
+
+
+
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::get('/admin', 'AdminController@show');
+
+
+Route::resource('Category','CategoryController');
+
 
 
 

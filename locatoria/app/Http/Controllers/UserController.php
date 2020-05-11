@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    protected $cid;
     /**
      * Create a new controller instance.
      *
@@ -109,5 +111,7 @@ class UserController extends Controller
 
         return redirect('/users');
     }
+
+    
 
 }

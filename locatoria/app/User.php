@@ -41,6 +41,12 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    public function favorites(){
+
+        return $this->hasMany(User::class); 
+        
+    }
+
     
 
 }

@@ -22,12 +22,17 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     <link href="{{ asset('css/account.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/category.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/item.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
         <main class="py-4">
             @include('inc.navbar')
             @yield('content')
+
+            
         </main>
         @include('inc.footer')
     </div>

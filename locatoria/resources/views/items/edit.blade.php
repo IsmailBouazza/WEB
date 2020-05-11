@@ -105,7 +105,7 @@
                             <label for="dispo_starts" class="col-4 col-form-label">Current thumbnail</label>
                             <div class="col-8">
                                 <div class="bg-primary text-center">
-                                    <img width="200px" height="200px" src="/storage/{{$item->thumbnail_path}}" alt="Old thumbnail">
+                                    <img width="200px" height="200px" src="{{asset('/storage/'.$item->thumbnail_path)}}" alt="Old thumbnail">
                                 </div>
                             </div>
 
@@ -117,7 +117,7 @@
                                 <div class="row">
                                     @foreach($item_photos_links as $photo_id => $photo_path)
                                         <div class="col-sm-6 col-md-4 mb-3">
-                                            <img style="width:100px" src="/storage/{{$photo_path}}"  >
+                                            <img style="width:100px" src="{{asset('/storage/'.$photo_path)}}"  >
                                             <button type="button" style="width:100%"class="btn btn-danger p-1" id="{{$photo_id}}">delete</button>
                                         </div>
                                     @endforeach

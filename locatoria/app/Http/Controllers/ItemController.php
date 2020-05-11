@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Item;
 use App\ItemPhoto;
+use App\User;
 
 class ItemController extends Controller
 {
@@ -111,7 +112,16 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::find($id);
+        $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
+        $user_id = $item->user_id;
+        $user = User::find($user_id);
+    
+        return view('items.show')->with([
+            'item' => $item,
+            'item_photos' => $item_photos,
+            'user' => $user,
+        ]);
     }
 
     /**

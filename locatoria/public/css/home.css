@@ -16,6 +16,11 @@ td.image{
     font-size: 2em;
 }
 
+td.image img{
+    width: 150px;
+    height: 150px;
+}
+
 div.search{
     margin-top: 50px;
     margin-left: 25%;
@@ -37,10 +42,30 @@ div.conteneur{
     float: left;
     width: 150px;
     height: 120px;
-    margin-left: 40px;
-    background-color: rgb(142, 142, 145);
-    padding: 40px;
+    margin-left: 60px;
+    background-color: transparent;
+    position: relative;
+    text-align: center;
 }
+
+.jumbotron div.annonce img{
+    width: 150px;
+    height: 120px;
+    object-fit: contain;
+    opacity: 0.6;
+}
+.jumbotron div.annonce img:hover {
+    opacity: 1.0;
+  }
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: #000000;
+  }
 
 div.title{
     font-size: 2em;
@@ -51,12 +76,19 @@ div.title{
     background-color: transparent;
     width: 350px;
     font-size: 2em;
-    
+    margin-left: 10px;
 }
 
 a{
     text-decoration: none;
     color: white;
+}
+
+.jumbotron div.annonce .img{
+    width: 150px;
+    height: 100px;
+    border: none;
+    
 }
 
 

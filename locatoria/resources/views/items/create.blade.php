@@ -59,15 +59,15 @@
                                 <div class="col-8">
                                     <select id="select" name="category" class="custom-select" required >
                                         <option value="" selected disabled hidden>Choose here</option>
-                                        <option value="1">INFORMATIQUE ET MULTIMEDIA</option>
-                                        <option value="2">VEHICULES</option>
-                                        <option value="3">IMMOBILIER</option>
-                                        <option value="4">POUR LA MAISON ET JARDIN</option>
-                                        <option value="5">HABILLEMENT ET BIEN ETRE</option>
-                                        <option value="6">LOISIRS ET DIVERTISSEMENT</option>
-                                        <option value="7">EMPLOI ET SERVICES</option>
-                                        <option value="8">ENTREPRISES</option>
-                                        <option value="9">AUTRES</option>
+                                        <option value="1">Car equipment</option>
+                                        <option value="2">Clothes</option>
+                                        <option value="3">High tech/Multimedia</option>
+                                        <option value="4">Home-Made</option>
+                                        <option value="5">House equipment</option>
+                                        <option value="6">Pets</option>
+                                        <option value="7">Services</option>
+                                        <option value="8">Sport equipment/Hobbies</option>
+                                        <option value="9">Vehicles</option>
                                     </select>
                                 </div>
                                 @if ($errors->has('category'))

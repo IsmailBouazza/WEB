@@ -85,7 +85,7 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'zip_code' => $data['zip_code'],
             'bio' => $data['bio'],
-            
+            'picture' => '',
 
         ]);        
 

@@ -13,5 +13,19 @@ class Item extends Model
         'status' => '1'
     ];
 
+    protected $table = 'items';
+
+
+    public function category(){
+        return $this->belongsTo(category::class);
+    }
+
+    public function favorites(){
+
+        return $this->hasMany(User::class);
+
+    }
+
+    
 }
 

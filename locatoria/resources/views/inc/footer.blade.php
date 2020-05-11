@@ -1,6 +1,6 @@
 
-<div>
-  <div class="footer" style="margin-top:600px;">
+<div style="position:relative; bottom:0px; width:100%; height: 200px; margin-top:400px">
+  <div class="footer" >
     <footer class="my-5 pt-5 text-muted text-center text-small">
       <p class="mb-1">&copy; 2019-2020 </p>
       <ul class="list-inline">
