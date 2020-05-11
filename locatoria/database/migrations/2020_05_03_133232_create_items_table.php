@@ -19,7 +19,7 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->text('description');
-            $table->string('thumbnail_path');
+            $table->string('thumbnail_path')->nullable();;
             $table->char('status');
             $table->float('price');
             $table->date('dispo_starts');
