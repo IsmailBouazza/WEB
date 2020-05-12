@@ -54,7 +54,7 @@
               @if($items->count() > 0)
               @foreach($items as $item)
 
-              <div class="card" style="width: 18rem;">
+              <div id="card" class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{$item->title}}</h5>
