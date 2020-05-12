@@ -3,7 +3,7 @@
 @section('content')
 
 <br><br><br><br>
-    
+     
     <div class="nav">
         <div class="mini-block">
             <img src="http://localhost/WEB/locatoria/storage/app/public/{{$user->picture}}" style="width:150px; height:150px; border-radius:50%; margin-left:250px;">
