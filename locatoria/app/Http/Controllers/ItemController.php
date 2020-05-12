@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Item;
+use Intervention\Image\Facades\Image;
+use App\Item; 
 use App\ItemPhoto;
-
+use App\User;
 class ItemController extends Controller
 {
     /**
@@ -14,9 +15,28 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+     //display user items
+    public function index($user)
     {
-        //
+        $items = Item::all();
+        $user = User::find($user);
+        $user->items()->get();
+        return view('items.myitems')->with([
+            'items'=>$items,
+            'user'=>$user,
+           
+        ]);
+    }
+
+   //display 6 latest items at home page
+    public function showHome(){
+
+            $items = Item::all()->sortByDesc('created_at')->take(6);
+            return view('general.home')->with([
+                'items'=>$items,
+            ]);
+        
     }
 
     /**
@@ -100,7 +120,7 @@ class ItemController extends Controller
         }
 
         // to do redirect to my items or dashboard
-        echo "done";
+        return redirect('/items/myitems/' . auth()->user()->id);
     }
 
     /**
@@ -109,10 +129,21 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //to show user item(details) 
     public function show($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
+       
+        return view('items.showitem')->with([
+            'item' => $item,
+            'item_photos' => $item_photos,
+            
+        ]);
     }
+
+    
+
 
     /**
      * Show the form for editing the specified resource.

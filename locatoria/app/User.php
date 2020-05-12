@@ -29,7 +29,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+  
     /**
      * The attributes that should be cast to native types.
      *
@@ -42,5 +42,8 @@ class User extends Authenticatable
     protected $guarded = [];
 
     
+    public function items(){
+        return $this->hasMany(Item::class)->orderBy('created_at', 'DESC');
+    }
 
 }
