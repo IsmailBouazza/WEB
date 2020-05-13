@@ -22,14 +22,10 @@ class Item extends Model
     }
     // default values just to test change it when saving
     protected $attributes = [
-        'user_id' => '1',
         'status' => '1'
     ];
 
   
-
-
-
     protected $table = 'items';
 
 

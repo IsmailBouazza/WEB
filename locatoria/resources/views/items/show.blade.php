@@ -10,12 +10,12 @@
         <div class="info-img">
             <div>{{$item->title}}</div>
             <hr>
-            <div>{{$item->description}}</div>
         </div>
 
         @foreach ($item_photos as $item_photo)
 
-            <img src="{{asset('storage/'.$item_photo->photo_path)}}">
+            <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
+            
 
         @endforeach
 
@@ -23,6 +23,8 @@
         <div class="link">
             {{$item_photos->links()}}
         </div>
+        <hr>
+        <div class="desc">{{$item->description}}</div>
     </div>
 
     <div class="img-container info-container">
@@ -44,5 +46,4 @@
         <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
     </div>
 
-    
 @endsection

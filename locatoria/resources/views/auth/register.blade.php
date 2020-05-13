@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+<!-- link css -->
+<link href="{{ asset('css/account.css') }}" rel="stylesheet">
+<!--  -->
 @section('content')
 <div class="container3">
     <img src="{{asset('images/logo.png')}}">
@@ -161,4 +163,8 @@
         </div>
     </div>
 </div>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
 @endsection

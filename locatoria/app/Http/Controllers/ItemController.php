@@ -8,6 +8,11 @@ use Intervention\Image\Facades\Image;
 use App\Item; 
 use App\ItemPhoto;
 use App\User;
+use App\Reservation;
+use Auth;
+use DateTime;
+use DateInterval;
+use DatePeriod;
 
 class ItemController extends Controller
 {
@@ -18,10 +23,11 @@ class ItemController extends Controller
      */
 
      //display user items
-    public function index($user)
+    public function index()
     {
+        $user_id=Auth::user()->id;
         $items = Item::all();
-        $user = User::find($user);
+        $user = User::find($user_id);
         $user->items()->get();
         return view('items.myitems')->with([
             'items'=>$items,
@@ -66,15 +72,16 @@ class ItemController extends Controller
             'price' => 'required|numeric',
             'dispo_starts' => 'required|date',
             'dispo_ends' => 'required',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'category' => 'required'
 
 
         ]);
         $item =  new Item;
 
+        $item->user_id=Auth::user()->id;
         $item->title=$request->title;
         $item->description=$request->description;
         $item->price=$request->price;
@@ -93,14 +100,15 @@ class ItemController extends Controller
             $extension = $request->file('thumbnail')->getClientOriginalExtension();
             $imageName = $item_id.'_thumbnail'.'.'.$extension;
             $path = $request->file('thumbnail')->storeAs($id_user.'/'.$item_id, $imageName, 'public'); //
-            $item->thumbnail_path=$path;
+            $item->thumbnail_path= $path;
+            $thumbnail = Image::make(public_path("storage/{$path}"))->resize(500,250);
+            $thumbnail->save();
             $item->save();
         }
 
         // add images to storage (/{user_id}/{item_id}/)
         // named as {item_id}_image_{i}.png
 
-        // - to do : we have to control the size of the images !
         if ($request->file('images')) {
             $i = 0;
 
@@ -110,6 +118,10 @@ class ItemController extends Controller
                 $i++;
 
                 $path=$image->storeAs($id_user.'/'.$item_id, $imageName, 'public');
+                $picture = Image::make(public_path("storage/{$path}"))->resize(500,250);
+                $picture->save();
+
+
 
                 //    $image->move(public_path().'/images/', $imageName);
                 $itemphoto = new ItemPhoto;
@@ -120,7 +132,6 @@ class ItemController extends Controller
             }
         }
 
-        // to do redirect to my items or dashboard
         return redirect('/items/myitems/' . auth()->user()->id);
     }
 
@@ -137,14 +148,33 @@ class ItemController extends Controller
         $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
         $user_id = $item->user_id;
         $user = User::find($user_id);
+
+        $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
+        $takendates = array();
+
+        foreach ($reservations as $reservation){
+
+            $begin = new DateTime($reservation->date_start);
+            $end = new DateTime($reservation->date_end);
+            $end = $end->modify( '+1 day' );
+
+            $interval = new DateInterval('P1D');
+            $daterange = new DatePeriod($begin, $interval ,$end);
+
+            foreach($daterange as $date){
+                $takendates[] = $date->format("Y-m-d");
+            }
+        }
+
+        
         return view('items.show')->with([
 
             'item' => $item,
             'item_photos' => $item_photos,
             'user' => $user,
-            
+            'takendates'=>json_encode($takendates),
         ]);
-       
+  
     }
 
     
@@ -187,7 +217,7 @@ class ItemController extends Controller
             'dispo_starts' => 'required|date',
             'dispo_ends' => 'required',
             // 'images' => 'required',
-            // 'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'category' => 'required'
         ]);
 
@@ -253,4 +283,6 @@ class ItemController extends Controller
     {
         //
     }
+
+
 }

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-      <a class="navbar-brand" href="{{ url('http://localhost/WEB/locatoria/public/home') }}">
-        <img src="{{asset('images/logo.png')}}" style="width:32px; height:32px; position:absolute; top:10px; left:200px; border-radius:50%;">
+      <a class="navbar-brand" href="{{ url('http://localhost/WEB/locatoria/public/home') }}" style="position: relative; padding-left:50px;">
+        <img src="{{asset('images/logo.png')}}" style="width:32px; height:32px; position:absolute; top:5px; left:10px; border-radius:50%;">
         {{ config('app.name', 'Locatoria') }}
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
