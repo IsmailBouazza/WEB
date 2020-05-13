@@ -1,5 +1,7 @@
 @extends('layouts.app')
+<!-- link css -->
 <link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
+<!--  -->
 @section('content')
     
     <br><br><br>
@@ -15,7 +17,6 @@
       </div>
   </div>
     <h1>My items</h1><br><br>
-  <!--<a href="http://localhost/locatoria/public/items/create"><button id="btn" type="button" class="btn btn-dark">Add item</button></a>-->
 
     <div class="album ">
     

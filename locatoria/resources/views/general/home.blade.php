@@ -1,4 +1,7 @@
 @extends('layouts.app')
+<!-- link css -->
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
+<!--  -->
 @section('content')
     <table class="img-container">
       <tr>

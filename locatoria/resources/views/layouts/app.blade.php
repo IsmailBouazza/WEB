@@ -18,13 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('/css/home.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('css/showitem.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/item.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/category.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/account.css') }}" rel="stylesheet">
+    
     
    
 </head>
