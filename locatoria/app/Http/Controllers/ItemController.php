@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Item;
 use App\ItemPhoto;
 use App\User;
+use App\Favorite;
 
 class ItemController extends Controller
 {
@@ -116,7 +117,6 @@ class ItemController extends Controller
         $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
         $user_id = $item->user_id;
         $user = User::find($user_id);
-    
         return view('items.show')->with([
             'item' => $item,
             'item_photos' => $item_photos,

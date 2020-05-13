@@ -25,7 +25,7 @@
 
     <div class="img-container info-container">
 
-            <img src="http://localhost/WEB/locatoria/storage/app/public/{{$user->picture}}" style="width: 150px; height:150px; border-radius:50%;">
+            <img src="{{asset('storage/'.$user->picture)}}" style="width: 150px; height:150px; border-radius:50%;">
             <hr>
             <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
             <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>

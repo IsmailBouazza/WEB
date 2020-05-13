@@ -23,7 +23,7 @@
 
         <div class="edit-block">
             <div class="float">
-                <img src="http://localhost/WEB/locatoria/public/images/edit.png" >
+                <img src="{{asset('images/edit.png')}}" >
             </div>
             <div class="float marg">
                 <div class="info row">
