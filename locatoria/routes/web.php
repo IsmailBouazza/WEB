@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +17,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@home');
 Route::get('/home', 'HomeController@home');
 
+Route::get('/home', 'ItemController@showHome');
+
 
 Auth::routes();
 
 Route::resource('Item','ItemController');
 Route::resource('ItemPhoto','ItemPhotoController');
+Route::get('/items/showitem/{id}', 'ItemController@show');
 
+Route::get('/items/myitems/{user}', 'ItemController@index');
+
+ 
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 

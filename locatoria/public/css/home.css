@@ -84,6 +84,21 @@ a{
     color: white;
 }
 
+#card{
+    margin-left: 10%;
+    margin-top: 80px;
+    width: 300px;
+}
+
+div.album{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+
+
+
 .jumbotron div.annonce .img{
     width: 150px;
     height: 100px;
