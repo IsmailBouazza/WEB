@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFeaturesToItemcomments extends Migration
+class AddFeaturesToItemPremia extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class AddFeaturesToItemcomments extends Migration
      */
     public function up()
     {
-        Schema::table('itemcomments', function (Blueprint $table) {
+        Schema::table('item_premia', function (Blueprint $table) {
             //
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
 
             $table->foreign('item_id')
                 ->references('id')
@@ -34,9 +30,8 @@ class AddFeaturesToItemcomments extends Migration
      */
     public function down()
     {
-        Schema::table('itemcomments', function (Blueprint $table) {
+        Schema::table('item_premia', function (Blueprint $table) {
             //
-            $table->dropForeign('user_id');
             $table->dropForeign('item_id');
         });
     }

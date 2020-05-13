@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+
 
 class UserController extends Controller
 {
+    protected $cid;
     /**
      * Create a new controller instance.
      *
@@ -66,10 +70,15 @@ class UserController extends Controller
             'picture' => '',
         ]);
 
+        
 
         if(request('picture')){
+            
+            Storage::disk('public')->delete($user->picture);
 
-            $picturePath = request('picture')->store('user','public');
+            $extension = request('picture')->getClientOriginalExtension();
+            $imageName = $user->id.'_picture'.'.'.$extension;
+            $picturePath = request('picture')->storeAs($user->id, $imageName,'public');
             $picture = Image::make(public_path("storage/{$picturePath}"))->fit(250,200);
             $picture->save();
 
@@ -102,5 +111,7 @@ class UserController extends Controller
 
         return redirect('/users');
     }
+
+    
 
 }

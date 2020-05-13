@@ -41,7 +41,6 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
-    
     public function items(){
         return $this->hasMany(Item::class)->orderBy('created_at', 'DESC');
     }

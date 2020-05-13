@@ -1,3 +1,11 @@
+
+// font-awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+$fa-font-path: "../fonts";
+
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 

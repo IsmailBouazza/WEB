@@ -134,12 +134,12 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
         $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
-       
         return view('items.showitem')->with([
             'item' => $item,
             'item_photos' => $item_photos,
             
         ]);
+       
     }
 
     

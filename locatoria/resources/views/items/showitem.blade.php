@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.app')
 <link href="{{ asset('css/showitem.css') }}" rel="stylesheet">
 
 @section('content')
@@ -20,6 +20,8 @@
         </div>
         </div>
     </div>-->
+    <br><br>
+  
     <br><br>
     </br><h1>{{$item->title}}</h1>
     <div class="box-container img-container">
@@ -102,15 +104,15 @@
 <div class="btns">
 <div class="col1">
     <label for="adresse"><br></label>
-    <form class="form-inline mt-2 mt-md-0">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Update</button>
-    </form>
+    </i><a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
+            
+    
 </div> 
-<div class="col2">
+<!--<div class="col2">
     <label for="adresse"><br></label>
     <form class="form-inline mt-2 mt-md-0">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">archive</button>
     </form>
-</div> 
+</div> -->
 </div>
 @endsection
