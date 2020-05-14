@@ -45,4 +45,5 @@ Route::resource('Category','CategoryController');
 
 
 Route::post('/reser', 'ReservationController@store');
+Route::get('/reservations', 'ReservationController@index');
 

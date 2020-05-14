@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use App\Reservation;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,5 +28,28 @@ class ReservationController extends Controller
         return redirect('/home');
 
     }
+
+
+    public function index(){
+
+        $reservations = Reservation::where('user_owner_id',Auth::user()->id)->get();
+
+        $reservations2 = $reservations->map(function ($resevation , $key){
+
+
+            $resevation->user_id = User::find($resevation->user_id);
+
+            return $resevation;
+        });
+
+        //dd($reservations2);
+
+        return view('reservation.reservations' , [
+
+            'reservations'=>$reservations2
+        ]);
+
+    }
+
 
 }
