@@ -1,6 +1,7 @@
 @extends('layouts.app')
 <!-- link css -->
 <link href="{{ asset('css/item.css') }}" rel="stylesheet">
+<link href="{{ asset('css/lightpick.css') }}" rel="stylesheet">
 <!--  -->
 @section('content')
 
@@ -13,17 +14,17 @@
         @if(count($item_photos)>0)
         <div class="info-img">
         @foreach ($item_photos as $item_photo)
-            
+
             <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
 
         @endforeach
 
 
         <div class="link">
-           
+
             {{$item_photos->links()}}
         </div>
-    
+
         @else
             <p>NO PHOTS!</p>
         @endif
@@ -32,7 +33,7 @@
 <div class="form">
     <div class="block">
         <div class="info row">
-           
+
 
             <div class="col-md-6 mb-3">
                 <label for="email">Description</label>
@@ -41,7 +42,7 @@
                     item description .
                 </div>
             </div>
-            
+
             <div class="col-md-6 mb-3">
                 <label for="zip_code">price</label>
                 <input type="text" class="form-control" id="zip_code" placeholder="{{$item->price}}" value="" required>
@@ -72,7 +73,7 @@
                     created_at.
                 </div>
             </div>
-            
+
             <div class="col-md-6 mb-3">
                 <label for="city">updated at</label>
                 <input type="text" class="form-control" id="city" placeholder="{{$item->updated_at}}" value="" required>
@@ -80,17 +81,17 @@
                     updated_at.
                 </div>
             </div>
-            
 
-          
-        </div>   
+
+
+        </div>
     </div>
 </div>
 <div class="btns">
 <div class="col1">
     <label for="adresse"><br></label>
     </i><a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
-</div> 
+</div>
 
 <div class="col2">
 {!!Form::open(['action' => ['ItemController@destroy', $item->id], 'method'=> 'POST', 'class'=> 'pull-right'])!!}
@@ -106,7 +107,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">archive</button>
     </form>
 </div> -->
-</div> 
+</div>
 
 @else
 
@@ -120,7 +121,7 @@
         @foreach ($item_photos as $item_photo)
 
             <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
-            
+
 
         @endforeach
 
@@ -141,7 +142,7 @@
             <div><i class="fas fa-phone" style="margin-right: 10px"></i></i>{{$user->phone}}</div>
             <div><i class="fas fa-envelope-open-text" style="margin-right: 10px"></i>{{$user->email}}</div>
 
-            <button type="button" class="center btn btn-success">Chat</button>        
+            <button type="button" class="center btn btn-success">Chat</button>
             </div>
     </div>
 
@@ -163,7 +164,7 @@
     @foreach ($item_photos as $item_photo)
 
         <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
-        
+
 
     @endforeach
 
@@ -184,7 +185,7 @@
         <div><i class="fas fa-phone" style="margin-right: 10px"></i></i>{{$user->phone}}</div>
         <div><i class="fas fa-envelope-open-text" style="margin-right: 10px"></i>{{$user->email}}</div>
 
-        <button type="button" class="center btn btn-success">Chat</button>        
+        <button type="button" class="center btn btn-success">Chat</button>
         </div>
 </div>
 
@@ -194,6 +195,180 @@
     <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
 </div>
 
+
+
 @endif
 
+<!--chekout-->
+
+<div class="col-lg-12" id="bill" style="display: none">
+    <div id="mainContentWrapper">
+        <div class="col-lg-8 offset-md-2">
+            <div class="shopping_cart">
+                <div class="panel-group" id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">
+
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Review
+
+                                    Your Order</a>
+
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse show">
+                            <div class="card-body">
+                                <div class="items">
+                                    <div class="col-lg-9">
+                                        <table class="table table-striped">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h4>{{$item->title}}</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <ul>
+                                                        <li><b><i>Gategory : </i></b>
+                                                        </li>
+                                                        <li><b><i>Renting Period : </i></b><span id="renting_period"></span>
+                                                        </li>
+                                                        <li><b><i>Total Days : </i></b><span id="total_days"></span>
+                                                        </li>
+                                                        <li><b><i>Price Per Day : </i></b><span id="price">{{$item->price}}</span> MAD</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-3 float-right">
+                                        <div style="text-align: center;">
+                                            <h3> <b>Total Price</b></h3>
+                                            <h3><span style="color:green;"><span id="total_price"></span> MAD</span></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+
+                            <div style="text-align: center; width:100%;">
+
+                                <a style="width:100%;" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class=" btn btn-success" onclick="submitForm()">
+
+                                    Send Renting Request</a>
+
+                            </div>
+
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<form id="checkoutform" action="{{ url('reservation') }}" method="POST" style="display: none">
+    @csrf
+    <input type="hidden" name="date_start" id="start">
+    <input type="hidden" name="date_end" id="end">
+    <input type="hidden" name="total_price">
+    <input type="hidden" name="item_id" value="{{$item->id}}">
+</form>
+
+
+
+<!--end ckeckout -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="{{ asset('js/lightpick.js') }}" ></script>
+
+<script type="application/javascript" >
+    var dispo_starts = "{{$item->dispo_starts}}";
+    var dispo_ends = "{{$item->dispo_ends}}";
+    var takendates  =  JSON.parse({!!json_encode($takendates)!!});
+
+    var date = new Date();
+    var today = date.getFullYear()+'-'+(date.getMonth()+1)+'/'+date.getDate();
+    console.log(takendates);
+    const myPicker = new Lightpick({
+        field: document.getElementById('start'),
+        secondField: document.getElementById('end'),
+
+        // date format
+        format: 'YYYY-MM-DD',
+
+        // separator character
+        separator: ' -',
+
+        // number of months to display
+        numberOfMonths: 2,
+
+        // number of columns to display
+        numberOfColumns: 2,
+
+        // single date mode
+        singleDate: false,
+
+        // auto close after selection
+        autoclose: true,
+
+        // Repick start/end instead of new range.
+        repick: false,
+
+
+        // min/max dates
+        minDate: dispo_starts,
+        maxDate: dispo_ends,
+
+        // min/max days
+        minDays: null,
+        maxDays: null,
+
+        // shows tooltip
+        hoveringTooltip: true,
+
+        // disabled dates in the range
+        disabledDatesInRange: false,
+        disableDates: takendates ,
+        // disable Saturday and Sunday.
+        disableWeekends: false,
+
+        // inline mode (still still)
+
+        inline: true,
+        onSelect: function(end){
+            var totaldays=$( ".lightpick__tooltip" ).text();
+            var days = totaldays.replace(/\D/g, "");
+
+            if (totaldays != ""){
+                $("#bill").show();
+                $("#total_days").text(totaldays);
+                var price = $("#price").text();
+                var total_price = price*days;
+                $("#total_price").text(total_price.toFixed(2)); // XXXXX.xx
+                $("#renting_period").text("from : "+$("#start").val()+" to : "+$("#end").val());
+                $('input[name="total_price"]').val(total_price.toFixed(2));
+
+            }
+        }
+
+    });
+    var calendar = $('.lightpick--inlined');
+    calendar.insertBefore('#bill');
+    calendar.addClass("offset-md-2");
+    calendar.css({"margin-bottom":"2%","margin-top":"2%","z-index": "0"});
+
+
+    function submitForm() {
+        $("#checkoutform").submit();
+
+    }
+</script>
 @endsection
