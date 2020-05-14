@@ -148,7 +148,6 @@ class ItemController extends Controller
         $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
         $user_id = $item->user_id;
         $user = User::find($user_id);
-
         $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
         $takendates = array();
 

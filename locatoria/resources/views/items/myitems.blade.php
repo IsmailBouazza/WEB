@@ -18,7 +18,7 @@
           </div>
       </div>
     </div>
-    <h1>My items</h1><br><br>
+    <h1></h1><br><br>
 
     <div class="album ">
     
@@ -31,7 +31,20 @@
             <div class="card-body">
               <h5 class="card-title">{{$item->title}}</h5>
               <p class="card-text">{{$item->description}}</p>
-              <a href="../showitem/{{$item->id}}" class="btn btn-primary">view details</a>
+              <a href="../show/{{$item->id}}" class="btn btn-primary">view details</a>
+              <div class="btns">
+                <div class="col1">
+                    <label for="adresse"><br></label>
+                    </i><a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
+                </div> 
+                
+                <div class="col2">
+                {!!Form::open(['action' => ['ItemController@destroy', $item->id], 'method'=> 'POST', 'class'=> 'pull-right'])!!}
+                    {{Form::hidden('_method', 'DELETE')}}
+                    {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
+                {!!Form::close()!!}
+                </div>
+              </div>
             </div>
           </div>
        

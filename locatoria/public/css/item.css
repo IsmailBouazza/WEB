@@ -83,3 +83,36 @@ a{
     text-align: center;
     font-size: 1.2em;
 }
+
+div.form{
+    margin-left: 20%;
+    margin-top: 180px;
+    
+}
+
+div.btns{
+    margin-top: 300px ;
+    display: flex ;
+}
+
+div.col1{
+    position : relative;
+    left: 40%;
+    right: 30%;
+}
+div.col2{
+    position : relative;
+    left: 50%;
+    right: 30%;
+}
+
+h1{
+    text-align: center;
+    margin-top: 100%;
+}
+
+div.bar{
+    margin-top: 5%;
+    margin-left: 3%;
+
+}
