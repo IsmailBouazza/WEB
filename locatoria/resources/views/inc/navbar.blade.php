@@ -1,10 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-<<<<<<< HEAD
       <a class="navbar-brand" href="{{ url('/home') }}" style="position: relative; padding-left:50px;">
-=======
-      <a class="navbar-brand" href="/home" style="position: relative; padding-left:50px;">
->>>>>>> e5f7fd9a1b0dafee1221ca339e9a9bc0124d0c0b
+
         <img src="{{asset('images/logo.png')}}" style="width:32px; height:32px; position:absolute; top:5px; left:10px; border-radius:50%;">
         {{ config('app.name', 'Locatoria') }}
       </a>

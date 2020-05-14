@@ -195,30 +195,8 @@
     <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
 </div>
 
-<<<<<<< HEAD
-<form id="checkoutform" action="{{ url('/Reservation') }}" method="POST" >
-    @csrf
-
-    <input type="text" name="date_start" id="start">
-    <input type="text" name="date_end" id="end">
-    <input type="text" name="total_price">
-    <input type="hidden" name="item_id" value="{{$item->id}}">
-    <div class="offset-6 col-8">
-        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
-
-@endif
 
 
-
-    
-
-@endsection
-=======
-
-
-@endif
 
 <!--chekout-->
 
@@ -366,5 +344,7 @@
 
     }
 </script>
+
+@endif
 @endsection
->>>>>>> 1c657890cfb70b4ccb972ce16ed994636e9884b4
+

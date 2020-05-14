@@ -5,14 +5,8 @@ namespace App\Http\Controllers;
 use App\Item;
 use App\Reservation;
 use App\User;
-use Illuminate\Http\Request;
-<<<<<<< HEAD
-use App\Reservation;
-use App\User;
 use Auth;
-=======
-use Illuminate\Support\Facades\Auth;
->>>>>>> e5f7fd9a1b0dafee1221ca339e9a9bc0124d0c0b
+use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
