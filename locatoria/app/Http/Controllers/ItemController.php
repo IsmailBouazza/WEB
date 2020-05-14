@@ -168,7 +168,7 @@ class ItemController extends Controller
         //dd($takendates);
 
         return view('items.show')->with([
-
+            'comments'=>$item->comments,
             'item' => $item,
             'item_photos' => $item_photos,
             'user' => $user,
