@@ -1,7 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
- 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 Route::get('/', 'HomeController@home');
 Route::get('/home', 'HomeController@home');
 Route::get('/', 'ItemController@showHome');
 Route::get('/home', 'ItemController@showHome');
-
 
 Auth::routes();
 
@@ -28,15 +29,12 @@ Route::get('/items/show/{id}', 'ItemController@show');
 
 Route::get('/items/myitems/{user}', 'ItemController@index');
 
- 
+
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 
 
 Route::resource('user', 'UserController');
-
-
-
 
 
 
@@ -51,12 +49,6 @@ Route::resource('Reservation','ReservationController');
 
 
 
+Route::post('/reser', 'ReservationController@store');
+Route::get('/reservations', 'ReservationController@index');
 
-
-
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use App\Item; 
+use App\Item;
 use App\ItemPhoto;
 use App\User;
 use App\Reservation;
@@ -32,7 +32,7 @@ class ItemController extends Controller
         return view('items.myitems')->with([
             'items'=>$items,
             'user'=>$user,
-           
+
         ]);
     }
 
@@ -43,7 +43,7 @@ class ItemController extends Controller
             return view('general.home')->with([
                 'items'=>$items,
             ]);
-        
+
     }
 
     /**
@@ -141,7 +141,7 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //to show user item(details) 
+    //to show user item(details)
     public function show($id)
     {
         $item = Item::findOrFail($id);
@@ -149,36 +149,38 @@ class ItemController extends Controller
         $user_id = $item->user_id;
         $user = User::find($user_id);
 
-        /*$reservations = Reservation::where('item_id',$id)->where('status',1)->get();
+        
+        $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
 
         $takendates = array();
 
         foreach ($reservations as $reservation){
 
-            $begin = new DateTime($reservation->date_start);
-            $end = new DateTime($reservation->date_end);
-            $end = $end->modify( '+1 day' );
+        $begin = new DateTime($reservation->date_start);
+        $end = new DateTime($reservation->date_end); // date_end - 1
+        $end = $end->modify( '+1 day' );
 
-            $interval = new DateInterval('P1D');
-            $daterange = new DatePeriod($begin, $interval ,$end);
+        $interval = new DateInterval('P1D');
+        $daterange = new DatePeriod($begin, $interval ,$end);
 
-            foreach($daterange as $date){
-                $takendates[] = $date->format("Y-m-d");
-            }
+        foreach($daterange as $date){
+            $takendates[] = $date->format("Y-m-d");
         }
-        */
-        
+
+    }
+
+
         return view('items.show')->with([
 
             'item' => $item,
             'item_photos' => $item_photos,
             'user' => $user,
-            //'takendates'=>json_encode($takendates),
+            'takendates'=>json_encode($takendates),
         ]);
-  
+
     }
 
-    
+
 
 
     /**
@@ -286,7 +288,7 @@ class ItemController extends Controller
         $photos = ItemPhoto::Where('item_id', $id);
         $photos->delete();
         $item->delete();
-        
+
         return redirect('/items/myitems/' . auth()->user()->id)->with('success', 'Item deleted');
     }
 
