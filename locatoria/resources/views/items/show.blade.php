@@ -47,13 +47,15 @@
     </div>
 
 
-    <form id="checkoutform" action="{{ url('Reservation') }}" method="POST" >
+    <form id="checkoutform" action="{{ url('Reservation') }}" method="POST" enctype="multipart/form-data">
 
         <input type="text" name="date_start" id="start">
         <input type="text" name="date_end" id="end">
         <input type="text" name="total_price">
         <input type="hidden" name="item_id" value="{{$item->id}}">
-        <button type="submit" class="btn btn-success">Submit</button>
+        <div class="offset-6 col-8">
+            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 
 @endsection

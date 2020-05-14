@@ -16,6 +16,7 @@ class ReservationController extends Controller
         $reservations = Reservation::all();
         $user = User::find($user_id);
         $user->reservations()->get();
+        dd($reservations);
         return view('reservations.myreservations')->with([
             'reservations' => $reservations,
             'user' => $user,
@@ -39,11 +40,17 @@ class ReservationController extends Controller
         $user_id = $reservation->user_id;
         $user = User::find($user_id);
         $reservation->item_id = $user->items()->id->get();
+        dd($reservation->item_id);
         $reservation->total_price=$request->total_price;
         $reservation->dispo_starts=$request->dispo_starts;
         $reservation->dispo_ends=$request->dispo_ends;
 
         $reservation->save();
+
+        
+
+        return redirect('/Reservation');
+
 
        
     }

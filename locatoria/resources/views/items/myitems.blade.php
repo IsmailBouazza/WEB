@@ -34,6 +34,19 @@
               <a href="../showitem/{{$item->id}}" class="btn btn-primary">view details</a>
             </div>
           </div>
+          <div class="btns">
+            <div class="col1">
+                <label for="adresse"><br></label>
+                </i><a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
+            </div> 
+            
+            <div class="col2">
+            {!!Form::open(['action' => ['ItemController@destroy', $item->id], 'method'=> 'POST', 'class'=> 'pull-right'])!!}
+                {{Form::hidden('_method', 'DELETE')}}
+                {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
+            {!!Form::close()!!}
+            </div>
+          </div>
        
           @endforeach
           @else

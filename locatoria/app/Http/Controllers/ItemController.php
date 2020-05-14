@@ -149,7 +149,7 @@ class ItemController extends Controller
         $user_id = $item->user_id;
         $user = User::find($user_id);
 
-        $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
+        /*$reservations = Reservation::where('item_id',$id)->where('status',1)->get();
         $takendates = array();
 
         foreach ($reservations as $reservation){
@@ -165,14 +165,14 @@ class ItemController extends Controller
                 $takendates[] = $date->format("Y-m-d");
             }
         }
-
+        */
         
         return view('items.show')->with([
 
             'item' => $item,
             'item_photos' => $item_photos,
             'user' => $user,
-            'takendates'=>json_encode($takendates),
+            //'takendates'=>json_encode($takendates),
         ]);
   
     }
