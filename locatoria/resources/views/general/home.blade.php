@@ -75,7 +75,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{$item->title}}</h5>
                   <p class="card-text">{{$item->description}}</p>
-                  <a href="#" class="btn btn-primary">view details</a>
+                <a href="http://localhost/WEB/locatoria/public/items/showitem/{{$item->id}}" class="btn btn-primary">view details</a>
                 </div>
               </div>
     

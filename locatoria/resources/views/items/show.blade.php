@@ -46,4 +46,14 @@
         <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
     </div>
 
+
+    <form id="checkoutform" action="{{ url('Reservation') }}" method="POST" >
+
+        <input type="text" name="date_start" id="start">
+        <input type="text" name="date_end" id="end">
+        <input type="text" name="total_price">
+        <input type="hidden" name="item_id" value="{{$item->id}}">
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
 @endsection

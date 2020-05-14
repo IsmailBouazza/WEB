@@ -1,0 +1,9 @@
+p.msg{
+    font-size: 3em;
+    margin-left: 40%;
+    margin-top: 100px;
+}
+
+div.msg{
+    width: 100%;
+}

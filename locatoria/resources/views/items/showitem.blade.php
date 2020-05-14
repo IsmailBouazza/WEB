@@ -4,23 +4,7 @@
 <!--  -->
 @section('content')
     
-      <!--  <div class="block hidden pt-0" >
-    <div class="mini-block">
-            <div class="image-block flt">
-              
-            </div>
-            <div class="title-block flt">
-                
-            </div>
-        </div>-->
-        <!--<div class="bar">
-        <div class="mini-block hidden">
-            <table class="mini">
-                <tr><td><a href="http://localhost/locatoria/public/items/myitems"><button type="button" class="butt btn btn-secondary">My items</button></a></td></tr>
-            </table>
-        </div>
-        </div>
-    </div>-->
+   
     <br><br>
   
     <br><br>

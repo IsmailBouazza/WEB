@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@home');
 Route::get('/home', 'HomeController@home');
-
+Route::get('/', 'ItemController@showHome');
 Route::get('/home', 'ItemController@showHome');
 
 
@@ -46,6 +46,9 @@ Route::get('/admin', 'AdminController@show');
 
 
 Route::resource('Category','CategoryController');
+
+Route::resource('Reservation','ReservationController');
+
 
 
 

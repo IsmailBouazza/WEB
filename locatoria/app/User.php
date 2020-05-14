@@ -45,4 +45,8 @@ class User extends Authenticatable
         return $this->hasMany(Item::class)->orderBy('created_at', 'DESC');
     }
 
+    public function reservations(){
+        return $this->hasMany(Reservation::class)->orderBy('created_at', 'DESC');
+    }
+
 }
