@@ -19,3 +19,18 @@ h1{
     margin-top: 0px;
     
 }
+div.btns{
+    
+    display: flex ;
+    padding-top: 5px;
+    padding-left: 0px;
+}
+
+div.col1{
+  position : relative;
+  padding-right: 6px;
+}
+div.col2{
+    position : relative;
+    
+}

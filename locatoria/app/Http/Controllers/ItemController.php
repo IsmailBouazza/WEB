@@ -150,6 +150,7 @@ class ItemController extends Controller
         $user = User::find($user_id);
 
         /*$reservations = Reservation::where('item_id',$id)->where('status',1)->get();
+
         $takendates = array();
 
         foreach ($reservations as $reservation){

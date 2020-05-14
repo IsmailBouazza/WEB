@@ -24,7 +24,7 @@ Auth::routes();
 
 Route::resource('Item','ItemController');
 Route::resource('ItemPhoto','ItemPhotoController');
-Route::get('/items/showitem/{id}', 'ItemController@show');
+Route::get('/items/show/{id}', 'ItemController@show');
 
 Route::get('/items/myitems/{user}', 'ItemController@index');
 
