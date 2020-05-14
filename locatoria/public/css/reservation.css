@@ -7,3 +7,8 @@ p.msg{
 div.msg{
     width: 100%;
 }
+
+.msg small{
+    margin-left: 50%;
+    font-size: 1em;
+}

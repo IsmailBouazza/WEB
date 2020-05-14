@@ -34,3 +34,18 @@ div.col2{
     position : relative;
     
 }
+
+p.msg{
+    font-size: 3em;
+    margin-left: 40%;
+    margin-top: 100px;
+}
+
+div.msg{
+    width: 100%;
+}
+
+.msg small{
+    margin-left: 50%;
+    font-size: 1em;
+}

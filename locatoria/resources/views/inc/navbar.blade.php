@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-      <a class="navbar-brand" href="{{ url('http://localhost/WEB/locatoria/public/home') }}" style="position: relative; padding-left:50px;">
+      <a class="navbar-brand" href="{{ url('/home') }}" style="position: relative; padding-left:50px;">
         <img src="{{asset('images/logo.png')}}" style="width:32px; height:32px; position:absolute; top:5px; left:10px; border-radius:50%;">
         {{ config('app.name', 'Locatoria') }}
       </a>
@@ -12,13 +12,13 @@
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="http://localhost/WEB/locatoria/public/home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ url('/home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost/WEB/locatoria/public/Category">Categories <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ url('/Category') }}">Categories <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost/WEB/locatoria/public/pages/favorite">My favorites <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url('/favorite') }}">My favorites <span class="sr-only">(current)</span></a>
             </li>
           </ul>
 
@@ -40,7 +40,7 @@
                       </a>
 
                       <div class="dropdown-menu dropdown-menu-right" >
-                            <a class="dropdown-item" href="http://localhost/WEB/locatoria/public/user/{{ Auth::user()->id }}">My account <span class="sr-only">(current)</span></a>
+                            <a class="dropdown-item" href="{{ url('/user/'.Auth::user()->id) }}">My account <span class="sr-only">(current)</span></a>
 
 
                             <a class="dropdown-item" href="{{ route('logout') }}"

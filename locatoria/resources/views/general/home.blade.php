@@ -27,13 +27,13 @@
     </div>
     <div class="categorie nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-          <a class="p-2 text-muted" href="http://localhost/WEB/locatoria/public/Category/4">Home-made</a>
-          <a class="p-2 text-muted" href="http://localhost/WEB/locatoria/public/Category/1">Car Equipement</a>
-          <a class="p-2 text-muted" href="http://localhost/WEB/locatoria/public/Category/3">Multimedia/High tech</a>
-          <a class="p-2 text-muted" href="http://localhost/WEB/locatoria/public/Category/8">Sport/Hobbies</a>
-          <a class="p-2 text-muted" href="http://localhost/WEB/locatoria/public/Category/2">Clothes</a>
-          <a class="p-2 text-muted" href="http://localhost/WEB/locatoria/public/Category/5">House Equipement</a>
-          <a class="p-2 text-muted" href="http://localhost/WEB/locatoria/public/Category">...More</a>
+          <a class="p-2 text-muted" href="{{ url('/Category/4') }}">Home-made</a>
+          <a class="p-2 text-muted" href="{{ url('/Category/1') }}">Car Equipement</a>
+          <a class="p-2 text-muted" href="{{ url('/Category/3') }}">Multimedia/High tech</a>
+          <a class="p-2 text-muted" href="{{ url('/Category/8') }}">Sport/Hobbies</a>
+          <a class="p-2 text-muted" href="{{ url('/Category/2') }}">Clothes</a>
+          <a class="p-2 text-muted" href="{{ url('/Category/5') }}">House Equipement</a>
+          <a class="p-2 text-muted" href="{{ url('/Category') }}">...More</a>
         </nav>
     </div>
 
@@ -41,19 +41,19 @@
         <div class="annonce annonce1">
             <h3 class="font-italic">Locatoria is here for you</h3>
         </div>  
-        <a href="http://localhost/WEB/locatoria/public/Category/4">
+        <a href="{{ url('/Category/4') }}">
           <div class="annonce">
             <img src="{{asset('images/home-made.jpg')}}"  class="img">
             <div class="centered">Home-Made</div>
           </div>
         </a>  
-        <a href="http://localhost/WEB/locatoria/public/Category/2">
+        <a href="{{ url('/Category/2') }}">
           <div class="annonce">
             <img src="{{asset('images/clothes.jpg')}}"  class="img">
             <div class="centered">Clothes</div>
           </div>
         </a>  
-        <a href="http://localhost/WEB/locatoria/public/Category/1"  class="img">
+        <a href="{{ url('/Category/1') }}"  class="img">
           <div class="annonce">
             <img src="{{asset('images/car-equipement.jpg')}}">
             <div class="centered">Car Equipement</div>
@@ -76,7 +76,7 @@
                   <h5 class="card-title">{{$item->title}}</h5>
                   <p class="card-text">{{$item->description}}</p>
 
-                <a href="items/show/{{$item->id}}" class="btn btn-primary">view details</a>
+                <a href="{{ url('items/show/'.$item->id) }}" class="btn btn-primary">view details</a>
                 </div>
               </div>
     

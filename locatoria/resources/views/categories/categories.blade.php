@@ -22,7 +22,7 @@
     @if(count($categories) > 0)
         @foreach ($categories as $category)
         <div class="cat">
-            <a href="http://localhost/WEB/locatoria/public/Category/{{$category->id}}">
+            <a href="{{ url('/Category/'.$category->id) }}">
                 <div class="img">
                     <img src="{{asset('images/'.$category->picture)}}">
                 </div>

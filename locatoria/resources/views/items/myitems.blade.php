@@ -11,18 +11,14 @@
       <div class="mini-block">
         <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
            <div class="s-nav">
-            <a href="http://localhost/WEB/locatoria/public/user/{{$user->id}}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
+              <a href="{{ url('/user/'.$user->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
               <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
               <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
-              <a href="http://localhost/WEB/locatoria/public/Reservation"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>My reservations</button></a>
+              <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>My reservations</button></a>
               <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>            
             </div>
       </div>
     </div>
-<<<<<<< HEAD
-=======
-    <h1></h1><br><br>
->>>>>>> de38a94bbb5766897086282e2db19e29b0516a9b
 
     <div class="album ">
     
@@ -35,7 +31,7 @@
             <div class="card-body">
               <h5 class="card-title">{{$item->title}}</h5>
               <p class="card-text">{{$item->description}}</p>
-              <a href="../show/{{$item->id}}" class="btn btn-primary">view details</a>
+              <a href="{{ url('/show/'.$item->id) }}" class="btn btn-primary">view details</a>
               <div class="btns">
                 <div class="col1">
                     <label for="adresse"><br></label>
@@ -51,23 +47,13 @@
               </div>
             </div>
           </div>
-          <div class="btns">
-            <div class="col1">
-                <label for="adresse"><br></label>
-                </i><a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
-            </div> 
-            
-            <div class="col2">
-            {!!Form::open(['action' => ['ItemController@destroy', $item->id], 'method'=> 'POST', 'class'=> 'pull-right'])!!}
-                {{Form::hidden('_method', 'DELETE')}}
-                {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
-            {!!Form::close()!!}
-            </div>
-          </div>
-       
+          
           @endforeach
           @else
-            <p>NO ITEM FOUND</p>
+            <div class="msg">
+              <p class="msg">No items found</p>
+              <small>Sorry try latter !!</small> 
+            </div>
           @endif
        
   </div>
