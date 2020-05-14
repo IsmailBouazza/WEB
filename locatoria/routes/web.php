@@ -56,3 +56,7 @@ Route::resource('Reservation','ReservationController');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

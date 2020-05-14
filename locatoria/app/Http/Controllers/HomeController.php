@@ -7,9 +7,9 @@ use App\Item;
 
 class HomeController extends Controller
 {
-    public function home(){   
+     function home(){
         return view('general.home');
     }
 
-    
+
 }
