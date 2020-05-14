@@ -246,6 +246,11 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+        $photos = ItemPhoto::Where('item_id', $id);
+        $photos->delete();
+        $item->delete();
+        
+        return redirect('/items/myitems/' . auth()->user()->id)->with('success', 'Item deleted');
     }
 }
