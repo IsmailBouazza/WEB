@@ -203,70 +203,44 @@
 
 <div class="col-lg-12" id="bill" style="display: none">
     <div id="mainContentWrapper">
-        <div class="col-lg-8 offset-md-2">
-            <div class="shopping_cart">
-                <div class="panel-group" id="accordion">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">
-
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Review
-
-                                    Your Order</a>
-
-                            </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse show">
+        <div class="row p-2 offset-md-2">
+            <div class="col-md-8  m-2">
+                <h3>
+                    Review your Reservation
+                </h3>
+                <div class="row">
+                    <div class="col-md-8 mt-2">
+                        <div class="card">
+                            <h5 class="card-header">
+                                {{$item->title}}
+                            </h5>
                             <div class="card-body">
-                                <div class="items">
-                                    <div class="col-lg-9">
-                                        <table class="table table-striped">
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h4>{{$item->title}}</h4>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <ul>
-                                                        <li><b><i>Gategory : </i></b>
-                                                        </li>
-                                                        <li><b><i>Renting Period : </i></b><span id="renting_period"></span>
-                                                        </li>
-                                                        <li><b><i>Total Days : </i></b><span id="total_days"></span>
-                                                        </li>
-                                                        <li><b><i>Price Per Day : </i></b><span id="price">{{$item->price}}</span> MAD</li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="col-lg-3 float-right">
-                                        <div style="text-align: center;">
-                                            <h3> <b>Total Price</b></h3>
-                                            <h3><span style="color:green;"><span id="total_price"></span> MAD</span></h3>
-                                        </div>
-                                    </div>
-                                </div>
+                                <p class="card-text">
+                                <ul>
+                                    <li><b><i>Gategory : </i></b></li>
+                                    <li><b><i>Renting Period : </i></b><span id="renting_period"></span></li>
+                                    <li><b><i>Total Days : </i></b><span id="total_days"></span></li>
+                                    <li><b><i>Price Per Day : </i></b><span id="price">{{$item->price}}</span> MAD</li>
+                                </ul>
+
+                                </p>
                             </div>
+
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">
-
-                            <div style="text-align: center; width:100%;">
-
-                                <a style="width:100%;" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class=" btn btn-success" onclick="submitForm()">
-
-                                    Send Renting Request</a>
-
-                            </div>
-
-                        </h4>
+                    <div class="col-md-4 ">
+                        <br><br><br><br>
+                        <h3 class="text-center mt-2">
+                            Total Price
+                        </h3>
+                        <h3 class="text-center text-success">
+                            <span id="total_price"></span> MAD</span>
+                        </h3>
                     </div>
                 </div>
+                <button type="button" class="btn btn-block btn-md active btn-success mt-5" onClick="submitForm()">
+                    Send Renting Request
+                </button>
             </div>
         </div>
     </div>
@@ -324,7 +298,7 @@
 
 
         // min/max dates
-        minDate: dispo_starts,
+        minDate: today,
         maxDate: dispo_ends,
 
         // min/max days
