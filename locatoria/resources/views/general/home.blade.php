@@ -76,7 +76,7 @@
                   <h5 class="card-title">{{$item->title}}</h5>
                   <p class="card-text">{{$item->description}}</p>
 
-                <a href="{{ url('items/show/'.$item->id) }}" class="btn btn-primary">view details</a>
+                <a href="{{ url('Item/'.$item->id) }}" class="btn btn-primary">view details</a>
                 </div>
               </div>
     

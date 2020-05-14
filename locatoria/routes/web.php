@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'HomeController@home');
-Route::get('/home', 'HomeController@home');
+
 Route::get('/', 'ItemController@showHome');
 Route::get('/home', 'ItemController@showHome');
 
@@ -25,7 +24,6 @@ Auth::routes();
 
 Route::resource('Item','ItemController');
 Route::resource('ItemPhoto','ItemPhotoController');
-Route::get('/items/show/{id}', 'ItemController@show');
 
 Route::get('/items/myitems/{user}', 'ItemController@index');
 

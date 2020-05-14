@@ -19,14 +19,11 @@
               <a class="nav-link" href="{{ url('/Category') }}">Categories <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/favorite') }}">My favorites <span class="sr-only">(current)</span></a>
-
-              <li class="nav-item">
-                  @if(! Auth::guard('admin')->check())
+              @if(! Auth::guard('admin')->check())
                 <a class="nav-link" href="/favorite">My favorites <span class="sr-only">(current)</span></a>
-                  @else
-                      <a class="nav-link" href="/admin">administration<span class="sr-only">(current)</span></a>
-                  @endif
+              @else
+                <a class="nav-link" href="/admin">administration<span class="sr-only">(current)</span></a>
+              @endif
             </li>
           </ul>
 
@@ -49,7 +46,7 @@
 
                       <div class="dropdown-menu dropdown-menu-right" >
 
-                          @if(Auth::user()) <a class="dropdown-item" href="/user/{{ Auth::user()->id }}">My account <span class="sr-only">(current)</span></a>@endif
+                          @if(Auth::user()) <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">My account <span class="sr-only">(current)</span></a>@endif
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
