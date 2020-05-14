@@ -17,6 +17,7 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('user_owner_id');
             $table->integer('status');
             $table->float('total_price');
             $table->date('date_start');

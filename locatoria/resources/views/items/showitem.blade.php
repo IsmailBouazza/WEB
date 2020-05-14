@@ -1,6 +1,7 @@
 @extends('layouts.app')
-<link href="{{ asset('css/showitem.css') }}" rel="stylesheet">
-
+<!-- link css -->
+<link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
+<!--  -->
 @section('content')
     
       <!--  <div class="block hidden pt-0" >

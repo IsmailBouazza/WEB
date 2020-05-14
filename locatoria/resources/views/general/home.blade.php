@@ -1,6 +1,7 @@
 @extends('layouts.app')
-
-<link href="{{ asset('/css/home.css') }}" rel="stylesheet" type="text/css"/>
+<!-- link css -->
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
+<!--  -->
 @section('content')
     <table class="img-container">
       <tr>
@@ -66,8 +67,8 @@
 
             <div class="album ">
 
-              @if($items->count() > 0)
-              @foreach($items as $item)
+              @if($items ?? ''->count() > 0)
+              @foreach($items ?? '' as $item)
 
               <div id="card" class="card" style="width: 18rem;">
                 <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap">

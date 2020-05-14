@@ -1,11 +1,21 @@
 @extends('layouts.app')
+<!-- link css -->
+<link href="{{ asset('css/account.css') }}" rel="stylesheet">
+<link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
+<link href="{{ asset('css/category.css') }}" rel="stylesheet">
+<link href="{{ asset('css/item.css') }}" rel="stylesheet">
+<link href="{{ asset('css/showitem.css') }}" rel="stylesheet">
 
+
+<!--  -->
 @section('content')
     
 <br><br>
 
 <div class="nav">
     <div class="mini-block">
+        <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:250px;">
         <div class="s-nav">
             <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
             <a href="{{ url('items/myitems/'.$user->id) }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-shopping-cart" style="margin-right: 7px;"></i>My items</button></a>
@@ -23,7 +33,7 @@
 
         <div class="edit-block">
             <div class="float">
-                <img src="http://localhost/WEB/locatoria/public/images/edit.png" >
+                <img src="{{asset('images/edit.png')}}" >
             </div>
             <div class="float marg">
                 <div class="info row">

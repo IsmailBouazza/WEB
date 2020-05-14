@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+<!-- link css -->
+<link href="{{ asset('css/item.css') }}" rel="stylesheet">
+<!--  -->
 @section('content')
 
 
@@ -8,12 +10,12 @@
         <div class="info-img">
             <div>{{$item->title}}</div>
             <hr>
-            <div>{{$item->description}}</div>
         </div>
 
         @foreach ($item_photos as $item_photo)
 
-            <img src="{{asset('storage/'.$item_photo->photo_path)}}">
+            <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
+            
 
         @endforeach
 
@@ -21,11 +23,13 @@
         <div class="link">
             {{$item_photos->links()}}
         </div>
+        <hr>
+        <div class="desc">{{$item->description}}</div>
     </div>
 
     <div class="img-container info-container">
 
-            <img src="http://localhost/WEB/locatoria/storage/app/public/{{$user->picture}}" style="width: 150px; height:150px; border-radius:50%;">
+            <img src="{{asset('storage/'.$user->picture)}}" style="width: 150px; height:150px; border-radius:50%;">
             <hr>
             <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
             <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>
@@ -42,5 +46,4 @@
         <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
     </div>
 
-    
 @endsection
