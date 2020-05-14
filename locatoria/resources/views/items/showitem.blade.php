@@ -90,9 +90,14 @@
 <div class="col1">
     <label for="adresse"><br></label>
     </i><a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
-            
-    
 </div> 
+
+<div class="col2">
+{!!Form::open(['action' => ['ItemController@destroy', $item->id], 'method'=> 'POST', 'class'=> 'pull-right'])!!}
+    {{Form::hidden('_method', 'DELETE')}}
+    {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
+{!!Form::close()!!}
+</div>
 <!--<div class="col2">
     <label for="adresse"><br></label>
     <form class="form-inline mt-2 mt-md-0">
