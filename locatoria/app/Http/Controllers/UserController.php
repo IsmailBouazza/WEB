@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -29,10 +29,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-   
+
 
     public function index()
-    {        
+    {
         $users = User::all();
 
         return view('admin.users', [
@@ -42,7 +42,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        if(Auth::user()->id == $user->id){
+        if(Auth::guard('admin')->check() || Auth::user()->id == $user->id){
             return view('user.account', compact('user'));
         }
         else{
@@ -52,7 +52,7 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        
+
         return view('user.edit', compact('user'));
     }
 
@@ -70,10 +70,10 @@ class UserController extends Controller
             'picture' => '',
         ]);
 
-        
+
 
         if(request('picture')){
-            
+
             Storage::disk('public')->delete($user->picture);
 
             $extension = request('picture')->getClientOriginalExtension();
@@ -91,16 +91,16 @@ class UserController extends Controller
         else{
             $user->update($data);
         }
-        
-        
-        
-        
+
+
+
+
 
         return redirect("/user/{$user->id}");
 
     }
 
-    
+
 
 
     public function delete(User $user)
@@ -112,6 +112,6 @@ class UserController extends Controller
         return redirect('/users');
     }
 
-    
+
 
 }

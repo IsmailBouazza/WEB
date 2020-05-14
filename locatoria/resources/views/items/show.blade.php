@@ -248,7 +248,7 @@
 
 
 
-<form id="checkoutform" action="{{ url('reservation') }}" method="POST" style="display: none">
+<form id="checkoutform" action="{{ url('reser') }}" method="POST" style="display: none">
     @csrf
     <input type="hidden" name="date_start" id="start">
     <input type="hidden" name="date_end" id="end">

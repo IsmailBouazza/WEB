@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-      <a class="navbar-brand" href="{{ url('http://localhost/WEB/locatoria/public/home') }}" style="position: relative; padding-left:50px;">
+      <a class="navbar-brand" href="/home" style="position: relative; padding-left:50px;">
         <img src="{{asset('images/logo.png')}}" style="width:32px; height:32px; position:absolute; top:5px; left:10px; border-radius:50%;">
         {{ config('app.name', 'Locatoria') }}
       </a>
@@ -12,13 +12,17 @@
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="http://localhost/WEB/locatoria/public/home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://localhost/WEB/locatoria/public/Category">Categories <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="/Category">Categories <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://localhost/WEB/locatoria/public/pages/favorite">My favorites <span class="sr-only">(current)</span></a>
+              <li class="nav-item">
+                  @if(! Auth::guard('admin')->check())
+                <a class="nav-link" href="/favorite">My favorites <span class="sr-only">(current)</span></a>
+                  @else
+                      <a class="nav-link" href="/admin">administration<span class="sr-only">(current)</span></a>
+                  @endif
             </li>
           </ul>
 
@@ -40,7 +44,7 @@
                       </a>
 
                       <div class="dropdown-menu dropdown-menu-right" >
-                            <a class="dropdown-item" href="http://localhost/WEB/locatoria/public/user/{{ Auth::user()->id }}">My account <span class="sr-only">(current)</span></a>
+                          @if(Auth::user()) <a class="dropdown-item" href="/user/{{ Auth::user()->id }}">My account <span class="sr-only">(current)</span></a>@endif
 
 
                             <a class="dropdown-item" href="{{ route('logout') }}"
