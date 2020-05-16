@@ -11,7 +11,14 @@ use Illuminate\Http\Request;
 class ReservationController extends Controller
 {
 
-    
+    public function index(){
+
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        return view('reservation.index')->with('user',$user);
+    }
+
     
 
     public function store(){
@@ -32,21 +39,35 @@ class ReservationController extends Controller
     }
 
 
-    public function index(){
+    public function reservation(){
 
-        $reservations = Reservation::where('user_owner_id',Auth::user()->id)->get();
+        $user_id = Auth::user()->id;
+        $Myreservations = Reservation::all();
+        $user = User::find($user_id);
+        $user->reservations()->get();
+        return view('reservation.reservations')->with([
+            'reservations'=> $Myreservations,
+            'user'=>$user,
+        
+        ]);
+           
+    }
+
+    public function request(){
+        
+        $id = Auth::user()->id;
+
+        $reservations = Reservation::where('user_owner_id',$id)->get();
 
         $reservations2 = $reservations->map(function ($resevation , $key){
 
-
             $resevation->user_id = User::find($resevation->user_id);
-
             return $resevation;
         });
 
-        //dd($reservations2);
+    //dd($reservations2);
 
-        return view('reservation.reservations' , [
+        return view('reservation.requests' , [
 
             'reservations'=>$reservations2
         ]);

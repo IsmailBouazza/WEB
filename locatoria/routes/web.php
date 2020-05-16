@@ -44,6 +44,9 @@ Route::get('/admin', 'AdminController@show');
 Route::resource('Category','CategoryController');
 
 Route::resource('Reservation','ReservationController');
+Route::get('/MyResrvations','ReservationController@reservation');
+Route::get('/MyRequests','ReservationController@request');
+
 
 
 

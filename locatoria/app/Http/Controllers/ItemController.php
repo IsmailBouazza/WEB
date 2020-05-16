@@ -25,7 +25,7 @@ class ItemController extends Controller
      //display user items
     public function index()
     {
-        $user_id=Auth::user()->id;
+        $user_id = Auth::user()->id;
         $items = Item::all();
         $user = User::find($user_id);
         $user->items()->get();
