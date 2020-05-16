@@ -12,3 +12,47 @@ div.msg{
     margin-left: 50%;
     font-size: 1em;
 }
+
+.res-container{
+    display: flex;
+    width: 80%;
+    height: 220px;
+    padding: 20px;
+    margin-top: 60px;
+    margin-left: 10%;
+    background-color: rgb(224, 224, 224);
+    justify-content: space-around;
+}
+
+
+.flex1{
+    width:200px;
+}
+.flex2{
+    margin-left: 0%;
+    width:200px;
+}
+
+.flex3{
+    width:200px;
+}
+
+.flex4{
+    width:200px;
+    padding: 20px;
+    opacity: 0.8;
+    border-radius: 10%;
+    background-color: rgb(133, 136, 133);
+}
+
+
+
+.reservations{
+    width: 100%;
+}
+
+
+
+p.msg{
+    font-size: 1em;
+}
