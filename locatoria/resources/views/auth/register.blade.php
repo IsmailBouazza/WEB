@@ -62,8 +62,11 @@
                             <label for="picture" class="col-md-4 col-form-label text-md-right">Picture</label>
 
                             <div class="col-md-6">
-                                <input type="file" class="form-control-file" id="picture" name="picture">
-
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="picture"
+                                           name="picture" accept="image/*">
+                                    <label class="custom-file-label" for="picture">Choose a picture </label>
+                                </div>
                                 @if($errors->has('picture'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('picture')}}</strong>

@@ -95,8 +95,12 @@
                         </div>
                     
                         <div class="col-md-6 mb-3">
-                            <label for="city">Image</label>
-                            <input type="file" class="form-control-file" name="picture" value="{{old('picture') ?? $user->picture}}">
+                            <label for="city">Picture</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="picture"
+                                       name="picture" accept="image/*">
+                                <label class="custom-file-label" for="picture">Choose new picture </label>
+                            </div>
                             @if($errors->has('picture'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('picture')}}</strong>

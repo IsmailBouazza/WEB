@@ -25,13 +25,7 @@ div.msg{
 }
 
 
-.flex1{
-    width:200px;
-}
-.flex2{
-    margin-left: 0%;
-    width:200px;
-}
+
 
 .flex3{
     width:200px;
@@ -55,4 +49,27 @@ div.msg{
 
 p.msg{
     font-size: 1em;
+}
+
+p.msg{
+    font-size: 3em;
+    margin-left: 40%;
+    margin-top: 100px;
+}
+
+div.msg{
+    width: 100%;
+}
+
+.msg small{
+    margin-left: 50%;
+    font-size: 1em;
+}
+
+.img-res{
+    float: right; 
+    margin-right: 15%; 
+    margin-top: 50px; 
+    font-size: 2.5em;
+
 }

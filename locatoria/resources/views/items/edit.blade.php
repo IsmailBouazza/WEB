@@ -133,8 +133,7 @@
                                 <div class="input-group">
 
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="thumbnail"
-                                               name="thumbnail" accept="image/*">
+                                        <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail" accept="image/*">
                                         <label class="custom-file-label" for="thumbnail">Choose new file </label>
                                     </div>
                                 </div>

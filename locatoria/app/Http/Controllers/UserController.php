@@ -42,18 +42,30 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        if(Auth::guard('admin')->check() || Auth::user()->id == $user->id){
-            return view('user.account', compact('user'));
+        if(!Auth::user()){
+            return redirect('/login')->with('error', 'unauthorized page');
         }
         else{
-            return view('erreur.erreur');
+            if(Auth::guard('admin')->check() || Auth::user()->id == $user->id){
+                return view('user.account', compact('user'));
+            }
+            return redirect('/user/'.Auth::user()->id)->with('error', 'unauthorized page');
         }
+        
     }
 
     public function edit(User $user)
     {
-
-        return view('user.edit', compact('user'));
+        if(!Auth::user()){
+            return redirect('/login')->with('error', 'unauthorized page');
+        }
+        else{
+            if(Auth::user()->id !== $user->id){
+                return redirect('/user/'.Auth::user()->id)->with('error', 'unauthorized page');;
+            }
+            return view('user.edit', compact('user'));
+        }
+        
     }
 
     public function update(User $user)

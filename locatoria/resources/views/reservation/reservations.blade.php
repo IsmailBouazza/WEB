@@ -26,7 +26,9 @@
             
                 <div class="res-container">
                     <div class="card flex1" style="width: 18rem;">
-                        <img src="{{asset('/storage/' .$reservation->item->thumbnail_path )}}" class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
+                        <a href="{{url('/Item/'.$reservation->item->id)}}">
+                            <img src="{{asset('/storage/' .$reservation->item->thumbnail_path )}}" class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
+                        </a>
                     </div>
                     <div class="flex2">
                         <div style="width:100%; height:10px; text-align:center;">
@@ -48,9 +50,10 @@
                     </div>
                     <div class="flex4">
                         @if($reservation->status == 0)
-                            <span style="color: #000000; font-weight: bold;">Your reservation is not accepted yet !!</span><br><br>
+                            <span style="color: #000000; font-weight: bold;">Your reservation is not accepted yet !!</span><br>
                             <small>Send a reminder</small>
                             <button type="button" class="btn btn-primary">Reminder</button>
+                            <button type="button" class="btn btn-danger" style="margin-top: 6px">Cancel Reservation</button>
                         @else
                             <span style="color: #000000; font-weight: bold;">Your reservation has already started !!</span>
                         @endif
@@ -58,6 +61,11 @@
                 </div>
 
             @endforeach
+        @else
+            <div class="msg">
+                <p class="msg">No Reservations found</p>
+                <small>Sorry try latter !!</small> 
+            </div>
         @endif
     </div>
 @endsection

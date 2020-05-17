@@ -65,28 +65,51 @@
         Last advertisements
     </div>
 
-            <div class="album ">
+    <div class="album ">
 
-              @if($items ?? ''->count() > 0)
-              @foreach($items ?? '' as $item)
+      @if($items ?? ''->count() > 0)
+        @foreach($items ?? '' as $item)
 
-              <div id="card" class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{$item->title}}</h5>
-                  <p class="card-text">{{$item->description}}</p>
+        <div id="card" class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap" style="width: 100%; height:250px">
+          <div class="card-body">
+            <h5 class="card-title">{{$item->title}}</h5>
+            <p class="card-text">{{$item->description}}</p>
 
-                <a href="{{ url('Item/'.$item->id) }}" class="btn btn-primary">view details</a>
-                </div>
-              </div>
-    
-            @endforeach
+            <a href="{{ url('Item/'.$item->id) }}" class="btn btn-primary">view details</a>
+          </div>
+        </div>
+      
+        @endforeach
 
-            @else
-              <p>NO ITEM ADDED YET</p>
-            @endif
+      @else
+        <div class="msg">
+          <p class="msg">No items added yet</p>
+          <small>Sorry try latter !!</small> 
+        </div>
+      @endif
          
+  </div>
+
+  <div class="annonce-premium">
+    <div class="grid-container">
+      <div class="grid-item item-1">
+        Item 1
+      </div>
+      <div class="grid-item item-2">
+        Item 2
+      </div>
+      <div class="grid-item item-3">
+        Item 3
+      </div>
+      <div class="grid-item item-4">
+        Item 4
+      </div>
+      <div class="grid-item item-5">
+        Item 5
+      </div>
     </div>
+  </div>
                        
         
         

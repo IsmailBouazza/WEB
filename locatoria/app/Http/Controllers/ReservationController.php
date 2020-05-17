@@ -12,6 +12,10 @@ class ReservationController extends Controller
 {
 
     public function index(){
+        
+        if(!Auth::user()){
+            return redirect('/login');
+        }
 
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
@@ -41,6 +45,10 @@ class ReservationController extends Controller
 
     public function reservation(){
 
+
+        if(!Auth::user()){
+            return redirect('/login');
+        }
         $user_id = Auth::user()->id;
         $Myreservations = Reservation::all();
         $user = User::find($user_id);
@@ -55,9 +63,14 @@ class ReservationController extends Controller
 
     public function request(){
         
+        if(!Auth::user()){
+            return redirect('/login');
+        }
+        
         $id = Auth::user()->id;
 
         $reservations = Reservation::where('user_owner_id',$id)->get();
+        $user = User::find($id);
 
         $reservations2 = $reservations->map(function ($resevation , $key){
 
@@ -69,7 +82,8 @@ class ReservationController extends Controller
 
         return view('reservation.requests' , [
 
-            'reservations'=>$reservations2
+            'user' => $user,
+            'reservations'=>$reservations2,
         ]);
 
     }

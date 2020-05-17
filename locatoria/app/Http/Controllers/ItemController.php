@@ -16,11 +16,8 @@ use DatePeriod;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+   
 
      //display user items
     public function index()
@@ -53,8 +50,11 @@ class ItemController extends Controller
      */
     public function create()
     {
-        // check if is auth
-        return view('items.create');
+        
+        if(Auth::user()){
+            return view('items.create');
+        }
+        return redirect('/login')->with('error', 'unauthorized page');
     }
 
     /**
@@ -132,7 +132,7 @@ class ItemController extends Controller
             }
         }
 
-        return redirect('/items/myitems/' . auth()->user()->id);
+        return redirect('/items/myitems/'.auth()->user()->id);
     }
 
     /**
@@ -144,40 +144,47 @@ class ItemController extends Controller
     //to show user item(details)
     public function show($id)
     {
-        $item = Item::findOrFail($id);
-        $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
-        $user_id = $item->user_id;
-        $user = User::find($user_id);
 
+        if(Auth::user()){
+
+       
+            $item = Item::findOrFail($id);
+            $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
+            $user_id = $item->user_id;
+            $user = User::find($user_id);
+
+            
+            $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
+
+            $takendates = array();
+
+            foreach ($reservations as $reservation){
+
+                $begin = new DateTime($reservation->date_start);
+                $end = new DateTime($reservation->date_end); // date_end - 1
+                $end = $end->modify( '+1 day' );
+
+                $interval = new DateInterval('P1D');
+                $daterange = new DatePeriod($begin, $interval ,$end);
+
+                foreach($daterange as $date){
+                    $takendates[] = $date->format("Y-m-d");
+                }
+
+            }
+
+
+            return view('items.show')->with([
+                'comments'=>$item->comments,
+                'item' => $item,
+                'item_photos' => $item_photos,
+                'user' => $user,
+                'takendates'=>json_encode($takendates),
+            ]);
         
-        $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
-
-        $takendates = array();
-
-        foreach ($reservations as $reservation){
-
-        $begin = new DateTime($reservation->date_start);
-        $end = new DateTime($reservation->date_end); // date_end - 1
-        $end = $end->modify( '+1 day' );
-
-        $interval = new DateInterval('P1D');
-        $daterange = new DatePeriod($begin, $interval ,$end);
-
-        foreach($daterange as $date){
-            $takendates[] = $date->format("Y-m-d");
         }
 
-    }
-
-
-        return view('items.show')->with([
-            'comments'=>$item->comments,
-            'item' => $item,
-            'item_photos' => $item_photos,
-            'user' => $user,
-            'takendates'=>json_encode($takendates),
-        ]);
-
+        return redirect('/login');
     }
 
 
@@ -190,13 +197,18 @@ class ItemController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
-    {
-        // to do
-        //Check if post exists before deleting
-        // Check for correct user
-
-        //getting data
+    {        
         $item = Item::find($id);
+
+        // to do
+        
+        //Check if post exists before deleting
+        /** Check for correct user */
+        
+        if(Auth::user()->id !== $item->user_id){
+            return redirect('/Item/'.$item->id)->with('error', 'unauthorized page');
+        }
+
         $item_photos_links=app('App\Http\Controllers\ItemPhotoController')->show($id);
 
 
@@ -263,17 +275,19 @@ class ItemController extends Controller
                 $i++;
 
                 $path=$image->storeAs($id_user.'/'.$item_id, $imageName, 'public');
-
+                
 
                 $item_photo = new ItemPhoto;
                 $item_photo->item_id=$item_id;
-                $item_photo->image_path=$path;
+                $item_photo->photo_path=$path;
+                $picture = Image::make(public_path("storage/{$path}"))->resize(500,250);
+                $picture->save();
                 $item_photo->save();
 
             }
         }
         //redirect to show items/{id}
-        echo 'updated';
+        return redirect('/Item/'.$item->id)->with('error', 'unauthorized page');
     }
 
     /**

@@ -31,7 +31,7 @@
             @foreach ($items as $item)
                 
                 <div class="item">
-                    <a href="http://localhost/WEB/locatoria/public/Item/{{$item->id}}">
+                    <a href="{{url('/Item/'.$item->id)}}">
                         <div class="img">
                             <img src="{{asset('storage/'.$item->thumbnail_path)}}">
                         </div>
