@@ -51,7 +51,7 @@ class UserController extends Controller
             }
             return redirect('/user/'.Auth::user()->id)->with('error', 'unauthorized page');
         }
-        
+
     }
 
     public function edit(User $user)
@@ -65,7 +65,7 @@ class UserController extends Controller
             }
             return view('user.edit', compact('user'));
         }
-        
+
     }
 
     public function update(User $user)
@@ -122,6 +122,24 @@ class UserController extends Controller
         $user->delete();
 
         return redirect('/users');
+    }
+
+    public function usersajaxfetch(User $user)
+    {
+        AdminController::loginverification();
+
+        $user->delete();
+
+        return redirect('/users');
+    }
+
+
+    public function usersajaxinsert(User $user)
+    {
+        AdminController::loginverification();
+
+        $user->delete();
+
     }
 
 

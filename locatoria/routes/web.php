@@ -53,3 +53,8 @@ Route::get('/MyRequests','ReservationController@request');
 Route::post('/reser', 'ReservationController@store');
 Route::get('/reservations', 'ReservationController@index');
 
+
+// admin delete
+Route::post('/userdelete', 'UserController@usersajaxinsert');
+//Route::get('/reservations', 'ReservationController@index');
+
