@@ -108,55 +108,46 @@ class UserController extends Controller
 
     }
 
-
-
-
-    public function block(User $user)
+    //  this function for delete and recover
+    public function block()
     {
-
         AdminController::loginverification();
 
-        $user->delete();
+        $user = User::withTrashed()->where('id', request('subject'))->first();
 
-        return redirect('/users');
+        if($user->trashed()){
+
+            $user->restore();
+        }
+        else{
+            $user->delete();
+        }
+
     }
 
-
-    // this function return the button of the admin
+    //  this function return the button of the admin
     public function usersajaxfetch()
     {
 
-        $user = User::withTrashed()->where('id', request('view'))->first();
-
         AdminController::loginverification();
+
+        $user = User::withTrashed()->where('id', request('view'))->first();
 
         $output = '';
 
         if($user->trashed()){
 
-            $output = "<button type=\"button unblock\" class=\"btn btn-labeled btn-info\">
-                <span ><i class=\"fas fa-trash-restore\"></i></span> Unblock</button>";
+            $output = "<button type=\"submit button unblock\" class=\"btn btn-labeled btn-info\">
+                <span ><i class=\"fas fa-trash-restore\"></i></span> Unblock</button><input type=\"hidden\" id=\"custId\" name=\"subject\" value=\"".request('view')."\">";
         }else {
 
-            $output = "<button type=\"button block\" class=\"btn btn-labeled btn-danger\">
-                <span ><i class=\"fas fa-trash-alt\"></i></span> Block</button>";
+            $output = "<button type=\"submit button block\" class=\"btn btn-labeled btn-danger\">
+                <span ><i class=\"fas fa-trash-alt\"></i></span> Block</button><input type=\"hidden\" id=\"custId\" name=\"subject\" value=\"".request('view')."\">";
         }
 
         $data = array( 'notification' => $output);
 
         return $data;
-
-    }
-
-
-    // this function for delete and recover
-    public function usersajaxinsert(User $user)
-    {
-        AdminController::loginverification();
-
-        $user->delete();
-
-        return $user;
 
     }
 

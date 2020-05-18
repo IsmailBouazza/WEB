@@ -55,13 +55,7 @@ Route::get('/reservations', 'ReservationController@index');
 
 
 // admin delete
-//Route::post('/userdelete', 'UserController@usersajaxinsert');
-
-Route::post('/userblock', 'UserController@block');
-Route::post('/userunblock', 'UserController@usersajaxinsert');
-
-
-Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');
-Route::post('/useroperation', 'UserController@usersajaxfetch')->name('ajax');
-
+Route::post('/userblockunblock', 'UserController@block');
+//Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');  // for testing
+Route::post('/useroperation', 'UserController@usersajaxfetch');
 

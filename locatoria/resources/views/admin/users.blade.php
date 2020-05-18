@@ -99,6 +99,12 @@
                                 </td>
                                 <td class="{{"operations".$user->id}}" style="width: 20%;">
 
+                                    <form method="post" id="comment_form{{$user->id}}">
+
+
+
+                                    </form>
+
                                 </td>
                             </tr>
 
@@ -114,16 +120,31 @@
                                             dataType:"json",
                                             success:function(data)
                                             {
-                                                $('{{".operations".$user->id}}').html(data.notification);
+                                                $('{{"#comment_form".$user->id}}').html(data.notification);
                                             }
                                         });
                                     }
+
+
+                                    $('#comment_form{{$user->id}}').on('submit', function(event){
+                                        event.preventDefault();
+                                        var form_data = $(this).serialize();
+                                            $.ajax({
+                                                url:"/userblockunblock",
+                                                method:"POST",
+                                                data:form_data,
+                                                success:function(data)
+                                                {
+
+                                                }
+                                            });
+                                    });
 
                                     load_unseen_notification{{$user->id}}({{$user->id}});
 
                                     setInterval(function(){
                                         load_unseen_notification{{$user->id}}({{$user->id}});
-                                    }, 5000);
+                                    }, 2000);
 
                                 });
 
