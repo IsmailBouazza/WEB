@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::withTrashed()->get();
 
         return view('admin.users', [
             "users"=>$users
@@ -104,10 +104,6 @@ class UserController extends Controller
             $user->update($data);
         }
 
-
-
-
-
         return redirect("/user/{$user->id}");
 
     }
@@ -115,17 +111,9 @@ class UserController extends Controller
 
 
 
-    public function delete(User $user)
+    public function block(User $user)
     {
-        AdminController::loginverification();
 
-        $user->delete();
-
-        return redirect('/users');
-    }
-
-    public function usersajaxfetch(User $user)
-    {
         AdminController::loginverification();
 
         $user->delete();
@@ -134,11 +122,41 @@ class UserController extends Controller
     }
 
 
+    // this function return the button of the admin
+    public function usersajaxfetch()
+    {
+
+        $user = User::withTrashed()->where('id', request('view'))->first();
+
+        AdminController::loginverification();
+
+        $output = '';
+
+        if($user->trashed()){
+
+            $output = "<button type=\"button unblock\" class=\"btn btn-labeled btn-info\">
+                <span ><i class=\"fas fa-trash-restore\"></i></span> Unblock</button>";
+        }else {
+
+            $output = "<button type=\"button block\" class=\"btn btn-labeled btn-danger\">
+                <span ><i class=\"fas fa-trash-alt\"></i></span> Block</button>";
+        }
+
+        $data = array( 'notification' => $output);
+
+        return $data;
+
+    }
+
+
+    // this function for delete and recover
     public function usersajaxinsert(User $user)
     {
         AdminController::loginverification();
 
         $user->delete();
+
+        return $user;
 
     }
 

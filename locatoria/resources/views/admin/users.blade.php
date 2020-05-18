@@ -49,12 +49,7 @@
 {{--    </div>--}}
 
 
-
-
-
-{{--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">--}}
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -76,6 +71,16 @@
                         </thead>
                         <tbody>
 
+                        <script>
+                            $(function() {
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                            });
+                        </script>
+
                         @forelse($users as $user)
                             <tr>
                                 <td>
@@ -92,16 +97,41 @@
                                 <td>
                                     <a href="#">{{$user->email}}</a>
                                 </td>
-                                <td style="width: 20%;">
-                                    @if($user->trashed())
-                                        <button onclick="window.location.href = 'https://w3docs.com';" type="button" class="btn btn-labeled btn-info">
-                                            <span ><i class="fas fa-trash-restore-alt"></i></span>Restore</button>
-                                    @else
-                                        <button onclick="window.location.href = 'https://w3docs.com';" type="button" class="btn btn-labeled btn-danger">
-                                            <span ><i class="fas fa-trash-alt"></i></span>Trash</button>
-                                    @endif
+                                <td class="{{"operations".$user->id}}" style="width: 20%;">
+
                                 </td>
                             </tr>
+
+                            <script>
+                                $(document).ready(function(){
+
+                                    function load_unseen_notification{{$user->id}}(view = '{{$user->id}}')
+                                    {
+                                        $.ajax({
+                                            url:"/useroperation",
+                                            method:"POST",
+                                            data:{view:view},
+                                            dataType:"json",
+                                            success:function(data)
+                                            {
+                                                $('{{".operations".$user->id}}').html(data.notification);
+                                            }
+                                        });
+                                    }
+
+                                    load_unseen_notification{{$user->id}}({{$user->id}});
+
+                                    setInterval(function(){
+                                        load_unseen_notification{{$user->id}}({{$user->id}});
+                                    }, 5000);
+
+                                });
+
+
+
+                            </script>
+
+
                         @empty
                             <tr>
                                 <td>
@@ -126,6 +156,9 @@
                                 </td>
                             </tr>
                         @endforelse
+
+
+
                         </tbody>
                     </table>
                 </div>
@@ -133,10 +166,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 
 @endsection
