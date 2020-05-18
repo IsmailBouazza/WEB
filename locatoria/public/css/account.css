@@ -20,6 +20,12 @@ div.container2{
     padding: 50px;
 }
 
+div.flex-box{
+    width: 100%;
+    display: flex;
+    margin-left: 10%;
+}
+
 
 div.signup{
     margin-top: 100px;
@@ -40,7 +46,6 @@ div.submit{
 div.container3{
     float: left;
     margin-top: 100px;
-    margin-left: 100px;
 }
 
 div.research{

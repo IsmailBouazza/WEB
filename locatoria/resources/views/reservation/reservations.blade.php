@@ -63,7 +63,7 @@
             @endforeach
         @else
             <div class="msg">
-                <p class="msg">No Reservations found</p>
+                <p class="msg" style="margin-left: 12%">No Reservations found or your reservation is refused</p>
                 <small>Sorry try latter !!</small> 
             </div>
         @endif

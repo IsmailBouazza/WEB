@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::withTrashed()->get();
 
         return view('admin.users', [
             "users"=>$users
@@ -51,7 +51,7 @@ class UserController extends Controller
             }
             return redirect('/user/'.Auth::user()->id)->with('error', 'unauthorized page');
         }
-        
+
     }
 
     public function edit(User $user)
@@ -65,7 +65,7 @@ class UserController extends Controller
             }
             return view('user.edit', compact('user'));
         }
-        
+
     }
 
     public function update(User $user)
@@ -104,24 +104,57 @@ class UserController extends Controller
             $user->update($data);
         }
 
-
-
-
-
         return redirect("/user/{$user->id}");
 
     }
 
-
-
-
-    public function delete(User $user)
+    //  this function for delete and recover
+    public function block()
     {
         AdminController::loginverification();
 
-        $user->delete();
+        $user = User::withTrashed()->where('id', request('subject'))->first();
 
-        return redirect('/users');
+        if($user->trashed()){
+
+            $user->restore();
+        }
+        else{
+            $user->delete();
+        }
+
+    }
+
+    //  this function return the button of the admin
+    public function usersajaxfetch()
+    {
+
+        AdminController::loginverification();
+
+        $user = User::withTrashed()->where('id', request('view'))->first();
+
+        $output = '';
+        $status = '';
+
+        if($user->trashed()){
+
+            $output = "<button type=\"submit button unblock\" class=\"btn btn-labeled btn-info\">
+                <span ><i class=\"fas fa-trash-restore\"></i></span> Unblock</button><input type=\"hidden\" id=\"custId\" name=\"subject\" value=\"".request('view')."\">";
+
+            $status = "<span style=\"color:red\" class=\"label label-default\">Blocked</span>";
+
+        }else {
+
+            $output = "<button type=\"submit button block\" class=\"btn btn-labeled btn-danger\">
+                <span ><i class=\"fas fa-trash-alt\"></i></span> Block</button><input type=\"hidden\" id=\"custId\" name=\"subject\" value=\"".request('view')."\">";
+
+            $status = "<span style=\"color:green\" class=\"label label-default\">Active</span>";
+        }
+
+        $data = array( 'notification' => $output , 'status'=>$status);
+
+        return $data;
+
     }
 
 

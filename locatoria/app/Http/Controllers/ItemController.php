@@ -34,7 +34,7 @@ class ItemController extends Controller
         ]);
     }
 
-   //display 6 latest items at home page
+   //display 3 latest items at home page
     public function showHome(){
 
             $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(3);
@@ -48,6 +48,7 @@ class ItemController extends Controller
             }
 
             $items_premium = Item::find($id_premium);
+
 
             return view('general.home')->with([
                 'items_premium' => $items_premium,
@@ -325,7 +326,9 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $photos = ItemPhoto::Where('item_id', $id);
+        $reservation = Reservation::Where('item_id', $id);
         $photos->delete();
+        $reservation->delete();
         $item->delete();
 
         return redirect('/items/myitems/' . auth()->user()->id)->with('success', 'Item deleted');

@@ -87,5 +87,26 @@ class ReservationController extends Controller
 
     }
 
+    public function approval($id)
+    {
+        $reservation = Reservation::find($id);
+       
+        if ($reservation->status == 0)
+        {
+            $reservation->status = 1;
+            $reservation->save();
+            
+        } else {
+            
+        }
+        return redirect()->back();
+    }
+
+    public function destroy($id){
+        $reservation = Reservation::find($id);
+        $reservation->delete();
+        return redirect()->back();
+
+    }
 
 }

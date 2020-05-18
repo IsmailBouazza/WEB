@@ -97,7 +97,9 @@
       <h4 style="color: white; margin-left: 10%;">Now you can see different items from differents categories and with a high quality</h4>
     </div>
     <div class="float" style="margin-left: 25%;">
-      <button type="button" class="btn btn-outline-secondary" style="color: white; border:white solid 2px; font-size:1.2em">Discover more</button>
+      <a href="{{ url('Premium') }}">
+        <button type="button" class="btn btn-outline-secondary" style="color: white; border:white solid 2px; font-size:1.2em">Discover more</button>
+      </a>
     </div>
     
     <div class="grid-container">
