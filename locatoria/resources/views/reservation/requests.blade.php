@@ -85,6 +85,8 @@
         </div>
     </div>
 
+
+    <!-- accept or refuse reservation with js -->
     
     <!-- Select Plugin Js -->
     <script src="{{ asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
