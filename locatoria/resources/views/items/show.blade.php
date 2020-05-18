@@ -124,7 +124,7 @@
     @if(!Auth::user())
 
     <!--Partenaire-->
-    
+
     <div class="box-container img-container">
 
         <div class="info-img">
@@ -172,26 +172,26 @@
     <div class="col-lg-12  calendrier" id="bill" style="display: none">
         <div id="mainContentWrapper">
             <div class="row p-2 offset-md-2">
-                <div class="col-md-8  m-2">
+                <div class="col-md-12 mt-2" style="margin-left: -15%">
                     <h3>
                         Review your Reservation
                     </h3>
-                    <div class="row">
+                    <div class="row " >
                         <div class="col-md-8 mt-2">
                             <div class="card">
                                 <h5 class="card-header">
-                                    {{$item->title}}
+                                    Item : {{$item->title}}
                                 </h5>
                                 <div class="card-body">
-                                    <p class="card-text">
+
                                     <ul>
-                                        <li><b><i>Gategory : </i></b></li>
+
                                         <li><b><i>Renting Period : </i></b><span id="renting_period"></span></li>
                                         <li><b><i>Total Days : </i></b><span id="total_days"></span></li>
                                         <li><b><i>Price Per Day : </i></b><span id="price">{{$item->price}}</span> MAD</li>
                                     </ul>
 
-                                    </p>
+
                                 </div>
 
                             </div>
@@ -202,13 +202,20 @@
                                 Total Price
                             </h3>
                             <h3 class="text-center text-success">
-                                <span id="total_price"></span> MAD</span>
+                                <span id="total_price"></span> MAD
                             </h3>
                         </div>
                     </div>
                     @if (Auth::guest())
                         <button type="button" class="btn btn-block btn-md active btn-success mt-5" disabled>
                             You should log in or register before sending a request
+                        </button>
+
+                        <button type="button" onclick="location.href='{{ route('login') }}'" class="btn btn-block btn-md active btn-primary" style="display:inline;width:49.9%" >
+                            You have an account ? Login.
+                        </button>
+                        <button type="button" onclick="location.href='{{ route('register') }}'" class="btn btn-block btn-md active btn-secondary" style="display:inline;width:49.5%"  >
+                            Not yet ? Register. it's never late.
                         </button>
                     @else
                         <button type="button" class="btn btn-block btn-md active btn-success mt-5" onClick="submitForm()">
@@ -470,7 +477,7 @@
                 var price = $("#price").text();
                 var total_price = price*days;
                 $("#total_price").text(total_price.toFixed(2)); // XXXXX.xx
-                $("#renting_period").text("from : "+$("#start").val()+" to : "+$("#end").val());
+                $("#renting_period").append("<br>from : "+$("#start").val()+" <br>to : "+$("#end").val());
                 $('input[name="total_price"]').val(total_price.toFixed(2));
 
             }
