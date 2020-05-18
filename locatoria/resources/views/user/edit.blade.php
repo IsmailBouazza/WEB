@@ -3,9 +3,6 @@
 <link href="{{ asset('css/account.css') }}" rel="stylesheet">
 <link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
-<link href="{{ asset('css/category.css') }}" rel="stylesheet">
-<link href="{{ asset('css/item.css') }}" rel="stylesheet">
-<link href="{{ asset('css/showitem.css') }}" rel="stylesheet">
 
 
 <!--  -->

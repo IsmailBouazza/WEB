@@ -26,7 +26,7 @@ class ItemController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $items = Item::all();
+        $items = Item::all()->where('status','1');
         $user = User::find($user_id);
         $user->items()->get();
         return view('items.myitems')->with([
@@ -39,10 +39,26 @@ class ItemController extends Controller
    //display 3 latest items at home page
     public function showHome(){
 
-            $items = Item::all()->sortByDesc('created_at')->take(3);
+            $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(3);
+            
+
+            $perimiums = ItemPremium::all()->where('status','1')->take(4);
+            $id_premium = array();
+            foreach ($perimiums as $premium ){
+            
+            $id_premium[] = $premium->item_id;
+            }
+
+            $items_premium = Item::find($id_premium);
+
+
             return view('general.home')->with([
-                'items'=>$items,
+                'items_premium' => $items_premium,
+                'items' => $items,
             ]);
+            
+
+            
 
     }
 
@@ -82,6 +98,7 @@ class ItemController extends Controller
 
 
         ]);
+
         $item =  new Item;
 
         $item->user_id=Auth::user()->id;
@@ -133,6 +150,14 @@ class ItemController extends Controller
                 $itemphoto->save();
 
             }
+        
+        }
+
+        // insert to premium 
+
+        if($request->premium){
+            $item->status = '0';
+            $item->save();
         }
 
         return redirect('/items/myitems/'.auth()->user()->id);
@@ -148,9 +173,6 @@ class ItemController extends Controller
     public function show($id)
     {
 
-        if(Auth::user()){
-
-       
             $item = Item::findOrFail($id);
             $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
             $user_id = $item->user_id;
@@ -185,9 +207,7 @@ class ItemController extends Controller
                 'takendates'=>json_encode($takendates),
             ]);
         
-        }
-
-        return redirect('/login');
+    
     }
 
 

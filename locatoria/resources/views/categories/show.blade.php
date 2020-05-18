@@ -40,7 +40,12 @@
                         {{$item->title}}
                     </div>
                     <div class="desc btn-group">
-                        <p><a class="btn btn-sm btn-outline-secondary" href="http://localhost/WEB/locatoria/public/Item/{{$item->id}}" role="button">View details &raquo;</a></p>                      
+                        <p><a class="btn btn-sm btn-outline-secondary" href="http://localhost/WEB/locatoria/public/Item/{{$item->id}}" role="button">View details &raquo;</a></p> 
+                        @if($item->status == '0')
+                            <a href="{{url('Premium')}}">
+                                <i class="fas fa-star" style="width: 25px; height: 25px; margin-left: 8px; color:yellow"></i>
+                            </a>
+                        @endif                     
                     </div>
                 </div>
             @endforeach

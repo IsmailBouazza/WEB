@@ -46,8 +46,13 @@
 
                       <div class="dropdown-menu dropdown-menu-right" >
 
-                          @if(Auth::user()) <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">My account <span class="sr-only">(current)</span></a>@endif
-
+                          @if(Auth::user())        
+                            <a class="dropdown-item" href=#{{url ('/user/'.Auth::user()->id ) }}">My messages<span class="sr-only">(current)</span></a>
+                            <a class="dropdown-item" href="{{url ('/Reservation' ) }}">Reservations <span class="sr-only">(current)</span></a>
+                            <a class="dropdown-item" href="#">My favorite <span class="sr-only">(current)</span></a>
+                            <hr>
+                            <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">My account <span class="sr-only">(current)</span></a>
+                          @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">

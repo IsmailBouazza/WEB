@@ -44,19 +44,16 @@
         <a href="{{ url('/Category/4') }}">
           <div class="annonce">
             <img src="{{asset('images/home-made.jpg')}}"  class="img">
-            <div class="centered">Home-Made</div>
           </div>
         </a>  
         <a href="{{ url('/Category/2') }}">
           <div class="annonce">
             <img src="{{asset('images/clothes.jpg')}}"  class="img">
-            <div class="centered">Clothes</div>
           </div>
         </a>  
         <a href="{{ url('/Category/1') }}"  class="img">
           <div class="annonce">
             <img src="{{asset('images/car-equipement.jpg')}}">
-            <div class="centered">Car Equipement</div>
           </div>
         </a>  
     </div>
@@ -92,22 +89,25 @@
   </div>
 
   <div class="annonce-premium">
+    <div class="float" style="margin-left: 5%;">
+      <h1 style="color: white; margin-left: 10%; font-weight:bold;">Discover premium ads</h1>
+      <h4 style="color: white; margin-left: 10%;">Now you can see different items from differents categories and with a high quality</h4>
+    </div>
+    <div class="float" style="margin-left: 25%;">
+      <a href="{{ url('Premium') }}">
+        <button type="button" class="btn btn-outline-secondary" style="color: white; border:white solid 2px; font-size:1.2em">Discover more</button>
+      </a>
+    </div>
+    
     <div class="grid-container">
-      <div class="grid-item item-1">
-        Item 1
-      </div>
-      <div class="grid-item item-2">
-        Item 2
-      </div>
-      <div class="grid-item item-3">
-        Item 3
-      </div>
-      <div class="grid-item item-4">
-        Item 4
-      </div>
-      <div class="grid-item item-5">
-        Item 5
-      </div>
+      @foreach($items_premium as $item)
+          <div class="grid-item">
+            <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap" style="width: 100%; height:80%; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            <div class="card-body">
+              <p class="card-text">{{$item->description}}</p>
+            </div>
+          </div>
+      @endforeach
     </div>
   </div>
                        
