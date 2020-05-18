@@ -91,8 +91,10 @@
                                 <td>
                                     {{$user->created_at}}
                                 </td>
-                                <td class="text-center">
-                                    <span class="label label-default">{{$user->trashed() ? 'Blocked':'Active'}}</span>
+                                <td class="text-center user{{$user->id}}">
+
+                                {{--    here ajax will fetsh the status of the user   --}}
+                                    
                                 </td>
                                 <td>
                                     <a href="#">{{$user->email}}</a>
@@ -101,7 +103,7 @@
 
                                     <form method="post" id="comment_form{{$user->id}}">
 
-
+                                        {{--    here ajax will fetsh the hidden input and the button to block or unblock the user   --}}
 
                                     </form>
 
@@ -121,6 +123,8 @@
                                             success:function(data)
                                             {
                                                 $('{{"#comment_form".$user->id}}').html(data.notification);
+                                                $('.user{{$user->id}}').html(data.status);
+
                                             }
                                         });
                                     }
