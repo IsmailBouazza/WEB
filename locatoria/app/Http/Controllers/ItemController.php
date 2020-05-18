@@ -171,9 +171,6 @@ class ItemController extends Controller
     public function show($id)
     {
 
-        if(Auth::user()){
-
-       
             $item = Item::findOrFail($id);
             $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
             $user_id = $item->user_id;
@@ -208,9 +205,7 @@ class ItemController extends Controller
                 'takendates'=>json_encode($takendates),
             ]);
         
-        }
-
-        return redirect('/login');
+    
     }
 
 

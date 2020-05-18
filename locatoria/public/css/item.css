@@ -5,7 +5,7 @@ div.img-container{
     height: 450px;
     float: left;
     border: rgb(230, 225, 225) solid 1px;
-    
+
 }
 
 .img-container img{
@@ -136,3 +136,7 @@ div.modal-content{
     text-align: center;
 }
 
+button:disabled {
+    cursor: not-allowed!important;
+    pointer-events: all ;
+}

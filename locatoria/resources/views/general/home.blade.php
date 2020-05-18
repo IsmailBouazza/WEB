@@ -44,19 +44,16 @@
         <a href="{{ url('/Category/4') }}">
           <div class="annonce">
             <img src="{{asset('images/home-made.jpg')}}"  class="img">
-            <div class="centered">Home-Made</div>
           </div>
         </a>  
         <a href="{{ url('/Category/2') }}">
           <div class="annonce">
             <img src="{{asset('images/clothes.jpg')}}"  class="img">
-            <div class="centered">Clothes</div>
           </div>
         </a>  
         <a href="{{ url('/Category/1') }}"  class="img">
           <div class="annonce">
             <img src="{{asset('images/car-equipement.jpg')}}">
-            <div class="centered">Car Equipement</div>
           </div>
         </a>  
     </div>

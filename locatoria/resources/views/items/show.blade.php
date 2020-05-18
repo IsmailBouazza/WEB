@@ -120,9 +120,161 @@
 
 <br><br>
 
-@if(Auth::user())
-    
+
+    @if(!Auth::user())
+
     <!--Partenaire-->
+    
+    <div class="box-container img-container">
+
+        <div class="info-img">
+            <div>{{$item->title}}</div>
+            <hr>
+        </div>
+
+        @foreach ($item_photos as $item_photo)
+
+            <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
+
+
+        @endforeach
+
+
+        <div class="link">
+            {{$item_photos->links()}}
+        </div>
+        <hr>
+        <div class="desc">{{$item->description}}</div>
+    </div>
+
+    <div class="img-container info-container">
+
+            <img src="{{asset('storage/'.$user->picture)}}" style="width: 150px; height:150px; border-radius:50%;">
+            <hr>
+            <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
+            <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>
+            <div><i class="fas fa-phone" style="margin-right: 10px"></i></i>{{$user->phone}}</div>
+            <div><i class="fas fa-envelope-open-text" style="margin-right: 10px"></i>{{$user->email}}</div>
+
+            <button type="button" class="center btn btn-success">Chat</button>
+            <hr>
+            <div style="font-size:1.5em"><a href="#"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px"></i></a>Make it your favorite</div>
+            <hr>
+            <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
+
+    </div>
+
+
+
+
+<!--chekout-->
+
+    <div class="col-lg-12  calendrier" id="bill" style="display: none">
+        <div id="mainContentWrapper">
+            <div class="row p-2 offset-md-2">
+                <div class="col-md-8  m-2">
+                    <h3>
+                        Review your Reservation
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-8 mt-2">
+                            <div class="card">
+                                <h5 class="card-header">
+                                    {{$item->title}}
+                                </h5>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <ul>
+                                        <li><b><i>Gategory : </i></b></li>
+                                        <li><b><i>Renting Period : </i></b><span id="renting_period"></span></li>
+                                        <li><b><i>Total Days : </i></b><span id="total_days"></span></li>
+                                        <li><b><i>Price Per Day : </i></b><span id="price">{{$item->price}}</span> MAD</li>
+                                    </ul>
+
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <br><br><br><br>
+                            <h3 class="text-center mt-2">
+                                Total Price
+                            </h3>
+                            <h3 class="text-center text-success">
+                                <span id="total_price"></span> MAD</span>
+                            </h3>
+                        </div>
+                    </div>
+                    @if (Auth::guest())
+                        <button type="button" class="btn btn-block btn-md active btn-success mt-5" disabled>
+                            You should log in or register before sending a request
+                        </button>
+                    @else
+                        <button type="button" class="btn btn-block btn-md active btn-success mt-5" onClick="submitForm()">
+                            Send Renting Request
+                        </button>
+                    @endif
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <form id="checkoutform" action="{{ url('reser') }}" method="POST" style="display: none">
+        @csrf
+        <input type="hidden" name="date_start" id="start">
+        <input type="hidden" name="date_end" id="end">
+        <input type="hidden" name="total_price">
+        <input type="hidden" name="item_id" value="{{$item->id}}">
+    </form>
+
+
+
+<!--end ckeckout -->
+
+
+
+<!-- begin mouad comments-->
+
+
+
+
+
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="blog-comment">
+                <h3 class="text-success">Comments</h3>
+                <hr/>
+                <ul class="comments">
+
+                    @forelse($comments as $comment)
+                        <li class="clearfix">
+                            <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt=""> {{-- haka t9ad tejbad lid d luser osta3mlo bach t9ad l image $comment->user->id --}}
+                            <div class="post-comments">
+                                <p class="meta"> {{$comment->updated_at}} <a class="commentuser" href="#">{{"@".$comment->user->name}}</a></p>
+                                <p>
+                                    {{$comment->comment}}
+                                </p>
+                            </div>
+                        </li>
+                    @empty
+                        <p style="font-size: 1.5em">No comment yet !!</p>
+                    @endforelse
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @else
 
     @if($item->user_id == Auth::user()->id)
 
@@ -135,7 +287,7 @@
                 <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
                 <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
                 <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>My reservations</button></a>
-                <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>            
+                <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>
               </div>
         </div>
     </div>
@@ -229,164 +381,12 @@
                     @method('PUT')
             </form>
         </div>
-
-       
-
-
-    
-    </div>
-    <!--END Partenaire-->
-
-    <!--Client-->
-
-    @else
-
-    <div class="box-container img-container">
-
-        <div class="info-img">
-            <div>{{$item->title}}</div>
-            <hr>
-        </div>
-
-        @foreach ($item_photos as $item_photo)
-
-            <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
-
-
-        @endforeach
-
-
-        <div class="link">
-            {{$item_photos->links()}}
-        </div>
-        <hr>
-        <div class="desc">{{$item->description}}</div>
     </div>
 
-    <div class="img-container info-container">
-
-            <img src="{{asset('storage/'.$user->picture)}}" style="width: 150px; height:150px; border-radius:50%;">
-            <hr>
-            <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
-            <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>
-            <div><i class="fas fa-phone" style="margin-right: 10px"></i></i>{{$user->phone}}</div>
-            <div><i class="fas fa-envelope-open-text" style="margin-right: 10px"></i>{{$user->email}}</div>
-
-            <button type="button" class="center btn btn-success">Chat</button>
-            <hr>
-            <div style="font-size:1.5em"><a href="#"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px"></i></a>Make it your favorite</div>
-            <hr>
-            <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
-
-    </div>
-
-    
-
-
-<!--chekout-->
-
-    <div class="col-lg-12  calendrier" id="bill" style="display: none">
-        <div id="mainContentWrapper">
-            <div class="row p-2 offset-md-2">
-                <div class="col-md-8  m-2">
-                    <h3>
-                        Review your Reservation
-                    </h3>
-                    <div class="row">
-                        <div class="col-md-8 mt-2">
-                            <div class="card">
-                                <h5 class="card-header">
-                                    {{$item->title}}
-                                </h5>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                    <ul>
-                                        <li><b><i>Gategory : </i></b></li>
-                                        <li><b><i>Renting Period : </i></b><span id="renting_period"></span></li>
-                                        <li><b><i>Total Days : </i></b><span id="total_days"></span></li>
-                                        <li><b><i>Price Per Day : </i></b><span id="price">{{$item->price}}</span> MAD</li>
-                                    </ul>
-
-                                    </p>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-4 ">
-                            <br><br><br><br>
-                            <h3 class="text-center mt-2">
-                                Total Price
-                            </h3>
-                            <h3 class="text-center text-success">
-                                <span id="total_price"></span> MAD</span>
-                            </h3>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-block btn-md active btn-success mt-5" onClick="submitForm()">
-                        Send Renting Request
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-    <form id="checkoutform" action="{{ url('reser') }}" method="POST" style="display: none">
-        @csrf
-        <input type="hidden" name="date_start" id="start">
-        <input type="hidden" name="date_end" id="end">
-        <input type="hidden" name="total_price">
-        <input type="hidden" name="item_id" value="{{$item->id}}">
-    </form>
-
-
-
-<!--end ckeckout -->
-
-
-
-<!-- begin mouad comments-->
-
-
-
-
-
-<div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="blog-comment">
-                <h3 class="text-success">Comments</h3>
-                <hr/>
-                <ul class="comments">
-
-                    @forelse($comments as $comment)
-                        <li class="clearfix">
-                            <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt=""> {{-- haka t9ad tejbad lid d luser osta3mlo bach t9ad l image $comment->user->id --}}
-                            <div class="post-comments">
-                                <p class="meta"> {{$comment->updated_at}} <a class="commentuser" href="#">{{"@".$comment->user->name}}</a></p>
-                                <p>
-                                    {{$comment->comment}}
-                                </p>
-                            </div>
-                        </li>
-                    @empty
-                        <p style="font-size: 1.5em">No comment yet !!</p>
-                    @endforelse
-
-
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--END Client-->
-
+    @endif
 
 @endif
 
-@endif
 
 
 
@@ -400,7 +400,7 @@
     <!-- TinyMCE -->
     <script src="{{ asset('assets/backend/plugins/tinymce/tinymce.js') }}"></script>
     <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
-    
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
@@ -489,7 +489,7 @@
 
     }
 </script>
-  
+
 <!-- to delete item (mounia) -->
 <script>
     $(function () {
