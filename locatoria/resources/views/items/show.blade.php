@@ -121,7 +121,7 @@
 <br><br>
 
 @if(Auth::user())
-    
+
     <!--Partenaire-->
 
     @if($item->user_id == Auth::user()->id)
@@ -135,7 +135,7 @@
                 <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
                 <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
                 <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>My reservations</button></a>
-                <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>            
+                <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>
               </div>
         </div>
     </div>
@@ -230,10 +230,10 @@
             </form>
         </div>
 
-       
 
 
-    
+
+
     </div>
     <!--END Partenaire-->
 
@@ -280,7 +280,7 @@
 
     </div>
 
-    
+
 
 
 <!--chekout-->
@@ -322,9 +322,17 @@
                             </h3>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-block btn-md active btn-success mt-5" onClick="submitForm()">
-                        Send Renting Request
-                    </button>
+                    @if (Auth::guest())
+                        <button type="button" class="btn btn-block btn-md active btn-success mt-5" disabled>
+                            You should log in or register before sending a request
+                        </button>
+                    @else
+                        <button type="button" class="btn btn-block btn-md active btn-success mt-5" onClick="submitForm()">
+                            Send Renting Request
+                        </button>
+                    @endif
+
+
                 </div>
             </div>
         </div>
@@ -400,7 +408,7 @@
     <!-- TinyMCE -->
     <script src="{{ asset('assets/backend/plugins/tinymce/tinymce.js') }}"></script>
     <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
-    
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
@@ -489,7 +497,7 @@
 
     }
 </script>
-  
+
 <!-- to delete item (mounia) -->
 <script>
     $(function () {

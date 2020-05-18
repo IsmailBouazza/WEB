@@ -5,7 +5,7 @@ div.img-container{
     height: 450px;
     float: left;
     border: rgb(230, 225, 225) solid 1px;
-    
+
 }
 
 .img-container img{
@@ -110,4 +110,8 @@ div.bar{
 div.calendrier{
     width: 1100px;
     margin-left: 16%;
+}
+button:disabled {
+    cursor: not-allowed!important;
+    pointer-events: all ;
 }
