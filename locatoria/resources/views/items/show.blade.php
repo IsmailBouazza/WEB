@@ -121,7 +121,7 @@
 <br><br>
 
 
-    @if(!Auth::user())
+    @if(!Auth::user() || Auth::user()->id !== $item->user_id)
 
     <!--Partenaire-->
     
@@ -391,8 +391,6 @@
 
 
 
-
-<!-- end mouad comments -->
 
 
     <!-- Select Plugin Js -->
