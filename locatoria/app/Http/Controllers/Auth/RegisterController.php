@@ -89,6 +89,7 @@ class RegisterController extends Controller
 
         ]);        
 
+
         if($data['picture']){
 
             $extension = $data['picture']->getClientOriginalExtension();

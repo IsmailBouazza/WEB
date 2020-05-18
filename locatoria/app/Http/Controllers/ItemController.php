@@ -18,7 +18,11 @@ use DatePeriod;
 class ItemController extends Controller
 {
    
-   
+    public function test()
+    {
+
+        return view('auth.loginTest');
+    }
 
      //display user items
     public function index()
@@ -111,6 +115,7 @@ class ItemController extends Controller
 
         $item_id=$item->id;
         $id_user=$item->user_id;
+
 
         // thumbnail path template (/{user_id}/{item_id}/{item_id}_thumbnail)
         if ($request->file('thumbnail')) {

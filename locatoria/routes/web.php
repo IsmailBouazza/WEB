@@ -39,6 +39,9 @@ Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 Route::resource('user', 'UserController');
 
+Route::get('/test', 'ItemController@test');
+
+
 /*  Admin  */ 
 
 
