@@ -72,13 +72,12 @@ class ReservationController extends Controller
         $reservations = Reservation::where('user_owner_id',$id)->get();
         $user = User::find($id);
 
-        $reservations2 = $reservations->map(function ($resevation , $key){
+        $reservations2 = $reservations->map(function ($reservation , $key){
 
-            $resevation->user_id = User::find($resevation->user_id);
-            return $resevation;
+            $reservation->user_id = User::find($reservation->user_id);
+            return $reservation;
         });
 
-    //dd($reservations2);
 
         return view('reservation.requests' , [
 
