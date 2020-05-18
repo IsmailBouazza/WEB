@@ -10,6 +10,8 @@ use App\ItemPhoto;
 use App\User;
 use App\Reservation;
 use App\ItemPremium;
+use App\Favorite;
+
 use Auth;
 use DateTime;
 use DateInterval;
@@ -322,13 +324,19 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //delete item function
     public function destroy($id)
     {
         $item = Item::find($id);
         $photos = ItemPhoto::Where('item_id', $id);
         $reservation = Reservation::Where('item_id', $id);
+        $premium = ItemPremium::Where('item_id', $id);
+        $favorites = Favorite::Where('item_id', $id);
         $photos->delete();
         $reservation->delete();
+        $premium->delete();
+        $favorites->delete();
         $item->delete();
 
         return redirect('/items/myitems/' . auth()->user()->id)->with('success', 'Item deleted');

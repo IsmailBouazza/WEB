@@ -87,6 +87,7 @@ class ReservationController extends Controller
 
     }
 
+    //accept a reservation
     public function approval($id)
     {
         $reservation = Reservation::find($id);
@@ -102,6 +103,8 @@ class ReservationController extends Controller
         return redirect()->back();
     }
 
+
+    //refuse(delete) a reservation
     public function destroy($id){
         $reservation = Reservation::find($id);
         $reservation->delete();
