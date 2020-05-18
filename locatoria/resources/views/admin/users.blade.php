@@ -94,7 +94,6 @@
                                 <td class="text-center user{{$user->id}}">
 
                                 {{--    here ajax will fetsh the status of the user   --}}
-                                    
                                 </td>
                                 <td>
                                     <a href="#">{{$user->email}}</a>

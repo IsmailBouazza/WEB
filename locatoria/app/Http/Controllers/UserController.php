@@ -141,14 +141,14 @@ class UserController extends Controller
             $output = "<button type=\"submit button unblock\" class=\"btn btn-labeled btn-info\">
                 <span ><i class=\"fas fa-trash-restore\"></i></span> Unblock</button><input type=\"hidden\" id=\"custId\" name=\"subject\" value=\"".request('view')."\">";
 
-            $status = "<span class=\"label label-default\">Blocked</span>";
+            $status = "<span style=\"color:red\" class=\"label label-default\">Blocked</span>";
 
         }else {
 
             $output = "<button type=\"submit button block\" class=\"btn btn-labeled btn-danger\">
                 <span ><i class=\"fas fa-trash-alt\"></i></span> Block</button><input type=\"hidden\" id=\"custId\" name=\"subject\" value=\"".request('view')."\">";
 
-            $status = "<span class=\"label label-default\">Active</span>";
+            $status = "<span style=\"color:green\" class=\"label label-default\">Active</span>";
         }
 
         $data = array( 'notification' => $output , 'status'=>$status);
