@@ -27,6 +27,9 @@ Route::resource('ItemPhoto','ItemPhotoController');
 
 Route::get('/items/myitems/{user}', 'ItemController@index');
 
+Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');
+
+
 
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
@@ -46,6 +49,10 @@ Route::resource('Category','CategoryController');
 Route::resource('Reservation','ReservationController');
 Route::get('/MyReservations','ReservationController@reservation');
 Route::get('/MyRequests','ReservationController@request');
+Route::put('/MyRequests/{id}/approve','ReservationController@approval')->name('MyRequests.approve');
+Route::put('/MyRequests/{id}/refuse','ReservationController@destroy')->name('MyRequests.refuse');
+
+
 
 
 
