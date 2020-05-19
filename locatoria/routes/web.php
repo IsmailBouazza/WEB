@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-/*  Item  */ 
+/*  Item  */
 
 Route::get('/', 'ItemController@showHome');
 Route::get('/home', 'ItemController@showHome');
@@ -25,21 +25,21 @@ Route::resource('Item','ItemController');
 Route::get('/items/myitems/{user}', 'ItemController@index');
 Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');
 
-/*  Item Photo  */ 
+/*  Item Photo  */
 
 
 Route::resource('ItemPhoto','ItemPhotoController');
 
 
 
-/*  User  */ 
+/*  User  */
 
 
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 Route::resource('user', 'UserController');
 
-/*  Admin  */ 
+/*  Admin  */
 
 
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
@@ -51,12 +51,12 @@ Route::post('/userblockunblock', 'UserController@block');
 Route::post('/useroperation', 'UserController@usersajaxfetch');
 
 
-/*  Category  */ 
+/*  Category  */
 
 
 Route::resource('Category','CategoryController');
 
-/*  Reservation  */ 
+/*  Reservation  */
 
 Route::resource('Reservation','ReservationController');
 Route::get('/MyReservations','ReservationController@reservation');
@@ -65,9 +65,10 @@ Route::put('/MyRequests/{id}/approve','ReservationController@approval')->name('M
 Route::put('/MyRequests/{id}/refuse','ReservationController@destroy')->name('MyRequests.refuse');
 Route::post('/reser', 'ReservationController@store');
 Route::get('/reservations', 'ReservationController@index');
+Route::post('/cancelreservation/{id}','ReservationController@userCancel');
 
 
-/*  Premium  */ 
+/*  Premium  */
 
 
 Route::resource('Premium','ItemPremiumController');
