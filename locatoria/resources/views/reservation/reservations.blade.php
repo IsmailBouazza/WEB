@@ -53,7 +53,7 @@
                             <div class="alert alert-warning">
                                 <strong>Pending</strong>
                             </div>
-                            <button type="button" class="btn btn-danger" style="margin-top: 6px;width: 100%" >Cancel Reservation</button>
+                            <button type="button" class="btn btn-danger" id="{{$reservation->id}}res" style="margin-top: 6px;width: 100%" >Cancel Reservation</button>
                         @else
                             @if(($reservation->date_start <= date('Y-m-d')) && ($reservation->date_end >= date('Y-m-d')) )
                                 <div class="alert alert-primary ">
@@ -68,8 +68,8 @@
                                     <div class="alert alert-success ">
                                         <strong>Approved </strong>
                                     </div>
-                                    <button type="button" class="btn btn-danger " id="{{$reservation->id}}res" style="margin-top: 6px;width: 100%" >Cancel Reservation</button>
-                                @endif
+                                    <button type="button" class="btn btn-danger" style="margin-top: 6px;width: 100%" >Cancel Reservation</button>
+                            @endif
 
                         @endif
 
