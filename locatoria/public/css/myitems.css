@@ -17,10 +17,10 @@ h1{
     width: 150px;
     margin-left: 100px;
     margin-top: 0px;
-
+    
 }
 div.btns{
-
+    
     display: flex ;
     padding-top: 5px;
     padding-left: 0px;
@@ -32,7 +32,7 @@ div.col1{
 }
 div.col2{
     position : relative;
-
+    
 }
 
 p.msg{
@@ -48,7 +48,4 @@ div.msg{
 .msg small{
     margin-left: 50%;
     font-size: 1em;
-}
-.swal2-confirm {
-    margin: 15px;
 }
