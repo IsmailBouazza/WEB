@@ -1,11 +1,12 @@
 @extends('layouts.app')
 <!-- link css -->
+<link href="{{ asset('css/item.css') }}" rel="stylesheet">
 <link href="{{ asset('css/lightpick.css') }}" rel="stylesheet">
 <link href="{{ asset('css/image-uploader.min.css') }}" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!--  -->
 @section('content')
-<br><br><br><br><br><br>
+<br><br><br><br>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -26,7 +27,7 @@
 
                     @endif
                     <!-- from starts here -->
-                        <form enctype="multipart/form-data" action="{{ url('Item') }}" method="POST">
+                        <form enctype="multipart/form-data" action="{{ url('Item') }}" method="POST" id="create-form">
                             @csrf
                             <div class="form-group row">
                                 <label for="title" class="col-4 col-form-label">Title</label>
@@ -140,7 +141,8 @@
 
                             <div class="form-group row">
                                 <div class="offset-6 col-8">
-                                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                    <button name="submit" type="submit" class="btn btn-primary" id="submit">Submit</button>
+                                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" type="button" class="btn btn-warning">Premium</button>
                                 </div>
                             </div>
 
@@ -153,6 +155,26 @@
     </div>
     <!-- from ends here -->
 
+    <!-- form for premium -->
+
+    
+    <div id="modal-wrapper" class="modal">
+        <div class="modal-content">
+            <h1>Premium</h1>
+            <hr>
+            <h4>Option premium will make your item appear in differents places</h4>
+            <hr>
+            <small>You will have to wait for the admin's approvale</small>
+            <hr>
+            <button style="width: 20%; margin-left:42%" id="send-premium" name="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+    
+
+    <!-- premium script -->
+
+
     <!-- include for js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"   type="application/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -160,6 +182,29 @@
     <script src="{{ asset('js/lightpick.js') }}" ></script>
     <script src="{{ asset('js/image-uploader.js') }}" ></script>
     <!--  -->
+
+    <script>
+        //if user clicked anywhere outside the modal, modal will close
+
+        $( document ).ready(function() {
+            var modal = document.getElementById('modal-wrapper');
+            window.onclick = function(event){
+            if(event.target == modal){
+                modal.style.display = "none";
+                
+            }
+            $('#send-premium').click(function(){
+                $('form').append('<input type="hidden" name="premium" value="1" />');
+                $('#submit').click();
+            });  
+            }
+        });
+
+
+    </script>
+
+
+
     <script type="application/javascript" >
 
         $('#thumbnail').change(function(e){

@@ -29,7 +29,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-  
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -47,6 +47,27 @@ class User extends Authenticatable
 
     public function reservations(){
         return $this->hasMany(Reservation::class)->orderBy('created_at', 'DESC');
+    }
+
+    public function announces(){
+        return $this->hasMany(Reservation::class,'user_owner_id')->orderBy('created_at', 'DESC');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
+    public function myitemscomments(){
+        return $this->hasMany(Comment::class , "user_id")->where('commentable_type', Item::class);
+    }
+
+    public function myuserscomments(){
+        return $this->hasMany(Comment::class , "user_id")->where('commentable_type', self::class );
+    }
+
+    public function favorites(){
+        return $this->belongsToMany(Item::class ,'Favorites' ,'user_id','item_id')->withPivot('created_at','id','updated_at');
     }
 
 }

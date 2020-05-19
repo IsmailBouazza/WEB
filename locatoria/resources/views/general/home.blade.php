@@ -45,19 +45,16 @@
         <a href="{{ url('/Category/4') }}">
           <div class="annonce">
             <img src="{{asset('images/home-made.jpg')}}"  class="img">
-            <div class="centered">Home-Made</div>
           </div>
         </a>  
         <a href="{{ url('/Category/2') }}">
           <div class="annonce">
             <img src="{{asset('images/clothes.jpg')}}"  class="img">
-            <div class="centered">Clothes</div>
           </div>
         </a>  
         <a href="{{ url('/Category/1') }}"  class="img">
           <div class="annonce">
             <img src="{{asset('images/car-equipement.jpg')}}">
-            <div class="centered">Car Equipement</div>
           </div>
         </a>  
     </div>
@@ -66,28 +63,54 @@
         Last advertisements
     </div>
 
-            <div class="album ">
+    <div class="album ">
 
-              @if($items ?? ''->count() > 0)
-              @foreach($items ?? '' as $item)
+      @if($items ?? ''->count() > 0)
+        @foreach($items ?? '' as $item)
 
-              <div id="card" class="card" style="width: 18rem;">
-                <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{$item->title}}</h5>
-                  <p class="card-text">{{$item->description}}</p>
+        <div id="card" class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap" style="width: 100%; height:250px">
+          <div class="card-body">
+            <h5 class="card-title">{{$item->title}}</h5>
+            <p class="card-text">{{$item->description}}</p>
 
-                <a href="{{ url('Item/'.$item->id) }}" class="btn btn-primary">view details</a>
-                </div>
-              </div>
-    
-            @endforeach
+            <a href="{{ url('Item/'.$item->id) }}" class="btn btn-primary">view details</a>
+          </div>
+        </div>
+      
+        @endforeach
 
-            @else
-              <p>NO ITEM ADDED YET</p>
-            @endif
+      @else
+        <div class="msg">
+          <p class="msg">No items added yet</p>
+          <small>Sorry try latter !!</small> 
+        </div>
+      @endif
          
+  </div>
+
+  <div class="annonce-premium">
+    <div class="float" style="margin-left: 5%;">
+      <h1 style="color: white; margin-left: 10%; font-weight:bold;">Discover premium ads</h1>
+      <h4 style="color: white; margin-left: 10%;">Now you can see different items from differents categories and with a high quality</h4>
     </div>
+    <div class="float" style="margin-left: 25%;">
+      <a href="{{ url('Premium') }}">
+        <button type="button" class="btn btn-outline-secondary" style="color: white; border:white solid 2px; font-size:1.2em">Discover more</button>
+      </a>
+    </div>
+    
+    <div class="grid-container">
+      @foreach($items_premium as $item)
+          <div class="grid-item">
+            <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap" style="width: 100%; height:80%; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            <div class="card-body">
+              <p class="card-text">{{$item->description}}</p>
+            </div>
+          </div>
+      @endforeach
+    </div>
+  </div>
                        
         
         

@@ -9,6 +9,9 @@ use App\Item;
 use App\ItemPhoto;
 use App\User;
 use App\Reservation;
+use App\ItemPremium;
+use App\Favorite;
+
 use Auth;
 use DateTime;
 use DateInterval;
@@ -16,17 +19,14 @@ use DatePeriod;
 
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+    
 
      //display user items
     public function index()
     {
-        $user_id=Auth::user()->id;
-        $items = Item::all();
+        $user_id = Auth::user()->id;
+        $items = Item::all()->where('status','1');
         $user = User::find($user_id);
         $user->items()->get();
         return view('items.myitems')->with([
@@ -36,13 +36,29 @@ class ItemController extends Controller
         ]);
     }
 
-   //display 6 latest items at home page
+   //display 3 latest items at home page
     public function showHome(){
 
-            $items = Item::all()->sortByDesc('created_at')->take(6);
+            $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(3);
+            
+
+            $perimiums = ItemPremium::all()->where('status','1')->take(4);
+            $id_premium = array();
+            foreach ($perimiums as $premium ){
+            
+            $id_premium[] = $premium->item_id;
+            }
+
+            $items_premium = Item::find($id_premium);
+
+
             return view('general.home')->with([
-                'items'=>$items,
+                'items_premium' => $items_premium,
+                'items' => $items,
             ]);
+            
+
+            
 
     }
 
@@ -53,8 +69,11 @@ class ItemController extends Controller
      */
     public function create()
     {
-        // check if is auth
-        return view('items.create');
+        
+        if(Auth::user()){
+            return view('items.create');
+        }
+        return redirect('/login')->with('error', 'unauthorized page');
     }
 
     /**
@@ -79,6 +98,7 @@ class ItemController extends Controller
 
 
         ]);
+
         $item =  new Item;
 
         $item->user_id=Auth::user()->id;
@@ -93,6 +113,7 @@ class ItemController extends Controller
 
         $item_id=$item->id;
         $id_user=$item->user_id;
+
 
         // thumbnail path template (/{user_id}/{item_id}/{item_id}_thumbnail)
         if ($request->file('thumbnail')) {
@@ -130,9 +151,17 @@ class ItemController extends Controller
                 $itemphoto->save();
 
             }
+        
         }
 
-        return redirect('/items/myitems/' . auth()->user()->id);
+        // insert to premium 
+
+        if($request->premium){
+            $item->status = '0';
+            $item->save();
+        }
+
+        return redirect('/items/myitems/'.auth()->user()->id);
     }
 
     /**
@@ -144,40 +173,42 @@ class ItemController extends Controller
     //to show user item(details)
     public function show($id)
     {
-        $item = Item::findOrFail($id);
-        $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
-        $user_id = $item->user_id;
-        $user = User::find($user_id);
 
+            $item = Item::findOrFail($id);
+            $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
+            $user_id = $item->user_id;
+            $user = User::find($user_id);
+
+            
+            $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
+
+            $takendates = array();
+
+            foreach ($reservations as $reservation){
+
+                $begin = new DateTime($reservation->date_start);
+                $end = new DateTime($reservation->date_end); // date_end - 1
+                $end = $end->modify( '+1 day' );
+
+                $interval = new DateInterval('P1D');
+                $daterange = new DatePeriod($begin, $interval ,$end);
+
+                foreach($daterange as $date){
+                    $takendates[] = $date->format("Y-m-d");
+                }
+
+            }
+
+
+            return view('items.show')->with([
+                'comments'=>$item->comments,
+                'item' => $item,
+                'item_photos' => $item_photos,
+                'user' => $user,
+                'takendates'=>json_encode($takendates),
+            ]);
         
-        $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
-
-        $takendates = array();
-
-        foreach ($reservations as $reservation){
-
-        $begin = new DateTime($reservation->date_start);
-        $end = new DateTime($reservation->date_end); // date_end - 1
-        $end = $end->modify( '+1 day' );
-
-        $interval = new DateInterval('P1D');
-        $daterange = new DatePeriod($begin, $interval ,$end);
-
-        foreach($daterange as $date){
-            $takendates[] = $date->format("Y-m-d");
-        }
-
-    }
-
-
-        return view('items.show')->with([
-            'comments'=>$item->comments,
-            'item' => $item,
-            'item_photos' => $item_photos,
-            'user' => $user,
-            'takendates'=>json_encode($takendates),
-        ]);
-
+    
     }
 
 
@@ -190,13 +221,18 @@ class ItemController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
-    {
-        // to do
-        //Check if post exists before deleting
-        // Check for correct user
-
-        //getting data
+    {        
         $item = Item::find($id);
+
+        // to do
+        
+        //Check if post exists before deleting
+        /** Check for correct user */
+        
+        if(Auth::user()->id !== $item->user_id){
+            return redirect('/Item/'.$item->id)->with('error', 'unauthorized page');
+        }
+
         $item_photos_links=app('App\Http\Controllers\ItemPhotoController')->show($id);
 
 
@@ -263,17 +299,19 @@ class ItemController extends Controller
                 $i++;
 
                 $path=$image->storeAs($id_user.'/'.$item_id, $imageName, 'public');
-
+                
 
                 $item_photo = new ItemPhoto;
                 $item_photo->item_id=$item_id;
-                $item_photo->image_path=$path;
+                $item_photo->photo_path=$path;
+                $picture = Image::make(public_path("storage/{$path}"))->resize(500,250);
+                $picture->save();
                 $item_photo->save();
 
             }
         }
         //redirect to show items/{id}
-        echo 'updated';
+        return redirect('/Item/'.$item->id)->with('error', 'unauthorized page');
     }
 
     /**
@@ -282,11 +320,19 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //delete item function
     public function destroy($id)
     {
         $item = Item::find($id);
         $photos = ItemPhoto::Where('item_id', $id);
+        $reservation = Reservation::Where('item_id', $id);
+        $premium = ItemPremium::Where('item_id', $id);
+        $favorites = Favorite::Where('item_id', $id);
         $photos->delete();
+        $reservation->delete();
+        $premium->delete();
+        $favorites->delete();
         $item->delete();
 
         return redirect('/items/myitems/' . auth()->user()->id)->with('success', 'Item deleted');

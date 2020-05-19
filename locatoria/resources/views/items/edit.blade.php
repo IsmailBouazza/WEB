@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<link href="{{ asset('css/item.css') }}" rel="stylesheet">
 <link href="{{ asset('css/image-uploader.min.css') }}" rel="stylesheet">
 <div class="container">
     <div class="row justify-content-center">
@@ -20,7 +21,7 @@
 
                 @endif
                 <!-- from starts here -->
-                    <form enctype="multipart/form-data" action="{{ url('Item/'.$item->id) }}" method="POST">
+                    <form enctype="multipart/form-data" action="{{ url('Item/'.$item->id) }}" method="POST" >
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
@@ -133,8 +134,7 @@
                                 <div class="input-group">
 
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="thumbnail"
-                                               name="thumbnail" accept="image/*">
+                                        <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail" accept="image/*">
                                         <label class="custom-file-label" for="thumbnail">Choose new file </label>
                                     </div>
                                 </div>
@@ -168,9 +168,6 @@
                         </div>
 
                     </form>
-
-
-
                 </div>
             </div>
         </div>
@@ -180,10 +177,14 @@
 
 
 
+
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="{{ asset('js/image-uploader.js') }}" ></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 <script>
     // add model to show old
 
@@ -221,4 +222,6 @@
 
 
 </script>
+
+
 @endsection
