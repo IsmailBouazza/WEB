@@ -6,6 +6,7 @@ use App\Item;
 use App\Reservation;
 use App\User;
 use Auth;
+use DateTime;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -37,7 +38,7 @@ class ReservationController extends Controller
         $res->user_owner_id = Item::find(request('item_id'))->user->id;
 
         $res->save();
-
+        // better to redirect to /Myreservations
         return redirect('/home');
 
     }
@@ -72,13 +73,12 @@ class ReservationController extends Controller
         $reservations = Reservation::where('user_owner_id',$id)->get();
         $user = User::find($id);
 
-        $reservations2 = $reservations->map(function ($resevation , $key){
+        $reservations2 = $reservations->map(function ($reservation , $key){
 
-            $resevation->user_id = User::find($resevation->user_id);
-            return $resevation;
+            $reservation->user_id = User::find($reservation->user_id);
+            return $reservation;
         });
 
-    //dd($reservations2);
 
         return view('reservation.requests' , [
 
@@ -88,6 +88,7 @@ class ReservationController extends Controller
 
     }
 
+    //accept a reservation
     public function approval($id)
     {
         $reservation = Reservation::find($id);
@@ -103,16 +104,16 @@ class ReservationController extends Controller
         return redirect()->back();
     }
 
+
+    //refuse(delete) a reservation
     public function destroy($id){
         $reservation = Reservation::find($id);
         $reservation->delete();
         return redirect()->back();
 
+
+
     }
-
-
-
-
 
     public function reservationsajaxfetch()
     {
@@ -130,6 +131,32 @@ class ReservationController extends Controller
 
     }
 
+    public  function  userCancel($id) {
 
+       if(Auth::user()){
+
+
+                $reservation = Reservation::find($id);
+
+                $start_date= new DateTime($reservation->date_start);
+
+                $today = date('Y-m-d');
+                $d2= new DateTime($today);
+
+                $interval= $start_date->diff($d2);
+                $hoursleft = $interval->days * 24;
+                if($hoursleft<=24){
+                    echo 'this reservation will start within 24h, you can not cancel it.for more information, please contact the owner';
+                }
+                else {
+                   self::destroy($id);
+                   //send notification to the owner
+                    echo 'your reservation has been cancled!';
+
+                }
+
+        }
+       // dd($date);
+    }
 
 }

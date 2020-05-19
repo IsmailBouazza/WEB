@@ -160,15 +160,18 @@
 
                       <div class="dropdown-menu dropdown-menu-right" >
 
+
                           @if(Auth::user())
 
                               <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">My account <span class="sr-only">(current)</span></a>
+                              <a class="dropdown-item" href=#{{url ('/user/'.Auth::user()->id ) }}">My messages<span class="sr-only">(current)</span></a>
+                              <a class="dropdown-item" href="#">My favorite <span class="sr-only">(current)</span></a>
 
                               <span class="dotx count2" ></span>
-                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">My announces </a>
+                              <a class="dropdown-item" href="{{url ('/MyRequests') }}">My announces </a>
 
                               <span class="dotx count1" ></span>
-                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">My reservation </a>
+                              <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">My reservation </a>
 
                           @endif
 

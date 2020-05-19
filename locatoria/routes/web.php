@@ -15,58 +15,63 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Auth::routes();
 
+/*  Item  */
 
 Route::get('/', 'ItemController@showHome');
 Route::get('/home', 'ItemController@showHome');
-
-Auth::routes();
-
 Route::resource('Item','ItemController');
-Route::resource('ItemPhoto','ItemPhotoController');
-
 Route::get('/items/myitems/{user}', 'ItemController@index');
-
 Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');
 
+/*  Item Photo  */
+
+
+Route::resource('ItemPhoto','ItemPhotoController');
+
+
+
+/*  User  */
 
 
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
-
-
 Route::resource('user', 'UserController');
 
 
 
+/*  Admin  */
+
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::get('/admin', 'AdminController@show');
+// admin delete
+Route::post('/userblockunblock', 'UserController@block');
+//Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');  // for testing
+Route::post('/useroperation', 'UserController@usersajaxfetch');
+
+
+/*  Category  */
 
 
 Route::resource('Category','CategoryController');
+
+/*  Reservation  */
 
 Route::resource('Reservation','ReservationController');
 Route::get('/MyReservations','ReservationController@reservation');
 Route::get('/MyRequests','ReservationController@request');
 Route::put('/MyRequests/{id}/approve','ReservationController@approval')->name('MyRequests.approve');
 Route::put('/MyRequests/{id}/refuse','ReservationController@destroy')->name('MyRequests.refuse');
-
-
-
-
-
-
 Route::post('/reser', 'ReservationController@store');
 Route::get('/reservations', 'ReservationController@index');
-
-
-// admin delete
-Route::post('/userblockunblock', 'UserController@block');
-//Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');  // for testing
-Route::post('/useroperation', 'UserController@usersajaxfetch');
+Route::post('/cancelreservation/{id}','ReservationController@userCancel');
 
 // reservations notification
 Route::post('/reservationsnotification', 'ReservationController@reservationsajaxfetch');
 
+/*  Premium  */
 
+
+Route::resource('Premium','ItemPremiumController');

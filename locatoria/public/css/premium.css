@@ -1,0 +1,93 @@
+.header-box{
+    margin-top: 50px;
+    background-image: url('../images/premium.png');
+    width: 100%;
+    height: 600px;
+}
+
+.float{
+    float: left;
+}
+
+.box1{
+    width: 50%;
+}
+
+.box2{
+    width: 50%;
+    height: 100%;
+    position:relative;
+    
+}
+
+.box2 img{
+    width: 70%;
+    height: 350px;
+    margin-top: 10%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+
+p.text{
+    width: 70%;
+    margin-top: 30%;
+    margin-left: 25%;
+    font-size: 1.2em;
+    color: white;
+}
+
+a.nv:hover{
+    background-color: grey;
+    border-radius: 12px;
+}
+  
+
+#card{
+    margin-left: 5%;
+    margin-top: 150px;
+    width: 300px;
+}
+
+div.album{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+
+
+
+
+
+
+
+
+h1 {
+    text-align: center;
+    font-size: 18px;
+    margin: 0;
+  }
+  
+
+  
+.slide {
+    object-fit: contain;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    opacity: 0;
+    transition: opacity 3s linear;
+  }
+  
+  .slider-wrapper > .slide:first-child {
+      opacity: 1;
+  }
+
+
+
+
+
+
