@@ -60,10 +60,10 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'bio' => ['required', 'string', 'max:255'],
             'picture' => 'max:2048',
-            
+
         ]);
 
-        
+
     }
 
     /**
@@ -87,7 +87,7 @@ class RegisterController extends Controller
             'bio' => $data['bio'],
             'picture' => '',
 
-        ]);        
+        ]);
 
         if($data['picture']){
 
@@ -95,12 +95,12 @@ class RegisterController extends Controller
             $imageName = $user->id.'_picture'.'.'.$extension;
             $picturePath = $data['picture']->storeAs($user->id, $imageName,'public');
             $picture = Image::make(public_path("storage/{$picturePath}"))->resize(250,200);
-        
+
             $user->picture = $picturePath;
             $user->save();
         }
 
         return $user;
-       
+
     }
 }

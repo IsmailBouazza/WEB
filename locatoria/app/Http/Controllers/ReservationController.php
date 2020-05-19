@@ -12,7 +12,7 @@ class ReservationController extends Controller
 {
 
     public function index(){
-        
+
         if(!Auth::user()){
             return redirect('/login');
         }
@@ -23,7 +23,7 @@ class ReservationController extends Controller
         return view('reservation.index')->with('user',$user);
     }
 
-    
+
 
     public function store(){
 
@@ -56,17 +56,17 @@ class ReservationController extends Controller
         return view('reservation.reservations')->with([
             'reservations'=> $Myreservations,
             'user'=>$user,
-        
+
         ]);
-           
+
     }
 
     public function request(){
-        
+
         if(!Auth::user()){
             return redirect('/login');
         }
-        
+
         $id = Auth::user()->id;
 
         $reservations = Reservation::where('user_owner_id',$id)->get();
@@ -91,14 +91,14 @@ class ReservationController extends Controller
     public function approval($id)
     {
         $reservation = Reservation::find($id);
-       
+
         if ($reservation->status == 0)
         {
             $reservation->status = 1;
             $reservation->save();
-            
+
         } else {
-            
+
         }
         return redirect()->back();
     }
@@ -109,5 +109,27 @@ class ReservationController extends Controller
         return redirect()->back();
 
     }
+
+
+
+
+
+    public function reservationsajaxfetch()
+    {
+
+        $count1 = request()->user()->reservations->where('user_read',0)->count(); // count my reservation
+        $count2 = request()->user()->announces->where('user_owner_read',0)->count(); // count my own announce
+
+        $data = array(
+                        'count' => $count1+$count2,
+                        'count1' => $count1,
+                        'count2' => $count2
+                    );
+
+        return $data;
+
+    }
+
+
 
 }

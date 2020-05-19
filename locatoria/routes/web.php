@@ -66,3 +66,7 @@ Route::post('/userblockunblock', 'UserController@block');
 //Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');  // for testing
 Route::post('/useroperation', 'UserController@usersajaxfetch');
 
+// reservations notification
+Route::post('/reservationsnotification', 'ReservationController@reservationsajaxfetch');
+
+

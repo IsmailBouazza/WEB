@@ -22,6 +22,8 @@ class CreateReservationsTable extends Migration
             $table->float('total_price');
             $table->date('date_start');
             $table->date('date_end');
+            $table->integer('user_read');
+            $table->integer('user_owner_read');
             $table->timestamps();
         });
     }
