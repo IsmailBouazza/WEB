@@ -116,7 +116,8 @@ div.header{
 
 div.edit-block{
     margin-left: 100px;
-   
+    width: 100%;
+    height: 400px;
 }
 
 div.float{

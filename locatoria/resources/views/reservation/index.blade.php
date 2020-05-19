@@ -18,10 +18,11 @@
         </div>
     </div>
 
-    <div class="img-res">
-        <img src="{{asset('images/reservation.jpg')}}" style="width:400px; height:400px; border-radius: 50%">
-        
+    <div class="rescontainer">
+        <div class="img-res">
+            <img src="{{asset('images/reservation.jpg')}}" style="width:400px; height:400px; border-radius: 50%">
+            
+        </div>
+        <div class="img-res" style="margin-top: 150px; text-align:center; width:350px">Welcome to your reservations center</div>
     </div>
-    <div class="img-res" style="margin-top: 150px; text-align:center; width:350px">Welcome to your reservations center</div>
-
 @endsection
