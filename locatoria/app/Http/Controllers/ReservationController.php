@@ -68,27 +68,26 @@ class ReservationController extends Controller
         }
         $reservations = Auth::user()->announces;
 
-        // you should return this collection because announces is set as viewd
-        $reservations2 = tap($reservations)->map(function ($reservation , $key){
-            if(! $reservation->announceviewed()){
-                $reservation->announceread();
-                $reservation->user_owner_read = 0;
-            }
-            return $reservation;
-        });
+        // map 1 : you should return this collection because announces is set as viewd
+        // map 2 : you shoud return information about the user sendind the request
+        // sortBy : the first one will be unviewed anounces
+        $reservations2 = $reservations->map(function ($reservation , $key){
+                    if(! $reservation->announceviewed()){
+                        $reservation->announceread();
+                        $reservation->user_owner_read = 0;
+                    }
+                    return $reservation;
+            })
+            ->map(function ($reservation){
 
+                    $reservation->user_id = User::find($reservation->user_id);
+                    return $reservation;
+            })
+            ->sortBy(function($reservation){
+                    return $reservation->user_owner_read;
+            })
+            ->values();
 
-        // you shoud return information about the user sendind the request
-        $reservations2 = $reservations2->map(function ($reservation){
-
-            $reservation->user_id = User::find($reservation->user_id);
-            return $reservation;
-        });
-
-        // the first one will be unviewed anounces
-        $reservations2 = $reservations2->sortBy(function($reservation){
-            return $reservation->user_owner_read;
-        })->values();
 
         // here I returned the anounces as unviewed cause we need to separate it later
         return view('reservation.announces' , [
