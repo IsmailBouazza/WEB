@@ -20,11 +20,7 @@ use DatePeriod;
 class ItemController extends Controller
 {
    
-    public function test()
-    {
-
-        return view('auth.loginTest');
-    }
+    
 
      //display user items
     public function index()

@@ -11,13 +11,20 @@
         <div class="float">
             <p class="text">
                 HERE ARE THE<br>
-                <span style="font-size: 3em; font-weight:bold">Premiums Ads</span><br>
+                <span style="font-size: 2.8em; font-weight:bold">Premium Items</span><br>
                 Unique items to rent, displayed  by owners from all over the world.
             </p>
         </div>
     </div>
-    <div class="float box2">
-        <img src="{{asset('images/header.jpg')}}" >
+    <div class="slider float box2" id="main-slider">   
+      <div class="slider-wrapper">
+        <img src="{{asset('images/ad1.jpg')}}" alt="1" class="slide">
+        <img src="{{asset('images/ad2.jpg')}}" alt="2" class="slide">
+        <img src="{{asset('images/ad3.jpg')}}" alt="3" class="slide">
+        <img src="{{asset('images/ad4.jpg')}}" alt="3" class="slide">
+        <img src="{{asset('images/ad5.jpg')}}" alt="3" class="slide">
+        <img src="{{asset('images/ad6.jpg')}}" alt="3" class="slide">
+      </div>
     </div>
 </div>
 
@@ -65,3 +72,5 @@
     @endif
        
 </div>
+
+<script src="{{asset('js/premium.js')}}"></script>
