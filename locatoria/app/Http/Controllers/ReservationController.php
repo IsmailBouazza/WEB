@@ -44,7 +44,7 @@ class ReservationController extends Controller
     }
 
 
-    public function reservation(){
+    public function reservations(){
 
 
         if(!Auth::user()){
@@ -59,30 +59,39 @@ class ReservationController extends Controller
             'user'=>$user,
 
         ]);
-
     }
 
-    public function request(){
+    public function announces(){
 
         if(!Auth::user()){
             return redirect('/login');
         }
+        $reservations = Auth::user()->announces;
 
-        $id = Auth::user()->id;
+        // you should return this collection because announces is set as viewd
+        $reservations2 = tap($reservations)->map(function ($reservation , $key){
+            if(! $reservation->announceviewed()){
+                $reservation->announceread();
+                $reservation->user_owner_read = 0;
+            }
+            return $reservation;
+        });
 
-        $reservations = Reservation::where('user_owner_id',$id)->get();
-        $user = User::find($id);
 
-        $reservations2 = $reservations->map(function ($reservation , $key){
+        // you shoud return information about the user sendind the request
+        $reservations2 = $reservations2->map(function ($reservation){
 
             $reservation->user_id = User::find($reservation->user_id);
             return $reservation;
         });
 
+        // the first one will be unviewed anounces
+        $reservations2 = $reservations2->sortBy(function($reservation){
+            return $reservation->user_owner_read;
+        })->values();
 
-        return view('reservation.requests' , [
-
-            'user' => $user,
+        // here I returned the anounces as unviewed cause we need to separate it later
+        return view('reservation.announces' , [
             'reservations'=>$reservations2,
         ]);
 
@@ -107,19 +116,23 @@ class ReservationController extends Controller
 
     //refuse(delete) a reservation
     public function destroy($id){
+
         $reservation = Reservation::find($id);
         $reservation->delete();
         return redirect()->back();
-
-
 
     }
 
     public function reservationsajaxfetch()
     {
 
-        $count1 = request()->user()->reservations->where('user_read',0)->count(); // count my reservation
-        $count2 = request()->user()->announces->where('user_owner_read',0)->count(); // count my own announce
+        $count1 = request()->user()->reservations->where('user_read',0)
+                                                    ->where('status',0)
+                                                    ->count(); // count my reservation
+
+        $count2 = request()->user()->announces->where('user_owner_read',0)
+                                                ->where('status',0)
+                                                ->count(); // count my own announce
 
         $data = array(
                         'count' => $count1+$count2,

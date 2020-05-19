@@ -5,15 +5,15 @@
 <!--  -->
 @section('content')
 
-<br><br><br>
-    
+<br><br>
+
     <div class="nav">
         <div class="mini-block">
-            <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
+            <img src="{{asset('storage/'.Auth::user()->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
             <div class="s-nav">
-                <a href="{{ url('/user/'.$user->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
+                <a href="{{ url('/user/'.Auth::user()->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
                 <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
-                <a href="{{ url('/items/myitems/'.$user->id) }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-shopping-cart" style="margin-right: 7px;"></i>My items</button></a>
+                <a href="{{ url('/items/myitems/'.Auth::user()->id) }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-shopping-cart" style="margin-right: 7px;"></i>My items</button></a>
                 <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-edit" style="margin-right: 7px;"></i>Reservations</button></a>
                 <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorite</button></a>
             </div>
@@ -23,9 +23,48 @@
 
     <div class="reservations">
 
+        <?php $i = 0; ?>
+
+        <style>
+            hr.style-two {
+                border: 0;
+                height: 2px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            }
+            .code {
+                color: #333;
+                position: relative;
+                overflow: hidden;
+            }
+            .code h2 {
+                text-align: left;
+                color: #ccc;
+                font: 25px monaco,mono-space;
+                padding-left: 300px;
+            }
+        </style>
+
+            @if( ! $reservations->first()->announceviewed())
+
+            <hr class="style-two">
+            <div class="code">
+                <h2>New</h2>
+            </div>
+            @endif
         @forelse($reservations as $reservation)
 
+            <?php if ($i==0 && $reservation->announceviewed()){
+
+                echo "<hr class=\"style-two\">
+                     <div class=\"code\">
+                        <h2>Old</h2>
+                     </div>";
+                        $i++;
+                    }
+            ?>
+
             <div class="res-container" style="width: 60%; margin-left:20%">
+
                 <div class="card flex1" style="width: 150px; height: 150px; border-radius: 50%">
                     <img src="{{asset('/storage/' .$reservation->item->thumbnail_path )}}" style="border-radius: 50%" class="bd-placeholder-img card-img-top" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img">
                 </div>
@@ -54,7 +93,7 @@
                     @if($reservation->status == 0)
                         <br>
                         <span style="color: #000000; font-weight: bold; margin-top: 10px">Accept the request ?</span><br><br>
-                        
+
                         <button type="button" class="btn btn-primary" onclick="approveReservation({{ $reservation->id }})">Accept</button>
                         <form method="post" action="{{ url('MyRequests/' .$reservation->id. '/approve') }}" id="approval-form" style="display: none">
                             @csrf
@@ -69,31 +108,31 @@
                     @else
                         <span style="color: #000000; font-weight: bold;">The reservation is already accepted !!</span>
                     @endif
-                </div>
-                
-                @empty
+            </div>
+            </div>
+
+         @empty
 
                 <div class="msg">
                     <p class="msg">No requests found</p>
-                    <small>Sorry try latter !!</small> 
+                    <small>Sorry try latter !!</small>
                 </div>
 
-            </div>
+
         @endforelse
 
 
-        </div>
     </div>
 
 
     <!-- accept or refuse reservation with js -->
-    
+
     <!-- Select Plugin Js -->
     <script src="{{ asset('assets/backend/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script>
     <!-- TinyMCE -->
     <script src="{{ asset('assets/backend/plugins/tinymce/tinymce.js') }}"></script>
     <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
-    
+
     <script>
         $(function () {
             //TinyMCE

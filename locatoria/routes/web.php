@@ -60,8 +60,10 @@ Route::resource('Category','CategoryController');
 /*  Reservation  */
 
 Route::resource('Reservation','ReservationController');
-Route::get('/MyReservations','ReservationController@reservation');
-Route::get('/MyRequests','ReservationController@request');
+
+Route::get('/MyAnnounces','ReservationController@announces');
+Route::get('/MyReservations','ReservationController@reservations');
+
 Route::put('/MyRequests/{id}/approve','ReservationController@approval')->name('MyRequests.approve');
 Route::put('/MyRequests/{id}/refuse','ReservationController@destroy')->name('MyRequests.refuse');
 Route::post('/reser', 'ReservationController@store');

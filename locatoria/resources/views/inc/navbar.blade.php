@@ -53,6 +53,7 @@
                                   position: absolute;
                                   top: 3px;
                                   left: 3px;
+                                  display: none;
 
                               }
 
@@ -128,6 +129,9 @@
                                                   }
                                                   else{
                                                       $('.count').css("display","none");
+                                                      $('.count1').css("display","none");
+                                                      $('.count2').css("display","none");
+
                                                   }
                                               }
                                           });
@@ -163,15 +167,15 @@
 
                           @if(Auth::user())
 
-                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">My account <span class="sr-only">(current)</span></a>
-                              <a class="dropdown-item" href=#{{url ('/user/'.Auth::user()->id ) }}">My messages<span class="sr-only">(current)</span></a>
-                              <a class="dropdown-item" href="#">My favorite <span class="sr-only">(current)</span></a>
+                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">Account <span class="sr-only">(current)</span></a>
+                              <a class="dropdown-item" href=#{{url ('/user/'.Auth::user()->id ) }}">Messages<span class="sr-only">(current)</span></a>
+                              <a class="dropdown-item" href="#">Favorite <span class="sr-only">(current)</span></a>
 
                               <span class="dotx count2" ></span>
-                              <a class="dropdown-item" href="{{url ('/MyRequests') }}">My announces </a>
+                              <a class="dropdown-item" href="{{url ('/MyAnnounces') }}">Announces </a>
 
                               <span class="dotx count1" ></span>
-                              <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">My reservation </a>
+                              <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">Reservation </a>
 
                           @endif
 
