@@ -50,3 +50,7 @@ Route::resource('Reservation','ReservationController');
 Route::post('/reser', 'ReservationController@store');
 Route::get('/reservations', 'ReservationController@index');
 
+
+
+Route::post('/search', 'SearchController@showResults');
+Route::get('/item/{id}','SearchController@showItem');

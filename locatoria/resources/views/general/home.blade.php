@@ -14,10 +14,11 @@
       </tr>
     </table>
     <div class="search">
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="District,City,Region ...." aria-label="Search">
-            <input class="form-control mr-sm-2" type="text" placeholder="Object" aria-label="Search">
-            <input class="form-control mr-sm-2" type="text" placeholder="Budget max" aria-label="Search">
+        <form  action="{{URL::to('/search')}}" method="POST" class="form-inline mt-2 mt-md-0">
+          @csrf
+            <input class="form-control mr-sm-2" type="text" name= 'city' placeholder="District,City,Region ...." aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" name= 'object' placeholder="Object" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" name= 'budget_max' placeholder="Budget max" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <br>
