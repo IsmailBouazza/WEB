@@ -175,7 +175,7 @@ class ItemController extends Controller
     {
 
             $item = Item::findOrFail($id);
-            $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
+            $item_photos = ItemPhoto::all()->Where('item_id',$id);
             $user_id = $item->user_id;
             $user = User::find($user_id);
 
@@ -198,6 +198,7 @@ class ItemController extends Controller
                 }
 
             }
+
 
 
             return view('items.show')->with([

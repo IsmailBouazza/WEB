@@ -13,6 +13,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </div>
+
 <h1>{{$item->title}}</h1>
 <p>{{$item->description}}</p>
 <p>{{$item->status}}</p>

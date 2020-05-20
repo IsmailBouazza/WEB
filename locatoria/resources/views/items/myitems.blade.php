@@ -1,7 +1,6 @@
 @extends('layouts.app')
 <!-- link css -->
 <link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
-<link href="{{ asset('css/account.css') }}" rel="stylesheet">
 
 <!--  -->
 @section('content')
@@ -16,12 +15,12 @@
         <h2>Items</h2>
         <hr>
         <div class="row"> 
-        <div class="album ">
+          <div class="album" style="margin-right: 60px">
         
           
                 @if($user->items->count() > 0)
                 @foreach($user->items as $item)
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 17rem;">
                   <img src="{{asset('/storage/' .$item->thumbnail_path )}}" class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
               
                 <div class="card-body">

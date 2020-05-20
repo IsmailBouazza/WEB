@@ -167,7 +167,6 @@
 
                           @if(Auth::user())
 
-                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">Account <span class="sr-only">(current)</span></a>
                               <a class="dropdown-item" href=#{{url ('/user/'.Auth::user()->id ) }}">Messages<span class="sr-only">(current)</span></a>
                               <a class="dropdown-item" href="#">Favorite <span class="sr-only">(current)</span></a>
 
@@ -176,6 +175,11 @@
 
                               <span class="dotx count1" ></span>
                               <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">Reservation </a>
+
+                              <hr>
+
+                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">Account <span class="sr-only">(current)</span></a>
+
 
                           @endif
 

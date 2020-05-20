@@ -1,6 +1,5 @@
 @extends('layouts.app')
 <!-- link css -->
-<link href="{{ asset('css/account.css') }}" rel="stylesheet">
 <link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 

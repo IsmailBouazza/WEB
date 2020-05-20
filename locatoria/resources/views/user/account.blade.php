@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+<link href="{{ asset('css/account.css') }}" rel="stylesheet">
 
 @section('content')
 @include('inc.sidebar')
@@ -69,13 +70,7 @@
               </div>
           </div>
 
-          <div class="col-md-6 mb-3">
-              <label for="password">Password</label>
-              <input type="text" class="form-control" id="password" value="{{$user->password}}" readonly>
-              <div class="invalid-feedback">
-                  Valid password is required.
-              </div>
-          </div>
+         
           
 
       </div>    

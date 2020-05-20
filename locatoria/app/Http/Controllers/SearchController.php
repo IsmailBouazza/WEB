@@ -23,7 +23,7 @@ class SearchController extends Controller
                 ->where(function($query) use ($filters){
                     if($filters['object']){
                         $query->where('title','LIKE' ,$filters['object'])
-                              ->orWhereHas('description','LIKE',$filters['object']);
+                              ->orWhere('description','LIKE',$filters['object']);
                     }if($filters['budget_max']){
                         $query->where('price','<', $filters['budget_max']);
                     }if($filters['city']){
@@ -37,7 +37,7 @@ class SearchController extends Controller
     public function showItem($id){
          
         $item = Search::find($id);
-        //dd($item);
+        
         return view('items.showItem')->with('item',$item);
     }
 

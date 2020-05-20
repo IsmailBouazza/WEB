@@ -9,8 +9,8 @@
   <!-- sidebar-wrapper  -->
   <main class="page-content" >
     <div class="container-fluid">
-        <img src="{{asset('images/edit.png')}}" style="width: 100px; height:100px">
-        <h2>Requests</h2>
+        <img src="{{asset('images/edit-item.png')}}" style="width: 100px; height:100px">
+        <h2>Edit Item</h2>
         <hr>
         <div class="row"> 
 

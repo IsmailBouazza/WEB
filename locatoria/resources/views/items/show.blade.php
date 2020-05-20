@@ -6,111 +6,8 @@
 
 <!--  -->
 
-<!-- start css mouad-->
-
-<style>
-    {{-- rah kayn fichier commenys.css fih hadchi manba3d fach tsay yield 3ad khdam bih o7ayad had css!! --}}
-    body{
-        background:#eee;
-    }
-
-    hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #FFFFFF;
-    }
-    a.commentuser {
-        color: #82b440;
-        text-decoration: none;
-    }
-    .blog-comment::before,
-    .blog-comment::after,
-    .blog-comment-form::before,
-    .blog-comment-form::after{
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    .blog-comment{
-        margin-top: 20px;
-        padding-top: 20px;
-        padding-left: 15%;
-        padding-right: 15%;
-    }
-
-    .blog-comment ul{
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .blog-comment img{
-        opacity: 1;
-        filter: Alpha(opacity=100);
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -o-border-radius: 4px;
-        border-radius: 4px;
-    }
-
-    .blog-comment img.avatar {
-        position: relative;
-        float: left;
-        margin-left: 0;
-        margin-top: 0;
-        width: 65px;
-        height: 65px;
-    }
-
-    .blog-comment .post-comments{
-        border: 1px solid #eee;
-        margin-bottom: 20px;
-        margin-left: 85px;
-        margin-right: 0px;
-        padding: 10px 20px;
-        position: relative;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -o-border-radius: 4px;
-        border-radius: 4px;
-        background: #fff;
-        color: #6b6e80;
-        position: relative;
-    }
-
-    .blog-comment .meta {
-        font-size: 13px;
-        color: #aaaaaa;
-        padding-bottom: 8px;
-        margin-bottom: 10px !important;
-        border-bottom: 1px solid #eee;
-    }
-
-    .blog-comment ul.comments ul{
-        list-style-type: none;
-        padding: 0;
-        margin-left: 85px;
-    }
-
-    .blog-comment-form{
-        padding-left: 15%;
-        padding-right: 15%;
-        padding-top: 40px;
-    }
-
-    .blog-comment h3,
-    .blog-comment-form h3{
-        margin-bottom: 40px;
-        font-size: 26px;
-        line-height: 30px;
-        font-weight: 800;
-    }
-
-</style>
-
-<!-- end css mouad-->
-
+   
+    
 
 
 
@@ -132,19 +29,23 @@
                 <hr>
             </div>
 
-            @foreach ($item_photos as $item_photo)
+            <div class="slider-wrapper">
 
-                <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
+                <div class="slider-container">
+                    @foreach ($item_photos as $item_photo)
 
+                        <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
 
-            @endforeach
+                    @endforeach
+                </div>
 
+                <div class="slider-controls">
+                  <span class="control prev">&larr;</span>
+                  <span class="control next">&rarr;</span>
+                </div>
 
-            <div class="link">
-                {{$item_photos->links()}}
             </div>
-            <hr>
-            <div class="desc">{{$item->description}}</div>
+          
         </div>
 
         <div class="img-container info-container">
@@ -304,17 +205,23 @@
         <div class="box-container img-container" style="margin-left: 10%; height: 500px;">
             @if(count($item_photos)>0)
             <div class="info-img">
-                @foreach ($item_photos as $item_photo)
+                <div class="slider-wrapper">
 
-                    <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
+                    <div class="slider-container">
+                        @foreach ($item_photos as $item_photo)
 
-                @endforeach
+                            <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
 
+                        @endforeach
+                    </div>
 
-                <div class="link">
+                    <div class="slider-controls">
+                      <span class="control prev">&larr;</span>
+                      <span class="control next">&rarr;</span>
+                    </div>
 
-                    {{$item_photos->links()}}
                 </div>
+                
 
                 @else
                     <p>NO PHOTS!</p>
@@ -548,6 +455,135 @@
                 }
             })
         }
+
+</script>
+
+<script type="text/javascript">
+
+//  set --n (used for calc in CSS) via JS, after getting
+// .container and the number of child images it holds:
+
+const _C = document.querySelector(".slider-container"),
+  N = _C.children.length;
+
+_C.style.setProperty("--n", N);
+
+// detect the direction of the motion between "touchstart" (or "mousedown") event
+// and the "touched" (or "mouseup") event
+// and then update --i (current slide) accordingly
+// and move the container so that the next image in the desired direction moves into the viewport
+
+// on "mousedown"/"touchstart", lock x-coordiate
+// and store it into an initial coordinate variable x0:
+let x0 = null;
+let locked = false;
+
+function lock(e) {
+  x0 = unify(e).clientX;
+  // remove .smooth class
+  _C.classList.toggle("smooth", !(locked = true));
+}
+
+// next, make the images move when the user swipes:
+// was the lock action performed aka is x0 set?
+// if so, read current x coordiante and compare it to x0
+// from the difference between these two determine what to do next
+
+let i = 0; // counter
+let w; //image width
+
+// update image width w on resive
+function size() {
+  w = window.innerWidth;
+}
+
+function move(e) {
+  if (locked) {
+    // set threshold of 20% (if less, do not drag to the next image)
+    // dx = number of pixels the user dragged
+    let dx = unify(e).clientX - x0,
+      s = Math.sign(dx),
+      f = +(s * dx / w).toFixed(2);
+
+    // Math.sign(dx) returns 1 or -1
+    // depending on this, the slider goes backwards or forwards
+
+    if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > 0.2) {
+      _C.style.setProperty("--i", (i -= s));
+      f = 1 - f;
+    }
+
+    _C.style.setProperty("--tx", "0px");
+    _C.style.setProperty("--f", f);
+    _C.classList.toggle("smooth", !(locked = false));
+    x0 = null;
+  }
+}
+
+size();
+
+addEventListener("resize", size, false);
+
+// ===============
+// drag-animation for the slider when it reaches the end
+// ===============
+
+function drag(e) {
+  e.preventDefault();
+
+  if (locked) {
+    _C.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
+  }
+}
+
+// ===============
+// prev, next
+// ===============
+let prev = document.querySelector(".prev");
+let next = document.querySelector(".next");
+
+prev.addEventListener("click", () => {
+  if (i == 0) {
+    console.log("start reached");
+  } else if (i > 0) {
+    // decrease i as long as it is bigger than the number of slides
+    _C.style.setProperty("--i", i--);
+  }
+});
+
+next.addEventListener("click", () => {
+  if (i < N) {
+    // increase i as long as it's smaller than the number of slides
+    _C.style.setProperty("--i", i++);
+  }
+});
+
+// ===============
+// slider event listeners for mouse and touch (start, move, end)
+// ===============
+
+_C.addEventListener("mousemove", drag, false);
+_C.addEventListener("touchmove", drag, false);
+
+_C.addEventListener("mousedown", lock, false);
+_C.addEventListener("touchstart", lock, false);
+
+_C.addEventListener("mouseup", move, false);
+_C.addEventListener("touchend", move, false);
+
+// override Edge swipe behaviour
+_C.addEventListener(
+  "touchmove",
+  e => {
+    e.preventDefault();
+  },
+  false
+);
+
+// unify touch and click cases:
+function unify(e) {
+  return e.changedTouches ? e.changedTouches[0] : e;
+}
 
 </script>
 

@@ -19,10 +19,10 @@
     <div class="slider float box2" id="main-slider">   
       <div class="slider-wrapper">
         <img src="{{asset('images/ad1.jpg')}}" alt="1" class="slide">
-        <img src="{{asset('images/ad3.jpg')}}" alt="3" class="slide">
+        <img src="{{asset('images/ad3.jpg')}}" alt="2" class="slide">
         <img src="{{asset('images/ad4.jpg')}}" alt="3" class="slide">
-        <img src="{{asset('images/ad5.jpg')}}" alt="3" class="slide">
-        <img src="{{asset('images/ad6.jpg')}}" alt="3" class="slide">
+        <img src="{{asset('images/ad5.jpg')}}" alt="4" class="slide">
+        <img src="{{asset('images/ad6.jpg')}}" alt="5" class="slide">
       </div>
     </div>
 </div>
@@ -38,11 +38,12 @@
     <a class="nv navbar-brand" href="{{ url('/Category/9') }}" style="margin-left: 8px">Vehicles</a>
     <a class="nv navbar-brand" href="{{ url('/Category/8') }}" style="margin-left: 8px">Sport Equipment</a>
     <div class="collapse navbar-collapse" id="navbarsExample09">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </form>
+    <ul class="navbar-nav mr-auto">
+    </ul>
+      <form  action="{{URL::to('/search')}}" method="POST" class="form-inline mt-2 mt-md-0">
+        @csrf
+        <input class="form-control" type="text" name="city object budget_max" placeholder="Search" aria-label="Search">
+      </form>
     </div>
 </nav>
 
