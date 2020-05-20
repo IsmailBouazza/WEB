@@ -73,7 +73,19 @@ Route::post('/cancelreservation/{id}','ReservationController@userCancel');
 // reservations notification
 Route::post('/reservationsnotification', 'ReservationController@reservationsajaxfetch');
 
+
+
+
+
 /*  Premium  */
-
-
 Route::resource('Premium','ItemPremiumController');
+
+
+
+
+
+/*Search*/
+Route::post('/search', 'SearchController@showResults');
+Route::get('/item/{id}','SearchController@showItem');
+
+
