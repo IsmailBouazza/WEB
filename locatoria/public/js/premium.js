@@ -1,7 +1,7 @@
 
   window.onload = function() {  
     const slider = new AutoSlider("#main-slider");
-    document.querySelector('h1').innerHTML = `${slider.delay / 4000}`
+    document.querySelector('h1').innerHTML = `${slider.delay / 1000}`
   };
   
   class AutoSlider {
@@ -14,7 +14,7 @@
         this.slides = this.el.querySelectorAll(".slide");
         this.index = 0;
         this.timer = null;
-        this.delay = 5000;
+        this.delay = 4000;
         this.action();
         this.addHoverListener();
     }

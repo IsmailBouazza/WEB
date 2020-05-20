@@ -15,7 +15,6 @@
 
 @section('content')
 
-<br><br>
 
 
     @if(!Auth::user() || Auth::user()->id !== $item->user_id)
@@ -186,117 +185,111 @@
     @if($item->user_id == Auth::user()->id)
 
         <!--Partenaire-->
+    @include('inc.sidebar')
 
 
-        <div class="nav">
-            <div class="mini-block">
-            <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
-                <div class="s-nav">
-                    <a href="{{ url('/user/'.$user->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
-                    <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
-                    <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
-                    <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>My reservations</button></a>
-                    <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>
-                </div>
-            </div>
-        </div>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content" >
+          <div class="container-fluid">
+              <img src="{{asset('images/item.png')}}" style="width: 100px; height:100px">
+              <h2>Items</h2>
+              <hr>
+              <div class="row"> 
+                <div class="box-container img-container" style="margin-left: 20%; height: 400px;">
+                    @if(count($item_photos)>0)
+                    <div class="info-img">
+                        <div class="slider-wrapper">
 
-        <h1>{{$item->title}}</h1>
-        <div class="box-container img-container" style="margin-left: 10%; height: 500px;">
-            @if(count($item_photos)>0)
-            <div class="info-img">
-                <div class="slider-wrapper">
+                            <div class="slider-container">
+                                @foreach ($item_photos as $item_photo)
 
-                    <div class="slider-container">
-                        @foreach ($item_photos as $item_photo)
+                                    <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
 
-                            <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
+                                @endforeach
+                            </div>
 
-                        @endforeach
-                    </div>
+                            <div class="slider-controls">
+                            <span class="control prev">&larr;</span>
+                            <span class="control next">&rarr;</span>
+                            </div>
 
-                    <div class="slider-controls">
-                      <span class="control prev">&larr;</span>
-                      <span class="control next">&rarr;</span>
-                    </div>
+                        </div>
+                        
 
-                </div>
-                
-
-                @else
-                    <p>NO PHOTS!</p>
-                @endif
-            </div>
-        </div>
-        <div class="form">
-            <div class="info row" style="width: 500px; margin-left: 20%;">
-
-
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="email">Description</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="email" placeholder="{{$item->description}}" value="" required>
-                    <div class="invalid-feedback">
-                        item description .
+                        @else
+                            <p>NO PHOTS!</p>
+                        @endif
                     </div>
                 </div>
+                <div class="form row" style="margin-left: 7%">
 
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="zip_code">price</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="zip_code" placeholder="{{$item->price}}" value="" required>
-                    <div class="invalid-feedback">
-                        price.
+                        <div style="padding: 20px;" class="col-md-6 mb-3">
+                            <label style="width: 300px; text-align: center;" for="email">Description</label>
+                            <input style="width: 300px; text-align: center;" type="text" class="form-control" id="email" placeholder="{{$item->description}}" value="" required>
+                            <div class="invalid-feedback">
+                                item description .
+                            </div>
+                        </div>
+
+                        <div style="padding: 20px;" class="col-md-6 mb-3">
+                            <label style="width: 300px; text-align: center;" for="zip_code">price</label>
+                            <input style="width: 300px; text-align: center;" type="text" class="form-control" id="zip_code" placeholder="{{$item->price}}" value="" required>
+                            <div class="invalid-feedback">
+                                price.
+                            </div>
+                        </div>
+
+                        <div style="padding: 20px;" class="col-md-6 mb-3">
+                            <label style="width: 300px; text-align: center;" for="city">disponibility starts at</label>
+                            <input style="width: 300px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_starts}}" value="" required>
+                            <div class="invalid-feedback">
+                                disponibility starts at.
+                            </div>
+                        </div>
+                        <div style="padding: 20px;" class="col-md-6 mb-3">
+                            <label style="width: 300px; text-align: center;" for="city">disponibility ends at</label>
+                            <input style="width: 300px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_ends}}" value="" required>
+                            <div class="invalid-feedback">
+                                disponibility ends at.
+                            </div>
+                        </div>
+
+                        <div style="padding: 20px;" class="col-md-6 mb-3">
+                            <label style="width: 300px; text-align: center;" for="city">created at</label>
+                            <input style="width: 300px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->created_at}}" value="" required>
+                            <div class="invalid-feedback">
+                                created_at.
+                            </div>
+                        </div>
+
+                        <div style="padding: 20px;" class="col-md-6 mb-3">
+                            <label style="width: 300px; text-align: center;" for="city">updated at</label>
+                            <input style="width: 300px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->updated_at}}" value="" required>
+                            <div class="invalid-feedback">
+                                updated_at.
+                            </div>
+                        </div>
+
+
+
+                </div>
+                <div class="btns" style="margin-left: 32%">
+                    <div class="col1">
+                        <label for="adresse"><br></label>
+                        <a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
+                    </div>
+
+                    <div class="col2">
+                        <button type="button" class="btn btn-danger pull-right " onclick="deleteItem({{ $item->id }})">Delete</button>
+                        <form method="post" action="{{ url('Item/' .$item->id. '/delete') }}" id="delete-form" style="display: none">
+                            @csrf
+                                @method('PUT')
+                        </form>
                     </div>
                 </div>
 
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">disponibility starts at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_starts}}" value="" required>
-                    <div class="invalid-feedback">
-                        disponibility starts at.
-                    </div>
-                </div>
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">disponibility ends at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_ends}}" value="" required>
-                    <div class="invalid-feedback">
-                        disponibility ends at.
-                    </div>
-                </div>
+            @include('inc.jsSidebar')
 
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">created at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->created_at}}" value="" required>
-                    <div class="invalid-feedback">
-                        created_at.
-                    </div>
-                </div>
-
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">updated at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->updated_at}}" value="" required>
-                    <div class="invalid-feedback">
-                        updated_at.
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="btns">
-            <div class="col1">
-                <label for="adresse"><br></label>
-                <a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
-            </div>
-
-            <div class="col2">
-                <button type="button" class="btn btn-danger pull-right " onclick="deleteItem({{ $item->id }})">Delete</button>
-                <form method="post" action="{{ url('Item/' .$item->id. '/delete') }}" id="delete-form" style="display: none">
-                    @csrf
-                        @method('PUT')
-                </form>
-            </div>
-        </div>
 
     @endif
 

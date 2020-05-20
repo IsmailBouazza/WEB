@@ -76,7 +76,7 @@
                                                 <option value="4">Home-Made</option>
                                                 <option value="5">House equipment</option>
                                                 <option value="6">Pets</option>
-                                                <option value="7">Services</option>
+                                                <option value="7">Sea equipment</option>
                                                 <option value="8">Sport equipment/Hobbies</option>
                                                 <option value="9">Vehicles</option>
                                             </select>

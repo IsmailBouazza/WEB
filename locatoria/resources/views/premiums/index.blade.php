@@ -34,7 +34,7 @@
     <a class="nv navbar-brand" href="{{ url('/Category/3') }}" style="margin-left: 8px">High tech / Multimedia</a>
     <a class="nv navbar-brand" href="{{ url('/Category/5') }}" style="margin-left: 8px">House Equipment</a>
     <a class="nv navbar-brand" href="{{ url('/Category/6') }}" style="margin-left: 8px">Pets</a>
-    <a class="nv navbar-brand" href="{{ url('/Category/7') }}" style="margin-left: 8px">Services</a>
+    <a class="nv navbar-brand" href="{{ url('/Category/7') }}" style="margin-left: 8px">Sea Equipment</a>
     <a class="nv navbar-brand" href="{{ url('/Category/9') }}" style="margin-left: 8px">Vehicles</a>
     <a class="nv navbar-brand" href="{{ url('/Category/8') }}" style="margin-left: 8px">Sport Equipment</a>
     <div class="collapse navbar-collapse" id="navbarsExample09">
@@ -42,7 +42,7 @@
     </ul>
       <form  action="{{URL::to('/search')}}" method="POST" class="form-inline mt-2 mt-md-0">
         @csrf
-        <input class="form-control" type="text" name="city object budget_max" placeholder="Search" aria-label="Search">
+        <input class="form-control" type="text" name="object" placeholder="Search by item" aria-label="Search">
       </form>
     </div>
 </nav>

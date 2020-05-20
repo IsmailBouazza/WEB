@@ -22,9 +22,6 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <br>
-        <div class="btn-group">
-          <p><a class="btn btn-sm btn-outline-secondary" href="http://localhost/locatoria/public/pages/researchdetails" role="button">View details &raquo;</a></p>                      
-        </div>
     </div>
     <div class="categorie nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
@@ -34,63 +31,134 @@
           <a class="p-2 text-muted" href="{{ url('/Category/8') }}">Sport/Hobbies</a>
           <a class="p-2 text-muted" href="{{ url('/Category/2') }}">Clothes</a>
           <a class="p-2 text-muted" href="{{ url('/Category/5') }}">House Equipement</a>
-          <a class="p-2 text-muted" href="{{ url('/Category') }}">...More</a>
+          <a class="p-2 text-muted" href="{{ url('/Category/6') }}">Pets</a>
         </nav>
     </div>
 
     <div class="conteneur jumbotron p-4 p-md-5 text-white rounded bg-dark">
-        <div class="annonce annonce1">
-            <h3 class="font-italic">Locatoria is here for you</h3>
+        <div class="annonce">
+          <img src="{{asset('images/logo.png')}}" style="width: 120px; height: 120px">
+          <h3 class="font-italic">Locatoria is here for you</h3>
         </div>  
-        <a href="{{ url('/Category/4') }}">
-          <div class="annonce">
-            <img src="{{asset('images/home-made.jpg')}}"  class="img">
+        <div id="slider">
+          <!--    Start: Buttons-->
+          <button class="control_next"><i class="fa fa-chevron-right"></i></button>
+          <button class="control_prev"><i class="fa fa-chevron-left"></i></button>
+          <!--    End: Buttons-->
+          <!--    Start: Images-->
+          <ul class="image_slider_ul">
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/4') }}">
+                  <img src="{{asset('images/home-made.jpg')}}">
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/2') }}">
+                  <img src="{{asset('images/clothes.jpg')}}" >
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/1') }}">
+                  <img src="{{asset('images/car-equipement.jpg')}}">
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/3') }}">
+                  <img src="{{asset('images/high-tech.jpg')}}">
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/5') }}">
+                  <img src="{{asset('images/house-equipment.jpg')}}">
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/6') }}">
+                  <img src="{{asset('images/pets.jpg')}}">
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/7') }}">
+                  <img src="{{asset('images/sea.jpg')}}">
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/9') }}">
+                  <img src="{{asset('images/vehicule.jpg')}}">
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="bgimage">
+                <a class="text-muted" href="{{ url('/Category/8') }}">
+                  <img src="{{asset('images/sport-equipment.jpg')}}">
+                </a>
+              </div>
+            </li>
+          </ul>
+          <!--    End: Images-->
+          <!--    Start: Indicators-->
+          <div class="indicator_con">
+            <ul class="indicator"></ul>
           </div>
-        </a>  
-        <a href="{{ url('/Category/2') }}">
-          <div class="annonce">
-            <img src="{{asset('images/clothes.jpg')}}"  class="img">
-          </div>
-        </a>  
-        <a href="{{ url('/Category/1') }}"  class="img">
-          <div class="annonce">
-            <img src="{{asset('images/car-equipement.jpg')}}">
-          </div>
-        </a>  
+          <!--    End Indicators-->
+        </div>
     </div>
 
     <div class="title">
         Last advertisements
     </div>
 
-    <div class="album ">
 
-      @if($items ?? ''->count() > 0)
-        @foreach($items ?? '' as $item)
-
-        <div id="card" class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap" style="width: 100%; height:250px">
-          <div class="card-body">
-            <h5 class="card-title">{{$item->title}}</h5>
-            <p class="card-text">{{$item->description}}</p>
-
-            <a href="{{ url('Item/'.$item->id) }}" class="btn btn-primary">view details</a>
-          </div>
+    <div class="container">
+        <div class="wrapper">
+            @if($items->count() > 0)
+                @foreach($items ?? '' as $item)
+                    <div class="product">
+                        <figure class="product__card">
+                            <div class="product__image">
+                                <img src="{{asset('/storage/'.$item->thumbnail_path )}}" alt="image">
+                                <div class='product__btns'>
+                                    <a href="{{ url('Item/'.$item->id) }}">quick view</a>
+                                </div>
+                            </div>
+                            <figcaption class="product__description">
+                                <h4>{{$item->title}}</h4>
+                                <span class="price">{{$item->price}} Dh</span>
+                            </figcaption>
+                        </figure>
+                    </div>
+                @endforeach
+            @else
+                <div class="msg">
+                    <p class="msg">No items added yet</p>
+                    <small>Sorry try latter !!</small> 
+                </div>
+            @endif
         </div>
-      
-        @endforeach
+    </div>
 
-      @else
-        <div class="msg">
-          <p class="msg">No items added yet</p>
-          <small>Sorry try latter !!</small> 
-        </div>
-      @endif
-         
-  </div>
+    <hr>
+
+
 
   <div class="annonce-premium">
-    <div class="float" style="margin-left: 5%;">
+    <div class="float" style="margin-left: 5%; margin-top:100px;">
       <h1 style="color: white; margin-left: 10%; font-weight:bold;">Discover premium ads</h1>
       <h4 style="color: white; margin-left: 10%;">Now you can see different items from differents categories and with a high quality</h4>
     </div>
@@ -99,20 +167,154 @@
         <button type="button" class="btn btn-outline-secondary" style="color: white; border:white solid 2px; font-size:1.2em">Discover more</button>
       </a>
     </div>
-    
-    <div class="grid-container">
-      @foreach($items_premium as $item)
-          <div class="grid-item">
-            <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap" style="width: 100%; height:80%; border-top-left-radius: 20px; border-top-right-radius: 20px;">
-            <div class="card-body">
-              <p class="card-text">{{$item->description}}</p>
-            </div>
+    <div class="space"></div>
+      <div class="container" style="height: 50px">
+        <div class="row">
+          <div class="col-md">
+            <button id="prev">Prev</button>
+            <button id="next">Next</button>
           </div>
-      @endforeach
-    </div>
-  </div>
-                       
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          @foreach($items_premium as $item)
+            <div class="m-auto on-screen image-container" style="border-radius: 12px;">
+              <img src="{{asset('/storage/' .$item->thumbnail_path )}}" class="img-fluid" >
+            </div>
+          @endforeach
+        </div>
+      </div>
         
+  </div>
+                
+
+
+<!-- slide 1 -->
+
+<script>
+
+$(document).ready(function(){
+
+var slideCount = $('#slider ul.image_slider_ul li').length;
+var slideWidth = $('#slider ul.image_slider_ul li').width();
+var slideHeight = $('#slider ul.image_slider_ul li').height();
+var sliderUlWidth = slideCount * slideWidth;
+
+$('#slider ul.image_slider_ul').css({ marginLeft: - slideWidth });
+
+  $('#slider ul.image_slider_ul li:last-child').prependTo('#slider ul.image_slider_ul');
+
+  function moveLeft() {
+      $('#slider ul.image_slider_ul').animate({
+          left: + slideWidth
+      }, 600, function () {
+          $('#slider ul.image_slider_ul li:last-child').prependTo('#slider ul.image_slider_ul');
+          $('#slider ul.image_slider_ul').css('left', '');
+      });
+  };
+
+  function moveRight() {
+      $('#slider ul.image_slider_ul').animate({
+          left: - slideWidth
+      }, 600, function () {
+          $('#slider ul.image_slider_ul li:first-child').appendTo('#slider ul.image_slider_ul');
+          $('#slider ul.image_slider_ul').css('left', '');
+      });
+  };
+
+  var navDots= [];
+
+  for(var i=0; i<slideCount; i++)
+  {
+  navDots[i]='<li currentSlide="'+i+'"></li>';
+  $('.indicator').append(navDots[i]);
+  }
+
+
+  var count = 0;
+    $("ul.indicator li").eq(count).addClass("active");
+
+
+    slideCountforindicators = slideCount-1;
+    $('button.control_prev').click(function () {
+        moveLeft();
+
+        $("ul.indicator li").eq(count).removeClass("active");
+        count--;
+        if(count<0)
+        {
+        count=slideCountforindicators;
+        }
+
+        $("ul.indicator li").eq(count).addClass('active');
+    });
+
+    $('button.control_next').click(function () {
+        moveRight();
+
+        $("ul.indicator li").eq(count).removeClass("active");
+          count++;
+          if(count>slideCountforindicators)
+          {
+          count=0;
+
+          }
+      
+          $("ul.indicator li").eq(count).addClass('active');
+    });
+    
+//   Automatic Slider
+  
+  setInterval(function () {
+
+      if($('#slider').is(':hover')) {
+
+      }else{
+          moveRight();
+              $("ul.indicator li").eq(count).removeClass("active");
+                count++;
+                if(count>slideCountforindicators)
+                {
+                count=0;
+
+                }
+
+                $("ul.indicator li").eq(count).addClass('active');
+      }
+  }, 8000);
+  
+});
+
+
+</script>
+        
+
+
+<!-- slide 1 -->
+
+<script>
+
+$('#next').click(function (){
+  
+  if($('.on-screen').next().length == 0){
+    $('.on-screen').removeClass('on-screen come-in').addClass('out-screen');
+    $('.image-container').first('image-container').removeClass('out-screen').addClass('come-in on-screen');
+  }
+  else
+    $('.on-screen').removeClass('on-screen come-in').addClass('out-screen').next('.image-container').addClass('come-in on-screen');
+});
+$('#prev').click(function (){
+  
+  if($('.on-screen').prev().length == 0){
+    $('.on-screen').removeClass('on-screen come-in').addClass('out-screen');
+    $('.image-container').last('image-container').removeClass('out-screen').addClass('come-in on-screen');
+  }
+  else
+    $('.on-screen').removeClass('on-screen come-in').addClass('out-screen').prev('.image-container').addClass('come-in on-screen');
+});
+
+</script>
         
 
 @endsection

@@ -21,6 +21,8 @@ Auth::routes();
 
 Route::get('/', 'ItemController@showHome');
 Route::get('/home', 'ItemController@showHome');
+
+
 Route::resource('Item','ItemController');
 Route::get('/items/myitems/{user}', 'ItemController@index');
 Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');

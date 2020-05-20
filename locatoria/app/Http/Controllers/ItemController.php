@@ -39,10 +39,10 @@ class ItemController extends Controller
    //display 3 latest items at home page
     public function showHome(){
 
-            $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(3);
+            $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(6);
             
 
-            $perimiums = ItemPremium::all()->where('status','1')->take(4);
+            $perimiums = ItemPremium::all()->where('status','1');
             $id_premium = array();
             foreach ($perimiums as $premium ){
             
@@ -61,6 +61,8 @@ class ItemController extends Controller
             
 
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -159,6 +161,11 @@ class ItemController extends Controller
         if($request->premium){
             $item->status = '0';
             $item->save();
+            $item_premium = new ItemPremium;
+            $item_premium->item_id = $item_id;
+            $item_premium->status = 0;
+            $item_premium->save();
+
         }
 
         return redirect('/items/myitems/'.auth()->user()->id);
