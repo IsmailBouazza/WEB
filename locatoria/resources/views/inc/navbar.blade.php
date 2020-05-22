@@ -101,7 +101,7 @@
                                       function load_unseen_notification(view = '')
                                       {
                                           $.ajax({
-                                              url:"/reservationsnotification",
+                                              url:"{{ url('/reservationsnotification') }}",
                                               method:"POST",
                                               data:{view:view},
                                               dataType:"json",
