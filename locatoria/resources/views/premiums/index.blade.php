@@ -47,30 +47,37 @@
     </div>
 </nav>
 
-<div class="album ">
-
-    @if($items_premium ?? ''->count() > 0)
-      @foreach($items_premium ?? '' as $item)
-
-      <div id="card" class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('/storage/' .$item->thumbnail_path )}}" alt="Card image cap" style="width: 100%; height:250px">
-        <div class="card-body">
-          <h5 class="card-title">{{$item->title}}</h5>
-          <p class="card-text">{{$item->description}}</p>
-
-          <a href="{{ url('Item/'.$item->id) }}" class="btn btn-primary">view details</a>
-        </div>
-      </div>
-    
-      @endforeach
-
+<div class="container" style="margin-top: 100px">
+  <div class="wrapper">
+    @if($items_premium->count() > 0)
+        @foreach($items_premium as $item)
+          <div class="product">
+            <figure class="product__card">
+              <div class="product__image">
+                <img src="{{asset('/storage/'.$item->thumbnail_path )}}" alt="image">
+                <div class='product__btns'>
+                  <a href="{{ url('Item/'.$item->id) }}">quick view</a>
+                </div>
+              </div>
+              <figcaption class="product__description">
+                <h4>{{$item->title}}</h4>
+                <span class="price">
+                  {{$item->price}} Dh
+                  @if(Auth::user()->id == $item->user_id)
+                    <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>
+                  @endif
+                </span>
+              </figcaption>
+            </figure>
+          </div>
+        @endforeach
     @else
       <div class="msg">
         <p class="msg">No items added yet</p>
         <small>Sorry try latter !!</small> 
-      </div>
-    @endif
-       
+    </div>
+      @endif
+  </div>
 </div>
 
 <script src="{{asset('js/premium.js')}}"></script>

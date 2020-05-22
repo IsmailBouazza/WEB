@@ -54,7 +54,7 @@
                                     <div class="form-group row">
                                         <label for="description" class="col-4 col-form-label">description</label>
                                         <div class="col-8">
-                                            <textarea id="description" name="description" cols="40" rows="5" class="form-control" required></textarea>
+                                            <textarea id="description" placeholder="Please keep it simple :D" name="description" cols="40" rows="3" class="form-control" required></textarea>
                                             @if ($errors->has('description'))
                                                 <div class="card bg-danger text-white">
                                                     <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('description') }}</div>

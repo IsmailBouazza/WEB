@@ -15,7 +15,7 @@
 
                     <div class="card-body">
 
-                        <button onclick="window.location.href = '/users';" type="button" class="btn btn-dark btn-primary btn-lg"><i class="fas fa-users" aria-hidden="true"></i> Users List</button>
+                        <a href ="{{url('/users')}}"><button type="button" class="btn btn-dark btn-primary btn-lg"><i class="fas fa-users" aria-hidden="true"></i> Users List</button></a>
 
                     </div>
                 </div>

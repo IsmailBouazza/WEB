@@ -3,6 +3,7 @@
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <!--  -->
 @section('content')
+
     <table class="img-container">
       <tr>
         <td class="image">
@@ -120,15 +121,33 @@
         </div>
     </div>
 
-    <div class="title">
-        Last advertisements
+  
+    <div class="slideshow">
+      <div id="arrow-left" class="arrow"><i class="fa fa-angle-left"></i></div>
+      <div id="arrow-right" class="arrow"><i class="fa fa-angle-right"></i></div>
+          @if($items_mostvieweds->count() > 0)
+              @foreach($items_mostvieweds as $item)
+                <div class="slide slide1">
+                  <img src="{{asset('/storage/'.$item->thumbnail_path )}}" alt="image">
+                  <div class="content">
+                    <a href="{{ url('Item/'.$item->id) }}"><div class="btn flex" style="background-color: rgb(66, 65, 65)">View Details <i class="fa fa-angle-right"></i></div></a>
+                  </div>
+                </div>
+              @endforeach
+          @else
+              <div class="msg">
+                  <p class="msg">No items added yet</p>
+                  <small>Sorry try latter !!</small> 
+              </div>
+          @endif
     </div>
 
+    <hr>
 
     <div class="container">
         <div class="wrapper">
-            @if($items->count() > 0)
-                @foreach($items ?? '' as $item)
+            @if(($items->count()) > 0)
+                @foreach($items as $item)
                     <div class="product">
                         <figure class="product__card">
                             <div class="product__image">
@@ -139,7 +158,14 @@
                             </div>
                             <figcaption class="product__description">
                                 <h4>{{$item->title}}</h4>
-                                <span class="price">{{$item->price}} Dh</span>
+                                <span class="price">
+                                  {{$item->price}} Dh
+                                  @if(Auth::user())
+                                    @if(Auth::user()->id == $item->user_id)
+                                      <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>
+                                    @endif
+                                  @endif
+                                </span>
                             </figcaption>
                         </figure>
                     </div>
@@ -153,43 +179,37 @@
         </div>
     </div>
 
-    <hr>
-
-
-
-  <div class="annonce-premium">
-    <div class="float" style="margin-left: 5%; margin-top:100px;">
-      <h1 style="color: white; margin-left: 10%; font-weight:bold;">Discover premium ads</h1>
-      <h4 style="color: white; margin-left: 10%;">Now you can see different items from differents categories and with a high quality</h4>
-    </div>
-    <div class="float" style="margin-left: 25%;">
-      <a href="{{ url('Premium') }}">
-        <button type="button" class="btn btn-outline-secondary" style="color: white; border:white solid 2px; font-size:1.2em">Discover more</button>
-      </a>
-    </div>
-    <div class="space"></div>
-      <div class="container" style="height: 50px">
-        <div class="row">
-          <div class="col-md">
-            <button id="prev">Prev</button>
-            <button id="next">Next</button>
+    <div class="annonce-premium">
+      <div class="float" style="margin-left: 5%; margin-top:100px;">
+        <h1 style="color: white; margin-left: 10%; font-weight:bold;">Discover premium ads</h1>
+        <h4 style="color: white; margin-left: 10%;">Now you can see different items from differents categories and with a high quality</h4>
+      </div>
+      <div class="float" style="margin-left: 25%;">
+        <a href="{{ url('Premium') }}">
+          <button type="button" class="btn btn-outline-secondary" style="color: white; border:white solid 2px; font-size:1.2em">Discover more</button>
+        </a>
+      </div>
+      <div class="space"></div>
+        <div class="container" style="height: 50px">
+          <div class="row">
+            <div class="col-md">
+              <button id="prev">Prev</button>
+              <button id="next">Next</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="container-fluid">
-        <div class="row">
-          @foreach($items_premium as $item)
-            <div class="m-auto on-screen image-container" style="border-radius: 12px;">
-              <img src="{{asset('/storage/' .$item->thumbnail_path )}}" class="img-fluid" >
-            </div>
-          @endforeach
+        <div class="container-fluid">
+          <div class="row">
+            @foreach($items_premium as $item)
+              <div class="m-auto on-screen image-container" style="border-radius: 12px;">
+                <img src="{{asset('/storage/' .$item->thumbnail_path )}}" class="img-fluid" >
+              </div>
+            @endforeach
+          </div>
         </div>
-      </div>
-        
-  </div>
+          
+    </div>
                 
-
-
 <!-- slide 1 -->
 
 <script>
@@ -313,6 +333,53 @@ $('#prev').click(function (){
   else
     $('.on-screen').removeClass('on-screen come-in').addClass('out-screen').prev('.image-container').addClass('come-in on-screen');
 });
+
+</script>
+
+
+
+
+<!--  Most Viewed -->
+
+<script>
+
+let sliderImages = document.querySelectorAll('.slide'),
+    arrowRight = document.querySelector('#arrow-right'),
+    arrowLeft = document.querySelector('#arrow-left'),
+    i = 0
+
+
+
+function reset() {
+  for (let i = 0; i < sliderImages.length; i++) {
+    sliderImages[i].style.display = 'none'
+  }
+}
+function startSlider() {
+  reset()
+  sliderImages[i].style.display = 'block'
+}
+arrowRight.addEventListener('click', function() {
+  if(i > sliderImages.length - 2 ) {i = -1}
+  i++
+  startSlider()
+})
+arrowLeft.addEventListener('click', function() {
+  if (i === 0) {i = sliderImages.length}
+  i--
+  startSlider()
+})
+
+function alert1() {
+  let y = 1
+  alert(y)
+  y++
+  setTimeout(alert1, 6000)
+}
+// alert1()
+
+startSlider()
+
 
 </script>
         

@@ -35,131 +35,20 @@
                   <li class="nav-item dropdown">
                       <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="position: relative; padding-left:50px;">
 
-
-                          <style>
-
-                              .dot{
-                                  height: 17px;
-                                  width: 17px;
-                                  background-color: #d9534f;
-                                  border-radius: 50%;
-
-                                  text-align: center;
-                                  color: #fff;
-
-                                  font-size: 75%;
-                                  font-weight: 700;
-
-                                  position: absolute;
-                                  top: 3px;
-                                  left: 3px;
-                                  display: none;
-
-                              }
-
-                              .dotx{
-                                  height: 17px;
-                                  width: 17px;
-                                  background-color: #d9534f;
-                                  border-radius: 50%;
-
-                                  text-align: center;
-                                  color: #fff;
-
-                                  font-size: 75%;
-                                  font-weight: 700;
-
-                                  position: absolute;
-
-                              }
-
-                          </style>
-
                           @if(Auth::user())
 
 
                             <div class="container">
                             <img src="{{ asset('storage/'.Auth::user()->picture) }}" style="width:37px; height:37px; position:absolute; top:5px; left:10px; border-radius:50%;">
-                                <span class="dot count" ></span>
                             </div>
-
                             {{ Auth::user()->name }}
-
-                              <script>
-                                  $(function() {
-                                      $.ajaxSetup({
-                                          headers: {
-                                              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                                          }
-                                      });
-                                  });
-                              </script>
-
-                              <script>
-                                  $(document).ready(function(){
-
-                                      function load_unseen_notification(view = '')
-                                      {
-                                          $.ajax({
-                                              url:"/reservationsnotification",
-                                              method:"POST",
-                                              data:{view:view},
-                                              dataType:"json",
-                                              success:function(data)
-                                              {
-                                                  if(data.count1 > 0 || data.count2 > 0)
-                                                  {
-                                                      $('.count').css("display","inline");
-                                                      $('.count').html(data.count);
-
-                                                      if(data.count1 > 0)
-                                                      {
-                                                          $('.count1').css("display","inline");
-                                                          $('.count1').html(data.count1);
-                                                      }else{
-                                                          $('.count1').css("display","none");
-                                                      }
-                                                      if(data.count2 > 0)
-                                                      {
-                                                          $('.count2').css("display","inline");
-                                                          $('.count2').html(data.count2);
-                                                      }else{
-                                                          $('.count2').css("display","none");
-                                                      }
-                                                  }
-                                                  else{
-                                                      $('.count').css("display","none");
-                                                      $('.count1').css("display","none");
-                                                      $('.count2').css("display","none");
-
-                                                  }
-                                              }
-                                          });
-                                      }
-
-                                      load_unseen_notification();
-
-                                      setInterval(function(){
-                                          load_unseen_notification();
-                                      }, 3000);
-
-                                  });
-                              </script>
-
-
                           @else
 
-
-
-                                {{"admin"}}
-
-
+                            {{"admin"}}
 
                           @endif
 
 
-
-                          <span class="caret"></span>
                       </a>
 
                       <div class="dropdown-menu dropdown-menu-right" >
@@ -171,7 +60,7 @@
                               <a class="dropdown-item" href="#">Favorite <span class="sr-only">(current)</span></a>
 
                               <span class="dotx count2" ></span>
-                              <a class="dropdown-item" href="{{url ('/MyAnnounces') }}">Announces </a>
+                              <a class="dropdown-item" href="{{url ('/MyRequests') }}">Requests </a>
 
                               <span class="dotx count1" ></span>
                               <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">Reservation </a>

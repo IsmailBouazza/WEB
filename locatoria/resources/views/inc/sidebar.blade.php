@@ -1,5 +1,5 @@
 <div class="page-wrapper chiller-theme toggled">
-    <nav id="sidebar" class="sidebar-wrapper" style="margin-top: 50px">
+    <nav id="sidebar" class="sidebar-wrapper bg-dark" style="margin-top: 50px">
       <div class="sidebar-content">
         <div class="sidebar-header">
           <div class="user-pic" style="height: 60px">
@@ -62,7 +62,7 @@
               </div>
             </li>
             <li class="sidebar">
-              <a href="{{ url('/MyAnnounces') }}">
+              <a href="{{ url('/MyRequests') }}">
                 <i class="fas fa-bell"></i>
                 <span>Requests</span>
               </a>

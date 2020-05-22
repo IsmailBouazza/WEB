@@ -61,36 +61,27 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function announces(){
+    public function requests(){
 
         if(!Auth::user()){
             return redirect('/login');
         }
-        $reservations = Auth::user()->announces;
 
-        // map 1 : you should return this collection because announces is set as viewd
-        // map 2 : you shoud return information about the user sendind the request
-        // sortBy : the first one will be unviewed anounces
+        $id = Auth::user()->id;
+
+        $reservations = Reservation::all()->where('user_owner_id',$id)->sortBy('status');
+        $user = User::find($id);
+
         $reservations2 = $reservations->map(function ($reservation , $key){
-                    if(! $reservation->announceviewed()){
-                        $reservation->announceread();
-                        $reservation->user_owner_read = 0;
-                    }
-                    return $reservation;
-            })
-            ->map(function ($reservation){
 
-                    $reservation->user_id = User::find($reservation->user_id);
-                    return $reservation;
-            })
-            ->sortBy(function($reservation){
-                    return $reservation->user_owner_read;
-            })
-            ->values();
+            $reservation->user_id = User::find($reservation->user_id);
+            return $reservation;
+        });
 
 
-        // here I returned the anounces as unviewed cause we need to separate it later
-        return view('reservation.announces' , [
+        return view('reservation.requests' , [
+
+            'user' => $user,
             'reservations'=>$reservations2,
         ]);
 
@@ -122,27 +113,7 @@ class ReservationController extends Controller
 
     }
 
-    public function reservationsajaxfetch()
-    {
-
-        $count1 = request()->user()->reservations->where('user_read',0)
-                                                    ->where('status',0)
-                                                    ->count(); // count my reservation
-
-        $count2 = request()->user()->announces->where('user_owner_read',0)
-                                                ->where('status',0)
-                                                ->count(); // count my own announce
-
-        $data = array(
-                        'count' => $count1+$count2,
-                        'count1' => $count1,
-                        'count2' => $count2
-                    );
-
-        return $data;
-
-    }
-
+   
     public  function  userCancel($id) {
 
        if(Auth::user()){

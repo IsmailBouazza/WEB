@@ -24,34 +24,36 @@
     </form>
 </div>
 
-<div class="album" style="">
-
-    @if (count($item)>0)
-        @foreach ($item as $result)
-            <div id="card" class="card" style="width: 18rem; height:400px">
-                <img style="height: 50%" class="card-img-top" src="{{asset('/storage/' .$result->thumbnail_path )}}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{$result->title}}</h5>
-                    <p class="card-text">{{$result->description}}</p>
-            
-                    <div class="desc btn-group">
-                        <p><a style="margin-top: 10%; margin-left: 30px" class="btn btn-sm btn-outline-secondary" href="{{asset('/Item/'.$result->id)}}" role="button">View details &raquo;</a></p> 
-                        @if($result->status == '0')
-                            <a href="{{url('Premium')}}">
-                                <i class="fas fa-star" style="width: 50px; height: 50px; margin-left: 30px; color:yellow"></i>
-                            </a>
-                        @endif                     
-                    </div>
+<div class="container" style="margin-top: 100px">
+    <div class="wrapper">
+        @if($item->count() > 0)
+            @foreach($item as $result)
+                <div class="product">
+                    <figure class="product__card">
+                        <div class="product__image">
+                            <img src="{{asset('/storage/'.$result->thumbnail_path )}}" alt="image">
+                            <div class='product__btns'>
+                                <a href="{{ url('Item/'.$result->id) }}">quick view</a>
+                            </div>
+                        </div>
+                        <figcaption class="product__description">
+                            <h4>{{$result->title}}</h4>
+                            <span class="price">
+                                {{$result->price}} Dh
+                                @if(Auth::user()->id == $result->user_id)
+                                    <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>
+                                @endif
+                            </span>
+                        </figcaption>
+                    </figure>
                 </div>
+            @endforeach
+        @else
+            <div class="msg">
+                <p class="msg">No items added yet</p>
+                <small>Sorry try latter !!</small> 
             </div>
-             
-        @endforeach
-    @else
-        <div class="msg">
-            <p class="msg">No Results found</p>
-            <small>Sorry try latter !!</small> 
-        </div>    
-    @endif
-
+        @endif
+    </div>
 </div>
 @endsection

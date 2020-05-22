@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use App\Item;
 use App\ItemPhoto;
@@ -11,6 +12,7 @@ use App\User;
 use App\Reservation;
 use App\ItemPremium;
 use App\Favorite;
+use App\MostViewed;
 
 use Auth;
 use DateTime;
@@ -42,6 +44,18 @@ class ItemController extends Controller
             $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(6);
             
 
+            $mostvieweds = MostViewed::select('item_id', DB::raw('count(*) as total'))->groupBy('item_id')->orderBy('total','DESC')->take(6)->get();
+            $id_mostviewed = array();
+                foreach ($mostvieweds as $mostviewed){
+                    
+                    $id_mostviewed[] = $mostviewed->item_id;
+
+                }
+
+            $items_mostvieweds = Item::find($id_mostviewed);
+
+
+
             $perimiums = ItemPremium::all()->where('status','1');
             $id_premium = array();
             foreach ($perimiums as $premium ){
@@ -55,6 +69,7 @@ class ItemController extends Controller
             return view('general.home')->with([
                 'items_premium' => $items_premium,
                 'items' => $items,
+                'items_mostvieweds'=>$items_mostvieweds,
             ]);
             
 
@@ -180,7 +195,23 @@ class ItemController extends Controller
     //to show user item(details)
     public function show($id)
     {
+            //Insert Commend for Views
+            if(Auth::check()){
+                $mostviewd = new MostViewed;
+                $mostviewd->item_id=$id;
+                $mostviewd->user_id=Auth::user()->id;
+                $existe=MostViewed::where('user_id',Auth::user()->id)->where('item_id',$id)->count();
+                if($existe == 0){
+                    $mostviewd->save();
+                }
+                else{}
+            }
 
+            
+            
+
+
+            //
             $item = Item::findOrFail($id);
             $item_photos = ItemPhoto::all()->Where('item_id',$id);
             $user_id = $item->user_id;

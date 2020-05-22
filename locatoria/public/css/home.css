@@ -22,6 +22,7 @@ td.image img{
 }
 
 div.search{
+    width: 50%;
     margin-top: 50px;
     margin-left: 25%;
 }
@@ -76,12 +77,7 @@ div.title{
     margin-left: 15%;
 }
 
-.jumbotron div.annonce1{
-    background-color: transparent;
-    width: 30%;
-    font-size: 2em;
-    margin-left: 10px;
-}
+
 
 a{
     text-decoration: none;
@@ -93,14 +89,6 @@ a{
     margin-top: 80px;
     width: 300px;
 }
-
-div.album{
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-
 
 
 .jumbotron div.annonce .img{
@@ -223,7 +211,6 @@ div.msg{
   
   button.control_prev:hover, button.control_next:hover {
     opacity: 1;
-    -webkit-transition: all 0.2s ease;
     /* background-color: #fff; */
     color: #fff;
   }
@@ -255,7 +242,7 @@ div.msg{
     height: 120vh;
     padding: 0;
     overflow: hidden;
-    margin-top: 100px;
+    margin-top: 50px;
   }
   .space{height: 100px;}
   .container-fluid{
@@ -310,6 +297,9 @@ div.msg{
   }
 
 
+/* --------------------------------------------------------------------------------------- */
+
+
 /* the Item display css */
 
 
@@ -349,6 +339,11 @@ img {
     margin: 0 -10px;
     padding: 24px 0;
 }
+
+.product__image img{
+  height: 250px;
+}
+
 .product {
     
     width: 370px;
@@ -448,3 +443,195 @@ div.product__btns > a:last-child {
   text-transform: uppercase;
  }
 
+
+
+
+
+
+
+
+/*   Most Viewed */
+
+
+
+
+i {
+  vertical-align: middle;
+}
+.slideshow {
+  margin-top: 70px;
+  position: relative;
+}
+.slide {
+  animation: fade 1s;
+  margin-left: 15%;
+  border-radius: 12px;
+  border: black solid 1px;
+  width: 70%;
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+.slide img {
+  animation: zoom 10s linear;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.arrow {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  margin: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+  transition: .4s;
+  z-index: 1;
+  width: 30px;
+  height: 60px;
+}
+.arrow:hover {
+  background: white;
+  color: black;
+}
+#arrow-right i.fa {
+  position: relative;
+  right: -4px;
+  top: -3px;
+}
+#arrow-left i.fa {
+  position: relative;
+  left: -4px;
+  top: -3px;
+}
+
+#arrow-right {
+  right: 16%;
+}
+
+#arrow-left {
+  left: 16%;
+}
+.content {
+  font-size: 20px;
+  position: absolute;
+  top: 80%;
+  transform: translate(0, -50%);
+  z-index: 1;
+}
+.slide1 .content {
+  color: white;
+  left: 100px;
+  max-width: 500px;
+}
+@keyframes fade {
+  from{ opacity: 0.4 }
+  to{ opacity: 1 }
+}
+@keyframes zoom {
+  from {transform: scale(1)}
+  to {transform: scale(1.5)}
+}
+
+* {
+  box-sizing: border-box;
+}
+.slide2 .content {
+  right: 100px;
+}
+
+.contact-form {
+  animation: slideUp .5s;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-top: 12px solid rgb(33, 51, 100);
+  padding: 10px 30px 10px;
+  width: 450px;
+}
+.contact-form h2 {
+  color: rgb(33, 51, 100);
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+@keyframes slideUp{
+  0%{
+    transform: translateY(150px) 
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+.contact-form input, .contact-form select, textarea {
+  margin-bottom: 20px;
+  padding: 10px;
+  resize: none;
+}
+input.submit, .slide1 .content .btn {
+  border: none;
+  background: #00a63f;
+  border-radius: 4px;
+  color: white;
+  display: inline-block;
+  padding: 10px 30px;
+}
+
+@media (max-width: 900px) {
+   .slide2 .content {
+    right: 50%;
+    transform: translate(50%, -50%);
+  } 
+  .arrow {
+    width: 70px;
+    height: 70px;
+    font-size: 50px;
+  }
+}
+@media (max-width: 750px) {
+  .content {
+    font-size: 1.5rem;
+  }
+  .slide1 .content {
+    max-width: 250px;
+  }
+  .contact-form {
+    max-width: 300px;
+  }
+  .contact-form .box50 {
+    width: 100%;
+  }
+  .arrow {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
+}
+@media (max-width: 450px) {
+  .content {
+    font-size: 1rem;
+  }
+  .contact-form {
+    display: none;
+  }
+  .contact-form .box50 {
+    width: 100%;
+  }
+  .slide {
+    height: 60vh;
+  }
+}
+
+.box50 {
+  width: 45%;
+}
+.box100 {
+  width: 100%;
+}

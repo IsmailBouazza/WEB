@@ -63,7 +63,7 @@ Route::resource('Category','CategoryController');
 
 Route::resource('Reservation','ReservationController');
 
-Route::get('/MyAnnounces','ReservationController@announces');
+Route::get('/MyRequests','ReservationController@requests');
 Route::get('/MyReservations','ReservationController@reservations');
 
 Route::put('/MyRequests/{id}/approve','ReservationController@approval')->name('MyRequests.approve');
@@ -72,8 +72,8 @@ Route::post('/reser', 'ReservationController@store');
 Route::get('/reservations', 'ReservationController@index');
 Route::post('/cancelreservation/{id}','ReservationController@userCancel');
 
-// reservations notification
-Route::post('/reservationsnotification', 'ReservationController@reservationsajaxfetch');
+
+
 
 
 
