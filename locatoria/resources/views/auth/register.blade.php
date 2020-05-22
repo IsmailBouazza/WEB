@@ -135,7 +135,7 @@
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate = "Valid zip code is required: ex@abc.xyz">
-						<input class="input100 form-control @error('zip_code') is-invalid @enderror" type="text" name="zip_code" placeholder="Zip code" value="{{ old('zip_code') }}" required autocomplete="zip_code" autofocus>
+						<input class="input100 form-control @error('zip_code') is-invalid @enderror" type="text" name="zip_code" placeholder="Zip code" value="{{ old('zip_code') }}" required  autofocus>
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fas fa-file-archive" aria-hidden="true" style="margin-left: 90%"></i>
@@ -148,7 +148,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100 form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" required autocomplete="current-password">
+						<input class="input100 form-control @error('password') is-invalid @enderror" type="password" name="password" placeholder="Password" required >
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true" style="margin-left: 90%"></i>

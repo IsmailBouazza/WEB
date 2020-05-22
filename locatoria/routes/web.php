@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Mail\NewUserWelcomeMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
+
+
+/* email */
+
+Route::get('/email', function(){
+    return new NewUserWelcomeMail();
+});
+
+
 
 /*  Item  */
 
