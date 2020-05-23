@@ -96,9 +96,9 @@ class RegisterController extends Controller
             $imageName = $user->id.'_picture'.'.'.$extension;
             $picturePath = $data['picture']->storeAs($user->id, $imageName,'public');
             $picture = Image::make(public_path("storage/{$picturePath}"))->resize(250,200);
-
             $user->picture = $picturePath;
             $user->save();
+
         }
 
         return $user;

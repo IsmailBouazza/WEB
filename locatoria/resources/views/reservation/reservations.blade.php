@@ -78,25 +78,25 @@
                 </div>
 
 
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
                 <script>
 
 
                     $(document).on("click","#{{$reservation->id}}res", function () {
                         var token = $("meta[name='csrf-token']").attr("content");
+                        if(confirm(" you want to cancel this reservation ?")) {
+                            $.ajax({
+                                url: "{{ url('/cancelreservation/'.$reservation->id) }}",
+                                type: "POST",
+                                data: {"_token": token},
+                                success: function (msg) {
+                                    alert(msg);
+                                    if (msg == 'your reservation has been cancled!') $('#{{$reservation->id}}').fadeOut(2000);
 
-                        $.ajax({
-                            url: "{{ url('/cancelreservation/'.$reservation->id) }}",
-                            type: "POST",
-                            data: { "_token": token },
-                            success: function( msg ) {
-                                alert( msg );
-                                if(msg == 'your reservation has been cancled!')$('#{{$reservation->id}}').fadeOut( 2000 );
-
-                            }
-                        });
+                                }
+                            });
+                        }
 
                     });
                 </script>

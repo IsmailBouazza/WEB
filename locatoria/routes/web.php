@@ -24,6 +24,9 @@ Route::get('/home', 'ItemController@showHome');
 Route::resource('Item','ItemController');
 Route::get('/items/myitems/{user}', 'ItemController@index');
 Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');
+Route::post('/addToFavorites/{id}','FavoriteController@addToFavorites');
+Route::get('myfavorites','FavoriteController@showMyFavorites');
+Route::post('myfavorites/{id}','FavoriteController@destroyfavorite');
 
 /*  Item Photo  */
 

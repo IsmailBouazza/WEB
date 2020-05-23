@@ -158,7 +158,26 @@
 
             <button type="button" class="center btn btn-success">Chat</button>
             <hr>
-            <div style="font-size:1.5em"><a href="#"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px"></i></a>Make it your favorite</div>
+
+            <div style="font-size:1.2em">
+                    @if(Auth::check())
+                        {{-- $NotFavourite return false if the item is favorite--}}
+                         @if($NotFavourite)
+                            <button id="favbtn" class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgba(253,32,32,0.64)"></i> <br>
+                                Add this item to your favorites</button>
+                         @else
+                              <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgb(253,32,32)"></i> <br>
+                                  This item is one of your favorites</button>
+                         @endif
+
+                    @else
+                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
+                                login to add this item to your favorites</button>
+                      @endif
+            </div>
+
+
+
             <hr>
             <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
 
@@ -494,6 +513,26 @@
         $("#checkoutform").submit();
 
     }
+
+    // add to favorites
+    $(document).on("click","#favbtn", function () {
+        var token = $("meta[name='csrf-token']").attr("content");
+        $.ajax({
+            url: "{{ url('/addToFavorites/'.$item->id) }}",
+            type: "POST",
+            data: { "_token": token,
+                "item_id": {{$item->id}}},
+            success: function( msg ) {
+
+                if(msg){
+                    alert("item added to you favorites");
+                    $('.fa-heart').css('color','#fd2020');
+                }
+            }
+        });
+
+
+    });
 </script>
 
 <!-- to delete item (mounia) -->
