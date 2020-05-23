@@ -73,13 +73,12 @@
                         
                         <script>
 
-                            var res_id = {{$reservation->id}};
 
                             $(document).on("click","#{{$reservation->id}}res", function () {
                                 var token = $("meta[name='csrf-token']").attr("content");
 
                                 $.ajax({
-                                    url: '/cancelreservation/{{$reservation->id}}',
+                                    url: "{{ url('/cancelreservation/'.$reservation->id) }}",
                                     type: "POST",
                                     data: { "_token": token },
                                     success: function( msg ) {

@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
+use \App\Mail\SendMail;
+use Auth;
+
 class RegisterController extends Controller
 {
     /*
@@ -30,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/email';
+    protected $redirectTo = '/email-send';
 
     /**
      * Create a new controller instance.
@@ -99,7 +102,11 @@ class RegisterController extends Controller
 
             $user->picture = $picturePath;
             $user->save();
+
         }
+        
+        \Mail::to($user['email'])->send(new SendMail($user));
+
 
         return $user;
 

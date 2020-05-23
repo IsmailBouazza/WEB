@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use App\Mail\NewUserWelcomeMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +19,7 @@ use App\Mail\NewUserWelcomeMail;
 Auth::routes();
 
 
-/* email */
-
-Route::get('/email', function(){
-    return new NewUserWelcomeMail();
-});
+Route::get('/email-send','MailController@mailsend');
 
 
 

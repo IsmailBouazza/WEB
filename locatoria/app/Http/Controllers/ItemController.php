@@ -107,10 +107,10 @@ class ItemController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'dispo_starts' => 'required|date',
-            'dispo_ends' => 'required',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'dispo_ends' => 'required|date',
+            'thumbnail' => 'required|image',
             'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'images.*' => 'image',
             'category' => 'required'
 
 
