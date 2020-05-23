@@ -33,6 +33,8 @@ Route::resource('Item','ItemController');
 Route::get('/items/myitems/{user}', 'ItemController@index');
 Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');
 
+Route::get('myfavorites','FavoriteController@showMyFavorites');
+
 /*  Item Photo  */
 
 

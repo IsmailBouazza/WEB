@@ -1,6 +1,7 @@
 @extends('layouts.app')
 <!-- link css -->
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Montez|Cinzel' rel='stylesheet' type='text/css'>
 <!--  -->
 @section('content')
 
@@ -9,8 +10,16 @@
         <td class="image">
           <img src="{{asset('images/logo.png')}}">
         </td>
-        <td class="image">
-          Welcome to the best renting website
+        <td class="image" style="padding-right: 20%">
+          <div id = "enter">
+            <div id= "target">
+            </div>
+            <div id = "page">
+              <section>
+                <h1 id = 'text' style="font-weight: bold">Welcome</h1>
+              </section>
+            </div>
+          </div>
         </td>
       </tr>
     </table>
@@ -341,6 +350,8 @@ $('#prev').click(function (){
 
 <!--  Most Viewed -->
 
+
+
 <script>
 
 let sliderImages = document.querySelectorAll('.slide'),
@@ -380,6 +391,47 @@ function alert1() {
 
 startSlider()
 
+
+</script>
+
+
+
+<!-- animated welcome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+
+
+<script>
+var length = 50;
+var string = "";
+for(var a = 0; a < length; a++){
+	string = string.concat("<div class = 'bar' id = 'bar"+a+"' style = 'left: "+(a/4)*2+"vw; width: "+6+"px; opacity: "+0.7+";'></div>");
+}
+document.getElementById("target").innerHTML = string;
+for(var a = 0; a < length/2; a++){
+	var bar = document.getElementById("bar"+a*2);
+	TweenMax.to(bar, 2, {top:"80px", delay: a/8, yoyo:true, ease:Power2.easeInOut, repeat:-1});
+		TweenMax.to(bar, 8, {backgroundColor: "#ff7700", delay: a/20, ease:Power2.easeInOut, yoyo:true, repeat:-1});
+}
+for(var a = 0; a < length/2; a++){
+	var bar = document.getElementById("bar"+((a*2)+1));
+	TweenMax.to(bar, 2, {top:"80px", delay: (a/8)+ 2, yoyo:true, ease:Power2.easeInOut, repeat:-1});
+	TweenMax.to(bar, 8, {backgroundColor: "#ff7700", delay:(a/20) - 10, ease:Power2.easeInOut, yoyo:true, repeat:-1});
+}
+function enterAnimation(){
+	for(var a = 0; a < length; a++){
+		var bar = document.getElementById("bar"+a);
+		TweenMax.to(bar, 5, {left: "0vw",width: "10px", ease:Power2.easeInOut});
+		if(a%2 == 0){
+			TweenMax.to(bar, 5, {top:"-100px", delay: 0});
+		}
+		else{
+			TweenMax.to(bar, 5, {top:"100px", delay: 0});
+		}
+		
+	}
+	var text = document.getElementById("text");
+	TweenMax.to(text, 2, {delay: 4, opacity: 0, ease:Power2.easeInOut, onComplete:exit});
+}
 
 </script>
         

@@ -105,7 +105,7 @@ class RegisterController extends Controller
 
         }
         
-        \Mail::to($user['email'])->send(new SendMail($user));
+        //\Mail::to($user['email'])->send(new SendMail($user));
 
 
         return $user;
