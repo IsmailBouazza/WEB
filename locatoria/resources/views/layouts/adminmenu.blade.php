@@ -28,14 +28,8 @@
     <main class="py-4">
         @include('inc.navbar')
         
-<div class="header bg-dark">
-    <div class="logo">
-        <i class="fa fa-tachometer"></i>
-        <span>Brand</span>
-    </div>
-    <a href="#" class="nav-trigger"><span></span></a>
-</div>
-<div class="side-nav bg-dark">
+
+<div class="side-nav bg-dark" style=" height: 100%; width: 17%;" >
     <div class="logo">
         <i class="fa fa-tachometer"></i>
         <span>Brand</span>

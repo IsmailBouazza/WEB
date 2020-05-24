@@ -60,7 +60,7 @@
 
 </div>
 <hr>
-<div class="container" style="margin-top : 10%;">
+<div class="container" style="margin-top : 10%; margin-left: 7%; width: 80%;">
     <div class="row">
         <div class="col-lg-12">
             <div class="main-box clearfix">
