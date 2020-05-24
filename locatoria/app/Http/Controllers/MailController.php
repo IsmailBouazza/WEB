@@ -17,7 +17,7 @@ class MailController extends Controller
             'email' => Auth::user()->email,
         ];
 
-        \Mail::to($user['email'])->send(new SendMail($user));
+        //\Mail::to($user['email'])->send(new SendMail($user));
 
 
         return view('emails.thanks')->with('name',$user['name']);

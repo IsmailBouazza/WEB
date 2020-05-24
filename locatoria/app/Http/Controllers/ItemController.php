@@ -172,7 +172,7 @@ class ItemController extends Controller
         // insert to premium
 
         if($request->premium){
-            $item->status = '0';
+            $item->status = 0;
             $item->save();
             $item_premium = new ItemPremium;
             $item_premium->item_id = $item_id;
