@@ -6,23 +6,17 @@
 <!--  -->
 @section('content')
     
-    <br><br><br>
-    <div class="nav">
-      <div class="mini-block">
-        <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
-           <div class="s-nav">
-              <a href="{{ url('/user/'.$user->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
-              <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
-              <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
-              <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>My reservations</button></a>
-              <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>            
-            </div>
-      </div>
-    </div>
+@include('inc.sidebar')
 
-    <div class="album ">
-    
-      
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content" >
+    <div class="container-fluid">
+        <img src="{{asset('images/item.png')}}" style="width: 100px; height:100px">
+        <h2>Items</h2>
+        <hr>
+        <div class="row">  
+          <div class="album ">
             @if($user->items->count() > 0)
             @foreach($user->items as $item)
             <div class="card" style="width: 18rem;">
@@ -120,5 +114,7 @@
           }
   
   </script>
+
+@include('inc.jsSidebar')
 
 @endsection

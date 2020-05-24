@@ -2,6 +2,21 @@
 @section('content')
 <link href="{{ asset('css/item.css') }}" rel="stylesheet">
 <link href="{{ asset('css/image-uploader.min.css') }}" rel="stylesheet">
+
+
+@section('content')
+
+@include('inc.sidebar')
+
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content" >
+    <div class="container-fluid">
+        <img src="{{asset('images/edit-item.png')}}" style="width: 100px; height:100px">
+        <h2>Edit Item</h2>
+        <hr>
+        <div class="row"> 
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -224,4 +239,7 @@
 </script>
 
 
+@include('inc.jsSidebar')
+
 @endsection
+

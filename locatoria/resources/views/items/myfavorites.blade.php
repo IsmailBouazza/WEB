@@ -3,7 +3,9 @@
 <link href="{{ asset('css/reservation.css') }}" rel="stylesheet">
 <link href="{{ asset('css/account.css') }}" rel="stylesheet">
 <!--  -->
+
 @section('content')
+@include('inc.sidebar')
 
 
 
@@ -67,6 +69,10 @@
                         </div>
                     @endif
                 </div>
+
+                
+                
+@include('inc.jsSidebar')
 
 
 @endsection

@@ -15,12 +15,10 @@
             <li class="nav-item active">
               <a class="nav-link" href="{{ url('/home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url('/Category') }}">Categories <span class="sr-only">(current)</span></a>
-            </li>
+            
             <li class="nav-item">
               @if(! Auth::guard('admin')->check())
-                <a class="nav-link" href="/favorite">My favorites <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url('/myfavorites') }}">My favorites <span class="sr-only">(current)</span></a>
               @else
                 <a class="nav-link" href="/admin">administration<span class="sr-only">(current)</span></a>
               @endif
@@ -167,8 +165,7 @@
 
                           @if(Auth::user())
 
-                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">Account <span class="sr-only">(current)</span></a>
-                              <a class="dropdown-item" href=#{{url ('/user/'.Auth::user()->id ) }}">Messages<span class="sr-only">(current)</span></a>
+                              <a class="dropdown-item" href="#">Messages<span class="sr-only">(current)</span></a>
                               <a class="dropdown-item" href="#">Favorite <span class="sr-only">(current)</span></a>
 
                               <span class="dotx count2" ></span>
@@ -176,6 +173,10 @@
 
                               <span class="dotx count1" ></span>
                               <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">Reservation </a>
+                              <hr>
+                              
+                              <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">Account <span class="sr-only">(current)</span></a>
+
 
                           @endif
 

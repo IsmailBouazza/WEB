@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+
+Route::get('/email-send','MailController@mailsend');
+
+
 /*  Item  */
 
 Route::get('/', 'ItemController@showHome');
