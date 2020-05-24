@@ -171,7 +171,7 @@
                          @endif
 
                     @else
-                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
+                        <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
                                 login to add this item to your favorites</button>
                       @endif
             </div>

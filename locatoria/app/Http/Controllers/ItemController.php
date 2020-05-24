@@ -231,11 +231,13 @@ class ItemController extends Controller
             }
             // check if this if a user favorite item
 
-            $NotFavourite = Favorite::select('*')
-            ->where('item_id', '=', $id)
-            ->where('user_id', '=', Auth::user()->id)
-            ->get()->isEmpty();
+                $NotFavourite = Favorite::select('*')
+                ->where('item_id', '=', $id)
+                ->where('user_id', '=', Auth::user()->id)
+                ->get()->isEmpty();
 
+           
+            
 
             return view('items.show')->with([
                 'comments'=>$item->comments,

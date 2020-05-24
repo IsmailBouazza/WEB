@@ -18,7 +18,9 @@
             
             <li class="nav-item">
               @if(! Auth::guard('admin')->check())
-                <a class="nav-link" href="{{ url('/myfavorites') }}">My favorites <span class="sr-only">(current)</span></a>
+                @if(Auth::user())
+                    <a class="nav-link" href="{{ url('/myfavorites') }}">My favorites <span class="sr-only">(current)</span></a>
+                @endif
               @else
                 <a class="nav-link" href="/admin">administration<span class="sr-only">(current)</span></a>
               @endif
