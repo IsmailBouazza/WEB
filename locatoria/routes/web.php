@@ -31,6 +31,7 @@ Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');
 Route::post('/addToFavorites/{id}','FavoriteController@addToFavorites');
 Route::get('myfavorites','FavoriteController@showMyFavorites');
 Route::post('myfavorites/{id}','FavoriteController@destroyfavorite');
+Route::post('/report/{id}','ItemReportController@report');
 
 /*  Item Photo  */
 
@@ -53,6 +54,14 @@ Route::resource('user', 'UserController');
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::get('/admin', 'AdminController@show');
+Route::get('/items', 'AdminController@index');
+
+//admin premium
+Route::get('/premium','ItemPremiumController@request');
+
+Route::put('/premium/{id}/approve','ItemPremiumController@approval')->name('premium.approve');
+Route::put('/premium/{id}/refuse','ItemPremiumController@destroy')->name('premium.refuse');
+
 // admin delete
 Route::post('/userblockunblock', 'UserController@block');
 //Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');  // for testing

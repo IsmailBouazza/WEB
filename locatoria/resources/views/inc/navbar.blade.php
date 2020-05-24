@@ -22,7 +22,7 @@
                     <a class="nav-link" href="{{ url('/myfavorites') }}">My favorites <span class="sr-only">(current)</span></a>
                 @endif
               @else
-                <a class="nav-link" href="/admin">administration<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ asset('/admin') }}">administration<span class="sr-only">(current)</span></a>
               @endif
             </li>
           </ul>

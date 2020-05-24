@@ -16,13 +16,13 @@ td.image{
 }
 
 td.image img{
-    
+
     height: 150px;
-    
+
 }
 
 div.search{
-    width: 50%;
+    width: 60%;
     margin-left: 25%;
     margin-top: 50px;
 }
@@ -95,7 +95,7 @@ a{
     width: 150px;
     height: 100px;
     border: none;
-    
+
 }
 
 p.msg{
@@ -129,7 +129,7 @@ div.msg{
     height: 100%;
     list-style: none;
   }
-  
+
   #slider ul.image_slider_ul li {
     position: relative;
     display: block;
@@ -139,7 +139,7 @@ div.msg{
     width: 25%;
     height: 100%;
   }
-  
+
   #slider ul.image_slider_ul li .bgimage{
     width: 100%;
     height: 100%;
@@ -150,9 +150,9 @@ div.msg{
     background-repeat: no-repeat;
     /* -webkit-filter: blur(2px); */
   }
-  
+
   /*  Indicators*/
-  
+
   #slider .indicator_con{
     width: 100%;
     height: auto;
@@ -163,14 +163,14 @@ div.msg{
     padding: 10px 0;
     bottom: 0;
   }
-  
+
   #slider .indicator_con ul.indicator{
     width: 100%;
     height: auto;
     position: relative;
     text-align: center;
   }
-  
+
   #slider .indicator_con ul.indicator li{
     position: relative;
     list-style: none;
@@ -183,13 +183,13 @@ div.msg{
     border-radius: 1.5px;
     transition: 800ms ease-in-out;
   }
-  
+
   #slider .indicator_con ul.indicator li.active{
   background-color:#F2B206;
   }
-  
+
   /*  Buttons*/
-  
+
   button.control_prev, button.control_next {
     position: absolute;
     /* top: 42%; */
@@ -208,17 +208,17 @@ div.msg{
     /* opacity: 0.8; */
     cursor: pointer;
   }
-  
+
   button.control_prev:hover, button.control_next:hover {
     opacity: 1;
     /* background-color: #fff; */
     color: #fff;
   }
-  
+
   button.control_prev {
     border-radius: 0 4px 4px 0;
   }
-  
+
   button.control_next {
     right: 0;
     border-radius: 4px 0 0 4px;
@@ -321,7 +321,7 @@ body {
 a {
     color: lightgray;
     text-decoration: none;
-    
+
     transition: .3s ease-in-out;
 }
 a:hover {
@@ -340,7 +340,7 @@ img {
 .wrapper {
     display: flex;
     flex-wrap: wrap;
-    
+
     margin: 0 -10px;
     padding: 24px 0;
 }
@@ -350,7 +350,7 @@ img {
 }
 
 .product {
-    
+
     width: 370px;
     height: 400px;
     padding: 0 10px;
@@ -369,7 +369,7 @@ img {
 .product__card:hover  div.product__btns {
   opacity: 1;
   }
-    
+
 .product__image {
     position: relative;
 }
@@ -389,14 +389,14 @@ img {
   transition: 0.5s ease-in-out;
 }
 div.product__btns {
-  position: absolute;  
+  position: absolute;
   top: 50%;
   left: 50%;
   z-index: 1;
-  transform: translate(-50%, -50%);  
-  
+  transform: translate(-50%, -50%);
+
   opacity: 0;
-  
+
   transition: .3s ease-in-out;
 }
 
@@ -405,18 +405,18 @@ div.product__btns {
 div.product__btns > a {
  position: relative;
  overflow: hidden;
- 
+
  display: block;
- 
+
  margin-bottom: 10px;
- 
+
  text-align: center;
  padding: 12px 40px;
- 
+
  font-size: 10px;
  color: white;
  text-transform: uppercase;
- 
+
  border: 1px solid white;
 }
 div.product__btns > a::after {
@@ -428,7 +428,7 @@ div.product__btns > a::after {
   width: 150%;
   height: 200%;
   z-index: -1;
-  
+
   transform: skew(-45deg);
   background: white;
   transition: .7s all;
@@ -442,7 +442,7 @@ div.product__btns > a:hover {
 div.product__btns > a:last-child {
   margin-bottom: 0;
 }
-        
+
 .product__description {
   padding: 14px 14px 18px;
 }
@@ -573,7 +573,7 @@ form {
 }
 @keyframes slideUp{
   0%{
-    transform: translateY(150px) 
+    transform: translateY(150px)
   }
   100%{
     transform: translateY(0px);
@@ -597,7 +597,7 @@ input.submit, .slide1 .content .btn {
    .slide2 .content {
     right: 50%;
     transform: translate(50%, -50%);
-  } 
+  }
   .arrow {
     width: 70px;
     height: 70px;
@@ -652,7 +652,7 @@ input.submit, .slide1 .content .btn {
 #enter{
   width: 600px;
   height: 150px;
-  
+
 }
 
 
@@ -671,7 +671,7 @@ input.submit, .slide1 .content .btn {
 	border-radius: 1vw;
 	width: 1vw;
 	position: absolute;
-	
+
 }
 #page{
 	height: 150px;
@@ -687,7 +687,7 @@ section{
 h1{
 	width: 600px;
 	text-align: center;
-	font-family: 'Montez'; 
+	font-family: 'Montez';
 	color: #000;
 	font-size: 20vh;
 	text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;

@@ -32,10 +32,10 @@
         <main class="py-4">
             @include('inc.navbar')
             @yield('content')
-
+            @include('inc.footer')
 
         </main>
-        @include('inc.footer')
+       
     </div>
 </body>
 </html>

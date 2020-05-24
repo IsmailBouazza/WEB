@@ -156,9 +156,10 @@ class ReservationController extends Controller
 
                 $today = date('Y-m-d');
                 $d2= new DateTime($today);
-
+                
                 $interval= $start_date->diff($d2);
                 $hoursleft = $interval->days * 24;
+              
                 if($hoursleft<=24){
                     echo 'this reservation will start within 24h, you can not cancel it.for more information, please contact the owner';
                 }
