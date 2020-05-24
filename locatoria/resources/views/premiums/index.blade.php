@@ -46,7 +46,7 @@
     </div>
 </nav>
 
-<div class="album ">
+<div class="album " style="margin-top: 100px; margin-left:10%">
 
     @if($items_premium ?? ''->count() > 0)
       @foreach($items_premium ?? '' as $item)
