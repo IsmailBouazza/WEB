@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\Factory;
 use Auth;
+use App\Item;
+use App\Reservation;
+
 
 
 class AdminController extends Controller
@@ -26,8 +29,17 @@ class AdminController extends Controller
     public function show()
     {
         self::loginverification();
+
+        $users = User::all();
+        $items = Item::all();
+        $reservations = Reservation::all();
         //return view('admin');
-        return View::make('admin.admin');
+        return View::make('admin.admin')->with([
+            'users'=> $users,
+            'items'=> $items,
+            'reservations'=> $reservations,
+            
+            ]);
     }
 
 

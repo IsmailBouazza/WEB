@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminmenu')
 
 @section('css')
 

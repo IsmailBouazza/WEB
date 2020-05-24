@@ -83,18 +83,18 @@
                 
                 <script>
 
-                    var res_id = {{$reservation->id}};
+     
 
-                    $(document).on("click","#"+res_id+"res", function () {
-                        var token = $("meta[name='csrf-token']").attr("content");
+                    $(document).on("click","#{{$reservation->id}}res", function () {
+                       // var token = $("meta[name='csrf-token']").attr("content");
 
                         $.ajax({
                             url: '/cancelreservation/{{$reservation->id}}',
                             type: "POST",
-                            data: { "_token": token },
+                            data: {},
                             success: function( msg ) {
                                 alert( msg );
-                                if(msg == 'your reservation has been cancled!')$('#'+res_id).fadeOut( 2000 );
+                                if(msg == 'your reservation has been canelled!')$("#{{$reservation->id}}").fadeOut( 2000 );
 
                             }
                         });

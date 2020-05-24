@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" id="adminNAV">
   <div class="container">
       <a class="navbar-brand" href="{{ url('/home') }}" style="position: relative; padding-left:50px;">
 
@@ -22,7 +22,7 @@
               @if(! Auth::guard('admin')->check())
                 <a class="nav-link" href="/favorite">My favorites <span class="sr-only">(current)</span></a>
               @else
-                <a class="nav-link" href="/admin">administration<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ asset('/admin') }}">administration<span class="sr-only">(current)</span></a>
               @endif
             </li>
           </ul>

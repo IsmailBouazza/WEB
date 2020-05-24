@@ -46,6 +46,13 @@ Route::resource('user', 'UserController');
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::get('/admin', 'AdminController@show');
+
+//admin premium
+Route::get('/premium','ItemPremiumController@request');
+
+Route::put('/premium/{id}/approve','ItemPremiumController@approval')->name('premium.approve');
+Route::put('/premium/{id}/refuse','ItemPremiumController@destroy')->name('premium.refuse');
+
 // admin delete
 Route::post('/userblockunblock', 'UserController@block');
 //Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');  // for testing
