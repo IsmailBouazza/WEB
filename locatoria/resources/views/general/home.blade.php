@@ -3,12 +3,12 @@
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <!--  -->
 @section('content')
-    <table class="img-container">
-      <tr>
-        <td class="image">
+    <table class="img-container" style="width: 50%;">
+      <tr style="width: 100%; display:flex; margin-left: 45%">
+        <td class="image" style="width:30%">
           <img src="{{asset('images/logo.png')}}">
         </td>
-        <td class="image" style="padding-right: 20%">
+        <td class="image" style="width:70%">
           <div id = "enter">
             <div id= "target">
             </div>

@@ -12,7 +12,7 @@
     <!-- sidebar-wrapper  -->
     <main class="page-content">
         <div class="container-fluid">
-            <img src="{{asset('images/reserv.jpg')}}" style="width: 100px; height:100px">
+            <img src="{{asset('images/heart.jpg')}}" style="width: 100px; height:100px; border-radius: 50%">
             <h2>Favorite</h2>
             <hr>
             <div class="row">

@@ -14,7 +14,7 @@
         <img class="top" src="{{asset('images/notif.png')}}" style="width: 100px; height:100px">
         <h2>Requests</h2>
         <hr>
-        <div class="row" style="width: 1800px;">  
+        <div class="row">  
 
 
         <div class="reservations">
@@ -59,7 +59,7 @@
                         }
                 ?>
 
-                <div class="res-container" style="width: 60%; margin-left:20%">
+                <div class="res-container" style="width: 80%; margin-left:10%">
 
                     <div class="card flex1" style="width: 150px; height: 150px; border-radius: 50%">
                         <img src="{{asset('/storage/' .$reservation->item->thumbnail_path )}}" style="border-radius: 50%" class="bd-placeholder-img card-img-top" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img">

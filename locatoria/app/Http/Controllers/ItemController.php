@@ -41,7 +41,7 @@ class ItemController extends Controller
    //display 3 latest items at home page
     public function showHome(){
 
-            $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(3);
+            $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(6);
 
             $mostvieweds = MostViewed::select('item_id', DB::raw('count(*) as total'))->groupBy('item_id')->orderBy('total','DESC')->take(6)->get();
             $id_mostviewed = array();

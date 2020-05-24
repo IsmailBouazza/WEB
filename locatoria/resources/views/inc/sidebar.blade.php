@@ -77,7 +77,7 @@
               <span>Extra</span>
             </li>
             <li>
-              <a href="#">
+              <a href="{{ url('/myfavorites') }}">
                 <i class="fa fa-heart"></i>
                 <span>Favorite</span>
               </a>

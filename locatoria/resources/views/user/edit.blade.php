@@ -11,17 +11,17 @@
 
   <!-- sidebar-wrapper  -->
   <main class="page-content" >
-    <div class="container-fluid">
+    <div class="container-fluid" style="height: auto">
         <img src="{{asset('images/edit.png')}}" style="width: 100px; height:100px">
         <h2>Edit Profile</h2>
         <hr>
-        <div class="row">  
+        <div class="row" >  
 
         <form action="{{ url('user/'.$user->id) }}" enctype="multipart/form-data" method="POST">
             @csrf
             @method('PUT')
 
-            <div class="edit-block">
+            <div class="edit-block" style="width: 60%; height:auto;">
                 <div class="float marg">
                     <div class="info row">
                             <div class="col-md-6 mb-3">
@@ -110,6 +110,7 @@
                 </div>   
             </div>
         </form>
+        <br><br><br>
 @include('inc.jsSidebar')
 
 @endsection
