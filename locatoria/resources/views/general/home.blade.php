@@ -31,7 +31,7 @@
         </form>
         <br>
         <div class="btn-group">
-          <p><a class="btn btn-sm btn-outline-secondary" href="http://localhost/locatoria/public/pages/researchdetails" role="button">View details &raquo;</a></p>                      
+          <p><a class="btn btn-sm btn-outline-secondary" href="http://localhost/locatoria/public/pages/researchdetails" role="button">View details &raquo;</a></p>
         </div>
     </div>
     <div class="categorie nav-scroller py-1 mb-2">
@@ -50,7 +50,7 @@
       <div class="annonce">
         <img src="{{asset('images/logo.png')}}" style="width: 120px; height: 120px">
         <h3 class="font-italic">Locatoria is here for you</h3>
-      </div>  
+      </div>
       <div id="slider">
         <!--    Start: Buttons-->
         <button class="control_next"><i class="fa fa-chevron-right"></i></button>
@@ -146,7 +146,7 @@
         @else
             <div class="msg">
                 <p class="msg">No items added yet</p>
-                <small>Sorry try latter !!</small> 
+                <small>Sorry try latter !!</small>
             </div>
         @endif
   </div>
@@ -180,7 +180,7 @@
         @else
             <div class="msg">
                 <p class="msg">No items added yet</p>
-                <small>Sorry try latter !!</small> 
+                <small>Sorry try latter !!</small>
             </div>
         @endif
     </div>
@@ -214,27 +214,27 @@
         @endforeach
       </div>
     </div>
-      
+
 </div>
-                       
-        
-        
+
+
+
 
 <!-- slide 1 -->
 
 <script>
 
   $(document).ready(function(){
-  
+
   var slideCount = $('#slider ul.image_slider_ul li').length;
   var slideWidth = $('#slider ul.image_slider_ul li').width();
   var slideHeight = $('#slider ul.image_slider_ul li').height();
   var sliderUlWidth = slideCount * slideWidth;
-  
+
   $('#slider ul.image_slider_ul').css({ marginLeft: - slideWidth });
-  
+
     $('#slider ul.image_slider_ul li:last-child').prependTo('#slider ul.image_slider_ul');
-  
+
     function moveLeft() {
         $('#slider ul.image_slider_ul').animate({
             left: + slideWidth
@@ -243,7 +243,7 @@
             $('#slider ul.image_slider_ul').css('left', '');
         });
     };
-  
+
     function moveRight() {
         $('#slider ul.image_slider_ul').animate({
             left: - slideWidth
@@ -252,54 +252,54 @@
             $('#slider ul.image_slider_ul').css('left', '');
         });
     };
-  
+
     var navDots= [];
-  
+
     for(var i=0; i<slideCount; i++)
     {
     navDots[i]='<li currentSlide="'+i+'"></li>';
     $('.indicator').append(navDots[i]);
     }
-  
-  
+
+
     var count = 0;
       $("ul.indicator li").eq(count).addClass("active");
-  
-  
+
+
       slideCountforindicators = slideCount-1;
       $('button.control_prev').click(function () {
           moveLeft();
-  
+
           $("ul.indicator li").eq(count).removeClass("active");
           count--;
           if(count<0)
           {
           count=slideCountforindicators;
           }
-  
+
           $("ul.indicator li").eq(count).addClass('active');
       });
-  
+
       $('button.control_next').click(function () {
           moveRight();
-  
+
           $("ul.indicator li").eq(count).removeClass("active");
             count++;
             if(count>slideCountforindicators)
             {
             count=0;
-  
+
             }
-        
+
             $("ul.indicator li").eq(count).addClass('active');
       });
-      
+
   //   Automatic Slider
-    
+
     setInterval(function () {
-  
+
         if($('#slider').is(':hover')) {
-  
+
         }else{
             moveRight();
                 $("ul.indicator li").eq(count).removeClass("active");
@@ -307,26 +307,26 @@
                   if(count>slideCountforindicators)
                   {
                   count=0;
-  
+
                   }
-  
+
                   $("ul.indicator li").eq(count).addClass('active');
         }
     }, 8000);
-    
+
   });
-  
-  
+
+
   </script>
-          
-  
-  
+
+
+
   <!-- slide 1 -->
-  
+
   <script>
-  
+
   $('#next').click(function (){
-    
+
     if($('.on-screen').next().length == 0){
       $('.on-screen').removeClass('on-screen come-in').addClass('out-screen');
       $('.image-container').first('image-container').removeClass('out-screen').addClass('come-in on-screen');
@@ -335,7 +335,7 @@
       $('.on-screen').removeClass('on-screen come-in').addClass('out-screen').next('.image-container').addClass('come-in on-screen');
   });
   $('#prev').click(function (){
-    
+
     if($('.on-screen').prev().length == 0){
       $('.on-screen').removeClass('on-screen come-in').addClass('out-screen');
       $('.image-container').last('image-container').removeClass('out-screen').addClass('come-in on-screen');
@@ -343,25 +343,25 @@
     else
       $('.on-screen').removeClass('on-screen come-in').addClass('out-screen').prev('.image-container').addClass('come-in on-screen');
   });
-  
+
   </script>
-  
-  
-  
-  
+
+
+
+
   <!--  Most Viewed -->
-  
-  
-  
+
+
+
   <script>
-  
+
   let sliderImages = document.querySelectorAll('.slide'),
       arrowRight = document.querySelector('#arrow-right'),
       arrowLeft = document.querySelector('#arrow-left'),
       i = 0
-  
-  
-  
+
+
+
   function reset() {
     for (let i = 0; i < sliderImages.length; i++) {
       sliderImages[i].style.display = 'none'
@@ -381,7 +381,7 @@
     i--
     startSlider()
   })
-  
+
   function alert1() {
     let y = 1
     alert(y)
@@ -389,19 +389,19 @@
     setTimeout(alert1, 6000)
   }
   // alert1()
-  
+
   startSlider()
-  
-  
+
+
   </script>
-  
-  
-  
+
+
+
   <!-- animated welcome -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
-  
-  
-  
+
+
+
   <script>
   var length = 50;
   var string = "";
@@ -429,13 +429,13 @@
       else{
         TweenMax.to(bar, 5, {top:"100px", delay: 0});
       }
-      
+
     }
     var text = document.getElementById("text");
     TweenMax.to(text, 2, {delay: 4, opacity: 0, ease:Power2.easeInOut, onComplete:exit});
   }
-  
+
   </script>
-          
-  
+
+
   @endsection
