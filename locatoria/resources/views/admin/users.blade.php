@@ -54,7 +54,13 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <br><br>
-<div class="container">
+<div class="title" style=" margin-left : 30%; display : flex; flex-wrap : wrap; text-align: center; margin-top : 4%;">
+    <i class="fas fa-users fa-5x "></i>
+    <h1 style="margin-top : 15px; margin-left : 2%;;">Locatoria's users</h1>
+
+</div>
+<hr>
+<div class="container" style="margin-top : 10%;">
     <div class="row">
         <div class="col-lg-12">
             <div class="main-box clearfix">

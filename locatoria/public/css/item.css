@@ -136,7 +136,219 @@ div.modal-content{
     text-align: center;
 }
 
+
+.report{
+    background-color: transparent;
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 400px;
+    overflow: auto;
+    margin-top: 4%;
+}
+
+div.report-content{
+    padding-top: 30px;
+    margin: 4% auto 15% auto;
+    border: 1px solid black;
+    border-radius: 13px;
+    width: 30%;
+    height: 300px;
+    padding-bottom: 30px;
+    background-color: rgb(202, 202, 202);
+    text-align: center;
+}
 button:disabled {
     cursor: not-allowed!important;
     pointer-events: all ;
 }
+
+
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #FFFFFF;
+}
+a.commentuser {
+    color: #82b440;
+    text-decoration: none;
+}
+.blog-comment::before,
+.blog-comment::after,
+.blog-comment-form::before,
+.blog-comment-form::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.blog-comment{
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.blog-comment ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog-comment img{
+    opacity: 1;
+    filter: Alpha(opacity=100);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.blog-comment img.avatar {
+    position: relative;
+    float: left;
+    margin-left: 0;
+    margin-top: 0;
+    width: 65px;
+    height: 65px;
+}
+
+.blog-comment .post-comments{
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    margin-left: 85px;
+    margin-right: 0px;
+    padding: 10px 20px;
+    position: relative;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    background: #fff;
+    color: #6b6e80;
+    position: relative;
+}
+
+.blog-comment .meta {
+    font-size: 13px;
+    color: #aaaaaa;
+    padding-bottom: 8px;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid #eee;
+}
+
+.blog-comment ul.comments ul{
+    list-style-type: none;
+    padding: 0;
+    margin-left: 85px;
+}
+
+.blog-comment-form{
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 40px;
+}
+
+.blog-comment h3,
+.blog-comment-form h3{
+    margin-bottom: 40px;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 800;
+}
+
+
+
+
+
+
+
+
+
+
+
+  /* parent of book-container & container (slider) */
+
+  
+  /* wraps entire slider */
+  .slider-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+  
+  
+  
+  /* slider controls*/
+  .control {
+    position: absolute;
+    top: 50%;
+    width: 70px;
+    height: 30px;
+    color: #fff;
+    font-size: 3rem;
+    padding: 0;
+    margin: 0;
+    line-height: 0px;
+  }
+  
+  .prev,
+  .next {
+    cursor: pointer;
+    transition: all 0.1s ease;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
+    background: rgba(0,0,0,0.3);
+    padding: 1rem;
+  }
+  
+  .prev {
+    margin-top: 30%;
+    margin-left: 30%;
+    left: 1.1rem;
+  }
+  
+  .next {
+    margin-top: 30%;
+    margin-right: 30%;
+    right: 1.1rem;
+  }
+  
+  .prev:hover,
+  .next:hover {
+    transform: scale(1.5,1.5);
+  }
+  
+  .slider-container {
+    /* 
+    n variable holds number of images to make .container wide enough 
+    to hold all its image children 
+    that still have the same width as its parent
+    */
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+    width: 100%; /* fallback */
+    width: calc(var(--n)*100%);
+    height: 31vw; 
+    max-height: 100vh;
+    transform: translate(calc(var(--i, 0)/var(--n)*-100% + var(--tx, 0px)));
+  }
+  
+  /* transition animation for the slider */
+  .smooth { 
+    /* f computes actual animation duration via JS */
+    transition: transform calc(var(--f, 1)*.5s) ease-out; 
+  }
+  
+  /* images for the slider */
+  img {
+    width: 100%; /* can't take this out either as it breaks Chrome */
+    margin: auto;
+    pointer-events: none;
+  }

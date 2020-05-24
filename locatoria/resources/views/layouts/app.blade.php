@@ -20,6 +20,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 
 
 
@@ -29,10 +32,10 @@
         <main class="py-4">
             @include('inc.navbar')
             @yield('content')
-
+            @include('inc.footer')
 
         </main>
-        @include('inc.footer')
+       
     </div>
 </body>
 </html>

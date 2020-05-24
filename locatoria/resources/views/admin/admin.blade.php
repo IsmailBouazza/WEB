@@ -31,13 +31,13 @@
             </div>
         </div>
     </div>--}}
-    <div class="welcome">
+    <div class="welcome" >
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-12">
-            <div class="content">
+          <div class="col-md-12" >
+            <div class="content bg-dark">
               <h2>Welcome to your Dashboard</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+              <p></p>
             </div>
           </div>
         </div>
@@ -47,25 +47,25 @@
 
     <section class="statistics" style="margin-top:10%; display:flex; flex-wrap: wrap; justify-content: space-around;">
       <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header" style="font-weight: bold; display: flex; flex-wrap: wrap;"><i class="fa fa-user fa-3x "></i><h5 style="margin-left: 4%; margin-top:5%; ">Users number</h5></div>
+        <div class="card-header" style="display: flex; flex-wrap: wrap;"><i class="fa fa-user fa-3x "></i><h5 style="margin-left: 4%; margin-top:5%; ">Users number</h5></div>
         <div class="card-body"> 
-          @if(count($users)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$users->count()}}</h1> @else <h4 class="card-title">No users registered<i class="far fa-sad-tear"></i></h4>@endif
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          @if(count($users)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$users->count()}}</h1> @else <h5 class="card-title">No users registered<i class="far fa-sad-tear"></i></h5>@endif
+          {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
         </div>
       </div>
       
       <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-        <div class="card-header" style="font-weight: bold;  display: flex; flex-wrap: wrap;"><i class="fas fa-toolbox  fa-3x"></i><h5 style="margin-left: 4%; margin-top:5%; ">Items number</h5></div>
+        <div class="card-header" style="  display: flex; flex-wrap: wrap;"><i class="fas fa-toolbox  fa-3x"></i><h5 style="margin-left: 4%; margin-top:5%; ">Items number</h5></div>
         <div class="card-body">
-          @if(count($items)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$items->count()}}</h1> @else <h4 class="card-title">No items found<i class="far fa-sad-tear"></i></h4>@endif
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          @if(count($items)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$items->count()}}</h1> @else <h5 class="card-title">No items found<i class="far fa-sad-tear"></i></h5>@endif
+          {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
         </div>
       </div>
       <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-        <div class="card-header"  style="font-weight: bold; display: flex; flex-wrap: wrap;"><i class="far fa-bookmark  fa-3x"></i><h5 style="margin-left: 4%; margin-top:5%; ">Reservations number</h5></div>
+        <div class="card-header"  style=" display: flex; flex-wrap: wrap;"><i class="far fa-bookmark  fa-3x"></i><h5 style="margin-left: 4%; margin-top:5%; ">Reservations number</h5></div>
         <div class="card-body">
-          @if(count($reservations)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$reservations->count()}}</h1> @else <h4 class="card-title">No users registered<i class="far fa-sad-tear"></i></h4>@endif
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          @if(count($reservations)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$reservations->count()}}</h1> @else <h5 class="card-title" style="text-align : center;">No reservations found <i class="far fa-sad-tear"></i></h5>@endif
+          {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
         </div>
       </div>
       

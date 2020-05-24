@@ -6,156 +6,164 @@
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!--  -->
 @section('content')
-<br><br><br><br>
-
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">list an Item</div>
-
-                    <div class="card-body">
-
-                        @if(Session::has('success'))
-
-                            <div class="alert alert-success">
-                                {{ Session::get('success') }}
-                                @php
-                                    Session::forget('success');
-                                @endphp
-                            </div>
-
-                    @endif
-                    <!-- from starts here -->
-                        <form enctype="multipart/form-data" action="{{ url('Item') }}" method="POST" id="create-form">
-                            @csrf
-                            <div class="form-group row">
-                                <label for="title" class="col-4 col-form-label">Title</label>
-                                <div class="col-8">
-                                    <input id="title" name="title" placeholder="item title " type="text" class="form-control" required >
-                                    @if ($errors->has('title'))
-                                        <div class="card bg-danger text-white">
-                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('title') }}</div>
-                                        </div>
-                                    @endif
-                                </div>
-
-                            </div>
-                            <div class="form-group row">
-                                <label for="description" class="col-4 col-form-label">description</label>
-                                <div class="col-8">
-                                    <textarea id="description" name="description" cols="40" rows="5" class="form-control" required></textarea>
-                                    @if ($errors->has('description'))
-                                        <div class="card bg-danger text-white">
-                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('description') }}</div>
-                                        </div>
-                                    @endif
-                                </div>
-
-                            </div>
+@include('inc.sidebar')
 
 
-                            <div class="form-group row">
-                                <label for="category" class="col-4 col-form-label">Category</label>
-                                <div class="col-8">
-                                    <select id="select" name="category" class="custom-select" required >
-                                        <option value="" selected disabled hidden>Choose here</option>
-                                        <option value="1">Car equipment</option>
-                                        <option value="2">Clothes</option>
-                                        <option value="3">High tech/Multimedia</option>
-                                        <option value="4">Home-Made</option>
-                                        <option value="5">House equipment</option>
-                                        <option value="6">Pets</option>
-                                        <option value="7">Services</option>
-                                        <option value="8">Sport equipment/Hobbies</option>
-                                        <option value="9">Vehicles</option>
-                                    </select>
-                                </div>
-                                @if ($errors->has('category'))
-                                    <div class="card bg-danger text-white">
-                                        <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('category') }}</div>
+  <!-- sidebar-wrapper  -->
+  <main class="page-content" >
+    <div class="container-fluid">
+        <img src="{{asset('images/add.jpg')}}" style="width: 100px; height:100px">
+        <h2>Add new item</h2>
+        <hr>
+        <div class="row"> 
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">list an Item</div>
+
+                            <div class="card-body">
+
+                                @if(Session::has('success'))
+
+                                    <div class="alert alert-success">
+                                        {{ Session::get('success') }}
+                                        @php
+                                            Session::forget('success');
+                                        @endphp
                                     </div>
-                                @endif
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="price" class="col-4 col-form-label">Rent Price</label>
-                                <div class="col-8">
-                                    <input id="price" name="price" placeholder="$$$$ " type="text" class="form-control" required >
-                                    @if ($errors->has('price'))
-                                        <div class="card bg-danger text-white">
-                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('price') }}</div>
+                            @endif
+                            <!-- from starts here -->
+                                <form enctype="multipart/form-data" action="{{ url('Item') }}" method="POST" id="create-form">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <label for="title" class="col-4 col-form-label">Title</label>
+                                        <div class="col-8">
+                                            <input id="title" name="title" placeholder="item title " type="text" class="form-control" required >
+                                            @if ($errors->has('title'))
+                                                <div class="card bg-danger text-white">
+                                                    <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('title') }}</div>
+                                                </div>
+                                            @endif
                                         </div>
-                                    @endif
-                                </div>
 
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="dispo_starts" class="col-4 col-form-label">Availability</label>
-                                <div class="col-8">
-                                    <input type="text" id="dispo_starts" name="dispo_starts" placeholder="from" class="form-control" class="form-control" required/>
-                                    <input type="text" id="dispo_ends" name="dispo_ends" placeholder="to" class="form-control" required/>
-                                    @if ($errors->has('dispo_starts') or $errors->has('dispo_ends'))
-                                        <div class="card bg-danger text-white">
-                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('dispo_starts') }} {{ $errors->first('dispo_ends') }}</div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="description" class="col-4 col-form-label">description</label>
+                                        <div class="col-8">
+                                            <textarea id="description" name="description" cols="40" rows="5" class="form-control" required></textarea>
+                                            @if ($errors->has('description'))
+                                                <div class="card bg-danger text-white">
+                                                    <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('description') }}</div>
+                                                </div>
+                                            @endif
                                         </div>
-                                    @endif
-                                </div>
 
-                            </div>
+                                    </div>
 
-                            <div class="form-group row">
-                                <label for="thumbnail" class="col-4 col-form-label">Thumbnail</label>
-                                <div class="col-8">
 
-                                    <div class="input-group">
+                                    <div class="form-group row">
+                                        <label for="category" class="col-4 col-form-label">Category</label>
+                                        <div class="col-8">
+                                            <select id="select" name="category" class="custom-select" required >
+                                                <option value="" selected disabled hidden>Choose here</option>
+                                                <option value="1">Car equipment</option>
+                                                <option value="2">Clothes</option>
+                                                <option value="3">High tech/Multimedia</option>
+                                                <option value="4">Home-Made</option>
+                                                <option value="5">House equipment</option>
+                                                <option value="6">Pets</option>
+                                                <option value="7">Services</option>
+                                                <option value="8">Sport equipment/Hobbies</option>
+                                                <option value="9">Vehicles</option>
+                                            </select>
+                                        </div>
+                                        @if ($errors->has('category'))
+                                            <div class="card bg-danger text-white">
+                                                <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('category') }}</div>
+                                            </div>
+                                        @endif
+                                    </div>
 
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" id="thumbnail"
-                                                   name="thumbnail" accept="image/*">
-                                            <label class="custom-file-label" for="thumbnail">Choose file</label>
+                                    <div class="form-group row">
+                                        <label for="price" class="col-4 col-form-label">Rent Price</label>
+                                        <div class="col-8">
+                                            <input id="price" name="price" placeholder="$$$$ " type="text" class="form-control" required >
+                                            @if ($errors->has('price'))
+                                                <div class="card bg-danger text-white">
+                                                    <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('price') }}</div>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="dispo_starts" class="col-4 col-form-label">Availability</label>
+                                        <div class="col-8">
+                                            <input type="text" id="dispo_starts" name="dispo_starts" placeholder="from" class="form-control" class="form-control" required/>
+                                            <input type="text" id="dispo_ends" name="dispo_ends" placeholder="to" class="form-control" required/>
+                                            @if ($errors->has('dispo_starts') or $errors->has('dispo_ends'))
+                                                <div class="card bg-danger text-white">
+                                                    <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('dispo_starts') }} {{ $errors->first('dispo_ends') }}</div>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="thumbnail" class="col-4 col-form-label">Thumbnail</label>
+                                        <div class="col-8">
+
+                                            <div class="input-group">
+
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="thumbnail"
+                                                        name="thumbnail" accept="image/*">
+                                                    <label class="custom-file-label" for="thumbnail">Choose file</label>
+                                                </div>
+                                            </div>
+                                            @if ($errors->has('thumbnail'))
+                                                <div class="card bg-danger text-white">
+                                                    <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('thumbnail') }}</div>
+                                                </div>
+                                            @endif
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row input-field">
+                                        <label for="images" class="col-4 col-form-label">images</label>
+                                        <div class="col-8">
+                                            <div id="images" class="input-images-1"  style="padding-top: .5rem;"> </div>
+                                            @if ($errors->has('images'))
+                                                <div class="card bg-danger text-white">
+                                                    <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('images') }}</div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
-                                    @if ($errors->has('thumbnail'))
-                                        <div class="card bg-danger text-white">
-                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('thumbnail') }}</div>
+
+                                    <div class="form-group row">
+                                        <div class="offset-6 col-8">
+                                            <button name="submit" type="submit" class="btn btn-primary" id="submit">Submit</button>
+                                            <button onclick="document.getElementById('modal-wrapper').style.display='block'" type="button" class="btn btn-warning">Premium</button>
                                         </div>
-                                    @endif
+                                    </div>
 
-                                </div>
+                                </form>
 
                             </div>
-
-                            <div class="form-group row input-field">
-                                <label for="images" class="col-4 col-form-label">images</label>
-                                <div class="col-8">
-                                    <div id="images" class="input-images-1"  style="padding-top: .5rem;"> </div>
-                                    @if ($errors->has('images'))
-                                        <div class="card bg-danger text-white">
-                                            <div class="card-body text-center" style="padding: 5px;">{{ $errors->first('images') }}</div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <div class="offset-6 col-8">
-                                    <button name="submit" type="submit" class="btn btn-primary" id="submit">Submit</button>
-                                    <button onclick="document.getElementById('modal-wrapper').style.display='block'" type="button" class="btn btn-warning">Premium</button>
-                                </div>
-                            </div>
-
-                        </form>
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- from ends here -->
+        <!-- from ends here -->
 
-    <!-- form for premium -->
+        <!-- form for premium -->
 
     
     <div id="modal-wrapper" class="modal">
@@ -269,4 +277,7 @@
 
         $('.input-images-1').imageUploader();
     </script>
+
+@include('inc.jsSidebar')
+
 @endsection

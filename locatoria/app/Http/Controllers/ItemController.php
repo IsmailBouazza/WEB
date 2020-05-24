@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Item;
@@ -11,16 +13,16 @@ use App\User;
 use App\Reservation;
 use App\ItemPremium;
 use App\Favorite;
+use App\MostViewed;
 
-use Auth;
 use DateTime;
 use DateInterval;
 use DatePeriod;
 
 class ItemController extends Controller
 {
-   
-    
+
+
 
      //display user items
     public function index()
@@ -39,13 +41,23 @@ class ItemController extends Controller
    //display 3 latest items at home page
     public function showHome(){
 
-            $items = Item::all()->where('status','0')->sortByDesc('created_at')->take(3);
-            
+            $items = Item::all()->where('status','1')->sortByDesc('created_at')->take(3);
+
+            $mostvieweds = MostViewed::select('item_id', DB::raw('count(*) as total'))->groupBy('item_id')->orderBy('total','DESC')->take(6)->get();
+            $id_mostviewed = array();
+                foreach ($mostvieweds as $mostviewed){
+                    
+                    $id_mostviewed[] = $mostviewed->item_id;
+
+                }
+
+            $items_mostvieweds = Item::find($id_mostviewed);
+
 
             $perimiums = ItemPremium::all()->where('status','1')->take(4);
             $id_premium = array();
             foreach ($perimiums as $premium ){
-            
+
             $id_premium[] = $premium->item_id;
             }
 
@@ -53,12 +65,15 @@ class ItemController extends Controller
 
 
             return view('general.home')->with([
+
                 'items_premium' => $items_premium,
                 'items' => $items,
-            ]);
-            
+                'items_mostvieweds'=>$items_mostvieweds,
 
-            
+            ]);
+
+
+
 
     }
 
@@ -69,7 +84,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        
+
         if(Auth::user()){
             return view('items.create');
         }
@@ -151,17 +166,17 @@ class ItemController extends Controller
                 $itemphoto->save();
 
             }
-        
+
         }
 
-        // insert to premium 
+        // insert to premium
 
         if($request->premium){
             $item->status = 0;
             $item->save();
             $item_premium = new ItemPremium;
-            $item_premium->item_id= $item_id;
-            $item_premium->status= 0;
+            $item_premium->item_id = $item_id;
+            $item_premium->status = 0;
             $item_premium->save();
         }
 
@@ -178,12 +193,24 @@ class ItemController extends Controller
     public function show($id)
     {
 
+            if(Auth::check()){
+                $mostviewd = new MostViewed;
+                $mostviewd->item_id=$id;
+                $mostviewd->user_id=Auth::user()->id;
+                $existe=MostViewed::where('user_id',Auth::user()->id)->where('item_id',$id)->count();
+                if($existe == 0){
+                    $mostviewd->save();
+                }
+                else{}
+            }
+
+
             $item = Item::findOrFail($id);
             $item_photos = ItemPhoto::Where('item_id',$id)->paginate(1);
             $user_id = $item->user_id;
             $user = User::find($user_id);
 
-            
+
             $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
 
             $takendates = array();
@@ -202,17 +229,24 @@ class ItemController extends Controller
                 }
 
             }
+            // check if this if a user favorite item
+
+            $NotFavourite = Favorite::select('*')
+            ->where('item_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->id)
+            ->get()->isEmpty();
 
 
             return view('items.show')->with([
                 'comments'=>$item->comments,
                 'item' => $item,
+                'NotFavourite' => $NotFavourite,
                 'item_photos' => $item_photos,
                 'user' => $user,
                 'takendates'=>json_encode($takendates),
             ]);
-        
-    
+
+
     }
 
 
@@ -225,14 +259,14 @@ class ItemController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
-    {        
+    {
         $item = Item::find($id);
 
         // to do
-        
+
         //Check if post exists before deleting
         /** Check for correct user */
-        
+
         if(Auth::user()->id !== $item->user_id){
             return redirect('/Item/'.$item->id)->with('error', 'unauthorized page');
         }
@@ -303,7 +337,7 @@ class ItemController extends Controller
                 $i++;
 
                 $path=$image->storeAs($id_user.'/'.$item_id, $imageName, 'public');
-                
+
 
                 $item_photo = new ItemPhoto;
                 $item_photo->item_id=$item_id;
@@ -341,6 +375,5 @@ class ItemController extends Controller
 
         return redirect('/items/myitems/' . auth()->user()->id)->with('success', 'Item deleted');
     }
-
 
 }

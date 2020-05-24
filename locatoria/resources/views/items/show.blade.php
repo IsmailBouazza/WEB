@@ -158,7 +158,26 @@
 
             <button type="button" class="center btn btn-success">Chat</button>
             <hr>
-            <div style="font-size:1.5em"><a href="#"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px"></i></a>Make it your favorite</div>
+
+            <div style="font-size:1.2em">
+                    @if(Auth::check())
+                        {{-- $NotFavourite return false if the item is favorite--}}
+                         @if($NotFavourite)
+                            <button id="favbtn" class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgba(253,32,32,0.64)"></i> <br>
+                                Add this item to your favorites</button>
+                         @else
+                              <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgb(253,32,32)"></i> <br>
+                                  This item is one of your favorites</button>
+                         @endif
+
+                    @else
+                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
+                                login to add this item to your favorites</button>
+                      @endif
+            </div>
+
+
+
             <hr>
             <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
 
@@ -285,111 +304,111 @@
     @if($item->user_id == Auth::user()->id)
 
         <!--Partenaire-->
+        @include('inc.sidebar')
 
 
-        <div class="nav">
-            <div class="mini-block">
-            <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
-                <div class="s-nav">
-                    <a href="{{ url('/user/'.$user->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
-                    <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
-                    <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
-                    <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>My reservations</button></a>
-                    <a href="{{ url('Item/create/') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-plus-circle" style="margin-right: 7px;"></i>Add item</button></a>
-                </div>
-            </div>
-        </div>
+        <main class="page-content" >
+            <div class="container-fluid">
+                <img src="{{asset('images/item.png')}}" style="width: 100px; height:100px">
+                <h2>Items</h2>
+                <hr>
+                <div class="row"> 
+                    <div class="box-container img-container" style="margin-left: 10%; height: 500px;">
+                        @if(count($item_photos)>0)
+                        <div class="info-img">
+                            <div class="slider-wrapper">
 
-        <h1>{{$item->title}}</h1>
-        <div class="box-container img-container" style="margin-left: 10%; height: 500px;">
-            @if(count($item_photos)>0)
-            <div class="info-img">
-                @foreach ($item_photos as $item_photo)
-
-                    <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
-
-                @endforeach
-
-
-                <div class="link">
-
-                    {{$item_photos->links()}}
-                </div>
-
-                @else
-                    <p>NO PHOTS!</p>
-                @endif
-            </div>
-        </div>
-        <div class="form">
-            <div class="info row" style="width: 500px; margin-left: 20%;">
-
-
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="email">Description</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="email" placeholder="{{$item->description}}" value="" required>
-                    <div class="invalid-feedback">
-                        item description .
+                                <div class="slider-container">
+                                    @foreach ($item_photos as $item_photo)
+    
+                                        <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
+    
+                                    @endforeach
+                                </div>
+    
+                                <div class="slider-controls">
+                                <span class="control prev">&larr;</span>
+                                <span class="control next">&rarr;</span>
+                                </div>
+    
+                            </div>
+                            @else
+                                <p>NO PHOTS!</p>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                    <div class="form">
+                        <div class="info row" style="margin-left: 7%">
 
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="zip_code">price</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="zip_code" placeholder="{{$item->price}}" value="" required>
-                    <div class="invalid-feedback">
-                        price.
+
+                            <div style="padding: 20px;" class="col-md-6 mb-3">
+                                <label style="width: 300px; text-align: center;" text-align: center;" for="email">Description</label>
+                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="email" placeholder="{{$item->description}}" value="" required>
+                                <div class="invalid-feedback">
+                                    item description .
+                                </div>
+                            </div>
+
+                            <div style="padding: 20px;" class="col-md-6 mb-3">
+                                <label style="width: 300px; text-align: center;" text-align: center;" for="zip_code">price</label>
+                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="zip_code" placeholder="{{$item->price}}" value="" required>
+                                <div class="invalid-feedback">
+                                    price.
+                                </div>
+                            </div>
+
+                            <div style="padding: 20px;" class="col-md-6 mb-3">
+                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">disponibility starts at</label>
+                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_starts}}" value="" required>
+                                <div class="invalid-feedback">
+                                    disponibility starts at.
+                                </div>
+                            </div>
+                            <div style="padding: 20px;" class="col-md-6 mb-3">
+                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">disponibility ends at</label>
+                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_ends}}" value="" required>
+                                <div class="invalid-feedback">
+                                    disponibility ends at.
+                                </div>
+                            </div>
+
+                            <div style="padding: 20px;" class="col-md-6 mb-3">
+                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">created at</label>
+                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->created_at}}" value="" required>
+                                <div class="invalid-feedback">
+                                    created_at.
+                                </div>
+                            </div>
+
+                            <div style="padding: 20px;" class="col-md-6 mb-3">
+                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">updated at</label>
+                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->updated_at}}" value="" required>
+                                <div class="invalid-feedback">
+                                    updated_at.
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
-                </div>
+                    <div class="btns">
+                        <div class="col1">
+                            <label for="adresse"><br></label>
+                            <a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
+                        </div>
 
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">disponibility starts at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_starts}}" value="" required>
-                    <div class="invalid-feedback">
-                        disponibility starts at.
+                        <div class="col2">
+                            <button type="button" class="btn btn-danger pull-right " onclick="deleteItem({{ $item->id }})">Delete</button>
+                            <form method="post" action="{{ url('Item/' .$item->id. '/delete') }}" id="delete-form" style="display: none">
+                                @csrf
+                                    @method('PUT')
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">disponibility ends at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_ends}}" value="" required>
-                    <div class="invalid-feedback">
-                        disponibility ends at.
-                    </div>
-                </div>
 
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">created at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->created_at}}" value="" required>
-                    <div class="invalid-feedback">
-                        created_at.
-                    </div>
-                </div>
+                    @include('inc.jsSidebar')
 
-                <div style="padding: 20px;" class="col-md-6 mb-3">
-                    <label style="width: 200px; text-align: center;" for="city">updated at</label>
-                    <input style="width: 200px; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->updated_at}}" value="" required>
-                    <div class="invalid-feedback">
-                        updated_at.
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="btns">
-            <div class="col1">
-                <label for="adresse"><br></label>
-                <a href="{{ url('Item/'.$item->id. '/edit') }}"><button type="button" class="btn btn-outline-success my-2 my-sm-0"><i class="fas fa-edit" style="margin-right: 7px;"></i>Edit </button></a>
-            </div>
-
-            <div class="col2">
-                <button type="button" class="btn btn-danger pull-right " onclick="deleteItem({{ $item->id }})">Delete</button>
-                <form method="post" action="{{ url('Item/' .$item->id. '/delete') }}" id="delete-form" style="display: none">
-                    @csrf
-                        @method('PUT')
-                </form>
-            </div>
-        </div>
 
     @endif
 
@@ -494,6 +513,26 @@
         $("#checkoutform").submit();
 
     }
+
+    // add to favorites
+    $(document).on("click","#favbtn", function () {
+        var token = $("meta[name='csrf-token']").attr("content");
+        $.ajax({
+            url: "{{ url('/addToFavorites/'.$item->id) }}",
+            type: "POST",
+            data: { "_token": token,
+                "item_id": {{$item->id}}},
+            success: function( msg ) {
+
+                if(msg){
+                    alert("item added to you favorites");
+                    $('.fa-heart').css('color','#fd2020');
+                }
+            }
+        });
+
+
+    });
 </script>
 
 <!-- to delete item (mounia) -->
@@ -551,5 +590,135 @@
 
 </script>
 
-@endsection
+<script type="text/javascript">
+
+    //  set --n (used for calc in CSS) via JS, after getting
+    // .container and the number of child images it holds:
+    
+    const _C = document.querySelector(".slider-container"),
+      N = _C.children.length;
+    
+    _C.style.setProperty("--n", N);
+    
+    // detect the direction of the motion between "touchstart" (or "mousedown") event
+    // and the "touched" (or "mouseup") event
+    // and then update --i (current slide) accordingly
+    // and move the container so that the next image in the desired direction moves into the viewport
+    
+    // on "mousedown"/"touchstart", lock x-coordiate
+    // and store it into an initial coordinate variable x0:
+    let x0 = null;
+    let locked = false;
+    
+    function lock(e) {
+      x0 = unify(e).clientX;
+      // remove .smooth class
+      _C.classList.toggle("smooth", !(locked = true));
+    }
+    
+    // next, make the images move when the user swipes:
+    // was the lock action performed aka is x0 set?
+    // if so, read current x coordiante and compare it to x0
+    // from the difference between these two determine what to do next
+    
+    let i = 0; // counter
+    let w; //image width
+    
+    // update image width w on resive
+    function size() {
+      w = window.innerWidth;
+    }
+    
+    function move(e) {
+      if (locked) {
+        // set threshold of 20% (if less, do not drag to the next image)
+        // dx = number of pixels the user dragged
+        let dx = unify(e).clientX - x0,
+          s = Math.sign(dx),
+          f = +(s * dx / w).toFixed(2);
+    
+        // Math.sign(dx) returns 1 or -1
+        // depending on this, the slider goes backwards or forwards
+    
+        if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > 0.2) {
+          _C.style.setProperty("--i", (i -= s));
+          f = 1 - f;
+        }
+    
+        _C.style.setProperty("--tx", "0px");
+        _C.style.setProperty("--f", f);
+        _C.classList.toggle("smooth", !(locked = false));
+        x0 = null;
+      }
+    }
+    
+    size();
+    
+    addEventListener("resize", size, false);
+    
+    // ===============
+    // drag-animation for the slider when it reaches the end
+    // ===============
+    
+    function drag(e) {
+      e.preventDefault();
+    
+      if (locked) {
+        _C.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
+      }
+    }
+    
+    // ===============
+    // prev, next
+    // ===============
+    let prev = document.querySelector(".prev");
+    let next = document.querySelector(".next");
+    
+    prev.addEventListener("click", () => {
+      if (i == 0) {
+        console.log("start reached");
+      } else if (i > 0) {
+        // decrease i as long as it is bigger than the number of slides
+        _C.style.setProperty("--i", i--);
+      }
+    });
+    
+    next.addEventListener("click", () => {
+      if (i < N) {
+        // increase i as long as it's smaller than the number of slides
+        _C.style.setProperty("--i", i++);
+      }
+    });
+    
+    // ===============
+    // slider event listeners for mouse and touch (start, move, end)
+    // ===============
+    
+    _C.addEventListener("mousemove", drag, false);
+    _C.addEventListener("touchmove", drag, false);
+    
+    _C.addEventListener("mousedown", lock, false);
+    _C.addEventListener("touchstart", lock, false);
+    
+    _C.addEventListener("mouseup", move, false);
+    _C.addEventListener("touchend", move, false);
+    
+    // override Edge swipe behaviour
+    _C.addEventListener(
+      "touchmove",
+      e => {
+        e.preventDefault();
+      },
+      false
+    );
+    
+    // unify touch and click cases:
+    function unify(e) {
+      return e.changedTouches ? e.changedTouches[0] : e;
+    }
+    
+    </script>
+    
+    @endsection
+    
 

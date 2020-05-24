@@ -28,19 +28,19 @@
     <main class="py-4">
         @include('inc.navbar')
         
-<div class="header">
+<div class="header bg-dark">
     <div class="logo">
         <i class="fa fa-tachometer"></i>
         <span>Brand</span>
     </div>
     <a href="#" class="nav-trigger"><span></span></a>
 </div>
-<div class="side-nav">
+<div class="side-nav bg-dark">
     <div class="logo">
         <i class="fa fa-tachometer"></i>
         <span>Brand</span>
     </div>
-    <nav>
+    <nav class="bg-dark">
         <ul>
             <li>
                 <a href="{{ asset('/admin') }}">
@@ -69,7 +69,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ asset('/items') }}">
                     <span><i class="fas fa-toolbox"></i></i></span>
                     <span>Items</span>
                 </a>
@@ -79,7 +79,7 @@
 </div>
 <div class="main-content">
     @yield('content')
-    @include('inc.footer')
+    
 </div>
 
 

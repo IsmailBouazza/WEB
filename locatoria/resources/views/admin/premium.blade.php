@@ -19,7 +19,13 @@
             </div>
         </div>
     </div> --}}
-    <h1 style="text-align: center;">Premium Requests</h1>
+    
+    <div class="title" style=" margin-left : 30%; display : flex; flex-wrap : wrap; text-align: center; margin-top : 2%;">
+        <i class="fas fa-dollar-sign fa-5x "></i>
+        <h1 style="margin-top : 15px; margin-left : 2%;;">Premium requests</h1>
+    
+    </div>
+    <hr>
 
     @forelse($data as $premium)
     <div class="reservations">

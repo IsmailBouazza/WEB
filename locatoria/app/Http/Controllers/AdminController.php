@@ -42,5 +42,13 @@ class AdminController extends Controller
             ]);
     }
 
+    //all items 
+
+    public function index(){
+
+        $items = Item::all()->sortByDesc('created_at');
+        return view('admin.items')->with('items', $items);
+    }
+
 
 }

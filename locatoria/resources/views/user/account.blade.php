@@ -1,27 +1,19 @@
 @extends('layouts.app')
 <!-- link css -->
 <link href="{{ asset('css/account.css') }}" rel="stylesheet">
-<link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <!--  -->
 @section('content')
 
-<br><br><br>
-    
-    <div class="nav">
-        <div class="mini-block">
-            <img src="{{asset('storage/'.$user->picture)}}" class="img">
-            <div class="s-nav">
-                <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
-                <a href="{{ url('/items/myitems/'.$user->id) }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-shopping-cart" style="margin-right: 7px;"></i>My items</button></a>
-                <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-check-square" style="margin-right: 7px;"></i>Reservations</button></a>
-                <a href="#"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorites</button></a>
-                </i><a href="{{ url('/user/'.$user->id.'/edit') }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-edit" style="margin-right: 7px;"></i>Update Profile</button></a>
-            </div>
-        </div>
-    </div>
+@include('inc.sidebar')
 
-    <div class="block">
-        <div class="info row">
+
+  <!-- sidebar-wrapper  -->
+  <main class="page-content">
+    <div class="container-fluid">
+        <img src="{{asset('images/profile.png')}}" style="width: 100px; height:100px">
+        <h2>Profile</h2>
+        <hr>
+        <div class="row">  
             
                 <div class="col-md-6 mb-3">
                     <label for="name">Your Name</label>
@@ -79,13 +71,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
-                    <label for="password">Password</label>
-                    <input type="text" class="form-control" id="password" value="{{$user->password}}" readonly>
-                    <div class="invalid-feedback">
-                        Valid password is required.
-                    </div>
-                </div>
                 
                
                
@@ -94,4 +79,8 @@
         </div>   
     </div>
 
+</main>
+<!-- page-content" -->
+
+@include('inc.jsSidebar')
 @endsection

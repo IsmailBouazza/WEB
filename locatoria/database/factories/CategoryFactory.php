@@ -9,6 +9,7 @@ $factory->define(Category::class, function (Faker $faker) {
     return [
         //
         'name' => $faker->name,
-        'description'=>$faker->sentence
+        'description'=>$faker->sentence,
+        'picture'=>$faker->sentence
     ];
 });
