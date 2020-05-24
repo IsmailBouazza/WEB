@@ -40,7 +40,7 @@
         <i class="fa fa-tachometer"></i>
         <span>Brand</span>
     </div>
-    <nav class="bg-dark">
+    <nav class="bg-dark" style=" height: 100%;">
         <ul>
             <li>
                 <a href="{{ asset('/admin') }}">

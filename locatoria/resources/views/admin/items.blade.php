@@ -1,7 +1,8 @@
 @extends('layouts.adminmenu')
 
 @section('css')
-
+  
+  <link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
