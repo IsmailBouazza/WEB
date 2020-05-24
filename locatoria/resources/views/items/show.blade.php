@@ -3,7 +3,8 @@
 <link href="{{ asset('css/item.css') }}" rel="stylesheet">
 <link href="{{ asset('css/lightpick.css') }}" rel="stylesheet">
 <link href="{{ asset('css/account.css') }}" rel="stylesheet">
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!--  -->
 
 <!-- start css mouad-->
@@ -118,7 +119,6 @@
 
 @section('content')
 
-<br><br>
 
 
     @if(!Auth::user() || Auth::user()->id !== $item->user_id)
@@ -128,7 +128,8 @@
         <div class="box-container img-container">
 
             <div class="info-img">
-                <div>{{$item->title}}</div>
+                <div style="margin-left: -30%" >{{$item->title}}   <span  class="float-lg-right" style="font-size:0.9rem;color:green;margin-right: 3%;font-weight: bold " >Price : {{$item->price}}/day MAD</span></div>
+
                 <hr>
             </div>
 
@@ -145,6 +146,7 @@
             </div>
             <hr>
             <div class="desc">{{$item->description}}</div>
+
         </div>
 
         <div class="img-container info-container">
@@ -156,7 +158,8 @@
             <div><i class="fas fa-phone" style="margin-right: 10px"></i></i>{{$user->phone}}</div>
             <div><i class="fas fa-envelope-open-text" style="margin-right: 10px"></i>{{$user->email}}</div>
 
-            <button type="button" class="center btn btn-success">Chat</button>
+            <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%">Chat</button>
+            <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#myModal">Report</button>
             <hr>
 
             <div style="font-size:1.2em">
@@ -178,8 +181,6 @@
 
 
 
-            <hr>
-            <div style="font-size:1.5em"><i class="fas fa-dollar-sign" style="margin-right: 10px;"></i>{{$item->price}}</div>
 
         </div>
 
@@ -264,7 +265,37 @@
 
 
 
-    <!-- comments -->
+        <!-- The Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Reporting an Item</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="reason">Tell us why you want to report this item :</label>
+                            <textarea class="form-control" id="reason" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-dark" id="closemodal" data-dismiss="modal">close</button>
+                        <button type="button" id="report"  class="btn btn-danger" >Report</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- The Modal end -->
+        <!-- comments -->
 
 
         <div class="container bootstrap snippet">
@@ -312,7 +343,7 @@
                 <img src="{{asset('images/item.png')}}" style="width: 100px; height:100px">
                 <h2>Items</h2>
                 <hr>
-                <div class="row"> 
+                <div class="row">
                     <div class="box-container img-container" style="margin-left: 10%; height: 500px;">
                         @if(count($item_photos)>0)
                         <div class="info-img">
@@ -320,17 +351,17 @@
 
                                 <div class="slider-container">
                                     @foreach ($item_photos as $item_photo)
-    
+
                                         <img src="{{asset('/storage/'.$item_photo->photo_path)}}">
-    
+
                                     @endforeach
                                 </div>
-    
+
                                 <div class="slider-controls">
                                 <span class="control prev">&larr;</span>
                                 <span class="control next">&rarr;</span>
                                 </div>
-    
+
                             </div>
                             @else
                                 <p>NO PHOTS!</p>
@@ -342,47 +373,47 @@
 
 
                             <div style="padding: 20px;" class="col-md-6 mb-3">
-                                <label style="width: 300px; text-align: center;" text-align: center;" for="email">Description</label>
-                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="email" placeholder="{{$item->description}}" value="" required>
+                                <label style="width: 300px; text-align: center; text-align: center;" for="email">Description</label>
+                                <input style="width: 300px; text-align: center; text-align: center;" type="text" class="form-control" id="email" placeholder="{{$item->description}}" value="" required>
                                 <div class="invalid-feedback">
                                     item description .
                                 </div>
                             </div>
 
                             <div style="padding: 20px;" class="col-md-6 mb-3">
-                                <label style="width: 300px; text-align: center;" text-align: center;" for="zip_code">price</label>
-                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="zip_code" placeholder="{{$item->price}}" value="" required>
+                                <label style="width: 300px; text-align: center; text-align: center;" for="zip_code">price</label>
+                                <input style="width: 300px; text-align: center; text-align: center;" type="text" class="form-control" id="zip_code" placeholder="{{$item->price}}" value="" required>
                                 <div class="invalid-feedback">
                                     price.
                                 </div>
                             </div>
 
                             <div style="padding: 20px;" class="col-md-6 mb-3">
-                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">disponibility starts at</label>
-                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_starts}}" value="" required>
+                                <label style="width: 300px; text-align: center; text-align: center;" for="city">disponibility starts at</label>
+                                <input style="width: 300px; text-align: center; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_starts}}" value="" required>
                                 <div class="invalid-feedback">
                                     disponibility starts at.
                                 </div>
                             </div>
                             <div style="padding: 20px;" class="col-md-6 mb-3">
-                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">disponibility ends at</label>
-                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_ends}}" value="" required>
+                                <label style="width: 300px; text-align: center; text-align: center;" for="city">disponibility ends at</label>
+                                <input style="width: 300px; text-align: center; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->dispo_ends}}" value="" required>
                                 <div class="invalid-feedback">
                                     disponibility ends at.
                                 </div>
                             </div>
 
                             <div style="padding: 20px;" class="col-md-6 mb-3">
-                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">created at</label>
-                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->created_at}}" value="" required>
+                                <label style="width: 300px; text-align: center; text-align: center;" for="city">created at</label>
+                                <input style="width: 300px; text-align: center; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->created_at}}" value="" required>
                                 <div class="invalid-feedback">
                                     created_at.
                                 </div>
                             </div>
 
                             <div style="padding: 20px;" class="col-md-6 mb-3">
-                                <label style="width: 300px; text-align: center;" text-align: center;" for="city">updated at</label>
-                                <input style="width: 300px; text-align: center;" text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->updated_at}}" value="" required>
+                                <label style="width: 300px; text-align: center; text-align: center;" for="city">updated at</label>
+                                <input style="width: 300px; text-align: center; text-align: center;" type="text" class="form-control" id="city" placeholder="{{$item->updated_at}}" value="" required>
                                 <div class="invalid-feedback">
                                     updated_at.
                                 </div>
@@ -687,6 +718,29 @@
 
 
     });
+
+    //report item
+
+    $(document).on("click","#report", function () {
+        var reason = $('#reason').val();
+        $('#reason').val("");
+        var token = $("meta[name='csrf-token']").attr("content");
+        if (confirm(" you want to report this item ?")) {
+                $.ajax({
+                    url: "{{ url('/report/'.$item->id) }}",
+                    type: "POST",
+                    data: {"_token": token,'reason':reason},
+                    success: function (msg) {
+                        $("#closemodal").click();
+                        if (msg) {
+                            alert("item reported");
+                            $("#report").prop("disabled", true);
+                        }
+                    }
+                });
+        }
+
+    });
 </script>
 
 <!-- to delete item (mounia) -->
@@ -748,41 +802,41 @@
 
     //  set --n (used for calc in CSS) via JS, after getting
     // .container and the number of child images it holds:
-    
+
     const _C = document.querySelector(".slider-container"),
       N = _C.children.length;
-    
+
     _C.style.setProperty("--n", N);
-    
+
     // detect the direction of the motion between "touchstart" (or "mousedown") event
     // and the "touched" (or "mouseup") event
     // and then update --i (current slide) accordingly
     // and move the container so that the next image in the desired direction moves into the viewport
-    
+
     // on "mousedown"/"touchstart", lock x-coordiate
     // and store it into an initial coordinate variable x0:
     let x0 = null;
     let locked = false;
-    
+
     function lock(e) {
       x0 = unify(e).clientX;
       // remove .smooth class
       _C.classList.toggle("smooth", !(locked = true));
     }
-    
+
     // next, make the images move when the user swipes:
     // was the lock action performed aka is x0 set?
     // if so, read current x coordiante and compare it to x0
     // from the difference between these two determine what to do next
-    
+
     let i = 0; // counter
     let w; //image width
-    
+
     // update image width w on resive
     function size() {
       w = window.innerWidth;
     }
-    
+
     function move(e) {
       if (locked) {
         // set threshold of 20% (if less, do not drag to the next image)
@@ -790,44 +844,44 @@
         let dx = unify(e).clientX - x0,
           s = Math.sign(dx),
           f = +(s * dx / w).toFixed(2);
-    
+
         // Math.sign(dx) returns 1 or -1
         // depending on this, the slider goes backwards or forwards
-    
+
         if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > 0.2) {
           _C.style.setProperty("--i", (i -= s));
           f = 1 - f;
         }
-    
+
         _C.style.setProperty("--tx", "0px");
         _C.style.setProperty("--f", f);
         _C.classList.toggle("smooth", !(locked = false));
         x0 = null;
       }
     }
-    
+
     size();
-    
+
     addEventListener("resize", size, false);
-    
+
     // ===============
     // drag-animation for the slider when it reaches the end
     // ===============
-    
+
     function drag(e) {
       e.preventDefault();
-    
+
       if (locked) {
         _C.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
       }
     }
-    
+
     // ===============
     // prev, next
     // ===============
     let prev = document.querySelector(".prev");
     let next = document.querySelector(".next");
-    
+
     prev.addEventListener("click", () => {
       if (i == 0) {
         console.log("start reached");
@@ -836,27 +890,27 @@
         _C.style.setProperty("--i", i--);
       }
     });
-    
+
     next.addEventListener("click", () => {
       if (i < N) {
         // increase i as long as it's smaller than the number of slides
         _C.style.setProperty("--i", i++);
       }
     });
-    
+
     // ===============
     // slider event listeners for mouse and touch (start, move, end)
     // ===============
-    
+
     _C.addEventListener("mousemove", drag, false);
     _C.addEventListener("touchmove", drag, false);
-    
+
     _C.addEventListener("mousedown", lock, false);
     _C.addEventListener("touchstart", lock, false);
-    
+
     _C.addEventListener("mouseup", move, false);
     _C.addEventListener("touchend", move, false);
-    
+
     // override Edge swipe behaviour
     _C.addEventListener(
       "touchmove",
@@ -865,14 +919,14 @@
       },
       false
     );
-    
+
     // unify touch and click cases:
     function unify(e) {
       return e.changedTouches ? e.changedTouches[0] : e;
     }
-    
+
     </script>
-    
+
     @endsection
-    
+
 

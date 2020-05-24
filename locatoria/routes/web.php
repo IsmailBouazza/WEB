@@ -31,6 +31,7 @@ Route::put('/Item/{id}/delete','ItemController@destroy')->name('Item.delete');
 Route::post('/addToFavorites/{id}','FavoriteController@addToFavorites');
 Route::get('myfavorites','FavoriteController@showMyFavorites');
 Route::post('myfavorites/{id}','FavoriteController@destroyfavorite');
+Route::post('/report/{id}','ItemReportController@report');
 
 /*  Item Photo  */
 
