@@ -580,7 +580,7 @@
                         $("#closemodal").click();
                         if (msg) {
                             alert("item reported");
-
+                            $("#report").prop("disabled", true);
                         }
                     }
                 });
