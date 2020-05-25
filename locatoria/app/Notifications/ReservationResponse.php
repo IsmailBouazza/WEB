@@ -12,15 +12,17 @@ class ReservationResponse extends Notification
     use Queueable;
 
     public $reservation_id;
+    public $response; // true or false
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($reser_id,$response)
     {
-        //
+        $this->reservation_id = $reser_id;
+        $this->response = $response;
     }
 
     /**
@@ -31,7 +33,7 @@ class ReservationResponse extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail','database'];
     }
 
     /**

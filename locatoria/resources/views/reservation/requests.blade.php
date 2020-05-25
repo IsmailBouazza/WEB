@@ -44,7 +44,7 @@
             }
         </style>
 
-            @if( $reservations->count() > 0 && ! $reservations->first()->read)
+            @if( $reservations->count() > 0 && (! $reservations->first()->read))
 
             <hr class="style-two">
             <div class="code">

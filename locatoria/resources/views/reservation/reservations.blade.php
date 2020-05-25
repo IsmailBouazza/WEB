@@ -21,7 +21,7 @@
     </div>
 
     <div class="reservations">
-        @if($user->reservations->count() > 0)
+        @if($user->reservationsresponse->count() > 0)
             @foreach($user->reservations as $reservation)
 
                 <div class="res-container" id="{{$reservation->id}}">

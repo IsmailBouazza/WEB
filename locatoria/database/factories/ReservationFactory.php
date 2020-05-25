@@ -14,8 +14,6 @@ $factory->define(Reservation::class, function (Faker $faker) {
         'status'=>0,
         'total_price'=>$faker->randomFloat(2,0,300),
         'date_start'=>$faker->dateTime,
-        'date_end'=>$faker->dateTime,
-        'user_read'=>0,
-        'user_owner_read'=>0
+        'date_end'=>$faker->dateTime
     ];
 });
