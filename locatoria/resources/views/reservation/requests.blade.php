@@ -65,23 +65,35 @@
                     </div>
                     <div class="flex2" style="width: 150px;">
                         <div style="width:100%;  text-align:center;">
-                            <span style="font-size: 1.5em"><u>Name :</u><br></span>
-                            <span style="font-size: 1em">{{ $reservation->user_id->name }}<br><br></span>
-                            <span style="font-size: 1.5em"><u>Email :</u><br></span>
-                            <span style="font-size: 1em">{{ $reservation->user_id->email }}<br></span>
+                            @if($reservation->status == 0)
+                                <span style="font-size: 1.5em"><u>Name :</u><br></span>
+                                <span style="font-size: 1em">{{ $reservation->user_id->name }}<br><br></span>
+                                <span style="font-size: 1.5em"><u>city :</u><br></span>
+                                <span style="font-size: 1em">{{ $reservation->user_id->city }}<br></span>
+                            @else
+                                <span style="font-size: 1.5em"><u>Email :</u><br></span>
+                                <span style="font-size: 1em">{{ $reservation->user_id->email }}<br></span><br>
+                                <span style="font-size: 1.5em"><u>Phone :</u><br></span>
+                                <span style="font-size: 1em">{{ $reservation->user_id->phone }}<br></span>
+                            @endif
+                            
                         </div>
                     </div>
                     <div class="flex3" style="width: 150px;">
                         <div style="width:100%; height:10px; text-align:center;">
                             <span style="font-size: 1.5em"><u>Date Dispo :</u><br></span>
-                            <span style="font-size: 1em">
-                                Start : {{$reservation->date_start}}<br>
-                                End : {{$reservation->date_end}}
-                            </span>
+                            @if($reservation->status == 0)
+                                <span style="font-size: 1em">
+                                    Start : {{$reservation->date_start}}<br>
+                                    End : {{$reservation->date_end}}
+                                </span>
+                            @else
+                                <span style="font-size: 1em">Renting period ...
+                            @endif
                         </div>
                         <div style="width:100%; font-size: 1.5em; height:10px; text-align:center; margin-top:80px">
                             <u>Total Price</u><br>
-                            <small style="font-size: 0.8em;">{{$reservation->total_price}} $</small>
+                            <small style="font-size: 0.8em;">{{$reservation->total_price}} MAD</small>
                         </div>
                     </div>
                     <div class="flex4">
@@ -101,10 +113,11 @@
                                 @method('PUT')
                             </form>
                         @else
-                            <span style="color: #000000; font-weight: bold;">The reservation is already accepted !!</span>
+                            <span style="color: #000000; font-weight: bold;">The request is already accepted !!</span>
                         @endif
                 </div>
                 </div>
+
 
             @empty
 
@@ -118,6 +131,11 @@
 
 
         </div>
+
+
+
+
+
 
 
     <!-- accept or refuse reservation with js -->

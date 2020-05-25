@@ -164,7 +164,7 @@
                         <figcaption class="product__description">
                             <h4>{{$item->title}}</h4>
                             <span class="price">
-                              {{$item->price}} Dh
+                              {{$item->price}} DH
                               @if(Auth::user())
                                   @if(Auth::user()->id == $item->user_id)
                                     <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>
