@@ -44,7 +44,7 @@
             }
         </style>
 
-            @if( ! $reservations->first()->announceviewed())
+            @if( $reservations->count() > 0 && ! $reservations->first()->read)
 
             <hr class="style-two">
             <div class="code">
@@ -53,7 +53,7 @@
             @endif
         @forelse($reservations as $reservation)
 
-            <?php if ($i==0 && $reservation->announceviewed()){
+            <?php if ($i==0 && $reservation->read){
 
                 echo "<hr class=\"style-two\">
                      <div class=\"code\">
