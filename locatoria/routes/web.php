@@ -89,3 +89,9 @@ Route::post('/search', 'SearchController@showResults');
 Route::get('/item/{id}','SearchController@showItem');
 
 
+
+
+/*Comment*/
+Route::post('comment','ItemCommentController@store');
+
+
