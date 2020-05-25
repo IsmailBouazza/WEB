@@ -13,12 +13,12 @@ class Favorite extends Model
     public function item(){
 
         return $this->hasMany(Item::class);
-        
+
     }
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
- 
+
 }

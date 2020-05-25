@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/email-send';
 
     /**
      * Create a new controller instance.
@@ -96,9 +96,9 @@ class RegisterController extends Controller
             $imageName = $user->id.'_picture'.'.'.$extension;
             $picturePath = $data['picture']->storeAs($user->id, $imageName,'public');
             $picture = Image::make(public_path("storage/{$picturePath}"))->resize(250,200);
-
             $user->picture = $picturePath;
             $user->save();
+
         }
 
         return $user;
