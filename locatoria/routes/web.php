@@ -62,6 +62,14 @@ Route::get('/premium','ItemPremiumController@request');
 Route::put('/premium/{id}/approve','ItemPremiumController@approval')->name('premium.approve');
 Route::put('/premium/{id}/refuse','ItemPremiumController@destroy')->name('premium.refuse');
 
+//admin reported items
+
+Route::get('/reported','ItemReportController@show');
+
+Route::put('/reported/{id}/approve','ItemReportController@approval')->name('reported.approve');
+Route::put('/reported/{id}/refuse','ItemReportController@destroy')->name('reported.refuse'); 
+
+
 // admin delete
 Route::post('/userblockunblock', 'UserController@block');
 //Route::get('/useroperation/{user}', 'UserController@usersajaxfetch');  // for testing

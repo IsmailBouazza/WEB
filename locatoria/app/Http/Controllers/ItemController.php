@@ -230,7 +230,7 @@ class ItemController extends Controller
 
             }
             // check if this if a user favorite item
-
+            if(Auth::check()){
             $NotFavourite = Favorite::select('*')
             ->where('item_id', '=', $id)
             ->where('user_id', '=', Auth::user()->id)
@@ -246,6 +246,15 @@ class ItemController extends Controller
                 'takendates'=>json_encode($takendates),
             ]);
 
+            }
+
+            return view('items.show')->with([
+                'comments'=>$item->comments,
+                'item' => $item,
+                'item_photos' => $item_photos,
+                'user' => $user,
+                'takendates'=>json_encode($takendates),
+            ]);
 
     }
 

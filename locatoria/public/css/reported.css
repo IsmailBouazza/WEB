@@ -1,0 +1,80 @@
+p.msg{
+    font-size: 3em;
+    margin-left: 40%;
+    margin-top: 100px;
+}
+
+div.msg{
+    width: 100%;
+}
+
+.msg small{
+    margin-left: 50%;
+    font-size: 1em;
+}
+
+.res-container{
+    display: flex;
+    width: 80%;
+    height: 220px;
+    padding: 20px;
+    margin-top: 60px;
+    margin-left: 10%;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+
+}
+
+.rescontainer{
+    width: 100%;
+    height: 200px;
+}
+
+
+
+.flex3{
+    width:150px;
+}
+
+
+
+.flex4{
+    width:200px;
+    opacity: 0.8;
+    border-radius: 10%;
+}
+
+
+
+.reservations{
+    width: 100%;
+}
+
+
+
+p.msg{
+    font-size: 1em;
+}
+
+p.msg{
+    font-size: 3em;
+    margin-left: 40%;
+    margin-top: 100px;
+}
+
+div.msg{
+    width: 100%;
+}
+
+.msg small{
+    margin-left: 50%;
+    font-size: 1em;
+}
+
+.img-res{
+    float: right; 
+    margin-right: 15%; 
+    margin-top: 50px; 
+    font-size: 2.5em;
+
+}
