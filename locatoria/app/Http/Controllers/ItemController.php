@@ -46,7 +46,7 @@ class ItemController extends Controller
             $mostvieweds = MostViewed::select('item_id', DB::raw('count(*) as total'))->groupBy('item_id')->orderBy('total','DESC')->take(6)->get();
             $id_mostviewed = array();
                 foreach ($mostvieweds as $mostviewed){
-                    
+
                     $id_mostviewed[] = $mostviewed->item_id;
 
                 }
@@ -231,17 +231,17 @@ class ItemController extends Controller
             }
             // check if this if a user favorite item
            if(Auth::check()){
-                $NotFavourite = Favorite::select('*')
-                ->where('item_id', '=', $id)
-                ->where('user_id', '=', Auth::user()->id)
-                ->get()->isEmpty();
-                return view('items.show')->with([
-                    'comments'=>$item->comments,
-                    'item' => $item,
-                    'NotFavourite' => $NotFavourite,
-                    'item_photos' => $item_photos,
-                    'user' => $user,
-                    'takendates'=>json_encode($takendates),
+            $NotFavourite = Favorite::select('*')
+            ->where('item_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->id)
+            ->get()->isEmpty();
+               return view('items.show')->with([
+                   'comments'=>$item->comments,
+                   'item' => $item,
+                   'NotFavourite' => $NotFavourite,
+                   'item_photos' => $item_photos,
+                   'user' => $user,
+                   'takendates'=>json_encode($takendates),
                ]);
            }
 
@@ -252,6 +252,8 @@ class ItemController extends Controller
                 'user' => $user,
                 'takendates'=>json_encode($takendates),
             ]);
+
+            
 
     }
 

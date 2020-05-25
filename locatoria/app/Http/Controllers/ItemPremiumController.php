@@ -25,6 +25,7 @@ class ItemPremiumController extends Controller
         return view('premiums.index')->with('items_premium',$items_premium);
     }
 
+    //display all premium requests
     public function request(){
 
 
@@ -37,6 +38,8 @@ class ItemPremiumController extends Controller
             return view('admin/premium', compact('data'));
 
     }
+
+    
 
     //accept premium request
     public function approval($id)

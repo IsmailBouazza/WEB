@@ -144,8 +144,7 @@
             <hr>
             <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
             <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>
-            <div><i class="fas fa-phone" style="margin-right: 10px"></i></i>{{$user->phone}}</div>
-            <div><i class="fas fa-envelope-open-text" style="margin-right: 10px"></i>{{$user->email}}</div>
+        
 
             <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%">Chat</button>
             <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#myModal">Report</button>
@@ -154,18 +153,18 @@
             <div style="font-size:1.2em">
                     @if(Auth::check())
                         {{-- $NotFavourite return false if the item is favorite--}}
-                         @if($NotFavourite)
+                        @if($NotFavourite)
                             <button id="favbtn" class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgba(253,32,32,0.64)"></i> <br>
-                                Add this item to your favorites</button>
-                         @else
-                              <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgb(253,32,32)"></i> <br>
-                                  This item is one of your favorites</button>
-                         @endif
+                            Add this item to your favorites</button>
+                        @else
+                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgb(253,32,32)"></i> <br>
+                            This item is one of your favorites</button>
+                        @endif
 
                     @else
-                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
-                                login to add this item to your favorites</button>
-                      @endif
+                            <a href="{{url('/login')}}"><button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
+                            login to add this item to your favorites</button></a>
+                    @endif
             </div>
 
 
@@ -333,7 +332,7 @@
                 <h2>Items</h2>
                 <hr>
                 <div class="row">
-                    <div class="box-container img-container" style="margin-left: 10%; height: 500px;">
+                    <div class="box-container img-container" style="margin-left: 30%; height: 500px;">
                         @if(count($item_photos)>0)
                         <div class="info-img">
                             <div class="slider-wrapper">
@@ -429,12 +428,12 @@
 
                     @include('inc.jsSidebar')
 
-
+                   
     @endif
 
     @endif
-
-
+            
+    
 
 
 

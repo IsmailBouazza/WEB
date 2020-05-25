@@ -26,7 +26,9 @@
                         </div>
                         <div class="flex2">
                             <div style="width:100%; height:10px; text-align:center;">
-                                <span style="font-size: 1.5em"><u>Item Info</u><br></span>
+                                <span style="font-size: 1.5em"><u>User Info</u><br></span>
+                                <small style="font-size: 1em;">{{$user->email}} </small><br>
+                                <small style="font-size: 1em;">{{$user->phone}} </small>
                             </div>
                         </div>
                         <div class="flex3" >

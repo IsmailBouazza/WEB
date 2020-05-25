@@ -7,18 +7,7 @@
 
 <br><br><br>
     
-   {{-- <div class="nav">
-        <div class="mini-block">
-            <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
-            <div class="s-nav">
-                <a href="{{ url('/user/'.$user->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
-                <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
-                <a href="{{ url('/items/myitems/'.$user->id) }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-shopping-cart" style="margin-right: 7px;"></i>My items</button></a>
-                <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-edit" style="margin-right: 7px;"></i>Reservations</button></a>
-                <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorite</button></a>
-            </div>
-        </div>
-    </div> --}}
+   
     
     <div class="title" style=" margin-left : 30%; display : flex; flex-wrap : wrap; text-align: center; margin-top : 2%;">
         <i class="fas fa-dollar-sign fa-5x "></i>
@@ -26,9 +15,9 @@
     
     </div>
     <hr>
+    <div class="reservations">
 
     @forelse($data as $premium)
-    <div class="reservations">
 
             <div class="res-container" style=" width: 80%;">
               

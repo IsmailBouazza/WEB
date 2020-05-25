@@ -1,5 +1,6 @@
 @extends('layouts.app')
 <!-- link css -->
+<link href="{{ asset('css/myitems.css') }}" rel="stylesheet">
 <link href="{{ asset('css/home.css') }}" rel="stylesheet">
 
 <!--  -->
@@ -13,7 +14,6 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </div>
-<h1>Search results</h1>
 @if (count($item)>0)
     @foreach ($item as $result)
     <div id="card" class="card" style="width: 18rem;">
@@ -27,6 +27,9 @@
       </div>
     @endforeach
 @else
-    <p>No results found</p>
+    <div class="msg">
+        <p class="msg">No items found</p>
+        <small>Sorry try latter !!</small> 
+    </div>
 @endif
 @endsection

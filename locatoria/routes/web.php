@@ -46,7 +46,10 @@ Route::resource('ItemPhoto','ItemPhotoController');
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 Route::resource('user', 'UserController');
-
+/* chat */
+Route::get('/chat','MessageController@index');
+Route::get('/chat/{id}', 'MessageController@getMessage')->name('message');
+Route::post('/chat','MessageController@sendMessage');
 
 
 /*  Admin  */
@@ -61,6 +64,14 @@ Route::get('/premium','ItemPremiumController@request');
 
 Route::put('/premium/{id}/approve','ItemPremiumController@approval')->name('premium.approve');
 Route::put('/premium/{id}/refuse','ItemPremiumController@destroy')->name('premium.refuse');
+
+//admin reported items
+
+Route::get('/reported','ItemReportController@show');
+
+Route::put('/reported/{id}/approve','ItemReportController@approval')->name('reported.approve');
+Route::put('/reported/{id}/refuse','ItemReportController@destroy')->name('reported.refuse'); 
+
 
 // admin delete
 Route::post('/userblockunblock', 'UserController@block');
