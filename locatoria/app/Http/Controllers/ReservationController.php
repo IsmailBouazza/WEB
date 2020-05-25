@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Notifications\ReservationRequest;
 use App\Reservation;
 use App\User;
-use Auth;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {
@@ -30,16 +32,18 @@ class ReservationController extends Controller
 
         $res = new Reservation();
 
+
         $res->date_start = request('date_start');
         $res->date_end = request('date_end');
         $res->total_price = request('total_price');
         $res->item_id = request('item_id');
-        $res->user_read = 1;
-        $res->user_owner_read = 0;
         $res->user_id = Auth::user()->id;
         $res->user_owner_id = Item::find(request('item_id'))->user->id;
 
-        $res->save();
+        $var = $res->save();
+
+        User::find($res->user_owner_id)->notify(new ReservationRequest($res->id)) ;
+
         // better to redirect to /Myreservations
         return redirect('/home');
 
@@ -68,31 +72,37 @@ class ReservationController extends Controller
         if(!Auth::user()){
             return redirect('/login');
         }
-        $reservations = Auth::user()->announces;
+        $reservations = Auth::user()->reservationsrequest;
 
-        // map 1 : you should return this collection because announces is set as viewd
-        // map 2 : you shoud return information about the user sendind the request
+        if ($reservations->count() > 0 ){
+        // map   : you should return this collection because announces is set as viewd
+        //       : you shoud return information about the user sendind the request
         // sortBy : the first one will be unviewed anounces
-        $reservations2 = $reservations->map(function ($reservation , $key){
-                    if(! $reservation->announceviewed()){
-                        $reservation->announceread();
-                        $reservation->user_owner_read = 0;
-                    }
-                    return $reservation;
-            })
-            ->map(function ($reservation){
+        $reservations2 = $reservations->map(function ($reservation){
 
                     $reservation->user_id = User::find($reservation->user_id);
+
+                    // this is the notification associated with this reservation
+                    $notification = Auth::user()->notifications()->where('data->reservation_id',$reservation->id)->first();
+
+
+                    $reservation->read = $notification->read() ? true : false;
+
+                    $notification->markAsRead();
+
                     return $reservation;
             })
             ->sortBy(function($reservation){
-                    return $reservation->user_owner_read;
+                    return $reservation->read;
             })
             ->values();
 
+        }else{
+            $reservations2 = $reservations;
+        }
 
-        // here I returned the anounces as unviewed cause we need to separate it later
-        return view('reservation.announces' , [
+        // here I returned the requests as unviewed cause we need to separate it later
+        return view('reservation.requests' , [
             'reservations'=>$reservations2,
         ]);
 
@@ -127,16 +137,18 @@ class ReservationController extends Controller
     public function reservationsajaxfetch()
     {
 
-        $count1 = request()->user()->reservations->where('user_read',0)
-                                                    ->where('status',0)
-                                                    ->count(); // count my reservation
+        $count = Auth::user()->unreadNotifications->count();
 
-        $count2 = request()->user()->announces->where('user_owner_read',0)
-                                                ->where('status',0)
-                                                ->count(); // count my own announce
+        $count1 = request()->user()->unreadNotifications
+                                    ->where('type','App\Notifications\ReservationRequest')
+                                    ->count(); // count the requests that i receive from other clients
+
+        $count2 = request()->user()->unreadNotifications
+                                    ->where('type','App\Notifications\ReservationResponse')
+                                    ->count(); // count the response that i receive from other landlords
 
         $data = array(
-                        'count' => $count1+$count2,
+                        'count' => $count,
                         'count1' => $count1,
                         'count2' => $count2
                     );
@@ -156,10 +168,10 @@ class ReservationController extends Controller
 
                 $today = date('Y-m-d');
                 $d2= new DateTime($today);
-                
+
                 $interval= $start_date->diff($d2);
                 $hoursleft = $interval->days * 24;
-              
+
                 if($hoursleft<=24){
                     echo 'this reservation will start within 24h, you can not cancel it.for more information, please contact the owner';
                 }

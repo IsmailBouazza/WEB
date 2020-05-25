@@ -1,21 +1,21 @@
 <?php
 
 namespace App;
- 
+
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
 
     protected $fillable = [
-        'category_id','user_id', 'title', 'status','description', 'thumbnail_path', 
+        'category_id','user_id', 'title', 'status','description', 'thumbnail_path',
     ];
 
-   
+
 
     protected $guarded = [];
 
-   
+
 
     public function category(){
         return $this->belongsTo(Category::class);
@@ -25,11 +25,11 @@ class Item extends Model
         'status' => '1'
     ];
 
-  
+
     protected $table = 'items';
 
 
-   
+
     public function favorites(){
 
         return $this->hasMany(User::class);
@@ -37,12 +37,12 @@ class Item extends Model
     }
 
 
+    // $item->comments will return comments on this item
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');
     }
 
-    
 
     public function photos(){
         return $this->hasMany(ItemPhoto::class);
