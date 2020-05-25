@@ -46,7 +46,10 @@ Route::resource('ItemPhoto','ItemPhotoController');
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 Route::resource('user', 'UserController');
-
+/* chat */
+Route::get('/chat','MessageController@index');
+Route::get('/chat/{id}', 'MessageController@getMessage')->name('message');
+Route::post('/chat','MessageController@sendMessage');
 
 
 /*  Admin  */
