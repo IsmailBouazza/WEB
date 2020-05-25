@@ -127,13 +127,13 @@ button:hover{
     margin-top: 4%;
 }
 
-div.modal-content{
+div.modal-content{ /*
     margin: 4% auto 15% auto;
     border: 1px solid #888;
     width: 30%;
     padding-bottom: 30px;
     background-color: rgb(202, 202, 202);
-    text-align: center;
+    text-align: center;*/
 }
 
 

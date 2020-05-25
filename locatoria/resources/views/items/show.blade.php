@@ -144,10 +144,10 @@
             <hr>
             <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
             <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>
-        
 
-            <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%">Chat</button>
-            <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#myModal">Report</button>
+
+            <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%" data-toggle="modal" data-target="#chatmodal">Chat</button>
+            <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#reportmodal">Report</button>
             <hr>
 
             <div style="font-size:1.2em">
@@ -253,8 +253,8 @@
 
 
 
-        <!-- The Modal -->
-        <div class="modal" id="myModal">
+        <!-- The Modal for report -->
+        <div class="modal" id="reportmodal">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -428,14 +428,12 @@
 
                     @include('inc.jsSidebar')
 
-                   
-    @endif
 
     @endif
-            
-    
 
+    @endif
 
+                @include('inc.Chatbutton')
 
 
 
@@ -547,6 +545,7 @@
                 });
         }
     });
+
 </script>
 
 <!-- to delete item (mounia) -->
