@@ -307,8 +307,25 @@
                             @empty
                                 <p style="font-size: 1.5em">No comment yet !!</p>
                             @endforelse
+                            
+                            @if(auth()->check())
+                                <form action="{{url('comment')}}" method="POST">
+                                    @csrf
+                                        <div class="form-group">
+                                            <label for="">Rate it</label>
+                                            <input type="text" class="form-control" name="rating" id="" placeholder="Rating the product">
+                                        </div>
 
-
+                                        <div class="form-group">
+                                            <label for="">Comment</label>
+                                            <input type="text" class="form-control" name="comment" id="" placeholder="Enter your comment here">
+                                        </div>
+                                        <input type="hidden" name="item_id" value="{{$item->id}}">
+                                        <button type="submit" class="btn btn-primary">Comment</button>
+                                </form>
+                            @else
+                                <a href="/login"></a>
+                            @endif
                         </ul>
                     </div>
                 </div>
