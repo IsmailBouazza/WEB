@@ -1,50 +1,5 @@
 <!-- Footer -->
-<footer class="page-footer font-small blue-grey lighten-5" style="position:relative; bottom:0px; width:100%; height: 200px; margin-top:200px">
-
-  <div class="bg-dark" style="color: white">
-    <div class="container">
-
-      <!-- Grid row-->
-      <div class="row py-4 d-flex align-items-center">
-
-        <!-- Grid column -->
-        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-          <h6 class="mb-0">Get connected with us on social networks!</h6>
-        </div>
-        <!-- Grid column -->
-
-        <!-- Grid column -->
-        <div class="col-md-6 col-lg-7 text-center text-md-right">
-
-          <!-- Facebook -->
-          <a class="fb-ic">
-            <i class="fab fa-facebook-f white-text mr-4"> </i>
-          </a>
-          <!-- Twitter -->
-          <a class="tw-ic">
-            <i class="fab fa-twitter white-text mr-4"> </i>
-          </a>
-          <!-- Google +-->
-          <a class="gplus-ic">
-            <i class="fab fa-google-plus-g white-text mr-4"> </i>
-          </a>
-          <!--Linkedin -->
-          <a class="li-ic">
-            <i class="fab fa-linkedin-in white-text mr-4"> </i>
-          </a>
-          <!--Instagram-->
-          <a class="ins-ic">
-            <i class="fab fa-instagram white-text"> </i>
-          </a>
-
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row-->
-
-    </div>
-  </div>
+<footer class="page-footer font-small blue-grey lighten-5" style="position:relative; bottom:0px; width:80%; height: 100px; margin-top:200px; margin-left:10%">
 
   <!-- Footer Links -->
   <div class="container text-center text-md-left mt-5">
@@ -129,13 +84,13 @@
   <div class="footer-copyright text-center text-black-50 py-3">
     <ul class="list-unstyled list-inline text-center py-2">
       <li class="list-inline-item">
-        <h6 class="mb-1" style="color: white">Contact</h6>
+        <h6 class="mb-1" style="color: black">Contact</h6>
       </li>
      
     </ul>
     <!-- Copyright -->
    
-      <a style="color: white">  © 2020 Copyright : Locatoria Team</a>
+      <a style="color: black">  © 2020 Copyright : Locatoria Team</a>
   </div>
   <!-- Copyright -->
 

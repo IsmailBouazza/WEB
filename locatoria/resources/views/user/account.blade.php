@@ -71,15 +71,7 @@
                     </div>
                 </div>
 
-                
-               
-               
-            
 
-        </div>   
-    </div>
-
-</main>
 <!-- page-content" -->
 
 @include('inc.jsSidebar')
