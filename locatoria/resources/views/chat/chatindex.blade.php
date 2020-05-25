@@ -99,8 +99,8 @@
                         });
 
                         $('.user').click(function () {
-                            $('.user').removeClass('active');
-                            $(this).addClass('active');
+                            $('.user').removeClass('activeuser');
+                            $(this).addClass('activeuser');
                             $(this).find('.pending').remove();
                             receiver_id = $(this).attr('id');
 

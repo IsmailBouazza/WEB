@@ -94,10 +94,10 @@ li {
     color: #777777;
     font-size: 12px;
 }
-.active {
+.activeuser {
     background: #eeeeee;
 }
-input[type=text] {
+#messageflied {
     width: 100%;
     padding: 12px 20px;
     margin: 15px 0 0 0;
@@ -107,6 +107,6 @@ input[type=text] {
     outline: none;
     border: 1px solid #cccccc;
 }
-input[type=text]:focus {
+#messageflied :focus {
     border: 1px solid #aaaaaa;
 }
