@@ -4,6 +4,7 @@
 <link href="{{ asset('css/account.css') }}" rel="stylesheet">
 <!--  -->
 @section('content')
+
 @include('inc.sidebar')
 
 
@@ -13,7 +14,7 @@
         <img src="{{asset('images/reserv.jpg')}}" style="width: 100px; height:100px">
         <h2>Reservations</h2>
         <hr>
-        <div class="row">  
+        <div class="row">
         <div class="reservations">
             @if($user->reservations->count() > 0)
                 @foreach($user->reservations as $reservation)
@@ -23,6 +24,7 @@
                             <a href="{{url('/Item/'.$reservation->item->id)}}">
                                 <img src="{{asset('/storage/' .$reservation->item->thumbnail_path )}}" class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
                             </a>
+
                         </div>
                         <div class="flex2">
                             <div style="width:100%; height:10px; text-align:center;">

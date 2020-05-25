@@ -14,50 +14,49 @@
         <img class="top" src="{{asset('images/notif.png')}}" style="width: 100px; height:100px">
         <h2>Requests</h2>
         <hr>
-        <div class="row">  
+        <div class="row">
 
+    <div class="reservations">
 
-        <div class="reservations">
+        <?php $i = 0; ?>
 
-            <?php $i = 0; ?>
+        <style>
+            hr.style-two {
+                border: 0;
+                height: 2px;
+                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+            }
+            .code {
+                color: #333;
+                position: relative;
+                overflow: hidden;
+            }
+            .code h2 {
+                text-align: left;
+                color: #ccc;
+                font: 25px monaco,mono-space;
+                padding-left: 300px;
+            }
+        </style>
 
-            <style>
-                hr.style-two {
-                    border: 0;
-                    height: 2px;
-                    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-                }
-                .code {
-                    color: #333;
-                    position: relative;
-                    overflow: hidden;
-                }
-                .code h2 {
-                    text-align: left;
-                    color: #ccc;
-                    font: 25px monaco,mono-space;
-                    padding-left: 300px;
-                }
-            </style>
+            @if( $reservations->count() > 0 && (! $reservations->first()->read))
 
-                @if( ! $reservations->first()->announceviewed())
+            <hr class="style-two">
+            <div class="code">
+                <h2>New</h2>
+            </div>
+            @endif
+        @forelse($reservations as $reservation)
 
-                <hr class="style-two">
-                <div class="code">
-                    <h2>New</h2>
-                </div>
-                @endif
-            @forelse($reservations as $reservation)
+            <?php if ($i==0 && $reservation->read){
 
-                <?php if ($i==0 && $reservation->announceviewed()){
-
-                    echo "<hr class=\"style-two\">
-                        <div class=\"code\">
-                            <h2>Old</h2>
-                        </div>";
-                            $i++;
-                        }
-                ?>
+                echo "<hr class=\"style-two\">
+                     <div class=\"code\">
+                        <h2>Old</h2>
+                     </div>";
+                        $i++;
+                    }
+            ?>
 
                 <div class="res-container" style="width: 80%; margin-left:10%">
 
