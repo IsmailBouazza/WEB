@@ -60,6 +60,36 @@
 
                 <div class="res-container" style="width: 80%; margin-left:10%">
 
+                    <!-- The Modal  -->
+                    <div class="modal" id="modal{{$reservation->user_id->id}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Sending a message</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="chat">write your message:</label>
+                                        <textarea class="form-control" id="chat" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-dark" id="closemodal" data-dismiss="modal">close</button>
+                                    <button type="button" id="{{$reservation->user_id->id}}" onclick="test(this)" class="btn btn-danger" >Send</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- The Modal end -->
                     <div class="card flex1" style="width: 150px; height: 150px; border-radius: 50%">
                         <img src="{{asset('/storage/' .$reservation->item->thumbnail_path )}}" style="border-radius: 50%" class="bd-placeholder-img card-img-top" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img">
                     </div>
@@ -94,12 +124,14 @@
                                 @csrf
                                 @method('PUT')
                             </form>
-
                             <button type="button" class="btn btn-danger" onclick="refuseReservation({{ $reservation->id }})">Refuse</button>
+                            <button type="button" class="btn btn-success mt-2" style="width: 100%" data-toggle="modal" data-target="#modal{{$reservation->user_id->id}}">Chat</button>
                             <form method="post" action="{{ url('MyRequests/' .$reservation->id. '/refuse') }}" id="refuse-form" style="display: none">
                                 @csrf
                                 @method('PUT')
                             </form>
+
+
                         @else
                             <span style="color: #000000; font-weight: bold;">The reservation is already accepted !!</span>
                         @endif
@@ -209,7 +241,36 @@
                 }
             })
         }
+
+        function test(btn) {
+
+            var receiver_id= $(btn).attr('id');
+            var message = $('#chat').val();
+
+            $('#chat').val("");
+            var token = $("meta[name='csrf-token']").attr("content");
+
+            $.ajax({
+                url: "{{ url('/chat')}}",
+                type: "POST",
+                data: {"_token": token,
+                    'message':message,
+                    'receiver_id':receiver_id},
+                success: function () {
+                    alert("message sent")
+                    $("#closemodal").click();
+
+                }
+            });
+
+        }
+
+
+
+
     </script>
+
+
 
 @include('inc.jsSidebar')
 

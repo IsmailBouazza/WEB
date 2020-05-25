@@ -8,7 +8,6 @@
 @include('inc.sidebar')
 
 
-
     <!-- sidebar-wrapper  -->
     <main class="page-content">
         <div class="container-fluid">
@@ -70,8 +69,8 @@
                     @endif
                 </div>
 
-                
-                
+
+
 @include('inc.jsSidebar')
 
 
