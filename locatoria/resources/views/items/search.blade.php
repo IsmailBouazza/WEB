@@ -18,27 +18,29 @@
     <div class="wrapper">
         @if(($item->count()) > 0)
             @foreach($item as $result)
-                <div class="product">
-                    <figure class="product__card">
-                        <div class="product__image">
-                            <img src="{{asset('/storage/'.$result->thumbnail_path )}}" alt="image">
-                            <div class='product__btns'>
-                                <a href="{{ url('Item/'.$result->id) }}">quick view</a>
+                @if($result->status == '1')
+                    <div class="product">
+                        <figure class="product__card">
+                            <div class="product__image">
+                                <img src="{{asset('/storage/'.$result->thumbnail_path )}}" alt="image">
+                                <div class='product__btns'>
+                                    <a href="{{ url('Item/'.$result->id) }}">quick view</a>
+                                </div>
                             </div>
-                        </div>
-                        <figcaption class="product__description">
-                            <h4>{{$result->title}}</h4>
-                            <span class="price">
-                              {{$result->price}} DH
-                              @if(Auth::user())
-                                  @if(Auth::user()->id == $result->user_id)
-                                    <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>
-                                  @endif
-                              @endif
-                            </span>
-                        </figcaption>
-                    </figure>
-                </div>
+                            <figcaption class="product__description">
+                                <h4>{{$result->title}}</h4>
+                                <span class="price">
+                                {{$result->price}} DH
+                                @if(Auth::user())
+                                    @if(Auth::user()->id == $result->user_id)
+                                        <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>
+                                    @endif
+                                @endif
+                                </span>
+                            </figcaption>
+                        </figure>
+                    </div>
+                @endif
             @endforeach
         @else
             <div class="msg">
