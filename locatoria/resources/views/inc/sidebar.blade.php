@@ -40,7 +40,7 @@
               </div>
             </li>
             <li class="sidebar">
-              <a href="#">
+              <a href="{{ url('/chat')}}">
                 <i class="fas fa-envelope-open-text"></i>
                 <span>Messages</span>
               </a>

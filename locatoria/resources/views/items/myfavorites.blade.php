@@ -26,14 +26,7 @@
                                         <img src="{{asset('/storage/' .$favorite->thumbnail_path )}}" class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
                                     </a>
                                 </div>
-                                <div class="flex3" >
-                                    <div style="width:100%; height:10px; text-align:center;">
-                                        <span style="font-size: 1.5em"><u>{{$favorite->title}}</u><br></span>
-                                        <span style="font-size: 1em">
-
-                                    </span>
-                                    </div>
-                                </div>
+                                
                                 <div class="flex4 text-center">
                                     <button type="button" id="{{$favorite->id}}btn" class="btn btn-danger">remove this item</button>
                                     <button type="button" class="btn btn-info mt-4">Contact the owner</button>
@@ -68,6 +61,7 @@
                         </div>
                     @endif
                 </div>
+                
 
 
 
