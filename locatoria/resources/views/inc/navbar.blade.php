@@ -167,8 +167,7 @@
 
                           @if(Auth::user())
 
-                              <a class="dropdown-item" href="#">Messages<span class="sr-only">(current)</span></a>
-                              <a class="dropdown-item" href="#">Favorite <span class="sr-only">(current)</span></a>
+                              <a class="dropdown-item" href="{{ url('/chat')}}">Messages<span class="sr-only">(current)</span></a>
 
                               <span class="dotx count1" ></span>
                               <a class="dropdown-item" href="{{url ('/MyAnnounces') }}">Announces </a>
