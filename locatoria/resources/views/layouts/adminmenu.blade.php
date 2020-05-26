@@ -25,7 +25,7 @@
 
 </head>
 <body>
-    <main class="py-4">
+    <main class="pt-4">
         @include('inc.navbar')
         
 
@@ -52,8 +52,14 @@
            
             <li>
                 <a href="{{ asset('/premium') }}">
+                    <span><i class="fas fa-search-dollar"></i></i></span>
+                    <span>Premium requests</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ asset('/premiumitems') }}">
                     <span><i class="fas fa-dollar-sign"></i></i></span>
-                    <span>Premium</span>
+                    <span>Premium items</span>
                 </a>
             </li>
             <li>
@@ -64,7 +70,7 @@
             </li>
             <li>
                 <a href="{{ asset('/items') }}">
-                    <span><i class="fas fa-toolbox"></i></i></span>
+                    <span><i class="fas fa-shopping-cart"></i></i></span>
                     <span>Items</span>
                 </a>
             </li>
@@ -73,13 +79,14 @@
 </div>
 <div class="main-content">
     @yield('content')
-    
+   
 </div>
 
 
 
-</main>
+
 
 </body>
+
 
 </html>

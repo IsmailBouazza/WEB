@@ -64,6 +64,8 @@ Route::get('/items', 'AdminController@index');
 //admin premium
 Route::get('/premium','ItemPremiumController@request');
 
+Route::get('/premiumitems','ItemPremiumController@show');
+
 Route::put('/premium/{id}/approve','ItemPremiumController@approval')->name('premium.approve');
 Route::put('/premium/{id}/refuse','ItemPremiumController@destroy')->name('premium.refuse');
 

@@ -14,6 +14,8 @@ use App\Reservation;
 use App\ItemPremium;
 use App\Favorite;
 use App\MostViewed;
+use App\Comment;
+use App\ItemReport;
 
 use DateTime;
 use DateInterval;
@@ -375,13 +377,19 @@ class ItemController extends Controller
         $reservation = Reservation::Where('item_id', $id);
         $premium = ItemPremium::Where('item_id', $id);
         $favorites = Favorite::Where('item_id', $id);
+        $comments = Comment::Where('commentable_id', $id);
+        $most_view = MostViewed::Where('item_id', $id);
+        $reported = ItemReport::Where('item_id', $id);
         $photos->delete();
         $reservation->delete();
         $premium->delete();
         $favorites->delete();
+        $comments->delete();
+        $most_view->delete();
+        $reported->delete();
         $item->delete();
-
         return redirect('/items/myitems/' . auth()->user()->id)->with('success', 'Item deleted');
-    }
+
+        }
 
 }
