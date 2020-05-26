@@ -11,16 +11,16 @@ class ReportItem extends Notification
 {
     use Queueable;
 
-    public $item_id;
+    public $reported_id;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($item_id)
+    public function __construct($reported_id)
     {
-        $this->item_id = $item_id;
+        $this->reported_id = $reported_id;
     }
 
     /**
@@ -57,7 +57,7 @@ class ReportItem extends Notification
     public function toArray($notifiable)
     {
         return [
-            'item_id'=>$this->item_id,
+            'reported_id'=>$this->reported_id,
         ];
     }
 }
