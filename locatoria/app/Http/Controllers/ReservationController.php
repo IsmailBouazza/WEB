@@ -190,6 +190,8 @@ class ReservationController extends Controller
 
         $reservation = Reservation::find($id);
         $reservation->delete();
+
+        User::find($reservation->user_id)->notify(new ReservationResponse($reservation->id,false)) ;
         return redirect()->back();
 
     }
