@@ -92,7 +92,7 @@ class ReservationController extends Controller
                 // sortBy : the first one will be unviewed anounces
                 $reservations1 = $reservations1->map(function ($reservation){
 
-                    $reservation->user_id = User::find($reservation->user_id);
+                    $reservation->user_owner_id = User::find($reservation->user_owner_id);
 
                     // this is the notification associated with this reservation
                     $notification = Auth::user()->notifications()->where('data->reservation_id',$reservation->id)->first();
@@ -111,6 +111,22 @@ class ReservationController extends Controller
                 ->values();
 
             }
+
+
+
+            if ($reservations2->count() > 0 ){
+                // map   : we need to return the user owner with each reservation
+                $reservations2 = $reservations2->map(function ($reservation){
+
+                    $reservation->user_owner_id = User::find($reservation->user_owner_id);
+
+                    return $reservation;
+                });
+
+            }
+
+
+
 
         }
 

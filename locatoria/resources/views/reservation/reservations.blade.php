@@ -129,8 +129,8 @@
                                 <div class="flex2">
                                     <div style="width:100%; height:10px; text-align:center;">
                                         <span style="font-size: 1.5em"><u>User Info</u><br></span>
-                                        <small style="font-size: 1em;">{{$user->email}} </small><br>
-                                        <small style="font-size: 1em;">{{$user->phone}} </small>
+                                        <small style="font-size: 1em;">{{$reservation->user_owner_id->email}} </small><br>
+                                        <small style="font-size: 1em;">{{$reservation->user_owner_id->phone}} </small>
                                     </div>
                                 </div>
                                 <div class="flex3" >
@@ -231,8 +231,19 @@
                                 <div class="flex2">
                                     <div style="width:100%; height:10px; text-align:center;">
                                         <span style="font-size: 1.5em"><u>User Info</u><br></span>
-                                        <small style="font-size: 1em;">{{$user->email}} </small><br>
-                                        <small style="font-size: 1em;">{{$user->phone}} </small>
+
+                                        @if($reservation->status == 0)
+                                            <span style="font-size: 1.5em"><u>Name :</u><br></span>
+                                            <span style="font-size: 1em">{{ $reservation->user_owner_id->name }}<br><br></span>
+                                            <span style="font-size: 1.5em"><u>city :</u><br></span>
+                                            <span style="font-size: 1em">{{ $reservation->user_owner_id->city }}<br></span>
+                                        @else
+                                            <span style="font-size: 1.5em"><u>Email :</u><br></span>
+                                            <span style="font-size: 1em">{{ $reservation->user_owner_id->email }}<br></span><br>
+                                            <span style="font-size: 1.5em"><u>Phone :</u><br></span>
+                                            <span style="font-size: 1em">{{ $reservation->user_owner_id->phone }}<br></span>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="flex3" >
