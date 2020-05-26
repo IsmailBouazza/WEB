@@ -18,47 +18,103 @@
 
     <div class="reservations">
 
-        <?php $i = 0; ?>
 
         <style>
-            hr.style-two {
-                border: 0;
-                height: 2px;
-                background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+
+            /*new tag css*/
+
+            .tags span {
+                display: inline-block;
+                height:24px;
+                line-height:23px;
+                position:relative;
+                margin: 0 12px 8px 0;
+                padding: 0 12px 0 10px;
+                background: #777;
+                -moz-border-radius-bottomleft: 5px;
+                -webkit-border-bottom-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                -moz-border-radius-topleft: 5px;
+                -webkit-border-top-left-radius: 5px;
+                border-top-left-radius: 5px;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                color: #fff;
+                font-size:12px;
+                font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
+                text-decoration: none;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                font-weight: bold;
             }
-            .code {
-                color: #333;
-                position: relative;
-                overflow: hidden;
+
+            .tags span:before {
+                content: "";
+                position: absolute;
+                top: 10px;
+                right: 1px;
+                float: left;
+                width: 5px;
+                height: 5px;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                border-radius: 50%;
+                background: #fff;
+                -moz-box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
+                -webkit-box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
+                box-shadow: -1px -1px 2px rgba(0,0,0,0.4);
             }
-            .code h2 {
-                text-align: left;
-                color: #ccc;
-                font: 25px monaco,mono-space;
-                padding-left: 300px;
+
+            .tags span:after {
+                content: "";
+                position: absolute;
+                top:0;
+                right: -12px;
+                width: 0;
+                height: 0;
+                border-color: transparent transparent transparent #777;
+                border-style: solid;
+                border-width: 12px 0 12px 12px;
             }
+
+            .tags span.color3 {background: #de3f3e;}
+            .tags span.color3:after {border-color: transparent transparent transparent #de3f3e}
+
+            .small span {
+                height: 21px;
+                line-height: 21px;
+                float: none;
+                font-size: 11px;
+            }
+
+            .small span:before {
+                right: 0;
+                top: 8px;
+                border-width: 10px 0 10px 10px;
+            }
+
+            .small span:after {
+                right: -11px;
+                top: 0;
+                border-width: 11px 0 11px 11px;
+            }
+
+            /*end new tag css*/
+
+
+
+
+
         </style>
 
-            @if( $reservations->count() > 0 && (! $reservations->first()->read))
-
-            <hr class="style-two">
-            <div class="code">
-                <h2>New</h2>
-            </div>
-            @endif
         @forelse($reservations as $reservation)
 
-            <?php if ($i==0 && $reservation->read){
-
-                echo "<hr class=\"style-two\">
-                     <div class=\"code\">
-                        <h2>Old</h2>
-                     </div>";
-                        $i++;
-                    }
-            ?>
 
                 <div class="res-container" style="width: 80%; margin-left:10%">
+
+                    @if( ! $reservation->read)
+                        <div class="tags">
+                            <span class="color3">New</span>
+                        </div>
+                    @endif
 
                     <!-- The Modal  -->
                     <div class="modal" id="modal{{$reservation->user_id->id}}">
@@ -106,7 +162,7 @@
                                 <span style="font-size: 1.5em"><u>Phone :</u><br></span>
                                 <span style="font-size: 1em">{{ $reservation->user_id->phone }}<br></span>
                             @endif
-                            
+
                         </div>
                     </div>
                     <div class="flex3" style="width: 150px;">
