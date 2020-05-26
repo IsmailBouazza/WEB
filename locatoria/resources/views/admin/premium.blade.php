@@ -1,42 +1,39 @@
 @extends('layouts.adminmenu')
 <!-- link css -->
-<link href="{{ asset('css/premiumreq.css') }}" rel="stylesheet">
-<link href="{{ asset('css/account.css') }}" rel="stylesheet">
+<link href="{{ asset('css/reported.css') }}" rel="stylesheet">
+
 <!--  -->
+@section('css')
+
+    <style>
+        hr.style-two {
+            border: 0;
+            height: 2px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+        }
+       
+    </style>
+
+@endsection
+
 @section('content')
 
-<br><br><br>
-    
-   {{-- <div class="nav">
-        <div class="mini-block">
-            <img src="{{asset('storage/'.$user->picture)}}" style="width:150px; height:150px; border-radius:50%; margin-left:100px;">
-            <div class="s-nav">
-                <a href="{{ url('/user/'.$user->id) }}"><button type="button" class="butt btn btn-secondary"><i class="fas fa-home" style="margin-right: 7px;"></i>My Profile</button></a>
-                <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-envelope-open-text" style="margin-right: 7px;"></i>My messages</button></a>
-                <a href="{{ url('/items/myitems/'.$user->id) }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-shopping-cart" style="margin-right: 7px;"></i>My items</button></a>
-                <a href="{{ url('/Reservation') }}"><button type="button"  class="butt btn btn-secondary"><i class="fas fa-edit" style="margin-right: 7px;"></i>Reservations</button></a>
-                <a href="#"><button type="button" class="butt btn btn-secondary"><i class="fas fa-heart" style="margin-right: 7px;"></i>My favorite</button></a>
-            </div>
-        </div>
-    </div> --}}
-    
-    <div class="title" style=" margin-left : 30%; display : flex; flex-wrap : wrap; text-align: center; margin-top : 2%;">
-        <i class="fas fa-dollar-sign fa-5x "></i>
-        <h1 style="margin-top : 15px; margin-left : 2%;;">Premium requests</h1>
-    
-    </div>
-    <hr>
-
-    @forelse($data as $premium)
-    <div class="reservations">
-
-            <div class="res-container" style=" width: 80%;">
-              
-                <div class="card flex1" style="width: 150px; height: 150px; border-radius: 50%">
-                    <img src="{{asset('/storage/' .$premium->thumbnail_path )}}" style="border-radius: 50%" class="bd-placeholder-img card-img-top" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"> 
-                </div>
+<br>
+        <img class="top" src="{{asset('images/notif.png')}}" style="width: 100px; height:100px; margin-top: 0;">
+        <h2 style="margin-left : 7%;">Premium requests </h2>
+        <hr>
+        <div class="row">  
+            @forelse($data as $premium)
+            @if($premium->status == 0)
+            <div class="reservations">
+            <hr class="style-two">
+            <div class="res-container" style="display : flex; flex-wrap : wrap;">
                 
-                 <div class="flex2" style="width: 150px;">
+                <div class="" style="width: 150px;   border-radius: 50%; ">
+                    <a href="{{ url('/Item/'.$premium->item_id) }}" ><img title="View item" src="{{asset('/storage/' .$premium->thumbnail_path )}}" style="border-radius: 50%" class="bd-placeholder-img card-img-top" width="150px" height="150px" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"> 
+                     </a>
+                </div>
+                <div class="flex2" >
                     <div style="width:100%;  text-align:center;">
                         <span style="font-size: 1.5em"><u>Owner :</u><br></span>
                         <span style="font-size: 1em">{{ $premium->name }}<br><br></span>
@@ -46,7 +43,7 @@
 
                 </div>
                
-                <div class="flex3" style="width: 150px;">
+                {{--<div class="flex3" style="width: 150px;">
                     <div style="width:100%; height:10px; text-align:center;">
                         <span style="font-size: 1.5em"><u>Item :</u><br></span>
                         <span style="font-size: 1em">
@@ -59,9 +56,8 @@
                         <small style="font-size: 0.8em;">{{$premium->price}} $</small>
                     </div>
                     <a href="{{ url('/Item/'.$premium->item_id) }}" class="btn btn-primary" style="margin-top: 38%; margin-left:23%;">view item</a>
-                </div>
+                </div>--}}
                 <div class="flex4">
-                    @if($premium->status == 0)
                         <br>
                         <span style="color: #000000; font-weight: bold; margin-top: 10px">Accept the request ?</span><br><br>
                         
@@ -76,10 +72,13 @@
                             @csrf
                             @method('PUT')
                         </form>
+                </div>        
+            </div>
+        </div>
                     @else
-                        <span style="color: #000000; font-weight: bold; display: flex; flex-wrap : wrap;" ><h5>It is premium now !!</h5><i class="far fa-smile-wink fa-3x" style="text-align : center;"></i></span>
+                        
                     @endif
-                </div>
+               
                
                 @empty
 
@@ -88,12 +87,10 @@
                     <small>Sorry try latter !!</small> 
                 </div>
 
-            </div>
-           
+          
         @endforelse
 
-
-        </div>
+    
     
 
 

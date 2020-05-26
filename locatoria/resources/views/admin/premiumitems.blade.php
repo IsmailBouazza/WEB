@@ -147,35 +147,36 @@
         text-transform: uppercase;
       }
 
+      
 
+.main-content {
+    background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 
-
+    height:100%;
+}
   </style>
 
 @endsection
 
 @section('content')
+<div class="welcome" >
+<img class="top" src="{{asset('images/premiums.png')}}" style="width: 100px; height:100px; margin-left : 5%; margin-top : 3%; borde-radius: 50%;">
+<h2 style="margin-left:15%; font-weight: bold; color: rgb(34, 37, 14);">Premium Items</h2>
+</div>   
+    <hr>
 
-{{--<div class="title" style=" margin-left : 30%; display : flex; flex-wrap : wrap; text-align: center; margin-top : 7%;">
-    <i class="fas fa-shopping-cart fa-5x"></i>
-    <h1 style="margin-top : 15px; margin-left : 2%;;">Locatoria's items</h1>
-
-</div>--}}
-<img class="top" src="{{asset('images/items.png')}}" style="width: 90px; height:90px; border-radius: 50%; margin-left:5%; margin-top:2%;">
-    <h2 style="margin-left : 9%;">Locatoria's Items </h2>
-    
-<hr>
 
 <div class="container" style="margin-left: 3%;">
   <div class="wrapper">
-      @if(($items->count()) > 0)
-          @foreach($items as $item)
+      @if(($data->count()) > 0)
+          @foreach($data as $item)
               <div class="product">
                   <figure class="product__card">
                       <div class="product__image">
                           <img src="{{asset('/storage/'.$item->thumbnail_path )}}" alt="image">
                           <div class='product__btns'>
-                              <a href="{{ url('Item/'.$item->id) }}">quick view</a>
+                              <a href="{{ url('Item/'.$item->item_id) }}">quick view</a>
                           </div>
                       </div>
                       <figcaption class="product__description">

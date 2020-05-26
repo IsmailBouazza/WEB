@@ -9,9 +9,9 @@
 
   <!-- sidebar-wrapper  -->
   <main class="page-content" >
-    <div class="container-fluid">
-        <img class="top" src="{{asset('images/notif.png')}}" style="width: 100px; height:100px">
-        <h2>Reported items</h2>
+    <div class="container-fluid" style="margin-top: 2%;">
+        <img class="top" src="{{asset('images/reported.jpg')}}" style="width: 100px; height:100px; border-radius: 50%; margin-left: 5%;">
+        <h2 style="margin-left: 8%;">Reported items</h2>
         <hr>
         <div class="row">  
 

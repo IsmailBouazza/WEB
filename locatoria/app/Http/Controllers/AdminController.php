@@ -9,6 +9,7 @@ use Illuminate\View\Factory;
 use Auth;
 use App\Item;
 use App\Reservation;
+use App\ItemPremium;
 
 
 
@@ -33,11 +34,13 @@ class AdminController extends Controller
         $users = User::all();
         $items = Item::all();
         $reservations = Reservation::all();
+        $premium = ItemPremium::where('status', 1)->get();
         //return view('admin');
         return View::make('admin.admin')->with([
             'users'=> $users,
             'items'=> $items,
             'reservations'=> $reservations,
+            'premium'=> $premium,
             
             ]);
     }
