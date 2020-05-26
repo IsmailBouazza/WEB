@@ -279,7 +279,7 @@
                               <a class="dropdown-item" href="{{ url('/chat')}}">Messages<span class="sr-only">(current)</span></a>
 
                               <span class="dotx count1" ></span>
-                              <a class="dropdown-item" href="{{url ('/MyAnnounces') }}">Announces </a>
+                              <a class="dropdown-item" href="{{url ('/MyAnnounces') }}">Requests </a>
 
                               <span class="dotx count2" ></span>
                               <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">Reservation </a>
@@ -291,10 +291,10 @@
 
 
                               <span class="dotx count1" ></span>
-                              <a class="dropdown-item" href="{{url ('/MyAnnounces') }}">Premium </a>
+                              <a class="dropdown-item" href="{{url ('/premium') }}">Premium </a>
 
                               <span class="dotx count2" ></span>
-                              <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">Reported items </a>
+                              <a class="dropdown-item" href="{{url ('/reported' ) }}">Reported items </a>
                               <hr>
 
 
