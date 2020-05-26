@@ -45,14 +45,27 @@ class User extends Authenticatable
         return $this->hasMany(Item::class)->orderBy('created_at', 'DESC');
     }
 
+    // response that i receive from other landlords
     public function reservations(){
         return $this->hasMany(Reservation::class)->orderBy('created_at', 'DESC');
     }
 
-    public function announces(){
+    // requests that i receive from other clients
+    public function reservationsrequest(){
         return $this->hasMany(Reservation::class,'user_owner_id')->orderBy('created_at', 'DESC');
     }
 
+    // $col is the reservation id an attribute of data(json) in the notification table
+    public function notifications_data($col)
+    {
+        $notifications = $this->notifications()
+            ->where('data','LIKE','{"reservation_id":1}')
+            ->get();
+
+        return ($notifications);
+    }
+
+    // $user->comments will return comments on this user
     public function comments()
     {
         return $this->morphMany('App\Comment', 'commentable');

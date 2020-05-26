@@ -13,5 +13,5 @@
 </div>
 
 <div class="input-text">
-    <input type="text" name="message" class="submit">
+    <input id="messageflied" type="text" name="message" class="submit">
 </div>

@@ -30,9 +30,7 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <br>
-        <div class="btn-group">
-          <p><a class="btn btn-sm btn-outline-secondary" href="http://localhost/locatoria/public/pages/researchdetails" role="button">View details &raquo;</a></p>
-        </div>
+{{-- remove "details" buttonHEAD --}}
     </div>
     <div class="categorie nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
@@ -166,7 +164,7 @@
                         <figcaption class="product__description">
                             <h4>{{$item->title}}</h4>
                             <span class="price">
-                              {{$item->price}} Dh
+                              {{$item->price}} DH
                               @if(Auth::user())
                                   @if(Auth::user()->id == $item->user_id)
                                     <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>

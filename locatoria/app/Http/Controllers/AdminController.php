@@ -42,15 +42,46 @@ class AdminController extends Controller
             'reservations'=> $reservations,
             'premium'=> $premium,
             
+
             ]);
     }
 
-    //all items 
+    //all items
 
     public function index(){
 
+        self::loginverification();
+
         $items = Item::all()->sortByDesc('created_at');
         return view('admin.items')->with('items', $items);
+    }
+
+
+
+    public function adminajaxfetch()
+    {
+
+        self::loginverification();
+
+
+        $count = Auth::guard('admin')->user()->unreadNotifications->count();
+
+        $count1 = Auth::guard('admin')->user()->unreadNotifications
+                                   ->where('type','App\Notifications\PremiumItem')
+                                   ->count(); // count the premium notifications
+
+        $count2 = Auth::guard('admin')->user()->unreadNotifications
+                                   ->where('type','App\Notifications\ReportItem')
+                                   ->count(); // count the reports notifications
+
+        $data = array(
+            'count' => $count,
+            'count1' => $count1,
+            'count2' => $count2
+        );
+
+        return $data;
+
     }
 
 

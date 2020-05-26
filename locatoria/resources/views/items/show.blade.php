@@ -7,115 +7,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <!--  -->
 
-<!-- start css mouad-->
-
-<style>
-    {{-- rah kayn fichier commenys.css fih hadchi manba3d fach tsay yield 3ad khdam bih o7ayad had css!! --}}
-    body{
-        background:#eee;
-    }
-
-    hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #FFFFFF;
-    }
-    a.commentuser {
-        color: #82b440;
-        text-decoration: none;
-    }
-    .blog-comment::before,
-    .blog-comment::after,
-    .blog-comment-form::before,
-    .blog-comment-form::after{
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    .blog-comment{
-        margin-top: 20px;
-        padding-top: 20px;
-        padding-left: 15%;
-        padding-right: 15%;
-    }
-
-    .blog-comment ul{
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .blog-comment img{
-        opacity: 1;
-        filter: Alpha(opacity=100);
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -o-border-radius: 4px;
-        border-radius: 4px;
-    }
-
-    .blog-comment img.avatar {
-        position: relative;
-        float: left;
-        margin-left: 0;
-        margin-top: 0;
-        width: 65px;
-        height: 65px;
-    }
-
-    .blog-comment .post-comments{
-        border: 1px solid #eee;
-        margin-bottom: 20px;
-        margin-left: 85px;
-        margin-right: 0px;
-        padding: 10px 20px;
-        position: relative;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -o-border-radius: 4px;
-        border-radius: 4px;
-        background: #fff;
-        color: #6b6e80;
-        position: relative;
-    }
-
-    .blog-comment .meta {
-        font-size: 13px;
-        color: #aaaaaa;
-        padding-bottom: 8px;
-        margin-bottom: 10px !important;
-        border-bottom: 1px solid #eee;
-    }
-
-    .blog-comment ul.comments ul{
-        list-style-type: none;
-        padding: 0;
-        margin-left: 85px;
-    }
-
-    .blog-comment-form{
-        padding-left: 15%;
-        padding-right: 15%;
-        padding-top: 40px;
-    }
-
-    .blog-comment h3,
-    .blog-comment-form h3{
-        margin-bottom: 40px;
-        font-size: 26px;
-        line-height: 30px;
-        font-weight: 800;
-    }
-
-</style>
-
-<!-- end css mouad-->
-
-
-
-
-
 
 @section('content')
 
@@ -155,28 +46,27 @@
             <hr>
             <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
             <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>
-            <div><i class="fas fa-phone" style="margin-right: 10px"></i></i>{{$user->phone}}</div>
-            <div><i class="fas fa-envelope-open-text" style="margin-right: 10px"></i>{{$user->email}}</div>
 
-            <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%">Chat</button>
-            <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#myModal">Report</button>
+
+            <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%" data-toggle="modal" data-target="#chatmodal">Chat</button>
+            <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#reportmodal">Report</button>
             <hr>
 
             <div style="font-size:1.2em">
                     @if(Auth::check())
                         {{-- $NotFavourite return false if the item is favorite--}}
-                         @if($NotFavourite)
+                        @if($NotFavourite)
                             <button id="favbtn" class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgba(253,32,32,0.64)"></i> <br>
-                                Add this item to your favorites</button>
-                         @else
-                              <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgb(253,32,32)"></i> <br>
-                                  This item is one of your favorites</button>
-                         @endif
+                            Add this item to your favorites</button>
+                        @else
+                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgb(253,32,32)"></i> <br>
+                            This item is one of your favorites</button>
+                        @endif
 
                     @else
-                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
-                                login to add this item to your favorites</button>
-                      @endif
+                            <a href="{{url('/login')}}"><button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
+                            login to add this item to your favorites</button></a>
+                    @endif
             </div>
 
 
@@ -265,8 +155,8 @@
 
 
 
-        <!-- The Modal -->
-        <div class="modal" id="myModal">
+        <!-- The Modal for report -->
+        <div class="modal" id="reportmodal">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -319,8 +209,25 @@
                             @empty
                                 <p style="font-size: 1.5em">No comment yet !!</p>
                             @endforelse
+                            
+                            @if(auth()->check())
+                                <form action="{{url('comment')}}" method="POST">
+                                    @csrf
+                                        <div class="form-group">
+                                            <label for="">Rate it</label>
+                                            <input type="text" class="form-control" name="rating" id="" placeholder="Rating the product">
+                                        </div>
 
-
+                                        <div class="form-group">
+                                            <label for="">Comment</label>
+                                            <input type="text" class="form-control" name="comment" id="" placeholder="Enter your comment here">
+                                        </div>
+                                        <input type="hidden" name="item_id" value="{{$item->id}}">
+                                        <button type="submit" class="btn btn-primary">Comment</button>
+                                </form>
+                            @else
+                                <a href="/login"></a>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -344,7 +251,7 @@
                 <h2>Items</h2>
                 <hr>
                 <div class="row">
-                    <div class="box-container img-container" style="margin-left: 10%; height: 500px;">
+                    <div class="box-container img-container" style="margin-left: 30%; height: 500px;">
                         @if(count($item_photos)>0)
                         <div class="info-img">
                             <div class="slider-wrapper">
@@ -440,14 +347,12 @@
 
                     @include('inc.jsSidebar')
 
-                   
-    @endif
 
     @endif
-            
-    
 
+    @endif
 
+                @include('inc.Chatbutton')
 
 
 
@@ -467,59 +372,43 @@
     var dispo_starts = "{{$item->dispo_starts}}";
     var dispo_ends = "{{$item->dispo_ends}}";
     var takendates  =  JSON.parse({!!json_encode($takendates)!!});
-
     var date = new Date();
     var today = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
     const myPicker = new Lightpick({
         field: document.getElementById('start'),
         secondField: document.getElementById('end'),
-
         // date format
         format: 'YYYY-MM-DD',
-
         // separator character
         separator: ' -',
-
         // number of months to display
         numberOfMonths: 2,
-
         // number of columns to display
         numberOfColumns: 2,
-
         // single date mode
         singleDate: false,
-
         // auto close after selection
         autoclose: true,
-
         // Repick start/end instead of new range.
         repick: false,
-
-
         // min/max dates
         minDate: today,
         maxDate: dispo_ends,
-
         // min/max days
         minDays: null,
         maxDays: null,
-
         // shows tooltip
         hoveringTooltip: true,
-
         // disabled dates in the range
         disabledDatesInRange: false,
         disableDates: takendates ,
         // disable Saturday and Sunday.
         disableWeekends: false,
-
         // inline mode (still still)
-
         inline: true,
         onSelect: function(end){
             var totaldays=$( ".lightpick__tooltip" ).text();
             var days = totaldays.replace(/\D/g, "");
-
             if (totaldays != ""){
                 $("#bill").show();
                 $("#total_days").text(totaldays);
@@ -528,23 +417,17 @@
                 $("#total_price").text(total_price.toFixed(2)); // XXXXX.xx
                 $("#renting_period").append("<br>from : "+$("#start").val()+" <br>to : "+$("#end").val());
                 $('input[name="total_price"]').val(total_price.toFixed(2));
-
             }
         }
-
     });
     var calendar = $('.lightpick--inlined');
     calendar.insertBefore('#bill');
     calendar.addClass("offset-md-2");
     calendar.addClass("calendrier");
     calendar.css({"margin-bottom":"2%","margin-top":"2%","z-index": "0","margin-left":"30%"});
-
-
     function submitForm() {
         $("#checkoutform").submit();
-
     }
-
     // add to favorites
     $(document).on("click","#favbtn", function () {
         var token = $("meta[name='csrf-token']").attr("content");
@@ -554,19 +437,14 @@
             data: { "_token": token,
                 "item_id": {{$item->id}}},
             success: function( msg ) {
-
                 if(msg){
                     alert("item added to you favorites");
                     $('.fa-heart').css('color','#fd2020');
                 }
             }
         });
-
-
     });
-
     //report item
-
     $(document).on("click","#report", function () {
         var reason = $('#reason').val();
         $('#reason').val("");
@@ -585,8 +463,8 @@
                     }
                 });
         }
-
     });
+
 </script>
 
 <!-- to delete item (mounia) -->
@@ -610,7 +488,6 @@
         tinymce.suffix = ".min";
         tinyMCE.baseURL = '{{ asset('assets/backend/plugins/tinymce') }}';
     });
-
     function deleteItem(id) {
             swal({
                 title: 'Are you sure?',
@@ -641,48 +518,37 @@
                 }
             })
         }
-
 </script>
 
 <script type="text/javascript">
-
     //  set --n (used for calc in CSS) via JS, after getting
     // .container and the number of child images it holds:
-
     const _C = document.querySelector(".slider-container"),
       N = _C.children.length;
-
     _C.style.setProperty("--n", N);
-
     // detect the direction of the motion between "touchstart" (or "mousedown") event
     // and the "touched" (or "mouseup") event
     // and then update --i (current slide) accordingly
     // and move the container so that the next image in the desired direction moves into the viewport
-
     // on "mousedown"/"touchstart", lock x-coordiate
     // and store it into an initial coordinate variable x0:
     let x0 = null;
     let locked = false;
-
     function lock(e) {
       x0 = unify(e).clientX;
       // remove .smooth class
       _C.classList.toggle("smooth", !(locked = true));
     }
-
     // next, make the images move when the user swipes:
     // was the lock action performed aka is x0 set?
     // if so, read current x coordiante and compare it to x0
     // from the difference between these two determine what to do next
-
     let i = 0; // counter
     let w; //image width
-
     // update image width w on resive
     function size() {
       w = window.innerWidth;
     }
-
     function move(e) {
       if (locked) {
         // set threshold of 20% (if less, do not drag to the next image)
@@ -690,44 +556,34 @@
         let dx = unify(e).clientX - x0,
           s = Math.sign(dx),
           f = +(s * dx / w).toFixed(2);
-
         // Math.sign(dx) returns 1 or -1
         // depending on this, the slider goes backwards or forwards
-
         if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > 0.2) {
           _C.style.setProperty("--i", (i -= s));
           f = 1 - f;
         }
-
         _C.style.setProperty("--tx", "0px");
         _C.style.setProperty("--f", f);
         _C.classList.toggle("smooth", !(locked = false));
         x0 = null;
       }
     }
-
     size();
-
     addEventListener("resize", size, false);
-
     // ===============
     // drag-animation for the slider when it reaches the end
     // ===============
-
     function drag(e) {
       e.preventDefault();
-
       if (locked) {
         _C.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
       }
     }
-
     // ===============
     // prev, next
     // ===============
     let prev = document.querySelector(".prev");
     let next = document.querySelector(".next");
-
     prev.addEventListener("click", () => {
       if (i == 0) {
         console.log("start reached");
@@ -736,27 +592,21 @@
         _C.style.setProperty("--i", i--);
       }
     });
-
     next.addEventListener("click", () => {
       if (i < N) {
         // increase i as long as it's smaller than the number of slides
         _C.style.setProperty("--i", i++);
       }
     });
-
     // ===============
     // slider event listeners for mouse and touch (start, move, end)
     // ===============
-
     _C.addEventListener("mousemove", drag, false);
     _C.addEventListener("touchmove", drag, false);
-
     _C.addEventListener("mousedown", lock, false);
     _C.addEventListener("touchstart", lock, false);
-
     _C.addEventListener("mouseup", move, false);
     _C.addEventListener("touchend", move, false);
-
     // override Edge swipe behaviour
     _C.addEventListener(
       "touchmove",
@@ -765,14 +615,11 @@
       },
       false
     );
-
     // unify touch and click cases:
     function unify(e) {
       return e.changedTouches ? e.changedTouches[0] : e;
     }
-
     </script>
 
     @endsection
-
 

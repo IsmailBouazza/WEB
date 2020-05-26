@@ -23,7 +23,9 @@ class SearchController extends Controller
                 ->where(function($query) use ($filters){
                     if($filters['object']){
                         $query->where('title','LIKE' ,$filters['object'])
+                            //replace orWhereHas with orWhere
                               ->orWhere('description','LIKE',$filters['object']);
+                          
                     }if($filters['budget_max']){
                         $query->where('price','<', $filters['budget_max']);
                     }if($filters['city']){

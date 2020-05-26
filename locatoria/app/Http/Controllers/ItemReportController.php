@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use App\ItemReport;
+use App\Notifications\ReportItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Item;
@@ -25,6 +27,19 @@ class itemReportController extends Controller
             $report->item_id = $id;
             $report->reason = $request->reason;
             $report->save();
+
+            $var = $report->id;
+
+            // notify all admins
+            Admin::all()->map(function ($admin) use ($var){
+
+
+                $admin->notify(new ReportItem($var));
+
+                return $admin;
+            });
+
+
             echo "reported";
 
         }
@@ -36,15 +51,37 @@ class itemReportController extends Controller
             $data = DB::table('item_reporteds')
                     ->join('items', 'items.id', '=', 'item_reporteds.item_id')
                     ->join('users', 'users.id', '=', 'items.user_id')
-                    ->select('item_reporteds.id', 'item_reporteds.item_id', 'items.title','items.thumbnail_path', 'items.price', 
+                    ->select('item_reporteds.id', 'item_reporteds.item_id', 'items.title','items.thumbnail_path', 'items.price',
                     'users.name', 'users.email')
                     ->get();
+
+            $admin = Auth::guard('admin')->user();
+
+
+            if ($data->count() > 0){
+
+            $data = $data->map(function ($reported) use ($admin){
+
+                    // this is the notification associated with this reservation
+                    $notification = $admin->notifications()->where('data->reported_id',$reported->id)->first();
+
+                    $reported->read = $notification->read() ? true : false;
+
+                    $notification->markAsRead();
+
+                    return $reported;
+            })
+            ->sortBy(function($reservation){
+                return $reservation->read;
+             })
+             ->values();
+
+            }
                 return view('admin/reported', compact('data'));
-    
-        
+
     }
 
-     //approve report 
+     //approve report
      public function approval($id)
      {
         $item = Item::find($id);
@@ -63,18 +100,20 @@ class itemReportController extends Controller
         $most_view->delete();
         $reported->delete();
         $item->delete();
+
+
         return redirect()->back();
      }
- 
+
      //reject a report
      public function destroy($id){
 
         $reported = ItemReport::find($id);
          $reported->delete();
          return redirect()->back();
- 
- 
- 
+
+
+
      }
- 
+
 }
