@@ -59,7 +59,8 @@ class ReservationResponse extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'reservation_id'=>$this->reservation_id,
+            'response'=>$this->response,
         ];
     }
 }
