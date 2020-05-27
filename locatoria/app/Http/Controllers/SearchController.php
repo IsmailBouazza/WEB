@@ -20,16 +20,20 @@ class SearchController extends Controller
 
         $item = DB::table('items')
                 ->join('users','items.user_id','=','users.id')
-                ->where(function($query) use ($filters){
-                    if($filters['object']){
-                        $query->where('title','LIKE' ,$filters['object'])
+                ->where(function($query1,$query2,$query3) use ($filters){
+                    if($filters['object'])
+                    {
+                        $query1->where('title','LIKE' ,$filters['object'])
                             //replace orWhereHas with orWhere
                               ->orWhere('description','LIKE',$filters['object']);
-                          
-                    }if($filters['budget_max']){
-                        $query->where('price','<', $filters['budget_max']);
-                    }if($filters['city']){
-                        $query->where('city','LIKE',$filters['city']);
+                    }
+                    if($filters['budget_max'])
+                    {
+                        $query2->where('price','<', $filters['budget_max']);
+                    }
+                    if($filters['city'])
+                    {
+                        $query3->where('city','LIKE',$filters['city']);
                     }
                 }) 
                 ->get();

@@ -192,6 +192,7 @@ class ItemController extends Controller
     //to show user item(details)
     public function show($id)
     {
+        $starMoyenne = DB::select("SELECT AVG(rating) total FROM comments where commentable_id =".$id);
 
             if(Auth::check()){
                 $mostviewd = new MostViewed;
@@ -212,7 +213,7 @@ class ItemController extends Controller
 
 
             $reservations = Reservation::where('item_id',$id)->where('status',1)->get();
-
+            
             $takendates = array();
 
             foreach ($reservations as $reservation){
@@ -220,7 +221,7 @@ class ItemController extends Controller
                 $begin = new DateTime($reservation->date_start);
                 $end = new DateTime($reservation->date_end); // date_end - 1
                 $end = $end->modify( '+1 day' );
-
+               
                 $interval = new DateInterval('P1D');
                 $daterange = new DatePeriod($begin, $interval ,$end);
 
@@ -237,6 +238,7 @@ class ItemController extends Controller
             ->get()->isEmpty();
                return view('items.show')->with([
                    'comments'=>$item->comments,
+                   'starMoyenne' =>$starMoyenne,
                    'item' => $item,
                    'NotFavourite' => $NotFavourite,
                    'item_photos' => $item_photos,
