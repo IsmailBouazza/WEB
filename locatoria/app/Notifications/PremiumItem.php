@@ -11,16 +11,16 @@ class PremiumItem extends Notification
 {
     use Queueable;
 
-    public $item_id;
+    public $premium_id;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($item_id)
+    public function __construct($premium_id)
     {
-        $this->item_id = $item_id;
+        $this->premium_id = $premium_id;
     }
 
     /**
@@ -57,7 +57,7 @@ class PremiumItem extends Notification
     public function toArray($notifiable)
     {
         return [
-            'item_id'=>$this->item_id,
+            'premium_id'=>$this->premium_id,
         ];
     }
 }

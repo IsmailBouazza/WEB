@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
+use App\Notifications\PremiumItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -180,6 +182,18 @@ class ItemController extends Controller
             $item_premium->item_id = $item_id;
             $item_premium->status = 0;
             $item_premium->save();
+
+            $var = $item_premium->id;
+
+            // notify all admins
+            Admin::all()->map(function ($admin) use ($var){
+
+
+                $admin->notify(new PremiumItem($var));
+
+                return $admin;
+            });
+
         }
 
         return redirect('/items/myitems/'.auth()->user()->id);
@@ -255,7 +269,7 @@ class ItemController extends Controller
                 'takendates'=>json_encode($takendates),
             ]);
 
-            
+
 
     }
 
