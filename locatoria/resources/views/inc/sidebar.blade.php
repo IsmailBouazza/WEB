@@ -73,6 +73,12 @@
                 <span>Reservations</span>
               </a>
             </li>
+            <li class="sidebar">
+              <a href="{{ url('/MyHistory') }}">
+                <i class="fas fa-hourglass-half"></i>
+                <span>History</span>
+              </a>
+            </li>
             <li class="header-menu">
               <span>Extra</span>
             </li>

@@ -11,8 +11,41 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
+use DateInterval;
+use DatePeriod;
+
 class ReservationController extends Controller
 {
+
+    public function history(){
+
+        $reservations = Auth::user()->reservations;
+
+        foreach($reservations as $reservation){
+
+           self::markaspast($reservation);
+
+        }
+
+        $history = Reservation::all()->where('status',2);
+    
+        return view('reservation.history')->with('history',$history);
+
+    }
+
+    public function markaspast($reservation){
+           
+            $today = new DateTime(date('y-m-d'));
+            $end = new DateTime($reservation->date_end);
+
+            if($end < $today){
+                $reservation->status = 2; //reservation ended
+                $reservation->save();
+            }
+
+    }
+
 
     public function index(){
 
@@ -57,8 +90,9 @@ class ReservationController extends Controller
             return redirect('/login');
         }
 
+        $reservations = Auth::user()->reservations()->where('status',0)->orWhere('status',1)->get();
 
-        $reservations = Auth::user()->reservations;
+
         $reservations1 = NULL;
         $reservations2 = NULL;
         $reservations_declined = NULL;
