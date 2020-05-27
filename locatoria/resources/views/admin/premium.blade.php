@@ -102,7 +102,7 @@
     @forelse($data as $premium)
     @if($premium->status == 0)
        
-            <div class="res-container" style=" display : flex; flex-wrap: wrap; margin-left: 20%; margin-top: 4%;">
+            <div class="res-container" style=" display : flex; flex-wrap: wrap; margin-left: 20%; margin-top: 6%;">
                 @if( ! $premium->read)
                     <div class="tags">
                         <span class="color3">New</span>

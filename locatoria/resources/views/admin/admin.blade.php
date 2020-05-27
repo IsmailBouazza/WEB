@@ -100,7 +100,7 @@
     </div>
     
 
-    <section class="statistics" style="margin-top:10%; display:flex; flex-wrap: wrap; justify-content: space-around;">
+    <section class="statistics" style="margin-top:10%; display:flex; flex-wrap: wrap; margin-left: 3%;">
       
       <main role="main" class="col-md-9 col-lg-10 my-3">
         <div class="card-list">
@@ -109,7 +109,7 @@
               <div class="card blue">
                 <div class="title">All users</div>
                 <i class="zmdi zmdi-upload"></i>
-                @if(count($users)>0)<div class="value">{{$users->count()}}</div>@else <div class="value"> No users registered<i class="far fa-sad-tear"></i></div>  @endif
+                @if(count($users)>0)<div class="value">{{$users->count()}}</div>@else <i class="fab fa-creative-commons-zero fa-3x" style="margin-left: 2%;"></i> @endif
                 <div class="stat"><b></b><i class="fa fa-user fa-3x"></i></div>
               </div>
             </div>
@@ -117,7 +117,7 @@
               <div class="card green">
                 <div class="title">All items</div>
                 <i class="zmdi zmdi-upload"></i>
-                @if(count($items)>0)<div class="value">{{$items->count()}}</div>@else <div class="value"> No items found<i class="far fa-sad-tear"></i></div> @endif
+                @if(count($items)>0)<div class="value">{{$items->count()}}</div>@else <i class="fab fa-creative-commons-zero fa-3x" style="margin-left: 2%;"></i> @endif
                 <div class="stat"><b></b><i class="fas fa-shopping-cart fa-3x"></i></div>
               </div>
             </div>
