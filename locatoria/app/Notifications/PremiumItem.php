@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ReservationRequest extends Notification
+class PremiumItem extends Notification
 {
     use Queueable;
 
-    public $reservation_id;
+    public $premium_id;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($reser_id)
+    public function __construct($premium_id)
     {
-        $this->reservation_id = $reser_id;
+        $this->premium_id = $premium_id;
     }
 
     /**
@@ -43,11 +43,8 @@ class ReservationRequest extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Reservation Request')
-                    ->greeting("What's up ".$notifiable->name)
-                    ->line('you\'re recieving a reservation request ')
-                    ->line('click the button below to go to our web site.')
-                    ->action('GO', url('/MyReservations'))
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
 
@@ -60,7 +57,7 @@ class ReservationRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            'reservation_id'=>$this->reservation_id,
+            'premium_id'=>$this->premium_id,
         ];
     }
 }

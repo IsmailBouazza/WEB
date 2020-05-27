@@ -9,6 +9,7 @@
     
 <!--  -->
 
+{{-- css of comments --}}
 <!-- start css mouad-->
 
 <style>
@@ -167,6 +168,8 @@
 
 
 
+=======
+>>>>>>> 14b75da6c0114ac3e4716f8ce0cea790685e6fb8
 
 @section('content')
 

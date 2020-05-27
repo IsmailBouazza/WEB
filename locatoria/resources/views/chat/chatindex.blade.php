@@ -5,7 +5,6 @@
 @section('content')
     @include('inc.sidebar')
 
-
     <!-- sidebar-wrapper  -->
     <main class="page-content" >
         <div class="container-fluid">
@@ -23,13 +22,14 @@
                                     @endif
                                     <div class="media">
                                         <div class="media-left">
-                                            <img src="{{ $user->picture }}" class="media-object">
+                                            <img src="{{asset('storage/'.$user->picture)}}" class="media-object" style="width: 70px;height:70px;">
                                         </div>
                                         <div class="media-body">
                                             <p class="name"><b>{{ $user->name }}</b></p>
                                             <p class="email">{{ $user->city }}</p>
                                         </div>
                                     </div>
+                                    <hr>
                                 </li>
                             @endforeach
                         </ul>

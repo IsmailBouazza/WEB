@@ -46,6 +46,9 @@ Route::resource('ItemPhoto','ItemPhotoController');
 Route::get('/users', 'UserController@index');
 Route::get('/user/delete/{user}', 'UserController@delete');
 Route::resource('user', 'UserController');
+
+
+
 /* chat */
 Route::get('/chat','MessageController@index');
 Route::get('/chat/{id}', 'MessageController@getMessage')->name('message');
@@ -62,6 +65,8 @@ Route::get('/items', 'AdminController@index');
 //admin premium
 Route::get('/premium','ItemPremiumController@request');
 
+Route::get('/premiumitems','ItemPremiumController@show');
+
 Route::put('/premium/{id}/approve','ItemPremiumController@approval')->name('premium.approve');
 Route::put('/premium/{id}/refuse','ItemPremiumController@destroy')->name('premium.refuse');
 
@@ -70,7 +75,7 @@ Route::put('/premium/{id}/refuse','ItemPremiumController@destroy')->name('premiu
 Route::get('/reported','ItemReportController@show');
 
 Route::put('/reported/{id}/approve','ItemReportController@approval')->name('reported.approve');
-Route::put('/reported/{id}/refuse','ItemReportController@destroy')->name('reported.refuse'); 
+Route::put('/reported/{id}/refuse','ItemReportController@destroy')->name('reported.refuse');
 
 
 // admin delete
@@ -96,26 +101,26 @@ Route::put('/MyRequests/{id}/refuse','ReservationController@destroy')->name('MyR
 Route::post('/reser', 'ReservationController@store');
 Route::get('/reservations', 'ReservationController@index');
 Route::post('/cancelreservation/{id}','ReservationController@userCancel');
+Route::get('/MyHistory', 'ReservationController@history');
+
+
 
 // reservations notification
 Route::post('/reservationsnotification', 'ReservationController@reservationsajaxfetch');
 
 
-
-
+// Admin notification
+Route::post('/adminnotification', 'AdminController@adminajaxfetch');
+Route::get('/adminnotification', 'AdminController@adminajaxfetch');
 
 /*  Premium  */
 Route::resource('Premium','ItemPremiumController');
 
 
 
-
-
 /*Search*/
 Route::post('/search', 'SearchController@showResults');
 Route::get('/item/{id}','SearchController@showItem');
-
-
 
 
 /*Comment*/

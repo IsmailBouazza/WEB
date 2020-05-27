@@ -4,15 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Item;
 use App\Notifications\ReservationRequest;
+use App\Notifications\ReservationResponse;
 use App\Reservation;
 use App\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
+
+use DateInterval;
+use DatePeriod;
 
 class ReservationController extends Controller
 {
+
+    public function history(){
+
+        $reservations = Auth::user()->reservations;
+
+        foreach($reservations as $reservation){
+
+           self::markaspast($reservation);
+
+        }
+
+        $history = Reservation::all()->where('status',2);
+    
+        return view('reservation.history')->with('history',$history);
+
+    }
+
+    public function markaspast($reservation){
+           
+            $today = new DateTime(date('y-m-d'));
+            $end = new DateTime($reservation->date_end);
+
+            if($end < $today){
+                $reservation->status = 2; //reservation ended
+                $reservation->save();
+            }
+
+    }
+
 
     public function index(){
 
@@ -56,13 +89,111 @@ class ReservationController extends Controller
         if(!Auth::user()){
             return redirect('/login');
         }
-        $user_id = Auth::user()->id;
-        $Myreservations = Reservation::all();
-        $user = User::find($user_id);
-        $user->reservations()->get();
-        return view('reservation.reservations')->with([
-            'reservations'=> $Myreservations,
+
+        $reservations = Auth::user()->reservations()->where('status',0)->orWhere('status',1)->get();
+
+
+        $reservations1 = NULL;
+        $reservations2 = NULL;
+        $reservations_declined = NULL;
+
+        $reservations_declined = Auth::user()->unreadNotifications->where('data->response',false);
+
+        //dd($reservations_declined->first());
+
+        if ($reservations_declined->count() > 0 ){
+
+            $reservations_declined = $reservations_declined->map(function ($notification){
+
+                $notification1 = (object)(array)$notification;
+
+                $notification1->item = Item::find($notification->data['item_id']);
+
+                $notification->markAsRead();
+
+                return $notification1;
+            });
+
+        }
+
+
+        if ($reservations->count() > 0 ){
+
+            // $reservations1 contains accepted reservations
+            $reservations1 = $reservations->filter(function($reservation){
+
+                $notification = Auth::user()->notifications()->where('data->reservation_id',$reservation->id)->first();
+
+                return $notification != NULL;
+
+            });
+
+
+
+            // $reservations2 contains reservations requsts that the user made
+            $reservations2 = $reservations->filter(function($reservation){
+
+                $notification = Auth::user()->notifications()->where('data->reservation_id',$reservation->id)->first();
+
+                return $notification == NULL;
+
+            });
+
+
+
+
+            if ($reservations1->count() > 0 ){
+                // map   : you should return this collection because requests is set as viewd
+                // sortBy : the first one will be unviewed anounces
+                $reservations1 = $reservations1->map(function ($reservation){
+
+                    $reservation->user_owner_id = User::find($reservation->user_owner_id);
+
+                    // this is the notification associated with this reservation
+                    $notification = Auth::user()->notifications()->where('data->reservation_id',$reservation->id)->first();
+
+                    $reservation->read = $notification->read() ? true : false;
+
+
+
+                    $notification->markAsRead();
+
+                    return $reservation;
+                })
+                ->sortBy(function($reservation){
+                    return $reservation->read;
+                })
+                ->values();
+
+            }
+
+
+
+            if ($reservations2->count() > 0 ){
+                // map   : we need to return the user owner with each reservation
+                $reservations2 = $reservations2->map(function ($reservation){
+
+                    $reservation->user_owner_id = User::find($reservation->user_owner_id);
+
+                    return $reservation;
+                });
+
+            }
+
+
+
+
+        }
+
+
+        $user = Auth::user();
+
+
+        return view('reservation.reservations',[
             'user'=>$user,
+            'reservations1'=>$reservations1,
+            'reservations2'=>$reservations2,
+            'reservations_declined'=>$reservations_declined,
 
         ]);
     }
@@ -75,8 +206,8 @@ class ReservationController extends Controller
         $reservations = Auth::user()->reservationsrequest;
 
         if ($reservations->count() > 0 ){
-        // map   : you should return this collection because announces is set as viewd
-        //       : you shoud return information about the user sendind the request
+        // map   : you should return this collection because requests is set as viewd
+        //       : you shoud return information about the user sending the request
         // sortBy : the first one will be unviewed anounces
         $reservations2 = $reservations->map(function ($reservation){
 
@@ -118,6 +249,8 @@ class ReservationController extends Controller
             $reservation->status = 1;
             $reservation->save();
 
+            User::find($reservation->user_id)->notify(new ReservationResponse($reservation->id,$reservation->item->id,true)) ;
+
         } else {
 
         }
@@ -129,7 +262,12 @@ class ReservationController extends Controller
     public function destroy($id){
 
         $reservation = Reservation::find($id);
+
+        User::find($reservation->user_id)->notify(new ReservationResponse($reservation->id,$reservation->item->id,false)) ;
+
         $reservation->delete();
+
+
         return redirect()->back();
 
     }

@@ -6,6 +6,61 @@
 
 @section('css')
 <style>
+            
+            .card-list {
+            width: 100%;
+          }
+          .card-list:before, .card-list:after {
+            content: " ";
+            display: table;
+          }
+          .card-list:after {
+            clear: both;
+          }
+
+          .card {
+            border-radius: 8px;
+            color: white;
+            padding: 10px;
+            position: relative;
+          }
+          .card .zmdi {
+            color: white;
+            font-size: 28px;
+            opacity: 0.3;
+            position: absolute;
+            right: 13px;
+            top: 13px;
+          }
+          .card .stat {
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 8px;
+            margin-top: 25px;
+            padding: 10px 10px 0;
+            text-transform: uppercase;
+          }
+          .card .title {
+            display: inline-block;
+            font-size: 8px;
+            padding: 10px 10px 0;
+            text-transform: uppercase;
+          }
+          .card .value {
+            font-size: 28px;
+            padding: 0 10px;
+          }
+          .card.blue {
+            background-color: #2298f1;
+          }
+          .card.green {
+            background-color: #66b92e;
+          }
+          .card.orange {
+            background-color: #da932c;
+          }
+          .card.red {
+            background-color: #d65b4a;
+          }
 
 
 </style>
@@ -45,31 +100,51 @@
     </div>
     
 
-    <section class="statistics" style="margin-top:10%; display:flex; flex-wrap: wrap; justify-content: space-around;">
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header" style="display: flex; flex-wrap: wrap;"><i class="fa fa-user fa-3x "></i><h5 style="margin-left: 4%; margin-top:5%; ">Users number</h5></div>
-        <div class="card-body"> 
-          @if(count($users)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$users->count()}}</h1> @else <h5 class="card-title">No users registered<i class="far fa-sad-tear"></i></h5>@endif
-          {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
-        </div>
-      </div>
+    <section class="statistics" style="margin-top:10%; display:flex; flex-wrap: wrap; margin-left: 3%;">
       
-      <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-        <div class="card-header" style="  display: flex; flex-wrap: wrap;"><i class="fas fa-toolbox  fa-3x"></i><h5 style="margin-left: 4%; margin-top:5%; ">Items number</h5></div>
-        <div class="card-body">
-          @if(count($items)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$items->count()}}</h1> @else <h5 class="card-title">No items found<i class="far fa-sad-tear"></i></h5>@endif
-          {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
+      <main role="main" class="col-md-9 col-lg-10 my-3">
+        <div class="card-list">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              <div class="card blue">
+                <div class="title">All users</div>
+                <i class="zmdi zmdi-upload"></i>
+                @if(count($users)>0)<div class="value">{{$users->count()}}</div>@else <i class="fab fa-creative-commons-zero fa-3x" style="margin-left: 2%;"></i> @endif
+                <div class="stat"><b></b><i class="fa fa-user fa-3x"></i></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              <div class="card green">
+                <div class="title">All items</div>
+                <i class="zmdi zmdi-upload"></i>
+                @if(count($items)>0)<div class="value">{{$items->count()}}</div>@else <i class="fab fa-creative-commons-zero fa-3x" style="margin-left: 2%;"></i> @endif
+                <div class="stat"><b></b><i class="fas fa-shopping-cart fa-3x"></i></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              <div class="card red">
+                <div class="title">Reservations</div>
+                <i class="zmdi zmdi-download"></i>
+                @if(count($reservations)>0)<div class="value">{{$reservations->count()}}</div> @else <i class="fab fa-creative-commons-zero fa-3x" style="margin-left: 2%;"></i> @endif
+                <div class="stat"><b></b><i class="far fa-bookmark  fa-3x"></i></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+              <div class="card orange">
+                <div class="title">Premium items</div>
+                <i class="zmdi zmdi-download"></i>
+                @if(count($premium)>0)<div class="value">{{$premium->count()}}</div> @else <i class="fab fa-creative-commons-zero fa-3x" style="margin-left: 2%;"></i> @endif
+                <div class="stat"><b></b><i class="fas fa-dollar-sign fa-3x"></i></div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-        <div class="card-header"  style=" display: flex; flex-wrap: wrap;"><i class="far fa-bookmark  fa-3x"></i><h5 style="margin-left: 4%; margin-top:5%; ">Reservations number</h5></div>
-        <div class="card-body">
-          @if(count($reservations)>0) <h1 class="card-title" style="text-align: center; font-weight: bold;">{{$reservations->count()}}</h1> @else <h5 class="card-title" style="text-align : center;">No reservations found <i class="far fa-sad-tear"></i></h5>@endif
-          {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
-        </div>
-      </div>
+  
+  
+      
       
     </section>
+    
 
 
 

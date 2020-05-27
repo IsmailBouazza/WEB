@@ -40,7 +40,7 @@
               </div>
             </li>
             <li class="sidebar">
-              <a href="#">
+              <a href="{{ url('/chat')}}">
                 <i class="fas fa-envelope-open-text"></i>
                 <span>Messages</span>
               </a>
@@ -71,6 +71,12 @@
               <a href="{{ url('/MyReservations') }}">
                 <i class="fas fa-check-square"></i>
                 <span>Reservations</span>
+              </a>
+            </li>
+            <li class="sidebar">
+              <a href="{{ url('/MyHistory') }}">
+                <i class="fas fa-hourglass-half"></i>
+                <span>History</span>
               </a>
             </li>
             <li class="header-menu">
