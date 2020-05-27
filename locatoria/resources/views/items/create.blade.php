@@ -167,7 +167,7 @@
 
     
     <div id="modal-wrapper" class="modal">
-        <div class="modal-content">
+        <div class="report-content">
             <h1>Premium</h1>
             <hr>
             <h4>Option premium will make your item appear in differents places</h4>

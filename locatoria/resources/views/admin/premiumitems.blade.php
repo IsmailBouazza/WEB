@@ -160,44 +160,46 @@
 @endsection
 
 @section('content')
-<div class="welcome" >
-<img class="top" src="{{asset('images/premiums.png')}}" style="width: 100px; height:100px; margin-left : 5%; margin-top : 3%; borde-radius: 50%;">
-<h2 style="margin-left:15%; font-weight: bold; color: rgb(34, 37, 14);">Premium Items</h2>
-</div>   
+
+    <div class="welcome" >
+    <img class="top" src="{{asset('images/premiums.png')}}" style="width: 100px; height:100px; margin-left : 5%; margin-top : 3%; borde-radius: 50%;">
+    <h2 style="margin-left:15%; font-weight: bold; color: rgb(34, 37, 14);">Premium Items</h2>
+    </div>   
     <hr>
 
 
-<div class="container" style="margin-left: 3%;">
-  <div class="wrapper">
-      @if(($data->count()) > 0)
-          @foreach($data as $item)
-              <div class="product">
-                  <figure class="product__card">
-                      <div class="product__image">
-                          <img src="{{asset('/storage/'.$item->thumbnail_path )}}" alt="image">
-                          <div class='product__btns'>
-                              <a href="{{ url('Item/'.$item->item_id) }}">quick view</a>
+    <div class="container" style="margin-left: 3%;">
+      <div class="wrapper">
+          @if(($data->count()) > 0)
+              @foreach($data as $item)
+                  <div class="product">
+                      <figure class="product__card">
+                          <div class="product__image">
+                              <img src="{{asset('/storage/'.$item->thumbnail_path )}}" alt="image">
+                              <div class='product__btns'>
+                                  <a href="{{ url('Item/'.$item->item_id) }}">quick view</a>
+                              </div>
                           </div>
-                      </div>
-                      <figcaption class="product__description">
-                          <h4>{{$item->title}}</h4>
-                          <span class="price">
-                            {{$item->price}} Dh
-                           
-                          </span>
-                      </figcaption>
-                  </figure>
+                          <figcaption class="product__description">
+                              <h4>{{$item->title}}</h4>
+                              <span class="price">
+                                {{$item->price}} Dh
+                              
+                              </span>
+                          </figcaption>
+                      </figure>
+                  </div>
+              @endforeach
+          @else
+              <div class="msg">
+                  <p class="msg">No items added yet</p>
+                  <small>Sorry try latter !!</small> 
               </div>
-          @endforeach
-      @else
-          <div class="msg">
-              <p class="msg">No items added yet</p>
-              <small>Sorry try latter !!</small> 
-          </div>
-      @endif
-  </div>
-</div>
+          @endif
+      </div>
+    </div>
 
+  
 
 
 

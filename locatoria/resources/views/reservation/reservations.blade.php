@@ -128,9 +128,9 @@
                                 </div>
                                 <div class="flex2">
                                     <div style="width:100%; height:10px; text-align:center;">
-                                        <span style="font-size: 1.5em"><u>User Info</u><br></span>
-                                        <small style="font-size: 1em;">{{$reservation->user_owner_id->email}} </small><br>
-                                        <small style="font-size: 1em;">{{$reservation->user_owner_id->phone}} </small>
+                                        <span style="font-size: 1.5em"><u>User Info</u><br></span><br>
+                                        <small style="font-size: 1em;"><i class="fas fa-envelope-square" style="margin-right: 5px"></i>{{$reservation->user_owner_id->email}} </small><br><br>
+                                        <small style="font-size: 1em;"><i class="fas fa-phone" style="margin-right: 5px"></i>{{$reservation->user_owner_id->phone}} </small>
                                     </div>
                                 </div>
                                 <div class="flex3" >
@@ -143,7 +143,7 @@
                                     </div>
                                     <div style="width:100%; font-size: 1.5em; height:10px; text-align:center; margin-top:80px">
                                         <u>Total Price</u><br>
-                                        <small style="font-size: 0.8em;">{{$reservation->total_price}} $</small>
+                                        <small style="font-size: 0.8em;">{{$reservation->total_price}} DH</small>
                                     </div>
                                 </div>
                                 <div class="flex4 text-center">
