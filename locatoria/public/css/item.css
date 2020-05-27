@@ -127,13 +127,15 @@ button:hover{
     margin-top: 4%;
 }
 
-div.modal-content{ /*
+div.report-content{ 
     margin: 4% auto 15% auto;
-    border: 1px solid #888;
+    border: 1px solid rgb(216, 216, 216);
     width: 30%;
     padding-bottom: 30px;
-    background-color: rgb(202, 202, 202);
-    text-align: center;*/
+    background-color: rgb(219, 219, 219);
+    text-align: center;
+    border-radius: 6px;
+
 }
 
 
@@ -147,17 +149,6 @@ div.modal-content{ /*
     margin-top: 4%;
 }
 
-div.report-content{
-    padding-top: 30px;
-    margin: 4% auto 15% auto;
-    border: 1px solid black;
-    border-radius: 13px;
-    width: 30%;
-    height: 300px;
-    padding-bottom: 30px;
-    background-color: rgb(202, 202, 202);
-    text-align: center;
-}
 button:disabled {
     cursor: not-allowed!important;
     pointer-events: all ;
