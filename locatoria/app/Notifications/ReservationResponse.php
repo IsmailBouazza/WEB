@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Item;
 use App\Reservation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,16 +15,18 @@ class ReservationResponse extends Notification
 
     public $reservation_id;
     public $response; // true or false
+    public $item_id;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($reser_id,$response)
+    public function __construct($reser_id,$item_id,$response)
     {
         $this->reservation_id = $reser_id;
         $this->response = $response;
+        $this->item_id = $item_id;
     }
 
     /**
@@ -46,7 +49,7 @@ class ReservationResponse extends Notification
     public function toMail($notifiable)
     {
         $respons = $this->response ? 'accepted' : 'declined';
-        $item = Reservation::find($this->reservation_id)->item;
+        $item = Item::find($this->item_id);
 
         return (new MailMessage)
                     ->subject('Reservation Response')
@@ -68,6 +71,7 @@ class ReservationResponse extends Notification
         return [
             'reservation_id'=>$this->reservation_id,
             'response'=>$this->response,
+            'item_id'=>$this->item_id,
         ];
     }
 }

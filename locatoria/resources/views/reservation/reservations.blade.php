@@ -101,13 +101,69 @@
                     </style>
 
 
-                    @if($reservations1 != NULL || $reservations2 != NULL)
+                    @if($reservations1 != NULL || $reservations2 != NULL || $reservations_declined != NULL)
+
+
+
+
+                        @forelse($reservations_declined as $reservation_declined)
+
+
+
+
+                            <div class="res-container" id="">
+
+
+                                    <div class="tags">
+                                        <span class="color3">New</span>
+                                    </div>
+
+                                <div class="card flex1" style="width: 18rem;">
+
+                                    <a href="{{url('/Item/'.$reservation_declined->item->id)}}">
+                                        <img src="{{asset('/storage/' .$reservation_declined->item->thumbnail_path )}}" class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" role="img"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
+                                    </a>
+                                </div>
+                                <div class="flex2">
+                                    <div style="width:100%; height:10px; text-align:center;">
+                                        <span style="font-size: 1.5em"><u>User Info</u><br></span><br>
+                                        <small style="font-size: 1em;"><i class="fas fa-envelope-square" style="margin-right: 5px"></i>{{$reservation_declined->item->user->name}} </small><br><br>
+                                        <small style="font-size: 1em;"><i class="fas fa-phone" style="margin-right: 5px"></i>{{$reservation_declined->item->user->city}} </small>
+                                    </div>
+                                </div>
+                                <div class="flex3" >
+                                    <div style="width:100%; height:10px; text-align:center;">
+                                        <span style="font-size: 1.5em"><u>Date Dispo</u><br></span>
+                                        <span style="font-size: 1em">
+                                            blablabla
+                                    </span>
+                                    </div>
+                                    <div style="width:100%; font-size: 1.5em; height:10px; text-align:center; margin-top:80px">
+                                        <u>Total Price</u><br>
+                                        <small style="font-size: 0.8em;">blablabla</small>
+                                    </div>
+                                </div>
+                                <div class="flex4 text-center">
+
+                                    <div class="alert alert-warning">
+                                        <strong>Request Declined</strong>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        @empty
+
+                        @endforelse
+
+
+
+
+
 
 
 
                         @forelse($reservations1 as $reservation)
-
-
 
 
 
