@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Reservation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -44,9 +45,15 @@ class ReservationResponse extends Notification
      */
     public function toMail($notifiable)
     {
+        $respons = $this->response ? 'accepted' : 'declined';
+        $item = Reservation::find($this->reservation_id)->item;
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->subject('Reservation Response')
+                    ->greeting("What's up ".$notifiable->name)
+                    ->line('you reservation request about the item '.$item->title.' has been '.$respons)
+                    ->line('click the button below to go to our web site.')
+                    ->action('GO', url('/'))
                     ->line('Thank you for using our application!');
     }
 
