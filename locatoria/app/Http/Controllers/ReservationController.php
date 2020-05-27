@@ -151,6 +151,7 @@ class ReservationController extends Controller
 
         }
 
+
         $user = Auth::user();
 
 
