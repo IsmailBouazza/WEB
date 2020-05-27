@@ -45,8 +45,9 @@ class ReservationRequest extends Notification
         return (new MailMessage)
                     ->subject('Reservation Request')
                     ->greeting("What's up ".$notifiable->name)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('you\'re recieving a reservation request ')
+                    ->line('click the button below to go to our web site.')
+                    ->action('GO', url('/MyReservations'))
                     ->line('Thank you for using our application!');
     }
 
