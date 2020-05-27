@@ -101,7 +101,7 @@
                     </style>
 
 
-                    @if($reservations1 != NULL || $reservations2 != NULL || $reservations_declined != NULL)
+                    @if($reservations1 != NULL || $reservations2 != NULL || $reservations_declined->count() > 0 )
 
 
 
@@ -160,7 +160,7 @@
 
 
 
-
+                    @if($reservations1 != NULL )
 
 
                         @forelse($reservations1 as $reservation)
@@ -259,6 +259,7 @@
 
                         @endforelse
 
+                @endif
 
 
 
@@ -268,11 +269,7 @@
 
 
 
-
-
-
-
-
+                    @if($reservations2 != NULL )
 
 
                         @forelse($reservations2 as $reservation)
@@ -375,6 +372,7 @@
                         @endforelse
 
 
+                    @endif
 
 
 
