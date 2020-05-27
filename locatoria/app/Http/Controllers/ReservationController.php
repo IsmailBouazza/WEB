@@ -61,6 +61,27 @@ class ReservationController extends Controller
         $reservations = Auth::user()->reservations;
         $reservations1 = NULL;
         $reservations2 = NULL;
+        $reservations_declined = NULL;
+
+        $reservations_declined = Auth::user()->unreadNotifications->where('data->response',false);
+
+        //dd($reservations_declined->first());
+
+        if ($reservations_declined->count() > 0 ){
+
+            $reservations_declined = $reservations_declined->map(function ($notification){
+
+                $notification1 = (object)(array)$notification;
+
+                $notification1->item = Item::find($notification->data['item_id']);
+
+                $notification->markAsRead();
+
+                return $notification1;
+            });
+
+        }
+
 
         if ($reservations->count() > 0 ){
 
@@ -92,7 +113,7 @@ class ReservationController extends Controller
                 // sortBy : the first one will be unviewed anounces
                 $reservations1 = $reservations1->map(function ($reservation){
 
-                    $reservation->user_id = User::find($reservation->user_id);
+                    $reservation->user_owner_id = User::find($reservation->user_owner_id);
 
                     // this is the notification associated with this reservation
                     $notification = Auth::user()->notifications()->where('data->reservation_id',$reservation->id)->first();
@@ -112,6 +133,22 @@ class ReservationController extends Controller
 
             }
 
+
+
+            if ($reservations2->count() > 0 ){
+                // map   : we need to return the user owner with each reservation
+                $reservations2 = $reservations2->map(function ($reservation){
+
+                    $reservation->user_owner_id = User::find($reservation->user_owner_id);
+
+                    return $reservation;
+                });
+
+            }
+
+
+
+
         }
 
         $user = Auth::user();
@@ -121,6 +158,7 @@ class ReservationController extends Controller
             'user'=>$user,
             'reservations1'=>$reservations1,
             'reservations2'=>$reservations2,
+            'reservations_declined'=>$reservations_declined,
 
         ]);
     }
@@ -176,7 +214,7 @@ class ReservationController extends Controller
             $reservation->status = 1;
             $reservation->save();
 
-            User::find($reservation->user_id)->notify(new ReservationResponse($reservation->id,true)) ;
+            User::find($reservation->user_id)->notify(new ReservationResponse($reservation->id,$reservation->item->id,true)) ;
 
         } else {
 
@@ -189,9 +227,12 @@ class ReservationController extends Controller
     public function destroy($id){
 
         $reservation = Reservation::find($id);
+
+        User::find($reservation->user_id)->notify(new ReservationResponse($reservation->id,$reservation->item->id,false)) ;
+
         $reservation->delete();
 
-        User::find($reservation->user_id)->notify(new ReservationResponse($reservation->id,false)) ;
+
         return redirect()->back();
 
     }

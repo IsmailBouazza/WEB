@@ -71,8 +71,8 @@ class itemReportController extends Controller
 
                     return $reported;
             })
-            ->sortBy(function($reservation){
-                return $reservation->read;
+            ->sortBy(function($reported){
+                return $reported->read;
              })
              ->values();
 

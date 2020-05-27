@@ -19,10 +19,10 @@
     <div class="slider float box2" id="main-slider">   
       <div class="slider-wrapper">
         <img src="{{asset('images/ad1.jpg')}}" alt="1" class="slide">
-        <img src="{{asset('images/ad3.jpg')}}" alt="3" class="slide">
+        <img src="{{asset('images/ad3.jpg')}}" alt="2" class="slide">
         <img src="{{asset('images/ad4.jpg')}}" alt="3" class="slide">
-        <img src="{{asset('images/ad5.jpg')}}" alt="3" class="slide">
-        <img src="{{asset('images/ad6.jpg')}}" alt="3" class="slide">
+        <img src="{{asset('images/ad5.jpg')}}" alt="4" class="slide">
+        <img src="{{asset('images/ad6.jpg')}}" alt="5" class="slide">
       </div>
     </div>
 </div>

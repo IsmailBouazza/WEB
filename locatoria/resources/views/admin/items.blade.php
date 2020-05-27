@@ -1,4 +1,5 @@
 @extends('layouts.adminmenu')
+<link href="{{ asset('css/reported.css') }}" rel="stylesheet">
 
 @section('css')
   
