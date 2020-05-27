@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class ReservationController extends Controller
 {
 
+    public function history(){
+        return view('reservation.history');
+    }
+
+
     public function index(){
 
         if(!Auth::user()){

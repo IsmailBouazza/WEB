@@ -48,6 +48,7 @@ Route::get('/user/delete/{user}', 'UserController@delete');
 Route::resource('user', 'UserController');
 
 
+
 /* chat */
 Route::get('/chat','MessageController@index');
 Route::get('/chat/{id}', 'MessageController@getMessage')->name('message');
@@ -100,6 +101,8 @@ Route::put('/MyRequests/{id}/refuse','ReservationController@destroy')->name('MyR
 Route::post('/reser', 'ReservationController@store');
 Route::get('/reservations', 'ReservationController@index');
 Route::post('/cancelreservation/{id}','ReservationController@userCancel');
+Route::get('/MyHistory', 'ReservationController@history');
+
 
 
 // reservations notification
