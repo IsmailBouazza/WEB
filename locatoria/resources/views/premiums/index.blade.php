@@ -63,7 +63,7 @@
             <h4>{{$item->title}}</h4>
             <span class="price">
               {{$item->price}} Dh
-              @if(Auth::user()->id == $item->user_id)
+              @if(Auth::user()->id == $item->user_id || Auth::guard('admin')->check())
                 <i class="fas fa-user-circle" style="margin-left: 80%; width:40px; height:40px; color: blue;"></i>
               @endif
             </span>

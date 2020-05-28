@@ -36,14 +36,14 @@
                 <hr>
                 
             </div>
-
+            <div>
             @foreach ($item_photos as $item_photo)
 
                 <img src="{{asset('storage/'.$item_photo->photo_path)}}" width="200px" height="250px">
 
 
             @endforeach
-
+            </div>
 
             <div class="link">
                 {{$item_photos->links()}}
@@ -224,34 +224,7 @@
                             @empty
                                 <p style="font-size: 1.5em">No comment yet !!</p>
                             @endforelse
-<<<<<<< HEAD
                             
-=======
-
-                            @if(auth()->check())
-                                <form action="{{url('comment')}}" method="POST">
-                                    @csrf
-                                        <div class="form-group">
-
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Comment</label>
-                                                <input type="radio" name="rating" class="rating star5" value="5" id="star5"><label for="star5" class="rating star5"></label>
-                                                <input type="radio" name="rating" class="rating star4" value="4" id="star4"><label for="star4" class="rating star5"></label>
-                                                <input type="radio" name="rating" class="rating star3" value="3" id="star3"><label for="star3" class="rating star3"></label>
-                                                <input type="radio" name="rating" class="rating star5" value="2" id="star2"><label for="star2" class="rating star2"></label>
-                                                <input type="radio" name="rating" class="rating star5" value="1" id="star1"><label for="star1" class="rating star1"></label>
-                                            <input type="text" class="form-control" name="comment" id="" placeholder="Enter your comment here">
-                                        </div>
-                                        <input type="hidden" name="item_id" value="{{$item->id}}">
-                                        <button type="submit" class="btn btn-primary">Comment</button>
-                         </form>
-                            @else
-                                <a href="/login"></a>
-                            @endif
->>>>>>> ed7f067c544737e68174ad136cce7b75821e8cb6
                         </ul>
                     </div>
                 </div>

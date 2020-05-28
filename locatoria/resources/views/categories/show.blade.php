@@ -15,7 +15,8 @@
         </tr>
     </table>
     <div class="search">
-        <form class="form-inline mt-2 mt-md-0">
+        <form class="form-inline mt-2 mt-md-0" action="{{URL::to('/search')}}" method="POST">
+            @csrf
             <input class="form-control mr-sm-2" type="text" placeholder="District,City,Region ...." aria-label="Search">
             <input class="form-control mr-sm-2" type="text" placeholder="Object" aria-label="Search">
             <input class="form-control mr-sm-2" type="text" placeholder="Budget max" aria-label="Search">
@@ -25,7 +26,7 @@
     </div>
 
 
-    <div class="container" style="margin-left: 3%;">
+    <div class="container" style="margin-left: 15%;">
         <div class="wrapper">
         @if(count($items) > 0)
             

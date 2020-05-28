@@ -132,16 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="flex3" >
-                                    <div style="width:100%; height:10px; text-align:center;">
-                                        <span style="font-size: 1.5em"><u>Date Dispo</u><br></span>
-                                        <span style="font-size: 1em">
-                                            blablabla
-                                    </span>
-                                    </div>
-                                    <div style="width:100%; font-size: 1.5em; height:10px; text-align:center; margin-top:80px">
-                                        <u>Total Price</u><br>
-                                        <small style="font-size: 0.8em;">blablabla</small>
-                                    </div>
+                                    
                                 </div>
                                 <div class="flex4 text-center">
 
@@ -283,13 +274,11 @@
                                 </div>
                                 <div class="flex2">
                                     <div style="width:100%; height:10px; text-align:center;">
-                                        <span style="font-size: 1.5em"><u>User Info</u><br></span>
+                                        <span style="font-size: 1.5em"><u>User Info</u><br><br></span>
 
                                         @if($reservation->status == 0)
-                                            <span style="font-size: 1.5em"><u>Name :</u><br></span>
-                                            <span style="font-size: 1em">{{ $reservation->user_owner_id->name }}<br><br></span>
-                                            <span style="font-size: 1.5em"><u>city :</u><br></span>
-                                            <span style="font-size: 1em">{{ $reservation->user_owner_id->city }}<br></span>
+                                            <i class="fas fa-user" style="margin-right: 5px"></i><span style="font-size: 1em">{{ $reservation->user_owner_id->name }}<br><br></span>
+                                            <i class="fas fa-city" style="margin-right: 5px"></i><span style="font-size: 1em">{{ $reservation->user_owner_id->city }}<br></span>
                                         @else
                                             <span style="font-size: 1.5em"><u>Email :</u><br></span>
                                             <span style="font-size: 1em">{{ $reservation->user_owner_id->email }}<br></span><br>
@@ -309,7 +298,7 @@
                                     </div>
                                     <div style="width:100%; font-size: 1.5em; height:10px; text-align:center; margin-top:80px">
                                         <u>Total Price</u><br>
-                                        <small style="font-size: 0.8em;">{{$reservation->total_price}} $</small>
+                                        <small style="font-size: 0.8em;">{{$reservation->total_price}} DH</small>
                                     </div>
                                 </div>
                                 <div class="flex4 text-center">
