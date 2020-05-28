@@ -9,167 +9,8 @@
     
 <!--  -->
 
-{{-- css of comments --}}
-<!-- start css mouad-->
-
-<style>
-    {{-- rah kayn fichier commenys.css fih hadchi manba3d fach tsay yield 3ad khdam bih o7ayad had css!! --}}
-    body{
-        background:#eee;
-    }
-    hr {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 0;
-        border-top: 1px solid #FFFFFF;
-    }
-    a.commentuser {
-        color: #82b440;
-        text-decoration: none;
-    }
-    .blog-comment::before,
-    .blog-comment::after,
-    .blog-comment-form::before,
-    .blog-comment-form::after{
-        content: "";
-        display: table;
-        clear: both;
-    }
-    .blog-comment{
-        margin-top: 20px;
-        padding-top: 20px;
-        padding-left: 15%;
-        padding-right: 15%;
-    }
-    .blog-comment ul{
-        list-style-type: none;
-        padding: 0;
-    }
-    .blog-comment img{
-        opacity: 1;
-        filter: Alpha(opacity=100);
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -o-border-radius: 4px;
-        border-radius: 4px;
-    }
-    .blog-comment img.avatar {
-        position: relative;
-        float: left;
-        margin-left: 0;
-        margin-top: 0;
-        width: 65px;
-        height: 65px;
-    }
-    .blog-comment .post-comments{
-        border: 1px solid #eee;
-        margin-bottom: 20px;
-        margin-left: 85px;
-        margin-right: 0px;
-        padding: 10px 20px;
-        position: relative;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        -o-border-radius: 4px;
-        border-radius: 4px;
-        background: #fff;
-        color: #6b6e80;
-        position: relative;
-    }
-    .blog-comment .meta {
-        font-size: 13px;
-        color: #aaaaaa;
-        padding-bottom: 8px;
-        margin-bottom: 10px !important;
-        border-bottom: 1px solid #eee;
-    }
-    .blog-comment ul.comments ul{
-        list-style-type: none;
-        padding: 0;
-        margin-left: 85px;
-    }
-    .blog-comment-form{
-        padding-left: 15%;
-        padding-right: 15%;
-        padding-top: 40px;
-    }
-    .blog-comment h3,
-    .blog-comment-form h3{
-        margin-bottom: 40px;
-        font-size: 26px;
-        line-height: 30px;
-        font-weight: 800;
-    }
-
-        input.rating{
-            display: none;
-
-        }
-        label.rating{
-            cursor: pointer;
-			width: 50px;
-            float: right;
-            padding: 10px;
-            font-size: 36px;
-            color: #444;
-            transition: all 0.2s;
-
-        }
-        input.rating:checked ~ label.rating:before{
-            content: '\f005';
-            color: #fd4;
-            transition: all 0.2s;
-        }
-        input.star5:checked ~ label.rating:before {
-            color: #fe7;
-        }
 
 
-        /* Css d formulaire d comment */
-        label.rating:before{
-            content: '\f005';
-            font-family: fontAwesome;
-        }
-
-        .star-outer{
-            position: relative;
-            display: inline-block;
-
-        }
-        .star-inner{
-            position: absolute;
-            top: 0;
-            left :0;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-
-        }
-        .star-outer:before{
-            content: "\f005 \f005 \f005 \f005 \f005";
-            font-family: 'Font Awesome 5 free';
-            font-weight: 900;
-            color:#ccc;
-
-        }
-        .star-inner:before{
-            content: "\f005 \f005 \f005 \f005 \f005";
-            font-family: 'Font Awesome 5 free';
-            font-weight: 900;
-            color:#fd4;
-
-        }
-	 
-</style>
-
-<!-- end css mouad-->
-
-
-
-
-
-=======
->>>>>>> 14b75da6c0114ac3e4716f8ce0cea790685e6fb8
 
 @section('content')
 
@@ -182,9 +23,18 @@
         <div class="box-container img-container">
 
             <div class="info-img">
-                <div style="margin-left: -30%" >{{$item->title}}   <span  class="float-lg-right" style="font-size:0.9rem;color:green;margin-right: 3%;font-weight: bold " >Price : {{$item->price}}/day MAD</span></div>
-
+                <div style="margin-left: -30%" >
+                    {{$item->title}}  
+                    <span  class="float-lg-right" style="font-size:0.9rem;color:green;margin-right: 3%;font-weight: bold " >Price : {{$item->price}}/day MAD</span>
+                    <div class="rating" style="font-size: 0.7em; padding-left: 80%">
+                        <div class="star-outer">
+                            <div class="star-inner" style="margin-top:0;"></div>
+                        </div>
+                        <span class = number-rating></span>
+                    </div>
+                </div>
                 <hr>
+                
             </div>
 
             @foreach ($item_photos as $item_photo)
@@ -209,31 +59,27 @@
             <hr>
             <div><i class="fas fa-user" style="margin-right: 10px"></i>{{$user->name}}</div>
             <div><i class="fas fa-map-marker" style="margin-right: 10px"></i>{{$user->city}} , {{$user->adresse}}</div>
-            <div class="rating">
-                <div class="star-outer">
-                    <div class="star-inner" style="margin-top:0;"></div>
-                </div>
-                <span class = number-rating></span>
-            </div>
+            
 
-
-            <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%" data-toggle="modal" data-target="#chatmodal">Chat</button>
-            <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#reportmodal">Report</button>
-            <hr>
+            @if(Auth::check())
+                <button type="button" class="btn btn-success mt-2" style="display: inline;margin-left: 20%;width: 30%" data-toggle="modal" data-target="#chatmodal">Chat</button>
+                <button type="button"  class="mt-2 btn btn-warning" style="display: inline;margin-left: 2%;width: 30%" data-toggle="modal" data-target="#reportmodal">Report</button>
+            @endif
+                <hr>
 
             <div style="font-size:1.2em">
                     @if(Auth::check())
                         {{-- $NotFavourite return false if the item is favorite--}}
                         @if($NotFavourite)
-                            <button id="favbtn" class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgba(253,32,32,0.64)"></i> <br>
-                            Add this item to your favorites</button>
+                            <button id="favbtn" class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:70px; height:70px;color: rgba(253, 32, 32, 0.493)"></i> <br>
+                            </button>
                         @else
-                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: rgb(253,32,32)"></i> <br>
-                            This item is one of your favorites</button>
+                            <button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:70px; height:70px;color: rgb(253,32,32)"></i> <br>
+                            </button>
                         @endif
 
                     @else
-                            <a href="{{url('/login')}}"><button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:30px; height:30px;color: #bccac3"></i> <br>
+                            <a href="{{url('/login')}}"><button  class="btn"><i class="fas fa-heart" style="margin-right: 10px; width:70px; height:70px;color: #bccac3"></i> <br>
                             login to add this item to your favorites</button></a>
                     @endif
             </div>
@@ -361,7 +207,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="blog-comment">
-                        <h3 class="text-success">Comments and Rate</h3>
+                        <h3 class="text-success">Comments</h3>
                         <hr/>
                         <ul class="comments">
 
@@ -379,29 +225,6 @@
                                 <p style="font-size: 1.5em">No comment yet !!</p>
                             @endforelse
                             
-                            @if(auth()->check())
-                                <form action="{{url('comment')}}" method="POST">
-                                    @csrf
-                                        <div class="form-group">
-                                                
-                                                
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Comment</label>
-                                                <input type="radio" name="rating" class="rating star5" value="5" id="star5"><label for="star5" class="rating star5"></label>
-                                                <input type="radio" name="rating" class="rating star4" value="4" id="star4"><label for="star4" class="rating star5"></label>
-                                                <input type="radio" name="rating" class="rating star3" value="3" id="star3"><label for="star3" class="rating star3"></label>
-                                                <input type="radio" name="rating" class="rating star5" value="2" id="star2"><label for="star2" class="rating star2"></label>
-                                                <input type="radio" name="rating" class="rating star5" value="1" id="star1"><label for="star1" class="rating star1"></label>
-                                            <input type="text" class="form-control" name="comment" id="" placeholder="Enter your comment here">
-                                        </div>
-                                        <input type="hidden" name="item_id" value="{{$item->id}}">
-                                        <button type="submit" class="btn btn-primary">Comment</button>
-                         </form>
-                            @else
-                                <a href="/login"></a>
-                            @endif
                         </ul>
                     </div>
                 </div>
@@ -547,11 +370,9 @@
         rating : "{{$starMoyenne[0]->total}}",
 
     }
-    console.log(ratings);
     const starsTotal = 5;
     document.addEventListener('DOMContentLoaded',getRatings);
     function getRatings(){
-        console.log('ran');
         for(let rating in ratings){
            // console.log(ratings[rating]); 
              const starPer = (ratings[rating]/starsTotal)*100;

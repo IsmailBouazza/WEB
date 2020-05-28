@@ -9,7 +9,6 @@
             <span class="user-name">
               <strong>{{Auth::user()->name}}</strong>
             </span>
-            <span class="user-role">Administrator</span>
             <span class="user-status">
               <i class="fa fa-circle" style="color: green"></i>
               <span style="color: green">Online</span>
