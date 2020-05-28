@@ -266,6 +266,7 @@ class ItemController extends Controller
             return view('items.show')->with([
                 'comments'=>$item->comments,
                 'item' => $item,
+                'starMoyenne' =>$starMoyenne,
                 'item_photos' => $item_photos,
                 'user' => $user,
                 'takendates'=>json_encode($takendates),

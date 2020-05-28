@@ -76,3 +76,34 @@ div.msg{
     font-size: 2.5em;
 
 }
+
+input.rating{
+    display: none;
+
+}
+label.rating{
+    cursor: pointer;
+    width: 50px;
+    float: right;
+    padding: 10px;
+    font-size: 36px;
+    color: #444;
+    transition: all 0.2s;
+
+}
+input.rating:checked ~ label.rating:before{
+    content: '\f005';
+    color: #fd4;
+    transition: all 0.2s;
+}
+input.star5:checked ~ label.rating:before {
+    color: #fe7;
+}
+
+
+/* Css d formulaire d comment */
+label.rating:before{
+    content: '\f005';
+    font-family: fontAwesome;
+}
+
