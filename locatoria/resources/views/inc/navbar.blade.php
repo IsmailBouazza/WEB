@@ -283,6 +283,8 @@
 
                               <span class="dotx count2" ></span>
                               <a class="dropdown-item" href="{{url ('/MyReservations' ) }}">Reservation </a>
+                              <a class="dropdown-item" href="{{url ('/MyHistory' ) }}">History </a>
+
                               <hr>
 
                               <a class="dropdown-item" href="{{url ('/user/'.Auth::user()->id ) }}">Account <span class="sr-only">(current)</span></a>

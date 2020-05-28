@@ -29,7 +29,6 @@
                                 
                                 <div class="flex4 text-center">
                                     <button type="button" id="{{$favorite->id}}btn" class="btn btn-danger">remove this item</button>
-                                    <button type="button" class="btn btn-info mt-4">Contact the owner</button>
                                 </div>
                             </div>
 
