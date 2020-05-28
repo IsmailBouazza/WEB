@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/gif" sizes="16x16">
     <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -31,13 +32,13 @@
     <div id="app">
         <main class="py-4">
             @include('inc.navbar')
-            
+
             @yield('content')
 
             @include('inc.footer')
 
         </main>
-       
+
     </div>
 </body>
 </html>

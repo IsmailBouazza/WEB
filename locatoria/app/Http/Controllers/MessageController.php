@@ -20,6 +20,7 @@ class MessageController extends Controller
     public function index()
     {
         //Get users
+        /*
        $usermessages = Message::where('from', Auth::id())->orWhere('to', Auth::id())->get();
        $usersm = array();
 
@@ -27,7 +28,12 @@ class MessageController extends Controller
            if($msg->from == Auth::id() ) $usersm[]=$msg->to;
            else $usersm[]=$msg->from;
        }
-        $users = User::find($usersm);
+        $users = User::find($usersm);*/
+
+        $users = DB::select("select users.id, users.name, users.picture, users.city, count(is_read) as unread
+        from users JOIN  messages ON users.id = messages.from and is_read = 0 and messages.to = " . Auth::id() . "
+        where users.id != " . Auth::id() . "
+        group by users.id, users.name, users.picture, users.city");
 
         return view('chat.chatindex', ['users' => $users]);
 

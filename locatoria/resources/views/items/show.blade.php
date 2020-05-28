@@ -6,7 +6,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
-    
+
 <!--  -->
 
 {{-- css of comments --}}
@@ -159,7 +159,7 @@
             color:#fd4;
 
         }
-	 
+
 </style>
 
 <!-- end css mouad-->
@@ -378,13 +378,13 @@
                             @empty
                                 <p style="font-size: 1.5em">No comment yet !!</p>
                             @endforelse
-                            
+
                             @if(auth()->check())
                                 <form action="{{url('comment')}}" method="POST">
                                     @csrf
                                         <div class="form-group">
-                                                
-                                                
+
+
                                         </div>
 
                                         <div class="form-group">
@@ -553,7 +553,7 @@
     function getRatings(){
         console.log('ran');
         for(let rating in ratings){
-           // console.log(ratings[rating]); 
+           // console.log(ratings[rating]);
              const starPer = (ratings[rating]/starsTotal)*100;
              console.log(starPer);
             const starRoundTen=`${Math.round(starPer/10)*10}%`;
@@ -607,6 +607,7 @@
                 var price = $("#price").text();
                 var total_price = price*days;
                 $("#total_price").text(total_price.toFixed(2)); // XXXXX.xx
+                $("#renting_period").empty();
                 $("#renting_period").append("<br>from : "+$("#start").val()+" <br>to : "+$("#end").val());
                 $('input[name="total_price"]').val(total_price.toFixed(2));
             }
