@@ -57,9 +57,9 @@
                         @forelse($users as $user)
                             <tr>
                                 <td>
-                                    <img src="{{asset('/storage/'.$user->picture)}}" alt="">
-                                    <a href="#" class="user-link">{{$user->name}}</a>
-                                    <span class="user-subhead">{{$user->city}}</span>
+                                    <img src="{{asset('/storage/'.$user->picture)}}" style="height: 100px; width: 100px; border-radius : 50%;" alt="">
+                                    <a href="#" class="user-link" style="margin-left: 80px;">{{$user->name}}</a>
+                                    <span class="user-subhead" style="margin-left: 10%;">{{$user->city}}</span>
                                 </td>
                                 <td>
                                     {{$user->created_at}}
