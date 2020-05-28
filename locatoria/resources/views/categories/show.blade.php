@@ -37,7 +37,7 @@
                     <div class="product__image">
                         <img src="{{asset('/storage/'.$item->thumbnail_path )}}" alt="image">
                         <div class='product__btns'>
-                            <a href="{{ url('Item/'.$item->item_id) }}">quick view</a>
+                            <a href="{{ url('Item/'.$item->id) }}">quick view</a>
                         </div>
                     </div>
                     <figcaption class="product__description">
